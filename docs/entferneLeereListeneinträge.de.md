@@ -1,0 +1,1 @@
+Entfernt 'leere' Elemente aus einer Liste.

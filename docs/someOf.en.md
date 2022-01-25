@@ -1,0 +1,1 @@
+Searches for the first element which is `true`. In the case when nothing is found, `false` is returned.

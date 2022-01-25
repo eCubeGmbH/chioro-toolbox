@@ -1,0 +1,1 @@
+Die Text-Repräsentation des übergebenen Wertes. Ein leerer Text, wenn der übergebene Wert undefiniert oder null ist.

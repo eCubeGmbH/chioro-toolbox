@@ -1,0 +1,1 @@
+Checks if all elements are `false`. If not `false` is returned.

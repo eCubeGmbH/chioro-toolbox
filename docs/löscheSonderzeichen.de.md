@@ -1,0 +1,1 @@
+Entfernt alle nicht-druckbaren und nicht-ASCII Zeichen.

@@ -1,0 +1,1 @@
+Prüft, ob der übergebene Text eine gültige Zahl darstellt

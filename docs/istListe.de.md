@@ -1,0 +1,1 @@
+Prüft, ob das übergebene Objekt eine Liste ist.

@@ -1,0 +1,1 @@
+Ersetzt alle Ketten von Leerzeichen, Tabulatoren und Zeilenumbrüchen in `text` durch ein einziges Leerzeichen.

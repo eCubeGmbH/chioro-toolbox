@@ -1,0 +1,1 @@
+helper to create an exact copy of a simple or complex property

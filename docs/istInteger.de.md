@@ -1,0 +1,1 @@
+Prüft, ob der übergebene Wert eine Ganzzahl ist.

@@ -1,0 +1,1 @@
+Wandelt den übergebenen `text` in Kleinbuchstaben.

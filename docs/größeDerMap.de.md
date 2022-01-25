@@ -1,0 +1,1 @@
+Anzahl der Paare in einer Name-Wert Tabelle (bzw. Anzahl der Properties in einem Objekt).

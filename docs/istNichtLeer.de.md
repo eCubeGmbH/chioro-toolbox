@@ -1,0 +1,1 @@
+Prüft, ob der übergebene Text etwas anderes als Leerzeichen, Tabs oder Zeilenumbrüche enthält.
