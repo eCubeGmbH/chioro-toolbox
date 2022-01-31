@@ -14,8 +14,11 @@ tools.add({
 		en: "getJson",
 		de: "getJson"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -33,8 +36,11 @@ tools.add({
 		en: "postJson",
 		de: "postJson"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -52,8 +58,11 @@ tools.add({
 		en: "numberPattern",
 		de: "zahlenMuster"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -81,8 +90,11 @@ tools.add({
 		en: "getSub",
 		de: "holeWert"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -124,8 +136,11 @@ tools.add({
 		en: "$",
 		de: "$"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -169,8 +184,11 @@ tools.add({
 		en: "$$",
 		de: "$$"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -188,8 +206,11 @@ tools.add({
 		en: "copy",
 		de: "kopiere"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -220,8 +241,11 @@ tools.add({
 		en: "get",
 		de: "hole"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -239,8 +263,11 @@ tools.add({
 		en: "source",
 		de: "quelle"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -258,8 +285,11 @@ tools.add({
 		en: "target",
 		de: "ziel"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["pattern"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -277,8 +307,11 @@ tools.add({
 		en: "getUnit",
 		de: "holeEinheit"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.UTIL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -296,8 +329,11 @@ tools.add({
 		en: "getValue",
 		de: "holeWert"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.UTIL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -319,8 +355,11 @@ tools.add({
 		en: "mapSize",
 		de: "größeDerMap"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.UTIL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -342,8 +381,11 @@ tools.add({
 		en: "stringOf",
 		de: "zeichenketteVon"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.UTIL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -375,8 +417,11 @@ tools.add({
 		en: "similarCategory",
 		de: "gleicheKategorie"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -395,8 +440,11 @@ tools.add({
 		en: "isInteger",
 		de: "istInteger"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -422,8 +470,11 @@ tools.add({
 		en: "decodeConditions",
 		de: "dekodiereBedingungen"
 	},
+	args: {
+		en: "condition_1, toReplace_1, ...",
+		de: "bedingung_1, zuErsetzen_1, ..."
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -441,8 +492,11 @@ tools.add({
 		en: "isString",
 		de: "istZeichenkette"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -460,8 +514,11 @@ tools.add({
 		en: "isList",
 		de: "istListe"
 	},
+	args: {
+		en: "",
+		de: ""
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -487,8 +544,11 @@ tools.add({
 		en: "size",
 		de: "größe"
 	},
-	tags: ["TAGS.UTIL","TAGS.LIST","TAGS.TEXT"],
-	visibility: "PUBLIC",
+	args: {
+		en: "something",
+		de: "argument"
+	},
+	tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -510,8 +570,11 @@ tools.add({
 		en: "asList",
 		de: "speichereAlsTabelle"
 	},
-	tags: ["TAGS.UTIL","TAGS.LIST"],
-	visibility: "PUBLIC",
+	args: {
+		en: "something1, something2, ...",
+		de: "argument1, argument2, ..."
+	},
+	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -535,8 +598,11 @@ tools.add({
 		en: "anyOf",
 		de: "erstesVon"
 	},
-	tags: ["TAGS.UTIL","TAGS.LIST"],
-	visibility: "PUBLIC",
+	args: {
+		en: "something1, something2, ...",
+		de: "Argument1, Argument2, ..."
+	},
+	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -563,8 +629,11 @@ tools.add({
 		en: "filterList",
 		de: "filtereListe"
 	},
+	args: {
+		en: "list property, regexp list",
+		de: "listeneintrag, regexp liste"
+	},
 	tags: ["TAGS.UTIL"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -590,8 +659,11 @@ tools.add({
 		en: "asMap",
 		de: "speichereAlsTabelle"
 	},
+	args: {
+		en: "name1, value1, name2, value2, ...",
+		de: "name1, wert1, name2, wert2, ..."
+	},
 	tags: ["TAGS.UTIL"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -612,8 +684,11 @@ tools.add({
 		en: "removeEmptyListEntries",
 		de: "entferneLeereListeneinträge"
 	},
-	tags: ["TAGS.UTIL","TAGS.LIST"],
-	visibility: "PUBLIC",
+	args: {
+		en: "list",
+		de: "liste"
+	},
+	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -631,8 +706,11 @@ tools.add({
 		en: "lowerCaseText",
 		de: "ändereZuKleinbuchstaben"
 	},
+	args: {
+		en: "text",
+		de: "text"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -650,8 +728,11 @@ tools.add({
 		en: "upperCaseText",
 		de: "ändereZuGroßbuchstaben"
 	},
+	args: {
+		en: "text",
+		de: "text"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -680,8 +761,11 @@ tools.add({
 		en: "joinText",
 		de: "verbindeTextMitTrennzeichen"
 	},
+	args: {
+		en: "separator, text1, text2, ...",
+		de: "trennzeichen, text1, text2, ..."
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -703,8 +787,11 @@ tools.add({
 		en: "concatenateText",
 		de: "verketteText"
 	},
+	args: {
+		en: "text1, text2, ...",
+		de: "text1, text2, ..."
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -731,8 +818,11 @@ tools.add({
 		en: "insertTextAtPosition",
 		de: "fügeTextAnPositionEin"
 	},
+	args: {
+		en: "text, textToInsert, position",
+		de: "text, einfügeText, position"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -756,8 +846,11 @@ tools.add({
 		en: "textAtPosition",
 		de: "gibTextAnPosition"
 	},
+	args: {
+		en: "text, position, length",
+		de: "text, position, länge"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -775,8 +868,11 @@ tools.add({
 		en: "trimText",
 		de: "schneideTextZu"
 	},
+	args: {
+		en: "text",
+		de: "text"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -794,8 +890,11 @@ tools.add({
 		en: "normalizeWhitespaces",
 		de: "normalisiereLücken"
 	},
+	args: {
+		en: "inputString",
+		de: "zeichenkette"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -821,8 +920,11 @@ tools.add({
 		en: "replaceInText",
 		de: "ersetzeInText"
 	},
+	args: {
+		en: "text, textToSearch, replaceWith",
+		de: "text, suchtext, ersetzeDurch"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -845,8 +947,11 @@ tools.add({
 		en: "locateInText",
 		de: "findePositionInText"
 	},
+	args: {
+		en: "text, textToSearch",
+		de: "text, suchtext"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -871,8 +976,11 @@ tools.add({
 		en: "containsText",
 		de: "beinhaltetText"
 	},
-	tags: ["TAGS.CONDITIONAL","TAGS.TEXT"],
-	visibility: "PUBLIC",
+	args: {
+		en: "text, textToSearch",
+		de: "text, suchtext"
+	},
+	tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -892,8 +1000,11 @@ tools.add({
 		en: "inList",
 		de: "istInListe"
 	},
-	tags: ["TAGS.CONDITIONAL","TAGS.LIST"],
-	visibility: "PUBLIC",
+	args: {
+		en: "searchItem, listItemToSearch1, listItemToSearch2, ...",
+		de: "suchbegriff, listeneintrag1, listeneintrag2, ..."
+	},
+	tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -917,8 +1028,11 @@ tools.add({
 		en: "extractFromText",
 		de: "extrahiereAusText"
 	},
+	args: {
+		en: "text, muster, fallback",
+		de: "text, muster, fallback"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -943,8 +1057,11 @@ tools.add({
 		en: "extractAllMatchesFromText",
 		de: "extrahiereAlleTrefferAusText"
 	},
+	args: {
+		en: "text, pattern",
+		de: "text, muster"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -962,8 +1079,11 @@ tools.add({
 		en: "extractNumberFromText",
 		de: "extrahiereZahlAusText"
 	},
+	args: {
+		en: "text, fallback",
+		de: "text, fallback"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -982,8 +1102,11 @@ tools.add({
 		en: "extractAllNumbersFromText",
 		de: "extrahiereAlleZahlenAusText"
 	},
+	args: {
+		en: "text",
+		de: "text"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1001,8 +1124,11 @@ tools.add({
 		en: "deleteSpecialCharacters",
 		de: "löscheSonderzeichen"
 	},
+	args: {
+		en: "text",
+		de: "text"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1021,8 +1147,11 @@ tools.add({
 		en: "textIsNotBlank",
 		de: "istNichtLeer"
 	},
-	tags: ["TAGS.TEXT","TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
+	args: {
+		en: "text",
+		de: "text"
+	},
+	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1040,8 +1169,11 @@ tools.add({
 		en: "startsNumeric",
 		de: "beginntMitZahl"
 	},
-	tags: ["TAGS.TEXT","TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
+	args: {
+		en: "text",
+		de: "text"
+	},
+	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1059,8 +1191,11 @@ tools.add({
 		en: "isNumeric",
 		de: "istZahl"
 	},
-	tags: ["TAGS.TEXT","TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
+	args: {
+		en: "text",
+		de: "text"
+	},
+	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1096,8 +1231,11 @@ tools.add({
 		en: "decode",
 		de: "findeUndMappe"
 	},
+	args: {
+		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
+		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1139,8 +1277,11 @@ tools.add({
 		en: "decodeAll",
 		de: "findeUndMappeAlles"
 	},
+	args: {
+		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
+		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1165,8 +1306,11 @@ tools.add({
 		en: "extractFirstTerm",
 		de: "extrahiereErstenBegriff"
 	},
+	args: {
+		en: "text, textToSearchAndShow_1, textToSearchAndShow_2, ...",
+		de: "text, zuExtrahierendesWort_1, zuExtrahierendesWort_2, ..."
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1186,8 +1330,11 @@ tools.add({
 		en: "extractProperty",
 		de: "extrahiereEigenschaft"
 	},
+	args: {
+		en: "text, propertyName, fallback",
+		de: "text, nameDerEigenschaft, fallback"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1212,8 +1359,11 @@ tools.add({
 		en: "extractFromHtmlEnum",
 		de: "extrahiereAusHtmlEnum"
 	},
+	args: {
+		en: "text, propertyName, fallback",
+		de: "text, nameDerEigenschaft, fallback"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1235,8 +1385,11 @@ tools.add({
 		en: "lookupGet",
 		de: "sucheUndNimm"
 	},
+	args: {
+		en: "matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, gesuchterWert, passendeSpalte, zuHolenderWertSpalte"
+	},
 	tags: ["TAGS.LOOKUP"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1267,8 +1420,11 @@ tools.add({
 		en: "lookupGetRegExp",
 		de: "sucheUndNimmRegExp"
 	},
+	args: {
+		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+	},
 	tags: ["TAGS.LOOKUP"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1299,8 +1455,11 @@ tools.add({
 		en: "lookupGetAllRegExp",
 		de: "sucheUndNimmAlleRegExp"
 	},
+	args: {
+		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+	},
 	tags: ["TAGS.LOOKUP"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1320,8 +1479,11 @@ tools.add({
 		en: "formatAsHtmlBulletpoints",
 		de: "formatiereAlsHtmlAufzählung"
 	},
+	args: {
+		en: "something1, something2, ...",
+		de: "argument1, argument2, ..."
+	},
 	tags: ["TAGS.FORMAT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1342,8 +1504,11 @@ tools.add({
 		en: "formatAsNumber",
 		de: "formatiereAlsZahl"
 	},
+	args: {
+		en: "value, locale",
+		de: "wert, länderFormat"
+	},
 	tags: ["TAGS.FORMAT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1364,8 +1529,11 @@ tools.add({
 		en: "textToNumber",
 		de: "textAlsZahl"
 	},
+	args: {
+		en: "value, locale",
+		de: "wert, länderFormat"
+	},
 	tags: ["TAGS.FORMAT"],
-	visibility: "PUBLIC",
 	hideInToolbox: null,
 
 	tests: () => {
@@ -1393,8 +1561,11 @@ tools.add({
 		en: "_numberParser",
 		de: "_numberParser"
 	},
+	args: {
+		en: "value, locale, ...",
+		de: "wert, länderFormat, ..."
+	},
 	tags: ["TAGS.FORMAT"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -1415,11 +1586,14 @@ tools.add({
 	id:"regExpMatch",
 	impl: regExpMatch,
 	aliases: {
+		en: "regExpMatch",
+		de: "regExpMatch"
+	},
+	args: {
 		en: "",
 		de: ""
 	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -1434,11 +1608,14 @@ tools.add({
 	id:"regExpReplace",
 	impl: regExpReplace,
 	aliases: {
+		en: "regExpReplace",
+		de: "regExpReplace"
+	},
+	args: {
 		en: "",
 		de: ""
 	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -1453,11 +1630,14 @@ tools.add({
 	id:"matches",
 	impl: matches,
 	aliases: {
+		en: "matches",
+		de: "matches"
+	},
+	args: {
 		en: "",
 		de: ""
 	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -1475,8 +1655,11 @@ tools.add({
 		en: "addCloudinaryTransformation",
 		de: "hinzufügenCloudinaryTransformation"
 	},
+	args: {
+		en: "cloudinaryUrl, publicId, transformation",
+		de: "cloudinaryUrl, publicId, transformation"
+	},
 	tags: ["TAGS.CLOUDINARY"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1494,8 +1677,11 @@ tools.add({
 		en: "addCloudinaryNamedTransformation",
 		de: "hinzufügenCloudinaryNamedTransformation"
 	},
+	args: {
+		en: "cloudinaryUrl, publicId, named_transformation",
+		de: "cloudinaryUrl, publicId, named_transformation"
+	},
 	tags: ["TAGS.CLOUDINARY"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1563,8 +1749,11 @@ tools.add({
 		en: "convertUnit",
 		de: "rechneEinheitUm"
 	},
+	args: {
+		en: "value, factor, oldUnit, newUnit, decimalPlaces",
+		de: "wert, faktor, alteEinheit, neueEinheit, dezimalStellen"
+	},
 	tags: ["TAGS.UNIT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1615,8 +1804,11 @@ tools.add({
 		en: "normalizeValues",
 		de: "normalisiereWerte"
 	},
+	args: {
+		en: "value, decimalSeparator, decimalPlaces",
+		de: "wert, dezimalTrennzeichen, dezimalStellen"
+	},
 	tags: ["TAGS.UNIT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1640,8 +1832,11 @@ tools.add({
 		en: "extractValueBeforeText",
 		de: "extrahiereWertVorText"
 	},
+	args: {
+		en: "value, text",
+		de: "wert, text"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1666,8 +1861,11 @@ tools.add({
 		en: "extractValueAfterText",
 		de: "extrahiereWertNachText"
 	},
+	args: {
+		en: "value, text",
+		de: "wert, text"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1685,8 +1883,11 @@ tools.add({
 		en: "escapeRegExp",
 		de: "escapeRegExp"
 	},
+	args: {
+		en: "text",
+		de: "text"
+	},
 	tags: ["TAGS.EXTRACT"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -1708,8 +1909,11 @@ tools.add({
 		en: "splitText",
 		de: "trenneText"
 	},
+	args: {
+		en: "text, separator",
+		de: "text, separator"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1727,8 +1931,11 @@ tools.add({
 		en: "attributes",
 		de: "attribute"
 	},
+	args: {
+		en: "text, separator",
+		de: "text, separator"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PRIVATE",
 	hideInToolbox: true,
 
 	tests: () => {
@@ -1761,8 +1968,11 @@ tools.add({
 		en: "startsWith",
 		de: "beginntMit"
 	},
+	args: {
+		en: "text, search",
+		de: "text, suchwert"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1795,8 +2005,11 @@ tools.add({
 		en: "endsWith",
 		de: "endetMit"
 	},
+	args: {
+		en: "text, search",
+		de: "text, suchwert"
+	},
 	tags: ["TAGS.TEXT"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1819,8 +2032,11 @@ tools.add({
 		en: "someOf",
 		de: "istEinElementWahr"
 	},
+	args: {
+		en: "something1, something2, ...",
+		de: "argument1, argument2, ..."
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1846,8 +2062,11 @@ tools.add({
 		en: "allOf",
 		de: "sindAlleElementeWahr"
 	},
+	args: {
+		en: "something1, something2, ...",
+		de: "argument1, argument2, ..."
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1873,8 +2092,11 @@ tools.add({
 		en: "noneOf",
 		de: "istKeinElementWahr"
 	},
+	args: {
+		en: "something1, something2, ...",
+		de: "argument1, argument2, ..."
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
@@ -1895,8 +2117,11 @@ tools.add({
 		en: "negate",
 		de: "ändereInsGegenteil"
 	},
+	args: {
+		en: "value",
+		de: "wert"
+	},
 	tags: ["TAGS.CONDITIONAL"],
-	visibility: "PUBLIC",
 	hideInToolbox: false,
 
 	tests: () => {
