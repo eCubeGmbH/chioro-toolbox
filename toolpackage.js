@@ -118,14 +118,15 @@ module.exports = class Toolpackage {
 
 class Tool {
 	constructor(t) {
+		this.id = t.id
 		this.impl = t.impl
 		this.name = t.impl.name
 		this.aliases = t.aliases || {}
 		this.args = t.args
 		this.tags = t.tags || []
 		this.tests = t.tests
-		// this.visibility = t.visibility || "PUBLIC"
-		// this.hideInToolbox = t.hideInToolbox
+        this.hideInToolbox = t.hideInToolbox
+        // this.visibility = t.visibility || "PUBLIC"
 	}
 
 	toolNamesFlat() {
