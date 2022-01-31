@@ -1,4 +1,4 @@
-const Toolpackage = require('chioro-toolbox-cjs/toolpackage')
+const Toolpackage = require('./toolpackage')
 
 const tools = new Toolpackage("Base Chioro Tools")
 tools.description = 'These are the toolbox tools included in chioro by default. All the tools defined here are available in the global namespace. '
@@ -389,6 +389,14 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		var something_undefined;
+		tools.expect(stringOf(something_undefined)).toBe('');
+		tools.expect(stringOf(null)).toBe('');
+		tools.expect(stringOf('')).toBe('');
+		tools.expect(stringOf(true)).toBe('true');
+		tools.expect(stringOf(false)).toBe('false');
+		tools.expect(stringOf('false')).toBe('false');
+		tools.expect(stringOf(0)).toBe('0')
 	}
 })
 
@@ -769,6 +777,11 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(joinText("-")).toBe("");
+		tools.expect(joinText("")).toBe("");
+		tools.expect(joinText("-", "a")).toBe("a");
+		tools.expect(joinText("-", "a", "b")).toBe("a-b");
+		tools.expect(joinText("-", ["a", "b", "c"], "d")).toBe("a-b-c-d");
 	}
 })
 
@@ -928,6 +941,7 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
 	}
 })
 
@@ -955,6 +969,10 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(locateInText("ene mene muh", "mene")).toBe(4);
+		tools.expect(locateInText("ene mene muh", "xxx")).toBe(-1);
+		tools.expect(locateInText("ene mene muh", /m.*e/)).toBe(4);
+		tools.expect(locateInText("ene mene muh", /xxx/)).toBe(-1);
 	}
 })
 
@@ -1036,6 +1054,8 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(extractFromText("ene mene muh", /m(.*)e/g, "dann halt nicht")).toBe("mene");
+		tools.expect(extractFromText("ene mxnx muh", /m(.*)e/g, "dann halt nicht")).toBe("dann halt nicht");
 	}
 })
 
@@ -1065,6 +1085,18 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.describe("Global (i.e. multi) matches", () => {
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /m..e/g)).jsonToBe(['mene', 'muhe']);
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /m(..)e/g)).jsonToBe(['mene', 'muhe']);
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /m(..)x/g)).jsonToBe([]);
+		});
+		tools.describe("Non-Global matches", () => {
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /m..e/)[0]).toBe('mene');
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /m(..)e/)[0]).toBe('mene');
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /m(..)e/)[1]).toBe('en');
+			tools.expect(extractAllMatchesFromText("ene mene muhe", /mxxe/)).jsonToBe([]);
+			tools.expect(extractAllMatchesFromText("Gewicht 23 kg brutto.", /(\d+)\s*([km]*g)/)).jsonToBe(['23 kg', '23', 'kg']);
+		});
 	}
 })
 
@@ -1087,6 +1119,7 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(extractNumberFromText("Temperaturen heute: 23 bis 25 Grad")).toBe("25");
 	}
 })
 
@@ -1110,6 +1143,14 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(extractAllNumbersFromText("Temperaturen heute: 23 bis 25 Grad")).jsonToBe(["23", "25"]);
+		tools.expect(extractAllNumbersFromText("Temperaturen heute: -23,6 bis 25.1 Grad")).jsonToBe(["-23,6", "25.1"]);
+		tools.expect(extractAllNumbersFromText("  23-25 ")).jsonToBe(["23", "25"]);
+		tools.expect(extractAllNumbersFromText("-23-25")).jsonToBe(["-23", "25"]);
+		tools.expect(extractAllNumbersFromText("-23 - -25")).jsonToBe(["-23", "-25"]);
+		tools.expect(extractAllNumbersFromText("23- -25")).jsonToBe(["23", "-25"]);
+		tools.expect(extractAllNumbersFromText("23    - -25")).jsonToBe(["23", "-25"]);
+		tools.expect(extractAllNumbersFromText("2    - -  0")).jsonToBe(["2", "0"]);
 	}
 })
 
@@ -1199,6 +1240,13 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(isNumeric("2")).toBe(true);
+		tools.expect(isNumeric("23")).toBe(true);
+		tools.expect(isNumeric("23,4")).toBe(true);
+		tools.expect(isNumeric("23.4")).toBe(true);
+		tools.expect(isNumeric("123.456,789")).toBe(true);
+		tools.expect(isNumeric("12a3.456,789")).toBe(false);
+		tools.expect(isNumeric("123.456,789.")).toBe(false);
 	}
 })
 
@@ -1239,6 +1287,7 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(decode("some words", "some", "another", "")).toBe("another");
 	}
 })
 
@@ -1285,6 +1334,11 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
+		tools.expect(decodeAll("some words")).jsonToBe([]);
+		tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
+		tools.expect(decodeAll("some words", "some", "a", "words", "a")).jsonToBe(["a"]);
+		tools.expect(decodeAll("some other things", "josef", "a", "words", "b", "nothing")).jsonToBe(["nothing"]);
 	}
 })
 
@@ -1314,6 +1368,10 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(extractFirstTerm("some words", "some")).toBe("some");
+		tools.expect(extractFirstTerm("some words", "another")).toBe("");
+		tools.expect(extractFirstTerm("some words", "some", "words")).toBe("some");
+		tools.expect(extractFirstTerm("some Words", "words", "some")).toBe("words");
 	}
 })
 
@@ -1338,6 +1396,9 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "Größe")).toBe("XL");
+		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "hinweise")).toBe(("nicht schleudern"));
+		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "xx", "fallback")).toBe("fallback");
 	}
 })
 
@@ -1367,6 +1428,8 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(extractFromHtmlEnum("<li>someStuff: other</li>", "someStuff")).toBe("other");
+		tools.expect(extractFromHtmlEnum("<li><span style=\"font-size:14px;\"><span style=\"font-family: arial,helvetica,sans-serif;\">Wandstärke: 5- 6cm</span></span></li>", "Wandstärke")).toBe("5- 6cm");
 	}
 })
 
@@ -1537,6 +1600,9 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(textToNumber("1,223.3", 'en-US')).toBe(1223.3);
+		tools.expect(textToNumber("1.223,3")).toBe(1223.3);
+		tools.expect(textToNumber("1234")).toBe(1234);
 	}
 })
 
@@ -1757,6 +1823,28 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(convertUnit("23 cm and 23 cm", 10, "cm", "mm")).toBe("230 mm and 230 mm");
+		tools.expect(convertUnit("amazing 2,3 cm thing", 10, "cm", "mm")).toBe("amazing 23 mm thing");
+		tools.expect(convertUnit("3 x 23 cmm and", 10, "cm", "mm")).toBe("3 x 23 cmm and");
+		tools.expect(convertUnit("3 x 23 cm", 10, "", "mm")).toBe("30 mm x 230 mm cm");
+		tools.expect(convertUnit("23 cm", 10, "cm", "mm")).toBe("230 mm");
+		tools.expect(convertUnit("23 cm", 10)).toBe("230 cm");
+		tools.expect(convertUnit("23 mm", 0.1, "mm", "cm", 1)).toBe("2.3 cm");
+		tools.expect(convertUnit("23,5 mm", 0.1, "mm", "cm")).toBe("2,35 cm");
+		tools.expect(convertUnit("3 x 23 cm", 10, "cm", "mm")).toBe("3 x 230 mm");
+		tools.expect(convertUnit("3 x 23 cm", 10, "", "mm")).toBe("30 mm x 230 mm cm");
+		tools.expect(convertUnit("-23 cm", 10, "", "mm")).toBe("-230 mm cm");
+		tools.expect(convertUnit("23 cm", 10, "cm", "mm")).toBe("230 mm");
+		tools.expect(convertUnit("14 x 5,5 cm, H: 14 cm", 10, "cm", "mm")).toBe("14 x 55 mm, H: 140 mm");
+		tools.expect(convertUnit("14 x 5,5 cm, H: 14 cm", 10, "", "mm")).toBe("140 mm x 55 mm cm, H: 140 mm cm");
+		tools.expect(convertUnit("14 x 5,5 cm, H: 14 mm", 10, "", "mm")).toBe("140 mm x 55 mm cm, H: 14 mm");
+		tools.expect(convertUnit("14 x 5,5 cm, H: 14 cm", 10, "", "")).toBe("140 x 55 cm, H: 140 cm");
+		tools.expect(convertUnit("14 x 5 cm, H: 16 cm", 0.01, "cm", "m")).toBe("14 x 0.05 m, H: 0.16 m");
+		tools.expect(convertUnit("14 x 5,5 cm, H: 16 cm", 0.01, "cm", "m")).toBe("14 x 0,055 m, H: 0,16 m");
+		tools.expect(convertUnit("14 x 5,5 cm, H: 16 cm", 0.01, "cm", "m", 2)).toBe("14 x 0,06 m, H: 0,16 m");
+		tools.expect(convertUnit("1,2", 0.01, "", "")).toBe("0,012");
+		tools.expect(convertUnit("1,23", 0.01, "", "", 4)).toBe("0,0123");
+		tools.expect(convertUnit("12,3", 0.01, "", "", 3)).toBe("0,123");
 	}
 })
 
@@ -1812,6 +1900,9 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(normalizeValues("23.1 and 23.22", '.', 1)).toBe("23.1 and 23.2");
+		tools.expect(normalizeValues("23 and 23.225 and some", '.', 1)).toBe("23.0 and 23.2 and some");
+		tools.expect(normalizeValues("etwa 2,3 megawatts", '.')).toBe("etwa 2.3 megawatts");
 	}
 })
 
@@ -1840,6 +1931,11 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(extractValueBeforeText("some 23.1 mangos and 4 apples ", 'mangos')).toBe("23.1");
+		tools.expect(extractValueBeforeText("Dimensions of 25cm and ", 'cm')).toBe("25");
+		tools.expect(extractValueBeforeText("range of 3..5 ", '..')).toBe("3");
+		tools.expect(extractValueBeforeText("21,3     text blabla", 'text')).toBe("21,3");
+		tools.expect(extractValueBeforeText('74-77','-')).toBe("74");
 	}
 })
 
@@ -1869,6 +1965,9 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(extractValueAfterText("some 23.1 mangos and 4 apples ", 'some')).toBe("23.1");
+		tools.expect(extractValueAfterText("Price of $200", '$')).toBe("200");
+		tools.expect(extractValueAfterText("range of 3..5 ", '..')).toBe("5");
 	}
 })
 
@@ -1917,6 +2016,16 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(splitText("a,b,c")).jsonToBe(['a','b','c']);
+		tools.expect(splitText("a, b,  c")).jsonToBe(['a','b','c']);
+		tools.expect(splitText("a|b|c", '|')).jsonToBe(['a','b','c']);
+		tools.expect(splitText("very nice, not nice, too nice", '|')).jsonToBe(["very nice, not nice, too nice"]);
+		tools.expect(splitText("boo")).jsonToBe(["boo"]);
+		tools.expect(splitText("very nice, not nice, too nice")).jsonToBe(['very nice', 'not nice', 'too nice']);
+		tools.expect(splitText(['a', 'b'], ',')).jsonToBe(null);
+		tools.expect(splitText([])).jsonToBe(null);
+		tools.expect(splitText({a: 1, b: 2})).jsonToBe(null);
+		tools.expect(splitText(null, ",")).jsonToBe(null);
 	}
 })
 
@@ -1976,6 +2085,16 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(startsWith("super", /u../)).toBe(false);
+		tools.expect(startsWith("super", /^s../)).toBe(true);
+		tools.expect(startsWith("super", /s../)).toBe(true);
+		tools.expect(startsWith("super", "su")).toBe(true);
+		tools.expect(startsWith("Super", /^s../i)).toBe(true);
+		tools.expect(startsWith("Super", "su")).toBe(false);
+		tools.expect(startsWith([], "su")).toBe(false);
+		tools.expect(startsWith("super", {})).toBe(false);
+		tools.expect(startsWith("super")).toBe(false);
+		tools.expect(startsWith()).toBe(false);
 	}
 })
 
@@ -2013,6 +2132,16 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(endsWith("super", /r/)).toBe(true);
+		tools.expect(endsWith("super", /u../)).toBe(false);
+		tools.expect(endsWith("super", /e..$/)).toBe(false);
+		tools.expect(endsWith("super", "er")).toBe(true);
+		tools.expect(endsWith("SupeR", /er/i)).toBe(true);
+		tools.expect(endsWith("Super", "er")).toBe(true);
+		tools.expect(endsWith([], "su")).toBe(false);
+		tools.expect(endsWith("super", {})).toBe(false);
+		tools.expect(endsWith("super")).toBe(false);
+		tools.expect(endsWith()).toBe(false);
 	}
 })
 
@@ -2040,6 +2169,12 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(someOf(true)).toBe(true);
+		tools.expect(someOf(true, false)).toBe(true);
+		tools.expect(someOf(false, true)).toBe(true);
+		tools.expect(someOf([], {})).toBe(false);
+		tools.expect(someOf([], true, false)).toBe(true);
+		tools.expect(someOf()).toBe(false);
 	}
 })
 
@@ -2070,6 +2205,12 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(allOf(true)).toBe(true);
+		tools.expect(allOf(true, false)).toBe(false);
+		tools.expect(allOf(true, true)).toBe(true);
+		tools.expect(allOf([], {})).toBe(false);
+		tools.expect(allOf([], true, false)).toBe(false);
+		tools.expect(allOf()).toBe(false);
 	}
 })
 
@@ -2100,6 +2241,12 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(noneOf(true)).toBe(false);
+		tools.expect(noneOf(true, false)).toBe(false);
+		tools.expect(noneOf(false, false)).toBe(true);
+		tools.expect(noneOf([], {})).toBe(false);
+		tools.expect(noneOf([], true, false)).toBe(false);
+		tools.expect(noneOf()).toBe(false);
 	}
 })
 
@@ -2125,6 +2272,11 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(negate(true)).toBe(false);
+		tools.expect(negate(false)).toBe(true);
+		tools.expect(negate([])).toBe(false);
+		tools.expect(negate({})).toBe(false);
+		tools.expect(negate()).toBe(false);
 	}
 })
 

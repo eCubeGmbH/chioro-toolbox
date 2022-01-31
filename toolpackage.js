@@ -11,6 +11,8 @@ module.exports = class Toolpackage {
     constructor(name) {
         this.name = name
         this.tbox = {}
+        this.cntPass = 0;
+        this.cntFail = 0;
     }
 
 	add(tooldef) {
@@ -25,9 +27,6 @@ module.exports = class Toolpackage {
     allTools() {
 		return Object.values(this.tbox)
     }
-
-	cntPass = 0;
-    cntFail = 0;
         
     describe(msg, fn) {
         console.log('\t' + msg)
