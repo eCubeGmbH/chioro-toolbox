@@ -8,6 +8,7 @@ function getJson(url) {
 	return JSON.parse(_apiFetcher.getUrl(url));
 }
 tools.add({
+	id:"getJson",
 	impl: getJson,
 	aliases: {
 		en: "getJson",
@@ -26,6 +27,7 @@ function postJson(url, params) {
 	return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
 }
 tools.add({
+	id:"postJson",
 	impl: postJson,
 	aliases: {
 		en: "postJson",
@@ -44,6 +46,7 @@ function numberPattern() {
 	return /-?[\d.,]*\d/g
 }
 tools.add({
+	id:"numberPattern",
 	impl: numberPattern,
 	aliases: {
 		en: "numberPattern",
@@ -72,6 +75,7 @@ function getSub() {
 	return tmp;
 }
 tools.add({
+	id:"getSub",
 	impl: getSub,
 	aliases: {
 		en: "getSub",
@@ -114,6 +118,7 @@ function $(propertyName) {
 	return result;
 }
 tools.add({
+	id:"$",
 	impl: $,
 	aliases: {
 		en: "$",
@@ -158,6 +163,7 @@ function $$(propertyName) {
 	return JSON.stringify(result);
 }
 tools.add({
+	id:"$$",
 	impl: $$,
 	aliases: {
 		en: "$$",
@@ -176,6 +182,7 @@ function copy(propertyName) {
 	return source(propertyName);
 }
 tools.add({
+	id:"copy",
 	impl: copy,
 	aliases: {
 		en: "copy",
@@ -207,6 +214,7 @@ function get(propertyName) {
 	}
 }
 tools.add({
+	id:"get",
 	impl: get,
 	aliases: {
 		en: "get",
@@ -225,6 +233,7 @@ function source(propertyName) {
 	return JSON.parse(_source)[propertyName];
 }
 tools.add({
+	id:"source",
 	impl: source,
 	aliases: {
 		en: "source",
@@ -243,6 +252,7 @@ function target(propertyName) {
 	return _target[propertyName];
 }
 tools.add({
+	id:"target",
 	impl: target,
 	aliases: {
 		en: "target",
@@ -261,6 +271,7 @@ function getUnit(name) {
 	return getSub(name, "unit")
 }
 tools.add({
+	id:"getUnit",
 	impl: getUnit,
 	aliases: {
 		en: "getUnit",
@@ -279,6 +290,7 @@ function getValue(name) {
 	return getSub(name, "value")
 }
 tools.add({
+	id:"getValue",
 	impl: getValue,
 	aliases: {
 		en: "getValue",
@@ -301,6 +313,7 @@ function mapSize(obj) {
 	return size;
 }
 tools.add({
+	id:"mapSize",
 	impl: mapSize,
 	aliases: {
 		en: "mapSize",
@@ -323,6 +336,7 @@ function stringOf(input) {
 	}
 }
 tools.add({
+	id:"stringOf",
 	impl: stringOf,
 	aliases: {
 		en: "stringOf",
@@ -355,6 +369,7 @@ function similarCategory(categoryValue, comparisonValue) {
 	return categoryValue.startsWith(comparisonValue);
 }
 tools.add({
+	id:"similarCategory",
 	impl: similarCategory,
 	aliases: {
 		en: "similarCategory",
@@ -374,6 +389,7 @@ function isInteger(value) {
 	return !isNaN(integer);
 }
 tools.add({
+	id:"isInteger",
 	impl: isInteger,
 	aliases: {
 		en: "isInteger",
@@ -400,6 +416,7 @@ function decodeConditions() {
 	return "";
 }
 tools.add({
+	id:"decodeConditions",
 	impl: decodeConditions,
 	aliases: {
 		en: "decodeConditions",
@@ -418,6 +435,7 @@ function isString(value) {
 	return typeof value === "string";
 }
 tools.add({
+	id:"isString",
 	impl: isString,
 	aliases: {
 		en: "isString",
@@ -436,6 +454,7 @@ function isList(value) {
 	return Array.isArray(value);
 }
 tools.add({
+	id:"isList",
 	impl: isList,
 	aliases: {
 		en: "isList",
@@ -462,6 +481,7 @@ function size(something) {
 	return 0;
 }
 tools.add({
+	id:"size",
 	impl: size,
 	aliases: {
 		en: "size",
@@ -484,6 +504,7 @@ function asList() {
 	return arr;
 }
 tools.add({
+	id:"asList",
 	impl: asList,
 	aliases: {
 		en: "asList",
@@ -508,6 +529,7 @@ function anyOf() {
 	return '';
 }
 tools.add({
+	id:"anyOf",
 	impl: anyOf,
 	aliases: {
 		en: "anyOf",
@@ -535,6 +557,7 @@ function filterList(listProperty, regExpList) {
 	});
 }
 tools.add({
+	id:"filterList",
 	impl: filterList,
 	aliases: {
 		en: "filterList",
@@ -561,6 +584,7 @@ function asMap() {
 	return result
 }
 tools.add({
+	id:"asMap",
 	impl: asMap,
 	aliases: {
 		en: "asMap",
@@ -582,6 +606,7 @@ function removeEmptyListEntries() {
 		.filter(s => s !== null)
 }
 tools.add({
+	id:"removeEmptyListEntries",
 	impl: removeEmptyListEntries,
 	aliases: {
 		en: "removeEmptyListEntries",
@@ -600,6 +625,7 @@ function lowerCaseText(text) {
 	return stringOf(text).toLowerCase();
 }
 tools.add({
+	id:"lowerCaseText",
 	impl: lowerCaseText,
 	aliases: {
 		en: "lowerCaseText",
@@ -618,6 +644,7 @@ function upperCaseText(text) {
 	return stringOf(text).toUpperCase();
 }
 tools.add({
+	id:"upperCaseText",
 	impl: upperCaseText,
 	aliases: {
 		en: "upperCaseText",
@@ -647,6 +674,7 @@ function joinText() {
 	return arr.join(arguments[0]);
 }
 tools.add({
+	id:"joinText",
 	impl: joinText,
 	aliases: {
 		en: "joinText",
@@ -669,6 +697,7 @@ function concatenateText() {
 	return arr.join('');
 }
 tools.add({
+	id:"concatenateText",
 	impl: concatenateText,
 	aliases: {
 		en: "concatenateText",
@@ -696,6 +725,7 @@ function insertTextAtPosition(text, textToInsert, position) {
 		+ text.slice(position);
 }
 tools.add({
+	id:"insertTextAtPosition",
 	impl: insertTextAtPosition,
 	aliases: {
 		en: "insertTextAtPosition",
@@ -720,6 +750,7 @@ function textAtPosition(text, position, length) {
 	return stringOf(text).substr(position, length);
 }
 tools.add({
+	id:"textAtPosition",
 	impl: textAtPosition,
 	aliases: {
 		en: "textAtPosition",
@@ -738,6 +769,7 @@ function trimText(text) {
 	return stringOf(text).trim();
 }
 tools.add({
+	id:"trimText",
 	impl: trimText,
 	aliases: {
 		en: "trimText",
@@ -756,6 +788,7 @@ function normalizeWhitespaces(text) {
 	return stringOf(text).replace(/\s+/g, " ");
 }
 tools.add({
+	id:"normalizeWhitespaces",
 	impl: normalizeWhitespaces,
 	aliases: {
 		en: "normalizeWhitespaces",
@@ -782,6 +815,7 @@ function replaceInText(text, textToSearch, replaceWith) {
 	return text;
 }
 tools.add({
+	id:"replaceInText",
 	impl: replaceInText,
 	aliases: {
 		en: "replaceInText",
@@ -805,6 +839,7 @@ function locateInText(text, textToSearch) {
 	}
 }
 tools.add({
+	id:"locateInText",
 	impl: locateInText,
 	aliases: {
 		en: "locateInText",
@@ -830,6 +865,7 @@ function containsText(text, textToSearch) {
 	return locateInText(text, textToSearch) >= 0;
 }
 tools.add({
+	id:"containsText",
 	impl: containsText,
 	aliases: {
 		en: "containsText",
@@ -850,6 +886,7 @@ function inList() {
 	return arr.find((s, i) => s == arr[0] && i > 0);
 }
 tools.add({
+	id:"inList",
 	impl: inList,
 	aliases: {
 		en: "inList",
@@ -874,6 +911,7 @@ function extractFromText(text, pattern, fallback) {
 	}
 }
 tools.add({
+	id:"extractFromText",
 	impl: extractFromText,
 	aliases: {
 		en: "extractFromText",
@@ -899,6 +937,7 @@ function extractAllMatchesFromText(text, pattern) {
 	}
 }
 tools.add({
+	id:"extractAllMatchesFromText",
 	impl: extractAllMatchesFromText,
 	aliases: {
 		en: "extractAllMatchesFromText",
@@ -917,6 +956,7 @@ function extractNumberFromText(text, fallback) {
 	return extractFromText(text, numberPattern(), fallback);
 }
 tools.add({
+	id:"extractNumberFromText",
 	impl: extractNumberFromText,
 	aliases: {
 		en: "extractNumberFromText",
@@ -936,6 +976,7 @@ function extractAllNumbersFromText(text) {
 	return extractAllMatchesFromText(text.replace(regex, text.match(regex) + ' '), numberPattern());
 }
 tools.add({
+	id:"extractAllNumbersFromText",
 	impl: extractAllNumbersFromText,
 	aliases: {
 		en: "extractAllNumbersFromText",
@@ -954,6 +995,7 @@ function deleteSpecialCharacters(text) {
 	return stringOf(text).replace(/[^a-zA-Z0-9]/g, "");
 }
 tools.add({
+	id:"deleteSpecialCharacters",
 	impl: deleteSpecialCharacters,
 	aliases: {
 		en: "deleteSpecialCharacters",
@@ -973,6 +1015,7 @@ function textIsNotBlank(text) {
 	return (inputString && !inputString.match(/^\s*$/));
 }
 tools.add({
+	id:"textIsNotBlank",
 	impl: textIsNotBlank,
 	aliases: {
 		en: "textIsNotBlank",
@@ -991,6 +1034,7 @@ function startsNumeric(text) {
 	return matches(text, /^[\d]/);
 }
 tools.add({
+	id:"startsNumeric",
 	impl: startsNumeric,
 	aliases: {
 		en: "startsNumeric",
@@ -1009,6 +1053,7 @@ function isNumeric(text) {
 	return matches(text, '^' + numberPattern().source + '$');
 }
 tools.add({
+	id:"isNumeric",
 	impl: isNumeric,
 	aliases: {
 		en: "isNumeric",
@@ -1045,6 +1090,7 @@ function decode() {
 	return ""
 }
 tools.add({
+	id:"decode",
 	impl: decode,
 	aliases: {
 		en: "decode",
@@ -1087,6 +1133,7 @@ function decodeAll() {
 	return replacements;
 }
 tools.add({
+	id:"decodeAll",
 	impl: decodeAll,
 	aliases: {
 		en: "decodeAll",
@@ -1112,6 +1159,7 @@ function extractFirstTerm() {
 	return decode.apply(this, decodeInputs);
 }
 tools.add({
+	id:"extractFirstTerm",
 	impl: extractFirstTerm,
 	aliases: {
 		en: "extractFirstTerm",
@@ -1132,6 +1180,7 @@ function extractProperty(text, propertyName, fallback) {
 	return (m ? trimText(m[1]) : stringOf(fallback));
 }
 tools.add({
+	id:"extractProperty",
 	impl: extractProperty,
 	aliases: {
 		en: "extractProperty",
@@ -1157,6 +1206,7 @@ function extractFromHtmlEnum(text, propertyName, fallback) {
 	return (m ? trimText(m[1]) : stringOf(fallback));
 }
 tools.add({
+	id:"extractFromHtmlEnum",
 	impl: extractFromHtmlEnum,
 	aliases: {
 		en: "extractFromHtmlEnum",
@@ -1179,6 +1229,7 @@ function lookupGet(matchingValue, lookupName, matchingColumn, columnToRetrieveVa
 		.get(matchingValue, columnToRetrieveValueFrom);
 }
 tools.add({
+	id:"lookupGet",
 	impl: lookupGet,
 	aliases: {
 		en: "lookupGet",
@@ -1210,6 +1261,7 @@ function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, column
 	return null;
 }
 tools.add({
+	id:"lookupGetRegExp",
 	impl: lookupGetRegExp,
 	aliases: {
 		en: "lookupGetRegExp",
@@ -1241,6 +1293,7 @@ function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, col
 	return results;
 }
 tools.add({
+	id:"lookupGetAllRegExp",
 	impl: lookupGetAllRegExp,
 	aliases: {
 		en: "lookupGetAllRegExp",
@@ -1261,6 +1314,7 @@ function formatAsHtmlBulletpoints() {
 	return '<ul><li>' + Array.from(arguments).flat().join('</li><li>')+'</li></ul>';
 }
 tools.add({
+	id:"formatAsHtmlBulletpoints",
 	impl: formatAsHtmlBulletpoints,
 	aliases: {
 		en: "formatAsHtmlBulletpoints",
@@ -1282,6 +1336,7 @@ function formatAsNumber(value, overrideLocale) {
 	return new Intl.NumberFormat(locale).format(value);
 }
 tools.add({
+	id:"formatAsNumber",
 	impl: formatAsNumber,
 	aliases: {
 		en: "formatAsNumber",
@@ -1303,6 +1358,7 @@ function textToNumber(value, overrideLocale) {
 	return _numberParser(value, locale);
 }
 tools.add({
+	id:"textToNumber",
 	impl: textToNumber,
 	aliases: {
 		en: "textToNumber",
@@ -1331,6 +1387,7 @@ function _numberParser(value, locale) {
 		.replace(_numeral, _index)) ? +v : null;
 }
 tools.add({
+	id:"_numberParser",
 	impl: _numberParser,
 	aliases: {
 		en: "_numberParser",
@@ -1355,6 +1412,7 @@ function regExpMatch(input, match, fallback) {
 	}
 }
 tools.add({
+	id:"regExpMatch",
 	impl: regExpMatch,
 	aliases: {
 		en: "",
@@ -1373,6 +1431,7 @@ function regExpReplace(input, search, replace) {
 	return replaceInText(input, search, replace);
 }
 tools.add({
+	id:"regExpReplace",
 	impl: regExpReplace,
 	aliases: {
 		en: "",
@@ -1391,6 +1450,7 @@ function matches(input, expr) {
 	return stringOf(input).search(expr) >= 0;
 }
 tools.add({
+	id:"matches",
 	impl: matches,
 	aliases: {
 		en: "",
@@ -1409,6 +1469,7 @@ function addCloudinaryTransformation(cloudinaryUrl, publicId, transformation) {
 	return replaceInText(cloudinaryUrl, new RegExp(publicId + "$"), transformation+ "/"+ publicId);
 }
 tools.add({
+	id:"addCloudinaryTransformation",
 	impl: addCloudinaryTransformation,
 	aliases: {
 		en: "addCloudinaryTransformation",
@@ -1427,6 +1488,7 @@ function addCloudinaryNamedTransformation(cloudinaryUrl, publicId, transformatio
 	return addCloudinaryTransformation(cloudinaryUrl, publicId, "t_" + transformation);
 }
 tools.add({
+	id:"addCloudinaryNamedTransformation",
 	impl: addCloudinaryNamedTransformation,
 	aliases: {
 		en: "addCloudinaryNamedTransformation",
@@ -1495,6 +1557,7 @@ function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
 	return result;
 }
 tools.add({
+	id:"convertUnit",
 	impl: convertUnit,
 	aliases: {
 		en: "convertUnit",
@@ -1546,6 +1609,7 @@ function normalizeValues(value, deciSeparator, deciPlaces) {
 	return result;
 }
 tools.add({
+	id:"normalizeValues",
 	impl: normalizeValues,
 	aliases: {
 		en: "normalizeValues",
@@ -1570,6 +1634,7 @@ function extractValueBeforeText(value,text) {
 	return value;
 }
 tools.add({
+	id:"extractValueBeforeText",
 	impl: extractValueBeforeText,
 	aliases: {
 		en: "extractValueBeforeText",
@@ -1595,6 +1660,7 @@ function extractValueAfterText(value,text) {
 	return value;
 }
 tools.add({
+	id:"extractValueAfterText",
 	impl: extractValueAfterText,
 	aliases: {
 		en: "extractValueAfterText",
@@ -1613,6 +1679,7 @@ function escapeRegExp(string) {
 	return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 tools.add({
+	id:"escapeRegExp",
 	impl: escapeRegExp,
 	aliases: {
 		en: "escapeRegExp",
@@ -1635,6 +1702,7 @@ function splitText(text, separator) {
 	return null;
 }
 tools.add({
+	id:"splitText",
 	impl: splitText,
 	aliases: {
 		en: "splitText",
@@ -1653,6 +1721,7 @@ function attributes() {
 	return Object.keys(JSON.parse(_source)).filter(k => !k.startsWith("_"));
 }
 tools.add({
+	id:"attributes",
 	impl: attributes,
 	aliases: {
 		en: "attributes",
@@ -1686,6 +1755,7 @@ function startsWith(text, search) {
 	return false
 }
 tools.add({
+	id:"startsWith",
 	impl: startsWith,
 	aliases: {
 		en: "startsWith",
@@ -1719,6 +1789,7 @@ function endsWith(text, search) {
 	return false
 }
 tools.add({
+	id:"endsWith",
 	impl: endsWith,
 	aliases: {
 		en: "endsWith",
@@ -1742,6 +1813,7 @@ function someOf() {
 	return false;
 }
 tools.add({
+	id:"someOf",
 	impl: someOf,
 	aliases: {
 		en: "someOf",
@@ -1768,6 +1840,7 @@ function allOf() {
 	return true;
 }
 tools.add({
+	id:"allOf",
 	impl: allOf,
 	aliases: {
 		en: "allOf",
@@ -1794,6 +1867,7 @@ function noneOf() {
 	return true;
 }
 tools.add({
+	id:"noneOf",
 	impl: noneOf,
 	aliases: {
 		en: "noneOf",
@@ -1815,6 +1889,7 @@ function negate(value) {
 	return false;
 }
 tools.add({
+	id:"negate",
 	impl: negate,
 	aliases: {
 		en: "negate",
