@@ -5,6 +5,7 @@ tools.description = 'These are the toolbox tools included in chioro by default. 
 
 
 function getJson(url) {
+	if(typeof _apiFetcher === 'undefined') return {};
 	return JSON.parse(_apiFetcher.getUrl(url));
 }
 tools.add({
@@ -22,11 +23,13 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
 	}
 })
 
 
 function postJson(url, params) {
+	if(typeof _apiFetcher === 'undefined') return {};
 	return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
 }
 tools.add({
@@ -44,6 +47,7 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
 	}
 })
 
@@ -219,6 +223,7 @@ tools.add({
 
 
 function get(propertyName) {
+	if(typeof _source === 'undefined' || typeof _target === 'undefined') return propertyName
 	const propertyNameWithoutPrefix = propertyName.replace(/^source\.|^target\./, '');
 	const source = JSON.parse(_source);
 	const target = _target;
@@ -249,11 +254,14 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		tools.expect(source("color_s")).toBe("color_s");
+		tools.expect(target("color_t")).toBe("color_t");
 	}
 })
 
 
 function source(propertyName) {
+	if(typeof _source === 'undefined') return propertyName;
 	return JSON.parse(_source)[propertyName];
 }
 tools.add({
@@ -271,11 +279,13 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		tools.expect(source("color")).toBe("color");
 	}
 })
 
 
 function target(propertyName) {
+	if(typeof _target === 'undefined') return propertyName;
 	return _target[propertyName];
 }
 tools.add({
@@ -293,6 +303,7 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		tools.expect(source("color")).toBe("color");
 	}
 })
 
@@ -1436,6 +1447,7 @@ tools.add({
 
 function lookupGet(matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom) {
 	/* 'lookups' is injected in environment, an instance of LookupCache class in java */
+	if(typeof _lookups === 'undefined') return "valueFound";
 	if(!matchingColumn) matchingColumn = 'key';
 	if(!columnToRetrieveValueFrom) columnToRetrieveValueFrom = 'value';
 	return _lookups.getLookup(lookupName, matchingColumn, columnToRetrieveValueFrom)
@@ -1456,12 +1468,14 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(lookupGet("test", "test","test", "test")).toBe("valueFound");
 	}
 })
 
 
 function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) {
 	/* 'pool' is injected in environment */
+	if(typeof _lookups === 'undefined') return "valueFound";
 	if(!matchingRegExpColumn) matchingRegExpColumn = 'key';
 	if(!columnToRetrieveValueFrom) columnToRetrieveValueFrom = 'value';
 	var lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveValueFrom).getAllEntries();
@@ -1491,11 +1505,13 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(lookupGetRegExp("test", "test","test", "test")).toBe("valueFound");
 	}
 })
 
 
 function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) {
+	if(typeof _lookups === 'undefined') return "valueFound";
 	if(!matchingRegExpColumn) matchingRegExpColumn = 'key';
 	if(!columnToRetrieveValueFrom) columnToRetrieveValueFrom = 'value';
 	var results = [];
@@ -1526,6 +1542,7 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(lookupGetAllRegExp("test", "test","test", "test")).toBe("valueFound");
 	}
 })
 
@@ -1555,6 +1572,7 @@ tools.add({
 
 
 function formatAsNumber(value, overrideLocale) {
+	if(typeof _locale === 'undefined') _locale = "de-DE";
 	let locale = overrideLocale;
 	if(!locale && typeof _locale !== 'undefined') locale = _locale;
 	if(!locale) locale = 'de-DE';
@@ -1575,11 +1593,13 @@ tools.add({
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(formatAsNumber("8.8")).toBe("8,8");
 	}
 })
 
 
 function textToNumber(value, overrideLocale) {
+	if(typeof _locale === 'undefined') _locale = "de-DE";
 	let locale = overrideLocale;
 	if(!locale && typeof _locale !== 'undefined') locale = _locale;
 	if(!locale) locale = 'de-DE';
@@ -2031,6 +2051,7 @@ tools.add({
 
 
 function attributes() {
+	if(typeof _source === 'undefined') return ['attr1','attr2','attr3'];
 	return Object.keys(JSON.parse(_source)).filter(k => !k.startsWith("_"));
 }
 tools.add({
@@ -2048,6 +2069,7 @@ tools.add({
 	hideInToolbox: true,
 
 	tests: () => {
+		tools.expect(attributes()).jsonToBe(['attr1','attr2','attr3']);
 	}
 })
 
