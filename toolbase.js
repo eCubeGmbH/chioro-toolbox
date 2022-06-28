@@ -925,14 +925,21 @@ tools.add({
 	}
 })
 
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
 
 function replaceInText(text, textToSearch, replaceWith) {
 	text = stringOf(text);
 	if(textToSearch instanceof RegExp) {
 		return text.replace(textToSearch, stringOf(replaceWith));
 	} else {
-		text = text.replaceAll(textToSearch,replaceWith);
-	}
+		text = replaceAll(text,textToSearch,replaceWith);
+	}	
 	return text;
 }
 tools.add({
