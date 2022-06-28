@@ -931,9 +931,7 @@ function replaceInText(text, textToSearch, replaceWith) {
 	if(textToSearch instanceof RegExp) {
 		return text.replace(textToSearch, stringOf(replaceWith));
 	} else {
-		while(containsText(text, textToSearch)) {
-			text = text.replace(textToSearch, replaceWith);
-		}
+		text = text.replaceAll(textToSearch,replaceWith);
 	}
 	return text;
 }
