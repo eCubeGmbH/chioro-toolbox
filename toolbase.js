@@ -1193,25 +1193,79 @@ tools.add({
 })
 
 
-function textIsNotBlank(text) {
-	var inputString = stringOf(text);
-	return (inputString && !inputString.match(/^\s*$/));
+function isBlank(text_or_object) {
+	if(text_or_object === null) return true;
+	if(
+			typeof text_or_object==='string' ||
+			typeof text_or_object==='boolean' ||
+			typeof text_or_object==='number'
+	) {
+		return stringOf(text_or_object).trim().length < 1;
+	}
+	if(text_or_object.length) {
+		return text_or_object.length < 1;
+	}
+	var keys = Object.keys(text_or_object);
+	if(keys.length) {
+		return keys.length < 1;
+	}
+	return true;
 }
 tools.add({
-	id:"textIsNotBlank",
-	impl: textIsNotBlank,
+	id:"isBlank",
+	impl: isBlank,
 	aliases: {
-		en: "textIsNotBlank",
-		de: "istNichtLeer"
+		en: "isBlank",
+		de: "istLeer"
 	},
 	args: {
-		en: "text",
-		de: "text"
+		en: "text_or_object",
+		de: "text_oder_objekt"
 	},
-	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
+	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
 
 	tests: () => {
+		tools.expect(isBlank("2")).toBe(false);
+		tools.expect(isBlank(2)).toBe(false);
+		tools.expect(isBlank("")).toBe(true);
+		tools.expect(isBlank("    ")).toBe(true);
+		tools.expect(isBlank([])).toBe(true);
+		tools.expect(isBlank({})).toBe(true);
+		tools.expect(isBlank(null)).toBe(true);
+		tools.expect(isBlank(['a'])).toBe(false);
+		tools.expect(isBlank({a: 'b'})).toBe(false);
+	}
+})
+
+
+function isNotBlank(text_or_object) {
+	return !isBlank(text_or_object);
+}
+tools.add({
+	id:"isNotBlank",
+	impl: isNotBlank,
+	aliases: {
+		en: "isNotBlank",
+		de: "istNichtLeer"
+	},
+	args: {
+		en: "text_or_object",
+		de: "text_oder_objekt"
+	},
+	tags: ["TAGS.CONDITIONAL"],
+	hideInToolbox: null,
+
+	tests: () => {
+		tools.expect(isNotBlank("2")).toBe(true);
+		tools.expect(isNotBlank(2)).toBe(true);
+		tools.expect(isNotBlank("")).toBe(false);
+		tools.expect(isNotBlank("    ")).toBe(false);
+		tools.expect(isNotBlank([])).toBe(false);
+		tools.expect(isNotBlank({})).toBe(false);
+		tools.expect(isNotBlank(null)).toBe(false);
+		tools.expect(isNotBlank(['a'])).toBe(true);
+		tools.expect(isNotBlank({a: 'b'})).toBe(true);
 	}
 })
 
