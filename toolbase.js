@@ -2352,18 +2352,18 @@ tools.add({
 })
 
 
-function negate(value) {
+function not(value) {
 	if (typeof value === "boolean") {
 		return !value;
 	}
 	return false;
 }
 tools.add({
-	id:"negate",
-	impl: negate,
+	id:"not",
+	impl: not,
 	aliases: {
-		en: "negate",
-		de: "ändereInsGegenteil"
+		en: "not",
+		de: "nicht"
 	},
 	args: {
 		en: "value",
@@ -2373,11 +2373,11 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
-		tools.expect(negate(true)).toBe(false);
-		tools.expect(negate(false)).toBe(true);
-		tools.expect(negate([])).toBe(false);
-		tools.expect(negate({})).toBe(false);
-		tools.expect(negate()).toBe(false);
+		tools.expect(not(true)).toBe(false);
+		tools.expect(not(false)).toBe(true);
+		tools.expect(not([])).toBe(false);
+		tools.expect(not({})).toBe(false);
+		tools.expect(not()).toBe(false);
 	}
 })
 
