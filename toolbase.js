@@ -151,6 +151,29 @@ tools.add({
 	}
 })
 
+function current() {
+	if (typeof _targetAttributeName === 'undefined') {
+		return '';
+	}
+	return _targetAttributeName;
+}
+tools.add({
+	id:"current",
+	impl: $,
+	aliases: {
+		en: "current",
+		de: "current"
+	},
+	args: {
+		en: "",
+		de: ""
+	},
+	tags: ["TAGS.UTIL"],
+	hideInToolbox: false,
+
+	tests: () => {
+	}
+})
 
 function $$(propertyName) {
 
