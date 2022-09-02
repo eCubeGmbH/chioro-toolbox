@@ -159,7 +159,7 @@ function current() {
 }
 tools.add({
 	id:"current",
-	impl: $,
+	impl: current,
 	aliases: {
 		en: "current",
 		de: "current"
