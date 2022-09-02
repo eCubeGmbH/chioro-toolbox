@@ -107,7 +107,7 @@ tools.add({
 
 
 function $(propertyName) {
-	if (typeof propertyName === 'undefined') return current();
+	if (typeof propertyName === 'undefined') return $(current());
 	if (propertyName === '') return '';
 
 	if(typeof propertyName !== 'string') return JSON.stringify(propertyName);
