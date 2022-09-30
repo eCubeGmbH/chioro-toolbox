@@ -51,29 +51,6 @@ tools.add({
 	}
 })
 
-
-function numberPattern() {
-	return /-?[\d.,]*\d/g
-}
-tools.add({
-	id:"numberPattern",
-	impl: numberPattern,
-	aliases: {
-		en: "numberPattern",
-		de: "zahlenMuster"
-	},
-	args: {
-		en: "",
-		de: ""
-	},
-	tags: ["pattern"],
-	hideInToolbox: true,
-
-	tests: () => {
-	}
-})
-
-
 function getSub() {
 	let tmp = get(arguments[0]);
 	if(!tmp) return null;
@@ -1182,10 +1159,29 @@ tools.add({
 	}
 })
 
+function numberPattern() {
+	return /(([^\d]-)|^-)?[\d.,]*\d/g
+}
+tools.add({
+	id:"numberPattern",
+	impl: numberPattern,
+	aliases: {
+		en: "numberPattern",
+		de: "zahlenMuster"
+	},
+	args: {
+		en: "",
+		de: ""
+	},
+	tags: ["pattern"],
+	hideInToolbox: true,
+
+	tests: () => {
+	}
+})
 
 function extractAllNumbersFromText(text) {
-	var regex = /\d-(d*)/g;
-	return extractAllMatchesFromText(text.replace(regex, text.match(regex) + ' '), numberPattern());
+	return extractAllMatchesFromText(text, numberPattern()).map(s => s.trim());
 }
 tools.add({
 	id:"extractAllNumbersFromText",
@@ -1210,6 +1206,7 @@ tools.add({
 		tools.expect(extractAllNumbersFromText("23- -25")).jsonToBe(["23", "-25"]);
 		tools.expect(extractAllNumbersFromText("23    - -25")).jsonToBe(["23", "-25"]);
 		tools.expect(extractAllNumbersFromText("2    - -  0")).jsonToBe(["2", "0"]);
+		tools.expect(extractAllNumbersFromText("Größe:l40-x-b38-x-h50cm:de")).jsonToBe(["40", "38", "50"]);
 	}
 })
 
