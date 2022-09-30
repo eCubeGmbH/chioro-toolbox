@@ -1160,7 +1160,7 @@ tools.add({
 })
 
 function numberPattern() {
-	return /(([^\d]-)|^-)?[\d.,]*\d/g
+	return /(((?<=[^\d])-)|^-)?[\d.,]*\d/g
 }
 tools.add({
 	id:"numberPattern",
@@ -1206,7 +1206,7 @@ tools.add({
 		tools.expect(extractAllNumbersFromText("23- -25")).jsonToBe(["23", "-25"]);
 		tools.expect(extractAllNumbersFromText("23    - -25")).jsonToBe(["23", "-25"]);
 		tools.expect(extractAllNumbersFromText("2    - -  0")).jsonToBe(["2", "0"]);
-		tools.expect(extractAllNumbersFromText("Größe:l40-x-b38-x-h50cm:de")).jsonToBe(["40", "38", "50"]);
+		tools.expect(extractAllNumbersFromText("Größe:l40-x-b38-x-50cm:de")).jsonToBe(["40", "38", "-50"]);
 	}
 })
 
