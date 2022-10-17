@@ -2470,15 +2470,20 @@ function roundNumber(value) {
 	}
 	if (Array.isArray(value)) {
 		for (let i = 0; i < value.length; i++) {
-			value[i] = Math.round(value[i]);
+			var roundedValue = Math.round(value[i]);
+			if (roundedValue) {
+				value[i] =roundedValue;
+			}
 		}
-		console.log("ArrayErgebniss: "+ value)
 		return value
 
 	}
 	if (typeof value === "object"){
 		Object.keys(value).forEach(key => {
-			value[key] = Math.round(value[key]);
+			var roundedValue = Math.round(value[key]);
+			if (roundedValue) {
+				value[key] = roundedValue;
+			}
 		});
 		return value
 	}
@@ -2507,9 +2512,12 @@ tools.add({
 	tests: () => {
 		tools.expect(roundNumber(88.6)).toBe(89);
 		tools.expect(roundNumber([88.6, 55.8])).jsonToBe([89, 56]);
+		tools.expect(roundNumber(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
+		tools.expect(roundNumber(["88.6", "66"])).jsonToBe([89, 66]);
 		tools.expect(roundNumber('Größe:98 x 50,5 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
 		tools.expect(roundNumber('asfdhgfj 55,4 ashfgklfa')).toBe('asfdhgfj 55 ashfgklfa');
 		tools.expect(roundNumber({'a': 88.5, 'b': 55})).jsonToBe({a: 89, b: 55});
+		tools.expect(roundNumber({'a': 'blabla', 'b': 'blabla'})).jsonToBe({a: 'blabla', b: 'blabla'});
 		tools.expect(roundNumber(null)).toBe(null);
 		tools.expect(roundNumber("")).toBe(null);
 		tools.expect(roundNumber('hello world')).toBe('hello world');
