@@ -2487,13 +2487,13 @@ function roundNumber(value) {
 		});
 		return value
 	}
-	if (typeof value === "string"){
+
 		var listOfNumbersFromString = extractAllNumbersFromText(value);
 		listOfNumbersFromString.forEach(number => {
 			value = value.replace(number, Math.round(parseFloat(number.replace(',', '.'))))
 		})
 		return value;
-	}
+
 }
 tools.add({
 	id:"roundNumber",
