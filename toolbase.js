@@ -2465,34 +2465,34 @@ function roundNumber(value) {
 	if (!value) {
 		return null;
 	}
-	if (typeof value === "number") {
-		return Math.round(value);
+
+	const round = v => {
+		if (typeof v === "string" ) {
+			var listOfNumbersFromString = extractAllNumbersFromText(v);
+			listOfNumbersFromString.forEach(number => {
+				v = v.replace(number, Math.round(parseFloat(number.replace(',', '.'))))
+			})
+		} else {
+			v = Math.round(v);
+		}
+		return v;
+
 	}
 	if (Array.isArray(value)) {
 		for (let i = 0; i < value.length; i++) {
-			var roundedValue = Math.round(value[i]);
-			if (roundedValue) {
-				value[i] =roundedValue;
-			}
+			value[i] = round(value[i]);
 		}
 		return value
 
 	}
 	if (typeof value === "object"){
 		Object.keys(value).forEach(key => {
-			var roundedValue = Math.round(value[key]);
-			if (roundedValue) {
-				value[key] = roundedValue;
-			}
+			value[key] = round(value[key]);
 		});
 		return value
 	}
 
-		var listOfNumbersFromString = extractAllNumbersFromText(value);
-		listOfNumbersFromString.forEach(number => {
-			value = value.replace(number, Math.round(parseFloat(number.replace(',', '.'))))
-		})
-		return value;
+	return round(value);
 
 }
 tools.add({
@@ -2510,10 +2510,9 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
-		tools.expect(roundNumber(88.6)).toBe(89);
 		tools.expect(roundNumber([88.6, 55.8])).jsonToBe([89, 56]);
 		tools.expect(roundNumber(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
-		tools.expect(roundNumber(["88.6", "66"])).jsonToBe([89, 66]);
+		tools.expect(roundNumber(["88,6", "66"])).jsonToBe(["89", "66"]);
 		tools.expect(roundNumber('Größe:98 x 50,5 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
 		tools.expect(roundNumber('asfdhgfj 55,4 ashfgklfa')).toBe('asfdhgfj 55 ashfgklfa');
 		tools.expect(roundNumber({'a': 88.5, 'b': 55})).jsonToBe({a: 89, b: 55});
@@ -2521,6 +2520,7 @@ tools.add({
 		tools.expect(roundNumber(null)).toBe(null);
 		tools.expect(roundNumber("")).toBe(null);
 		tools.expect(roundNumber('hello world')).toBe('hello world');
+		tools.expect(roundNumber(['Größe:98 x 50,5 x 5 cm:de', 99.7])).jsonToBe(['Größe:98 x 51 x 5 cm:de', 100]);
 	}
 })
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
