@@ -2461,5 +2461,59 @@ tools.add({
 	}
 })
 
+function roundNumber(value) {
+	if (!value) {
+		return null;
+	}
+	if (typeof value === "number") {
+		return Math.round(value);
+	}
+	if (Array.isArray(value)) {
+		for (let i = 0; i < value.length; i++) {
+			value[i] = Math.round(value[i]);
+		}
+		console.log("ArrayErgebniss: "+ value)
+		return value
+
+	}
+	if (typeof value === "object"){
+		Object.keys(value).forEach(key => {
+			value[key] = Math.round(value[key]);
+		});
+		return value
+	}
+	if (typeof value === "string"){
+		var listOfNumbersFromString = extractAllNumbersFromText(value);
+		listOfNumbersFromString.forEach(number => {
+			value = value.replace(number, Math.round(parseFloat(number.replace(',', '.'))))
+		})
+		return value;
+	}
+}
+tools.add({
+	id:"roundNumber",
+	impl: roundNumber,
+	aliases: {
+		en: "roundNumber",
+		de: "rundeNummer"
+	},
+	args: {
+		en: "value",
+		de: "wert"
+	},
+	tags: ["TAGS.CONDITIONAL"],
+	hideInToolbox: false,
+
+	tests: () => {
+		tools.expect(roundNumber(88.6)).toBe(89);
+		tools.expect(roundNumber([88.6, 55.8])).jsonToBe([89, 56]);
+		tools.expect(roundNumber('Größe:98 x 50,5 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
+		tools.expect(roundNumber('asfdhgfj 55,4 ashfgklfa')).toBe('asfdhgfj 55 ashfgklfa');
+		tools.expect(roundNumber({'a': 88.5, 'b': 55})).jsonToBe({a: 89, b: 55});
+		tools.expect(roundNumber(null)).toBe(null);
+		tools.expect(roundNumber("")).toBe(null);
+		tools.expect(roundNumber('hello world')).toBe('hello world');
+	}
+})
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
