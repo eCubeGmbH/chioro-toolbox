@@ -1,4 +1,5 @@
 const Toolpackage = require('./toolpackage')
+var format = require('date-fns/format')
 
 const tools = new Toolpackage("Base Chioro Tools")
 tools.description = 'These are the toolbox tools included in chioro by default. All the tools defined here are available in the global namespace. '
@@ -2398,6 +2399,56 @@ tools.add({
 		tools.expect(not([])).toBe(false);
 		tools.expect(not({})).toBe(false);
 		tools.expect(not()).toBe(false);
+	}
+})
+
+function date(value) {
+	if (typeof value === "undefined" || !value) {
+		return format(new Date(), "dd.MM.yyyy")
+	} else {
+		return format(new Date(), value);
+	}
+}
+tools.add({
+	id:"date",
+	impl: date,
+	aliases: {
+		en: "date",
+		de: "datum"
+	},
+	args: {
+		en: "format",
+		de: "format"
+	},
+	tags: ["TAGS.UTIL"],
+	hideInToolbox: false,
+
+	tests: () => {
+	}
+})
+
+function timestamp(value) {
+	if (typeof value === "undefined" || !value) {
+		return format(new Date(), "yyyyMMddhhmm")
+	} else {
+		return format(new Date(), value);
+	}
+}
+tools.add({
+	id:"timestamp",
+	impl: timestamp,
+	aliases: {
+		en: "timestamp",
+		de: "zeitstempel"
+	},
+	args: {
+		en: "format",
+		de: "format"
+	},
+	tags: ["TAGS.UTIL"],
+	hideInToolbox: false,
+
+	tests: () => {
 	}
 })
 
