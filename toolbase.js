@@ -2402,11 +2402,14 @@ tools.add({
 	}
 })
 
-function date(value) {
-	if (typeof value === "undefined" || !value) {
-		return format(new Date(), "dd.MM.yyyy")
+function date(formatting, initialDate) {
+	if (typeof initialDate === "undefined" || !initialDate) {
+		initialDate = new Date();
+	}
+	if (typeof formatting === "undefined" || !formatting) {
+		return format(initialDate, "dd.MM.yyyy")
 	} else {
-		return format(new Date(), value);
+		return format(initialDate, formatting);
 	}
 }
 tools.add({
@@ -2417,23 +2420,28 @@ tools.add({
 		de: "datum"
 	},
 	args: {
-		en: "format",
-		de: "format"
+		en: "formatting, dateToProcess",
+		de: "formatierung, datum"
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(date('dd.MM.yyyy', Date.parse("1980/01/01"))).toBe("01.01.1980");
 	}
 })
 
-function timestamp(value) {
+function timestamp(formatting, initialDate) {
+	if (typeof initialDate === "undefined" || !initialDate) {
+		initialDate = new Date();
+	}
 	if (typeof value === "undefined" || !value) {
-		return format(new Date(), "yyyyMMddhhmm")
+		return format(initialDate, "yyyyMMddhhmm")
 	} else {
-		return format(new Date(), value);
+		return format(initialDate, value);
 	}
 }
+
 tools.add({
 	id:"timestamp",
 	impl: timestamp,
@@ -2449,6 +2457,7 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(timestamp('yyyyMMddhhmm', Date.parse("1980/01/01"))).toBe("198001011200");
 	}
 })
 
