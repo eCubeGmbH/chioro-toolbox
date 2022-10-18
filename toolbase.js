@@ -2461,5 +2461,67 @@ tools.add({
 	}
 })
 
+function roundAllNumbers(value) {
+	if (!value) {
+		return null;
+	}
+
+	const round = v => {
+		if (typeof v === "string" ) {
+			var listOfNumbersFromString = extractAllNumbersFromText(v);
+			listOfNumbersFromString.forEach(number => {
+				v = v.replace(number, Math.round(parseFloat(number.replace(',', '.'))))
+			})
+		} else {
+			v = Math.round(v);
+		}
+		return v;
+
+	}
+	if (Array.isArray(value)) {
+		for (let i = 0; i < value.length; i++) {
+			value[i] = round(value[i]);
+		}
+		return value
+
+	}
+	if (typeof value === "object"){
+		Object.keys(value).forEach(key => {
+			value[key] = round(value[key]);
+		});
+		return value
+	}
+
+	return round(value);
+
+}
+tools.add({
+	id:"roundAllNumbers",
+	impl: roundAllNumbers,
+	aliases: {
+		en: "roundAllNumbers",
+		de: "rundeAlleZahlen"
+	},
+	args: {
+		en: "value",
+		de: "wert"
+	},
+	tags: ["TAGS.CONDITIONAL"],
+	hideInToolbox: false,
+
+	tests: () => {
+		tools.expect(roundAllNumbers([88.6, 55.8])).jsonToBe([89, 56]);
+		tools.expect(roundAllNumbers(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
+		tools.expect(roundAllNumbers(["88,6", "66"])).jsonToBe(["89", "66"]);
+		tools.expect(roundAllNumbers('Größe:98 x 50,5 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
+		tools.expect(roundAllNumbers('asfdhgfj 55,4 ashfgklfa')).toBe('asfdhgfj 55 ashfgklfa');
+		tools.expect(roundAllNumbers({'a': 88.5, 'b': 55})).jsonToBe({a: 89, b: 55});
+		tools.expect(roundAllNumbers({'a': 'blabla', 'b': 'blabla'})).jsonToBe({a: 'blabla', b: 'blabla'});
+		tools.expect(roundAllNumbers(null)).toBe(null);
+		tools.expect(roundAllNumbers("")).toBe(null);
+		tools.expect(roundAllNumbers('hello world')).toBe('hello world');
+		tools.expect(roundAllNumbers(['Größe:98 x 50,5 x 5 cm:de', 99.7])).jsonToBe(['Größe:98 x 51 x 5 cm:de', 100]);
+	}
+})
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
