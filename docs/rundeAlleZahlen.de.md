@@ -1,4 +1,4 @@
-Diese Funktion rundet alle Nummern die es findet auf oder ab.
+Diese Funktion rundet alle Zahlen die es findet.
 
 **Beispiele**
 
