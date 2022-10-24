@@ -2435,10 +2435,10 @@ function timestamp(formatting, initialDate) {
 	if (typeof initialDate === "undefined" || !initialDate) {
 		initialDate = new Date();
 	}
-	if (typeof value === "undefined" || !value) {
+	if (typeof formatting === "undefined" || !formatting) {
 		return format(initialDate, "yyyyMMddhhmm")
 	} else {
-		return format(initialDate, value);
+		return format(initialDate, formatting);
 	}
 }
 
@@ -2523,5 +2523,31 @@ tools.add({
 		tools.expect(roundAllNumbers(['Größe:98 x 50,5 x 5 cm:de', 99.7])).jsonToBe(['Größe:98 x 51 x 5 cm:de', 100]);
 	}
 })
+
+function $global(key, value) {
+	if(typeof _globalContext === 'undefined') _globalContext = {}
+	if(typeof value !== 'undefined') {
+		_globalContext[key] = value;
+	}
+	return _globalContext[key];
+}
+tools.add({
+	id:"$global",
+	impl: $global,
+	aliases: {
+		en: "$global",
+		de: "$global"
+	},
+	args: {
+		en: "key,value",
+		de: "schlüssel,wert"
+	},
+	tags: ["TAGS.UTIL"],
+	hideInToolbox: false,
+
+	tests: () => {
+	}
+})
+
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
