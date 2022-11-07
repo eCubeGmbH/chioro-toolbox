@@ -1832,7 +1832,7 @@ tools.add({
 
 
 function addCloudinaryTransformation(cloudinaryUrl, publicId, transformation) {
-	return replaceInText(cloudinaryUrl, new RegExp(publicId + "$"), transformation+ "/"+ publicId);
+	return replaceInText(cloudinaryUrl, publicId, transformation+ "/"+ publicId);
 }
 tools.add({
 	id:"addCloudinaryTransformation",
@@ -1849,6 +1849,8 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "cx32x44"))
+			.toBe("https://res.cloudinary.com/ecubede/cx32x44/bekleidung/4029051623453.jpeg");
 	}
 })
 
@@ -1871,6 +1873,8 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(addCloudinaryNamedTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "josef"))
+			.toBe("https://res.cloudinary.com/ecubede/t_josef/bekleidung/4029051623453.jpeg");
 	}
 })
 
