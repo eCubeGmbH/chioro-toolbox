@@ -8,11 +8,12 @@ If no `textToSearchAndShow_x` was found at all, an empty text is returned.
 **Example**
 
 
-`extractWords(description,
+`extractFirstTerm(description,
 'ladies',
 'women',
 'men',
 'uni')`
 
-- "women's top" &#8594; "ladies"
-- ``"women's shoes" &#8594; "women's"
+- "women's top" &#8594; "women"
+- "men or women shoes" &#8594; "men"
+- - "some text" &#8594; ""
