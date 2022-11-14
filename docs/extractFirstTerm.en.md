@@ -16,4 +16,4 @@ If no `textToSearchAndShow_x` was found at all, an empty text is returned.
 
 - "women's top" &#8594; "women"
 - "men or women shoes" &#8594; "men"
-- - "some text" &#8594; ""
+- "some text" &#8594; ""
