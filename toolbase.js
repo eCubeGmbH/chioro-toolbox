@@ -1582,9 +1582,13 @@ function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, column
 	while(lookupItems.hasNext()) {
 		const lookupItem = lookupItems.getNext();
 		var regex = lookupItem.get(matchingRegExpColumn);
-		if(regex) {
+		if(!regex instanceof RegExp) {
 			if(matchingValue.match(new RegExp(regex, 'ig'))) {
 				return lookupItem.get(columnToRetrieveValueFrom);
+			}
+		} else {
+			if(matchingValue.match(regex)) {
+				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		}
 	}
@@ -1606,6 +1610,8 @@ tools.add({
 
 	tests: () => {
 		tools.expect(lookupGetRegExp("test", "test","test", "test")).toBe("valueFound");
+		tools.expect(lookupGetRegExp("test", "test",/test/g, "test")).toBe("valueFound");
+		tools.expect(lookupGetRegExp("test", "test",/\w+/g, "test")).toBe("valueFound");
 	}
 })
 
@@ -1619,8 +1625,12 @@ function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, col
 	while(lookupItems.hasNext()) {
 		const lookupItem = lookupItems.getNext();
 		var regex = lookupItem.get(matchingRegExpColumn);
-		if(regex) {
+		if(!regex instanceof RegExp) {
 			if(matchingValue.match(new RegExp(regex, 'ig'))) {
+				results.push(lookupItem.get(columnToRetrieveValueFrom));
+			}
+		} else {
+			if(matchingValue.match(regex)) {
 				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		}
@@ -1643,6 +1653,8 @@ tools.add({
 
 	tests: () => {
 		tools.expect(lookupGetAllRegExp("test", "test","test", "test")).toBe("valueFound");
+		tools.expect(lookupGetAllRegExp("test", "test",/test/g, "test")).toBe("valueFound");
+		tools.expect(lookupGetAllRegExp("test", "test",/\w+/g, "test")).toBe("valueFound");
 	}
 })
 
