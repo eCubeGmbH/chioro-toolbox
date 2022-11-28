@@ -1561,8 +1561,8 @@ tools.add({
 		de: "sucheUndNimm"
 	},
 	args: {
-		en: "matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom",
-		de: "passenderWert, gesuchterWert, passendeSpalte, zuHolenderWertSpalte"
+		en: "matchingValue, nameOfDatatable, matchingColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, datentabelle, spalteInDerGesuchtWird, spalteAusDerWertGeholtWird"
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
