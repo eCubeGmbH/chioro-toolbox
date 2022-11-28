@@ -1561,8 +1561,8 @@ tools.add({
 		de: "sucheUndNimm"
 	},
 	args: {
-		en: "matchingValue, nameOfDatatable, matchingColumn, columnToRetrieveValueFrom",
-		de: "passenderWert, datentabelle, spalteInDerGesuchtWird, spalteAusDerWertGeholtWird"
+		en: "matchingValue, datatableName, matchingColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, datentabelleName, spalteInDerGesuchtWird, spalteAusDerWertGeholtWird"
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
@@ -1598,8 +1598,8 @@ tools.add({
 		de: "sucheUndNimmRegExp"
 	},
 	args: {
-		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
-		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+		en: "matchingValue, datatableName, matchingRegExpColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, datentabelleName, spalteInDerGesuchtWird, spalteAusDerWertGeholtWird"
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
@@ -1635,8 +1635,8 @@ tools.add({
 		de: "sucheUndNimmAlleRegExp"
 	},
 	args: {
-		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
-		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+		en: "matchingValue, datatableName, matchingRegExpColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, datentabelleName, spalteInDerGesuchtWird, spalteAusDerWertGeholtWird"
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
