@@ -1048,7 +1048,10 @@ tools.add({
 
 
 function extractFromText(text, pattern, fallback, withGroups) {
-	var matched = stringOf(text).match(pattern);
+	if(!pattern instanceof RegExp) {
+		pattern = new RegExp(pattern, 'ig')
+	}
+	let matched = stringOf(text).match(pattern);
 	if (matched !== null) {
 		if(withGroups) {
 			return matched[1] || matched[0];
@@ -1076,6 +1079,7 @@ tools.add({
 	tests: () => {
 		tools.expect(extractFromText("ene mene muh", /m(.*)e/g, "dann halt nicht")).toBe("mene");
 		tools.expect(extractFromText("ene mxnx muh", /m(.*)e/g, "dann halt nicht")).toBe("dann halt nicht");
+		tools.expect(extractFromText("ene mxnx muh", "muh", "dann halt nicht")).toBe("muh");
 	}
 })
 
@@ -1583,11 +1587,11 @@ function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, column
 		const lookupItem = lookupItems.getNext();
 		var regex = lookupItem.get(matchingRegExpColumn);
 		if(!regex instanceof RegExp) {
-			if(matchingValue.match(new RegExp(regex, 'ig'))) {
+			if(matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
 				return lookupItem.get(columnToRetrieveValueFrom);
 			}
 		} else {
-			if(matchingValue.match(regex)) {
+			if(matchingValue.match && matchingValue.match(regex)) {
 				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		}
@@ -1626,11 +1630,11 @@ function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, col
 		const lookupItem = lookupItems.getNext();
 		var regex = lookupItem.get(matchingRegExpColumn);
 		if(!regex instanceof RegExp) {
-			if(matchingValue.match(new RegExp(regex, 'ig'))) {
+			if(matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
 				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		} else {
-			if(matchingValue.match(regex)) {
+			if(matchingValue.match && matchingValue.match(regex)) {
 				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		}
