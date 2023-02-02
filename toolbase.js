@@ -959,6 +959,7 @@ tools.add({
 
 	tests: () => {
 		tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
+		tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
 	}
 })
 
