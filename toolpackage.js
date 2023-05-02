@@ -121,7 +121,7 @@ class Tool {
 		this.impl = t.impl
 		this.name = t.impl.name
 		this.aliases = t.aliases || {}
-		this.args = t.args
+		this.argsOld = t.argsOld
 		this.tags = t.tags || []
 		this.tests = t.tests
         this.hideInToolbox = t.hideInToolbox
