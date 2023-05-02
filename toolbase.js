@@ -959,6 +959,7 @@ tools.add({
 
 	tests: () => {
 		tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
+		tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
 	}
 })
 
@@ -1048,7 +1049,10 @@ tools.add({
 
 
 function extractFromText(text, pattern, fallback, withGroups) {
-	var matched = stringOf(text).match(pattern);
+	if(!pattern instanceof RegExp) {
+		pattern = new RegExp(pattern, 'ig')
+	}
+	let matched = stringOf(text).match(pattern);
 	if (matched !== null) {
 		if(withGroups) {
 			return matched[1] || matched[0];
@@ -1076,6 +1080,7 @@ tools.add({
 	tests: () => {
 		tools.expect(extractFromText("ene mene muh", /m(.*)e/g, "dann halt nicht")).toBe("mene");
 		tools.expect(extractFromText("ene mxnx muh", /m(.*)e/g, "dann halt nicht")).toBe("dann halt nicht");
+		tools.expect(extractFromText("ene mxnx muh", "muh", "dann halt nicht")).toBe("muh");
 	}
 })
 
@@ -1582,9 +1587,13 @@ function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, column
 	while(lookupItems.hasNext()) {
 		const lookupItem = lookupItems.getNext();
 		var regex = lookupItem.get(matchingRegExpColumn);
-		if(regex) {
-			if(matchingValue.match(new RegExp(regex, 'ig'))) {
+		if(!regex instanceof RegExp) {
+			if(matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
 				return lookupItem.get(columnToRetrieveValueFrom);
+			}
+		} else {
+			if(matchingValue.match && matchingValue.match(regex)) {
+				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		}
 	}
@@ -1606,6 +1615,8 @@ tools.add({
 
 	tests: () => {
 		tools.expect(lookupGetRegExp("test", "test","test", "test")).toBe("valueFound");
+		tools.expect(lookupGetRegExp("test", "test",/test/g, "test")).toBe("valueFound");
+		tools.expect(lookupGetRegExp("test", "test",/\w+/g, "test")).toBe("valueFound");
 	}
 })
 
@@ -1619,8 +1630,12 @@ function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, col
 	while(lookupItems.hasNext()) {
 		const lookupItem = lookupItems.getNext();
 		var regex = lookupItem.get(matchingRegExpColumn);
-		if(regex) {
-			if(matchingValue.match(new RegExp(regex, 'ig'))) {
+		if(!regex instanceof RegExp) {
+			if(matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
+				results.push(lookupItem.get(columnToRetrieveValueFrom));
+			}
+		} else {
+			if(matchingValue.match && matchingValue.match(regex)) {
 				results.push(lookupItem.get(columnToRetrieveValueFrom));
 			}
 		}
@@ -1643,6 +1658,8 @@ tools.add({
 
 	tests: () => {
 		tools.expect(lookupGetAllRegExp("test", "test","test", "test")).toBe("valueFound");
+		tools.expect(lookupGetAllRegExp("test", "test",/test/g, "test")).toBe("valueFound");
+		tools.expect(lookupGetAllRegExp("test", "test",/\w+/g, "test")).toBe("valueFound");
 	}
 })
 
@@ -1832,7 +1849,7 @@ tools.add({
 
 
 function addCloudinaryTransformation(cloudinaryUrl, publicId, transformation) {
-	return replaceInText(cloudinaryUrl, new RegExp(publicId + "$"), transformation+ "/"+ publicId);
+	return replaceInText(cloudinaryUrl, publicId, transformation+ "/"+ publicId);
 }
 tools.add({
 	id:"addCloudinaryTransformation",
@@ -1849,6 +1866,8 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "cx32x44"))
+			.toBe("https://res.cloudinary.com/ecubede/cx32x44/bekleidung/4029051623453.jpeg");
 	}
 })
 
@@ -1871,6 +1890,8 @@ tools.add({
 	hideInToolbox: false,
 
 	tests: () => {
+		tools.expect(addCloudinaryNamedTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "josef"))
+			.toBe("https://res.cloudinary.com/ecubede/t_josef/bekleidung/4029051623453.jpeg");
 	}
 })
 
@@ -2435,10 +2456,10 @@ function timestamp(formatting, initialDate) {
 	if (typeof initialDate === "undefined" || !initialDate) {
 		initialDate = new Date();
 	}
-	if (typeof value === "undefined" || !value) {
+	if (typeof formatting === "undefined" || !formatting) {
 		return format(initialDate, "yyyyMMddhhmm")
 	} else {
-		return format(initialDate, value);
+		return format(initialDate, formatting);
 	}
 }
 
@@ -2523,5 +2544,31 @@ tools.add({
 		tools.expect(roundAllNumbers(['Größe:98 x 50,5 x 5 cm:de', 99.7])).jsonToBe(['Größe:98 x 51 x 5 cm:de', 100]);
 	}
 })
+
+function $global(key, value) {
+	if(typeof _globalContext === 'undefined') _globalContext = {}
+	if(typeof value !== 'undefined') {
+		_globalContext[key] = value;
+	}
+	return _globalContext[key];
+}
+tools.add({
+	id:"$global",
+	impl: $global,
+	aliases: {
+		en: "$global",
+		de: "$global"
+	},
+	args: {
+		en: "key,value",
+		de: "schlüssel,wert"
+	},
+	tags: ["TAGS.UTIL"],
+	hideInToolbox: false,
+
+	tests: () => {
+	}
+})
+
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
