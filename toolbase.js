@@ -16,7 +16,7 @@ tools.add({
 		en: "getJson",
 		de: "getJson"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -40,7 +40,7 @@ tools.add({
 		en: "postJson",
 		de: "postJson"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -72,7 +72,7 @@ tools.add({
 		en: "getSub",
 		de: "holeWert"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -118,7 +118,7 @@ tools.add({
 		en: "$",
 		de: "$"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -142,7 +142,7 @@ tools.add({
 		en: "current",
 		de: "current"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -189,7 +189,7 @@ tools.add({
 		en: "$$",
 		de: "$$"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -211,7 +211,7 @@ tools.add({
 		en: "copy",
 		de: "kopiere"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -247,7 +247,7 @@ tools.add({
 		en: "get",
 		de: "hole"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -272,7 +272,7 @@ tools.add({
 		en: "source",
 		de: "quelle"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -296,7 +296,7 @@ tools.add({
 		en: "target",
 		de: "ziel"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -319,7 +319,7 @@ tools.add({
 		en: "getUnit",
 		de: "holeEinheit"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -341,7 +341,7 @@ tools.add({
 		en: "getValue",
 		de: "holeWert"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -367,7 +367,7 @@ tools.add({
 		en: "mapSize",
 		de: "größeDerMap"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -393,7 +393,7 @@ tools.add({
 		en: "stringOf",
 		de: "zeichenketteVon"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -437,7 +437,7 @@ tools.add({
 		en: "similarCategory",
 		de: "gleicheKategorie"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -460,7 +460,7 @@ tools.add({
 		en: "isInteger",
 		de: "istInteger"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -490,7 +490,7 @@ tools.add({
 		en: "decodeConditions",
 		de: "dekodiereBedingungen"
 	},
-	args: {
+	argsOld: {
 		en: "condition_1, toReplace_1, ...",
 		de: "bedingung_1, zuErsetzen_1, ..."
 	},
@@ -512,7 +512,7 @@ tools.add({
 		en: "isString",
 		de: "istZeichenkette"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -534,7 +534,7 @@ tools.add({
 		en: "isList",
 		de: "istListe"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -564,7 +564,7 @@ tools.add({
 		en: "size",
 		de: "größe"
 	},
-	args: {
+	argsOld: {
 		en: "something",
 		de: "argument"
 	},
@@ -590,7 +590,7 @@ tools.add({
 		en: "asList",
 		de: "speichereAlsTabelle"
 	},
-	args: {
+	argsOld: {
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
@@ -618,7 +618,7 @@ tools.add({
 		en: "anyOf",
 		de: "erstesVon"
 	},
-	args: {
+	argsOld: {
 		en: "something1, something2, ...",
 		de: "Argument1, Argument2, ..."
 	},
@@ -649,7 +649,7 @@ tools.add({
 		en: "filterList",
 		de: "filtereListe"
 	},
-	args: {
+	argsOld: {
 		en: "list property, regexp list",
 		de: "listeneintrag, regexp liste"
 	},
@@ -679,7 +679,7 @@ tools.add({
 		en: "asMap",
 		de: "speichereAlsTabelle"
 	},
-	args: {
+	argsOld: {
 		en: "name1, value1, name2, value2, ...",
 		de: "name1, wert1, name2, wert2, ..."
 	},
@@ -704,7 +704,7 @@ tools.add({
 		en: "removeEmptyListEntries",
 		de: "entferneLeereListeneinträge"
 	},
-	args: {
+	argsOld: {
 		en: "list",
 		de: "liste"
 	},
@@ -726,7 +726,7 @@ tools.add({
 		en: "lowerCaseText",
 		de: "ändereZuKleinbuchstaben"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -748,7 +748,7 @@ tools.add({
 		en: "upperCaseText",
 		de: "ändereZuGroßbuchstaben"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -781,7 +781,7 @@ tools.add({
 		en: "joinText",
 		de: "verbindeTextMitTrennzeichen"
 	},
-	args: {
+	argsOld: {
 		en: "separator, text1, text2, ...",
 		de: "trennzeichen, text1, text2, ..."
 	},
@@ -812,7 +812,7 @@ tools.add({
 		en: "concatenateText",
 		de: "verketteText"
 	},
-	args: {
+	argsOld: {
 		en: "text1, text2, ...",
 		de: "text1, text2, ..."
 	},
@@ -843,7 +843,7 @@ tools.add({
 		en: "insertTextAtPosition",
 		de: "fügeTextAnPositionEin"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToInsert, position",
 		de: "text, einfügeText, position"
 	},
@@ -871,7 +871,7 @@ tools.add({
 		en: "textAtPosition",
 		de: "gibTextAnPosition"
 	},
-	args: {
+	argsOld: {
 		en: "text, position, length",
 		de: "text, position, länge"
 	},
@@ -893,7 +893,7 @@ tools.add({
 		en: "trimText",
 		de: "schneideTextZu"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -915,7 +915,7 @@ tools.add({
 		en: "normalizeWhitespaces",
 		de: "normalisiereLücken"
 	},
-	args: {
+	argsOld: {
 		en: "inputString",
 		de: "zeichenkette"
 	},
@@ -950,7 +950,7 @@ tools.add({
 		en: "replaceInText",
 		de: "ersetzeInText"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToSearch, replaceWith",
 		de: "text, suchtext, ersetzeDurch"
 	},
@@ -978,7 +978,7 @@ tools.add({
 		en: "locateInText",
 		de: "findePositionInText"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToSearch",
 		de: "text, suchtext"
 	},
@@ -1011,7 +1011,7 @@ tools.add({
 		en: "containsText",
 		de: "beinhaltetText"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToSearch",
 		de: "text, suchtext"
 	},
@@ -1035,7 +1035,7 @@ tools.add({
 		en: "inList",
 		de: "istInListe"
 	},
-	args: {
+	argsOld: {
 		en: "searchItem, listItemToSearch1, listItemToSearch2, ...",
 		de: "suchbegriff, listeneintrag1, listeneintrag2, ..."
 	},
@@ -1066,7 +1066,7 @@ tools.add({
 		en: "extractFromText",
 		de: "extrahiereAusText"
 	},
-	args: {
+	argsOld: {
 		en: "text, muster, fallback",
 		de: "text, muster, fallback"
 	},
@@ -1114,7 +1114,7 @@ tools.add({
 		en: "extractAllMatchesFromText",
 		de: "extrahiereAlleTrefferAusText"
 	},
-	args: {
+	argsOld: {
 		en: "text, pattern, withGroups",
 		de: "text, muster, mitGruppen"
 	},
@@ -1148,7 +1148,7 @@ tools.add({
 		en: "extractNumberFromText",
 		de: "extrahiereZahlAusText"
 	},
-	args: {
+	argsOld: {
 		en: "text, fallback",
 		de: "text, fallback"
 	},
@@ -1170,7 +1170,7 @@ tools.add({
 		en: "numberPattern",
 		de: "zahlenMuster"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -1191,7 +1191,7 @@ tools.add({
 		en: "extractAllNumbersFromText",
 		de: "extrahiereAlleZahlenAusText"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -1222,7 +1222,7 @@ tools.add({
 		en: "deleteSpecialCharacters",
 		de: "löscheSonderzeichen"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -1259,7 +1259,7 @@ tools.add({
 		en: "isBlank",
 		de: "istLeer"
 	},
-	args: {
+	argsOld: {
 		en: "text_or_object",
 		de: "text_oder_objekt"
 	},
@@ -1290,7 +1290,7 @@ tools.add({
 		en: "isNotBlank",
 		de: "istNichtLeer"
 	},
-	args: {
+	argsOld: {
 		en: "text_or_object",
 		de: "text_oder_objekt"
 	},
@@ -1321,7 +1321,7 @@ tools.add({
 		en: "startsNumeric",
 		de: "beginntMitZahl"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -1343,7 +1343,7 @@ tools.add({
 		en: "isNumeric",
 		de: "istZahl"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -1390,7 +1390,7 @@ tools.add({
 		en: "decode",
 		de: "findeUndMappe"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
 		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
 	},
@@ -1437,7 +1437,7 @@ tools.add({
 		en: "decodeAll",
 		de: "findeUndMappeAlles"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
 		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
 	},
@@ -1471,7 +1471,7 @@ tools.add({
 		en: "extractFirstTerm",
 		de: "extrahiereErstenBegriff"
 	},
-	args: {
+	argsOld: {
 		en: "text, textToSearchAndShow_1, textToSearchAndShow_2, ...",
 		de: "text, zuExtrahierendesWort_1, zuExtrahierendesWort_2, ..."
 	},
@@ -1499,7 +1499,7 @@ tools.add({
 		en: "extractProperty",
 		de: "extrahiereEigenschaft"
 	},
-	args: {
+	argsOld: {
 		en: "text, propertyName, fallback",
 		de: "text, nameDerEigenschaft, fallback"
 	},
@@ -1531,7 +1531,7 @@ tools.add({
 		en: "extractFromHtmlEnum",
 		de: "extrahiereAusHtmlEnum"
 	},
-	args: {
+	argsOld: {
 		en: "text, propertyName, fallback",
 		de: "text, nameDerEigenschaft, fallback"
 	},
@@ -1560,7 +1560,7 @@ tools.add({
 		en: "lookupGet",
 		de: "sucheUndNimm"
 	},
-	args: {
+	argsOld: {
 		en: "matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeSpalte, zuHolenderWertSpalte"
 	},
@@ -1597,7 +1597,7 @@ tools.add({
 		en: "lookupGetRegExp",
 		de: "sucheUndNimmRegExp"
 	},
-	args: {
+	argsOld: {
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
 	},
@@ -1634,7 +1634,7 @@ tools.add({
 		en: "lookupGetAllRegExp",
 		de: "sucheUndNimmAlleRegExp"
 	},
-	args: {
+	argsOld: {
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
 	},
@@ -1659,7 +1659,7 @@ tools.add({
 		en: "formatAsHtmlBulletpoints",
 		de: "formatiereAlsHtmlAufzählung"
 	},
-	args: {
+	argsOld: {
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
@@ -1685,7 +1685,7 @@ tools.add({
 		en: "formatAsNumber",
 		de: "formatiereAlsZahl"
 	},
-	args: {
+	argsOld: {
 		en: "value, locale",
 		de: "wert, länderFormat"
 	},
@@ -1712,7 +1712,7 @@ tools.add({
 		en: "textToNumber",
 		de: "textAlsZahl"
 	},
-	args: {
+	argsOld: {
 		en: "value, locale",
 		de: "wert, länderFormat"
 	},
@@ -1747,7 +1747,7 @@ tools.add({
 		en: "_numberParser",
 		de: "_numberParser"
 	},
-	args: {
+	argsOld: {
 		en: "value, locale, ...",
 		de: "wert, länderFormat, ..."
 	},
@@ -1775,7 +1775,7 @@ tools.add({
 		en: "regExpMatch",
 		de: "regExpMatch"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -1797,7 +1797,7 @@ tools.add({
 		en: "regExpReplace",
 		de: "regExpReplace"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -1819,7 +1819,7 @@ tools.add({
 		en: "matches",
 		de: "matches"
 	},
-	args: {
+	argsOld: {
 		en: "",
 		de: ""
 	},
@@ -1841,7 +1841,7 @@ tools.add({
 		en: "addCloudinaryTransformation",
 		de: "hinzufügenCloudinaryTransformation"
 	},
-	args: {
+	argsOld: {
 		en: "cloudinaryUrl, publicId, transformation",
 		de: "cloudinaryUrl, publicId, transformation"
 	},
@@ -1863,7 +1863,7 @@ tools.add({
 		en: "addCloudinaryNamedTransformation",
 		de: "hinzufügenCloudinaryNamedTransformation"
 	},
-	args: {
+	argsOld: {
 		en: "cloudinaryUrl, publicId, named_transformation",
 		de: "cloudinaryUrl, publicId, named_transformation"
 	},
@@ -1935,7 +1935,7 @@ tools.add({
 		en: "convertUnit",
 		de: "rechneEinheitUm"
 	},
-	args: {
+	argsOld: {
 		en: "value, factor, oldUnit, newUnit, decimalPlaces",
 		de: "wert, faktor, alteEinheit, neueEinheit, dezimalStellen"
 	},
@@ -2012,7 +2012,7 @@ tools.add({
 		en: "normalizeValues",
 		de: "normalisiereWerte"
 	},
-	args: {
+	argsOld: {
 		en: "value, decimalSeparator, decimalPlaces",
 		de: "wert, dezimalTrennzeichen, dezimalStellen"
 	},
@@ -2043,7 +2043,7 @@ tools.add({
 		en: "extractValueBeforeText",
 		de: "extrahiereWertVorText"
 	},
-	args: {
+	argsOld: {
 		en: "value, text",
 		de: "wert, text"
 	},
@@ -2077,7 +2077,7 @@ tools.add({
 		en: "extractValueAfterText",
 		de: "extrahiereWertNachText"
 	},
-	args: {
+	argsOld: {
 		en: "value, text",
 		de: "wert, text"
 	},
@@ -2102,7 +2102,7 @@ tools.add({
 		en: "escapeRegExp",
 		de: "escapeRegExp"
 	},
-	args: {
+	argsOld: {
 		en: "text",
 		de: "text"
 	},
@@ -2128,7 +2128,7 @@ tools.add({
 		en: "splitText",
 		de: "trenneText"
 	},
-	args: {
+	argsOld: {
 		en: "text, separator",
 		de: "text, separator"
 	},
@@ -2161,7 +2161,7 @@ tools.add({
 		en: "attributes",
 		de: "attribute"
 	},
-	args: {
+	argsOld: {
 		en: "text, separator",
 		de: "text, separator"
 	},
@@ -2199,7 +2199,7 @@ tools.add({
 		en: "startsWith",
 		de: "beginntMit"
 	},
-	args: {
+	argsOld: {
 		en: "text, search",
 		de: "text, suchwert"
 	},
@@ -2246,7 +2246,7 @@ tools.add({
 		en: "endsWith",
 		de: "endetMit"
 	},
-	args: {
+	argsOld: {
 		en: "text, search",
 		de: "text, suchwert"
 	},
@@ -2283,7 +2283,7 @@ tools.add({
 		en: "someOf",
 		de: "istEinElementWahr"
 	},
-	args: {
+	argsOld: {
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
@@ -2319,7 +2319,7 @@ tools.add({
 		en: "allOf",
 		de: "sindAlleElementeWahr"
 	},
-	args: {
+	argsOld: {
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
@@ -2355,7 +2355,7 @@ tools.add({
 		en: "noneOf",
 		de: "istKeinElementWahr"
 	},
-	args: {
+	argsOld: {
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
@@ -2386,7 +2386,7 @@ tools.add({
 		en: "not",
 		de: "nicht"
 	},
-	args: {
+	argsOld: {
 		en: "value",
 		de: "wert"
 	},
@@ -2419,7 +2419,7 @@ tools.add({
 		en: "date",
 		de: "datum"
 	},
-	args: {
+	argsOld: {
 		en: "formatting, dateToProcess",
 		de: "formatierung, datum"
 	},
@@ -2449,7 +2449,7 @@ tools.add({
 		en: "timestamp",
 		de: "zeitstempel"
 	},
-	args: {
+	argsOld: {
 		en: "format",
 		de: "format"
 	},
@@ -2502,7 +2502,7 @@ tools.add({
 		en: "roundAllNumbers",
 		de: "rundeAlleZahlen"
 	},
-	args: {
+	argsOld: {
 		en: "value",
 		de: "wert"
 	},
