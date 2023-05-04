@@ -20,9 +20,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
 	}
@@ -44,9 +48,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
 	}
@@ -76,9 +84,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -122,9 +134,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -146,9 +162,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -193,9 +213,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -215,9 +239,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -251,9 +279,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color_s")).toBe("color_s");
 		tools.expect(target("color_t")).toBe("color_t");
@@ -276,9 +308,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color")).toBe("color");
 	}
@@ -300,9 +336,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color")).toBe("color");
 	}
@@ -323,9 +363,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -345,9 +389,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -371,9 +419,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -397,9 +449,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		var something_undefined;
 		tools.expect(stringOf(something_undefined)).toBe('');
@@ -441,9 +497,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -464,9 +524,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -494,9 +558,47 @@ tools.add({
 		en: "condition_1, toReplace_1, ...",
 		de: "bedingung_1, zuErsetzen_1, ..."
 	},
+	args: {
+		en : [{
+				"key" : "condition_1",
+				"label": "Condition 1",
+				"type": "text",
+				"desc": "Condition"
+			},
+			{
+				"key" : "toReplace_1",
+				"label": "To Replace 1",
+				"type": "text",
+				"desc": "Text which will be returned if condition evaluated as true"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}],
+		de : [{
+				"key" : "condition_1",
+				"label": "Bedingung 1",
+				"type": "text",
+				"desc": "Bedingung"
+			},
+			{
+				"key" : "toReplace_1",
+				"label": "To Replace 1",
+				"type": "text",
+				"desc": "Text, der zurückgegeben wird, wenn Bedingung als wahr bewertet wird"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideInSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -518,7 +620,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideInSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -540,7 +642,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -568,9 +670,23 @@ tools.add({
 		en: "something",
 		de: "argument"
 	},
+	args: {
+		en : [{
+			"key" : "something",
+			"label": "Input",
+			"type": "text",
+			"desc": "Returns the length"
+		}],
+		de : [{
+			"key" : "something",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Gibt die Länge zurück"
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -596,7 +712,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -624,7 +740,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -655,7 +771,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -685,7 +801,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -710,7 +826,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -732,7 +848,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -754,7 +870,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -787,7 +903,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(joinText("-")).toBe("");
 		tools.expect(joinText("")).toBe("");
@@ -818,7 +934,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -849,7 +965,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -877,7 +993,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -899,7 +1015,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -921,7 +1037,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -956,7 +1072,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
 		tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
@@ -985,7 +1101,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(locateInText("ene mene muh", "mene")).toBe(4);
 		tools.expect(locateInText("ene mene muh", "xxx")).toBe(-1);
@@ -1018,7 +1134,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -1042,7 +1158,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1076,7 +1192,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractFromText("ene mene muh", /m(.*)e/g, "dann halt nicht")).toBe("mene");
 		tools.expect(extractFromText("ene mxnx muh", /m(.*)e/g, "dann halt nicht")).toBe("dann halt nicht");
@@ -1125,7 +1241,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.describe("Global (i.e. multi) matches", () => {
 			tools.expect(extractAllMatchesFromText("ene mene muhe", /m..e/g)).jsonToBe(['mene', 'muhe']);
@@ -1159,7 +1275,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractNumberFromText("Temperaturen heute: 23 bis 25 Grad")).toBe("25");
 	}
@@ -1181,7 +1297,7 @@ tools.add({
 	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1202,7 +1318,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractAllNumbersFromText("Temperaturen heute: 23 bis 25 Grad")).jsonToBe(["23", "25"]);
 		tools.expect(extractAllNumbersFromText("Temperaturen heute: -23,6 bis 25.1 Grad")).jsonToBe(["-23,6", "25.1"]);
@@ -1233,7 +1349,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -1270,7 +1386,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(isBlank("2")).toBe(false);
 		tools.expect(isBlank(2)).toBe(false);
@@ -1301,7 +1417,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(isNotBlank("2")).toBe(true);
 		tools.expect(isNotBlank(2)).toBe(true);
@@ -1332,7 +1448,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -1354,7 +1470,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(isNumeric("2")).toBe(true);
 		tools.expect(isNumeric("23")).toBe(true);
@@ -1401,7 +1517,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(decode("some words", "some", "another", "")).toBe("another");
 	}
@@ -1448,7 +1564,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
 		tools.expect(decodeAll("some words")).jsonToBe([]);
@@ -1482,7 +1598,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(extractFirstTerm("some words", "some")).toBe("some");
 		tools.expect(extractFirstTerm("some words", "another")).toBe("");
@@ -1510,7 +1626,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "Größe")).toBe("XL");
 		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "hinweise")).toBe(("nicht schleudern"));
@@ -1542,7 +1658,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractFromHtmlEnum("<li>someStuff: other</li>", "someStuff")).toBe("other");
 		tools.expect(extractFromHtmlEnum("<li><span style=\"font-size:14px;\"><span style=\"font-family: arial,helvetica,sans-serif;\">Wandstärke: 5- 6cm</span></span></li>", "Wandstärke")).toBe("5- 6cm");
@@ -1571,7 +1687,7 @@ tools.add({
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(lookupGet("test", "test","test", "test")).toBe("valueFound");
 	}
@@ -1612,7 +1728,7 @@ tools.add({
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(lookupGetRegExp("test", "test","test", "test")).toBe("valueFound");
 		tools.expect(lookupGetRegExp("test", "test",/test/g, "test")).toBe("valueFound");
@@ -1655,7 +1771,7 @@ tools.add({
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(lookupGetAllRegExp("test", "test","test", "test")).toBe("valueFound");
 		tools.expect(lookupGetAllRegExp("test", "test",/test/g, "test")).toBe("valueFound");
@@ -1682,7 +1798,7 @@ tools.add({
 	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1708,7 +1824,7 @@ tools.add({
 	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(formatAsNumber("8.8")).toBe("8,8");
 	}
@@ -1735,7 +1851,7 @@ tools.add({
 	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(textToNumber("1,223.3", 'en-US')).toBe(1223.3);
 		tools.expect(textToNumber("1.223,3")).toBe(1223.3);
@@ -1770,7 +1886,7 @@ tools.add({
 	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1798,7 +1914,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1820,7 +1936,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1842,7 +1958,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1864,7 +1980,7 @@ tools.add({
 	},
 	tags: ["TAGS.CLOUDINARY"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "cx32x44"))
 			.toBe("https://res.cloudinary.com/ecubede/cx32x44/bekleidung/4029051623453.jpeg");
@@ -1888,7 +2004,7 @@ tools.add({
 	},
 	tags: ["TAGS.CLOUDINARY"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(addCloudinaryNamedTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "josef"))
 			.toBe("https://res.cloudinary.com/ecubede/t_josef/bekleidung/4029051623453.jpeg");
@@ -1962,7 +2078,7 @@ tools.add({
 	},
 	tags: ["TAGS.UNIT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(convertUnit("23 cm and 23 cm", 10, "cm", "mm")).toBe("230 mm and 230 mm");
 		tools.expect(convertUnit("amazing 2,3 cm thing", 10, "cm", "mm")).toBe("amazing 23 mm thing");
@@ -2039,7 +2155,7 @@ tools.add({
 	},
 	tags: ["TAGS.UNIT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(normalizeValues("23.1 and 23.22", '.', 1)).toBe("23.1 and 23.2");
 		tools.expect(normalizeValues("23 and 23.225 and some", '.', 1)).toBe("23.0 and 23.2 and some");
@@ -2070,7 +2186,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractValueBeforeText("some 23.1 mangos and 4 apples ", 'mangos')).toBe("23.1");
 		tools.expect(extractValueBeforeText("Dimensions of 25cm and ", 'cm')).toBe("25");
@@ -2104,7 +2220,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractValueAfterText("some 23.1 mangos and 4 apples ", 'some')).toBe("23.1");
 		tools.expect(extractValueAfterText("Price of $200", '$')).toBe("200");
@@ -2129,7 +2245,7 @@ tools.add({
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -2155,7 +2271,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(splitText("a,b,c")).jsonToBe(['a','b','c']);
 		tools.expect(splitText("a, b,  c")).jsonToBe(['a','b','c']);
@@ -2188,7 +2304,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(attributes()).jsonToBe(['attr1','attr2','attr3']);
 	}
@@ -2226,7 +2342,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(startsWith("super", /u../)).toBe(false);
 		tools.expect(startsWith("super", /^s../)).toBe(true);
@@ -2273,7 +2389,7 @@ tools.add({
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(endsWith("super", /r/)).toBe(true);
 		tools.expect(endsWith("super", /u../)).toBe(false);
@@ -2310,7 +2426,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(someOf(true)).toBe(true);
 		tools.expect(someOf(true, false)).toBe(true);
@@ -2346,7 +2462,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(allOf(true)).toBe(true);
 		tools.expect(allOf(true, false)).toBe(false);
@@ -2382,7 +2498,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(noneOf(true)).toBe(false);
 		tools.expect(noneOf(true, false)).toBe(false);
@@ -2413,7 +2529,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(not(true)).toBe(false);
 		tools.expect(not(false)).toBe(true);
@@ -2446,7 +2562,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(date('dd.MM.yyyy', Date.parse("1980/01/01"))).toBe("01.01.1980");
 	}
@@ -2476,7 +2592,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(timestamp('yyyyMMddhhmm', Date.parse("1980/01/01"))).toBe("198001011200");
 	}
@@ -2529,7 +2645,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(roundAllNumbers([88.6, 55.8])).jsonToBe([89, 56]);
 		tools.expect(roundAllNumbers(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
@@ -2565,7 +2681,7 @@ tools.add({
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
