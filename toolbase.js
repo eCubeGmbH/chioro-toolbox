@@ -710,9 +710,43 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "something1",
+			"label": "First input",
+			"type": "text",
+			"desc": "First input which will merged into a list"
+		}, {
+			"key" : "something2",
+			"label": "Second input",
+			"type": "text",
+			"desc": "Second input which will merged into a list"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "argument1",
+			"label": "Erste Eingabe",
+			"type": "text",
+			"desc": "Erste Eingabe die zu einer Liste zusammengefügt wird"
+		}, {
+			"key" : "argument2",
+			"label": "Erste Eingabe",
+			"type": "text",
+			"desc": "Zweite Eingabe die zu einer Liste zusammengefügt wird"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-	hideOnSimpleMode: null,
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -738,9 +772,43 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "Argument1, Argument2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "something1",
+			"label": "Input",
+			"type": "text",
+			"desc": "First argument which will be checked if true"
+		}, {
+			"key" : "something2",
+			"label": "Input",
+			"type": "text",
+			"desc": "Second argument which will be checked if true"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "argument1",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Überprüfen ob erstes Argument true ist"
+		}, {
+			"key" : "argument2",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Überprüfen ob zweites Argument true ist"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-	hideOnSimpleMode: null,
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -769,6 +837,30 @@ tools.add({
 		en: "list property, regexp list",
 		de: "listeneintrag, regexp liste"
 	},
+	args: {
+		en : [{
+			"key" : "list property",
+			"label": "List",
+			"type": "text",
+			"desc": "List input"
+		}, {
+			"key" : "regexp list",
+			"label": "Regexp list",
+			"type": "text",
+			"desc": "List of regex to filter for"
+		}],
+		de : [{
+			"key" : "listeneintrag",
+			"label": "Liste",
+			"type": "text",
+			"desc": "Eingabe Liste die gefiltert werden soll."
+		}, {
+			"key" : "regexp liste",
+			"label": "Regexp list",
+			"type": "text",
+			"desc": "Liste von Regexp nach denen gefiltert werden soll."
+		}]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -793,15 +885,69 @@ tools.add({
 	impl: asMap,
 	aliases: {
 		en: "asMap",
-		de: "speichereAlsTabelle"
+		de: "speichereAlsListe"
 	},
 	argsOld: {
 		en: "name1, value1, name2, value2, ...",
 		de: "name1, wert1, name2, wert2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "name1",
+			"label": "Key 1",
+			"type": "text",
+			"desc": "Key 1"
+		}, {
+			"key" : "value1",
+			"label": "Value 1",
+			"type": "text",
+			"desc": "Value 1"
+		}, {
+			"key" : "name2",
+			"label": "Key 2",
+			"type": "text",
+			"desc": "Key 2"
+		}, {
+			"key" : "value2",
+			"label": "Value 2",
+			"type": "text",
+			"desc": "Value 2"
+		},{
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "name1",
+			"label": "Schlüssel 1",
+			"type": "text",
+			"desc": "Schlüssel 1"
+		}, {
+			"key" : "wert1",
+			"label": "Wert 1",
+			"type": "text",
+			"desc": "Wert 1"
+		}, {
+			"key" : "name2",
+			"label": "Schlüssel 2",
+			"type": "text",
+			"desc": "Schlüssel 2"
+		}, {
+			"key" : "wert2",
+			"label": "Wert 2",
+			"type": "text",
+			"desc": "Wert 2"
+		},{
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: null,
-	hideOnSimpleMode: null,
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -823,6 +969,20 @@ tools.add({
 	argsOld: {
 		en: "list",
 		de: "liste"
+	},
+	args: {
+		en : [{
+			"key" : "list",
+			"label": "Input list",
+			"type": "text",
+			"desc": "List input which will be filtered."
+		}, ],
+		de : [{
+			"key" : "liste",
+			"label": "Eingabeliste",
+			"type": "text",
+			"desc": "Eingabeliste die gefiltert werden soll."
+		}]
 	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
@@ -846,6 +1006,20 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Output of the text in lowercase"
+		}, ],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Ausgabe des Textes in Kleinbuchstaben"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -867,6 +1041,20 @@ tools.add({
 	argsOld: {
 		en: "text",
 		de: "text"
+	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Output of the text in uppercase"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Ausgabe des Textes in Großbuchstaben"
+		}]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
@@ -901,6 +1089,50 @@ tools.add({
 		en: "separator, text1, text2, ...",
 		de: "trennzeichen, text1, text2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "separator",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Separator which divides the text"
+		}, {
+			"key" : "text1",
+			"label": "Input text 1",
+			"type": "text",
+			"desc": "First text to join"
+		}, {
+			"key" : "text2",
+			"label": "Input text 2",
+			"type": "text",
+			"desc": "Second Text to join"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "trennzeichen",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Trennzeichen welches den Text teilt"
+		}, {
+			"key" : "text1",
+			"label": "Eingabetext 1",
+			"type": "text",
+			"desc": "Erster Text der mit Trennzeichen verbunden wird"
+		}, {
+			"key" : "text2",
+			"label": "Eingabetext 2",
+			"type": "text",
+			"desc": "Zweiter Text der mit Trennzeichen verbunden wird"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: true,
@@ -931,6 +1163,40 @@ tools.add({
 	argsOld: {
 		en: "text1, text2, ...",
 		de: "text1, text2, ..."
+	},
+	args: {
+		en : [{
+			"key" : "text1",
+			"label": "First input text",
+			"type": "text",
+			"desc": "First text which should concatenate"
+		}, {
+			"key" : "text2",
+			"label": "Second input text",
+			"type": "text",
+			"desc": "Second text which should concatenate"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "text1",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Erster Text der verkettet werden soll"
+		}, {
+			"key" : "text2",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Zweiter Text der verkettet werden soll"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
@@ -963,6 +1229,40 @@ tools.add({
 		en: "text, textToInsert, position",
 		de: "text, einfügeText, position"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where something should be inserted"
+		}, {
+			"key" : "textToInsert",
+			"label": "Insert text",
+			"type": "text",
+			"desc": "Text which should be inserted"
+		}, {
+			"key" : "position",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Position where the text should be inserted"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Ausgangstext",
+			"type": "text",
+			"desc": "Text in den was eingefügt werden soll"
+		}, {
+			"key" : "einfügeText",
+			"label": "Einfügetext",
+			"type": "text",
+			"desc": "Text der eingefügt werden soll"
+		}, {
+			"key" : "position",
+			"label": "Position",
+			"type": "text",
+			"desc": "Position an die eingefügt werden soll"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -991,6 +1291,40 @@ tools.add({
 		en: "text, position, length",
 		de: "text, position, länge"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where something should be extracted"
+		}, {
+			"key" : "position",
+			"label": "Position",
+			"type": "text",
+			"desc": "Position which should be begin to extract"
+		}, {
+			"key" : "length",
+			"label": "Length",
+			"type": "text",
+			"desc": "Length of how much should be extracted"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text woraus etwas extrahiert werden soll"
+		}, {
+			"key" : "position",
+			"label": "Position",
+			"type": "text",
+			"desc": "Position von der aus extrahiert werden soll"
+		}, {
+			"key" : "länge",
+			"label": "Länge",
+			"type": "text",
+			"desc": "Länge des zu extrahierenden Textes"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1013,6 +1347,20 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where spaces, tabs and line breaks will be removed"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1034,6 +1382,20 @@ tools.add({
 	argsOld: {
 		en: "inputString",
 		de: "zeichenkette"
+	},
+	args: {
+		en : [{
+			"key" : "inputString",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where spaces, tabs and line breaks replaced with space."
+		}],
+		de : [{
+			"key" : "zeichenkette",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche durch Leerzeichen ersetzt werden"
+		}]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
@@ -1070,6 +1432,40 @@ tools.add({
 		en: "text, textToSearch, replaceWith",
 		de: "text, suchtext, ersetzeDurch"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where something should be replaced."
+		}, {
+			"key" : "textToSearch",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text which should be replaced."
+		}, {
+			"key" : "replaceWith",
+			"label": "Replace text",
+			"type": "text",
+			"desc": "Text which should be replace something."
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text wo etwas ersetzt werden soll."
+		}, {
+			"key" : "suchtext",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der ersetzt werden soll."
+		}, {
+			"key" : "ersetzeDurch",
+			"label": "Einfügetext",
+			"type": "text",
+			"desc": "Text der für Suchtext eingefügt werden soll."
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1098,6 +1494,30 @@ tools.add({
 	argsOld: {
 		en: "text, textToSearch",
 		de: "text, suchtext"
+	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where position should be located"
+		}, {
+			"key" : "textToSearch",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text which should be located"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text in dem gesucht werden soll."
+		}, {
+			"key" : "suchtext",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht werden soll."
+		}]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
@@ -1132,6 +1552,30 @@ tools.add({
 		en: "text, textToSearch",
 		de: "text, suchtext"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text in which is searched."
+		}, {
+			"key" : "textToSearch",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text that is searched."
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text in dem gesucht werden soll."
+		}, {
+			"key" : "suchtext",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht werden soll."
+		}]
+	},
 	tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1155,6 +1599,50 @@ tools.add({
 	argsOld: {
 		en: "searchItem, listItemToSearch1, listItemToSearch2, ...",
 		de: "suchbegriff, listeneintrag1, listeneintrag2, ..."
+	},
+	args: {
+		en : [{
+			"key" : "searchItem",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text which should be searched."
+		}, {
+			"key" : "listItemToSearch1",
+			"label": "List item 1",
+			"type": "text",
+			"desc": "Text where should be searched"
+		}, {
+			"key" : "listItemToSearch2",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text where should be searched"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "suchbegriff",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht wird."
+		}, {
+			"key" : "listeneintrag1",
+			"label": "Listeneintrag eins",
+			"type": "text",
+			"desc": "Text in dem gesucht wird."
+		}, {
+			"key" : "listeneintrag2",
+			"label": "Listeneintrag zwei",
+			"type": "text",
+			"desc": "Text in dem gesucht wird."
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
 	},
 	tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
 	hideInToolbox: null,
@@ -1189,6 +1677,40 @@ tools.add({
 	argsOld: {
 		en: "text, muster, fallback",
 		de: "text, muster, fallback"
+	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text in which is searched."
+		}, {
+			"key" : "muster",
+			"label": "Search pattern",
+			"type": "text",
+			"desc": "Search pattern to search text."
+		}, {
+			"key" : "fallback",
+			"label": "Fallback text",
+			"type": "text",
+			"desc": "Fallback if nothing found."
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text in dem gesucht werden soll."
+		}, {
+			"key" : "muster",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht werden soll."
+		}, {
+			"key" : "fallback",
+			"label": "Fallback",
+			"type": "text",
+			"desc": "Rückgabetext wenn nichts gefunden wurde."
+		}]
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
