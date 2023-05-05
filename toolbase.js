@@ -1200,7 +1200,7 @@ tools.add({
 	}
 })
 
-
+// LW ab hier args anpassen für simple Mode
 function extractAllMatchesFromText(text, pattern, withGroups) {
 	// TODO für GUH: Hier weitermachen
 	//var myRegexp = new RegExp(pattern, "g");
@@ -1238,6 +1238,48 @@ tools.add({
 	argsOld: {
 		en: "text, pattern, withGroups",
 		de: "text, muster, mitGruppen"
+	},
+	args: {
+		en : [
+			{
+			    "key" : "text",
+			    "label": "Text",
+			    "type": "text",
+			    "desc": "Text to extract from"
+		    },
+			{
+				"key" : "pattern",
+				"label": "Search pattern",
+				"type": "text",
+				"desc": "Simple string or RegEx used for the search"
+			},
+			{
+				"key" : "withGroups",
+				"label": "One/all results",
+				"type": "text",
+				"desc": "Return only first occurrence or all occurrences"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "pattern",
+				"label": "Suchmuster",
+				"type": "text",
+				"desc": "Entweder ein einfacher Text oder RegEx"
+			},
+			{
+				"key" : "withGroups",
+				"label": "Erstes/alle Ergebnisse",
+				"type": "text",
+				"desc": "Nur das Erste oder alle Resultate zurückgeben"
+			}
+		]
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
