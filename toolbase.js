@@ -1315,6 +1315,36 @@ tools.add({
 		en: "text, fallback",
 		de: "text, fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text to extract from"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "If there is no number found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "pattern",
+				"label": "Suchmuster",
+				"type": "text",
+				"desc": "Wenn die Suche nichts ergibt verwende diesen Wert"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1337,6 +1367,10 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -1357,6 +1391,24 @@ tools.add({
 	argsOld: {
 		en: "text",
 		de: "text"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text to extract from"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			}
+		]
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
@@ -1388,6 +1440,24 @@ tools.add({
 	argsOld: {
 		en: "text",
 		de: "text"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "In this Text the special Chars are removed"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "In diesem Text werden die Sonderzeichen gelöscht"
+			}
+		]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
@@ -1426,6 +1496,24 @@ tools.add({
 		en: "text_or_object",
 		de: "text_oder_objekt"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input is empty"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe leer ist"
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1456,6 +1544,24 @@ tools.add({
 	argsOld: {
 		en: "text_or_object",
 		de: "text_oder_objekt"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input is not empty"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe nicht leer ist"
+			}
+		]
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
@@ -1488,6 +1594,24 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input starts with a number"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe mit einer Zahl beginnt"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1509,6 +1633,24 @@ tools.add({
 	argsOld: {
 		en: "text",
 		de: "text"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input is a number"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe eine Zahl ist"
+			}
+		]
 	},
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
@@ -1557,6 +1699,96 @@ tools.add({
 		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
 		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Search",
+				"type": "text",
+				"desc": "First search string or pattern"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Replace",
+				"type": "text",
+				"desc": "First string for replace"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Search",
+				"type": "text",
+				"desc": "Second search string or pattern"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Replace",
+				"type": "text",
+				"desc": "Second string for replace"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Erster Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der erste Suchtext ersetzt"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweiter Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der zweite Suchtext ersetzt"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn die Suche nicht erfolgreich war"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: true,
@@ -1604,6 +1836,96 @@ tools.add({
 		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
 		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Search",
+				"type": "text",
+				"desc": "First search string or pattern"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Replace",
+				"type": "text",
+				"desc": "First string for replace"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Search",
+				"type": "text",
+				"desc": "Second search string or pattern"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Replace",
+				"type": "text",
+				"desc": "Second string for replace"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Erster Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der erste Suchtext ersetzt"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweiter Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der zweite Suchtext ersetzt"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn die Suche nicht erfolgreich war"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: true,
@@ -1638,6 +1960,60 @@ tools.add({
 		en: "text, textToSearchAndShow_1, textToSearchAndShow_2, ...",
 		de: "text, zuExtrahierendesWort_1, zuExtrahierendesWort_2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "textToSearchAndShow_1",
+				"label": "Search",
+				"type": "text",
+				"desc": "First search string or pattern"
+			},
+			{
+				"key" : "textToSearchAndShow_2",
+				"label": "Search",
+				"type": "text",
+				"desc": "Second search string or pattern"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "zuExtrahierendesWort_1",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Erster Text nach dem gesucht wird"
+			},
+			{
+				"key" : "zuExtrahierendesWort_2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweiter Text nach dem gesucht wird"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: true,
@@ -1665,6 +2041,48 @@ tools.add({
 	argsOld: {
 		en: "text, propertyName, fallback",
 		de: "text, nameDerEigenschaft, fallback"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "propertyName",
+				"label": "Property",
+				"type": "text",
+				"desc": "Search for this property and return the value"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "nameDerEigenschaft",
+				"label": "Eigenschaft",
+				"type": "text",
+				"desc": "Suche nach dieser Eigenschaft und gib deren Wert zurück"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn nichts gefunden wurde"
+			}
+		]
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
@@ -1698,6 +2116,48 @@ tools.add({
 		en: "text, propertyName, fallback",
 		de: "text, nameDerEigenschaft, fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "propertyName",
+				"label": "Property",
+				"type": "text",
+				"desc": "Search for this property and return the value"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "nameDerEigenschaft",
+				"label": "Eigenschaft",
+				"type": "text",
+				"desc": "Suche nach dieser Eigenschaft und gib deren Wert zurück"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn nichts gefunden wurde"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1726,6 +2186,60 @@ tools.add({
 	argsOld: {
 		en: "matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeSpalte, zuHolenderWertSpalte"
+	},
+	args: {
+		en : [
+			{
+				"key" : "matchingValue",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "lookupName",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "Search in this data table"
+			},
+			{
+				"key" : "matchingColumn",
+				"label": "Search column",
+				"type": "text",
+				"desc": "Search in this column of the data table"
+			},
+			{
+				"key" : "columnToRetrieveValueFrom",
+				"label": "Return column",
+				"type": "text",
+				"desc": "Give back the value of this column"
+			}
+		],
+		de : [
+			{
+				"key" : "passenderWert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "gesuchterWert",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "In dieser Datentabelle wird gesucht"
+			},
+			{
+				"key" : "passendeSpalte",
+				"label": "Suchspalte",
+				"type": "text",
+				"desc": "In dieser Spalte der Tabelle wird gesucht"
+			},
+			{
+				"key" : "zuHolenderWertSpalte",
+				"label": "Rückgabespalte",
+				"type": "text",
+				"desc": "Der Wert aus dieser Spalte wird zurückgegeben"
+			}
+		]
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
@@ -1767,6 +2281,60 @@ tools.add({
 	argsOld: {
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+	},
+	args: {
+		en : [
+			{
+				"key" : "matchingValue",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "lookupName",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "Search in this data table"
+			},
+			{
+				"key" : "matchingRegExpColumn",
+				"label": "Search column",
+				"type": "text",
+				"desc": "Search in this column of the data table with RegEx"
+			},
+			{
+				"key" : "columnToRetrieveValueFrom",
+				"label": "Return column",
+				"type": "text",
+				"desc": "Give back the value of this column"
+			}
+		],
+		de : [
+			{
+				"key" : "passenderWert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "gesuchterWert",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "In dieser Datentabelle wird gesucht"
+			},
+			{
+				"key" : "passendeRegExpSpalte",
+				"label": "Suchspalte",
+				"type": "text",
+				"desc": "In dieser Spalte der Tabelle wird mit RegEx gesucht"
+			},
+			{
+				"key" : "zuHolenderWertSpalte",
+				"label": "Rückgabespalte",
+				"type": "text",
+				"desc": "Der Wert aus dieser Spalte wird zurückgegeben"
+			}
+		]
 	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
@@ -1811,6 +2379,60 @@ tools.add({
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
 	},
+	args: {
+		en : [
+			{
+				"key" : "matchingValue",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "lookupName",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "Search in this data table"
+			},
+			{
+				"key" : "matchingRegExpColumn",
+				"label": "Search column",
+				"type": "text",
+				"desc": "Search in this column of the data table with RegEx"
+			},
+			{
+				"key" : "columnToRetrieveValueFrom",
+				"label": "Return column",
+				"type": "text",
+				"desc": "Give back the value of this column"
+			}
+		],
+		de : [
+			{
+				"key" : "passenderWert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "gesuchterWert",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "In dieser Datentabelle wird gesucht"
+			},
+			{
+				"key" : "passendeRegExpSpalte",
+				"label": "Suchspalte",
+				"type": "text",
+				"desc": "In dieser Spalte der Tabelle wird mit RegEx gesucht"
+			},
+			{
+				"key" : "zuHolenderWertSpalte",
+				"label": "Rückgabespalte",
+				"type": "text",
+				"desc": "Der Wert aus dieser Spalte wird zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
 	hideOnSimpleMode: null,
@@ -1838,6 +2460,48 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Text",
+				"type": "text",
+				"desc": "First row"
+			},
+			{
+				"key" : "something2",
+				"label": "Text",
+				"type": "text",
+				"desc": "Second row"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Text",
+				"type": "text",
+				"desc": "Erste Zeile"
+			},
+			{
+				"key" : "argument2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweite Zeile"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
 	hideOnSimpleMode: true,
@@ -1863,6 +2527,36 @@ tools.add({
 	argsOld: {
 		en: "value, locale",
 		de: "wert, länderFormat"
+	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to format"
+			},
+			{
+				"key" : "locale",
+				"label": "Locale",
+				"type": "text",
+				"desc": "Locale to use/override"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Die zu formatierende Zahl"
+			},
+			{
+				"key" : "länderFormat",
+				"label": "Länderformat",
+				"type": "text",
+				"desc": "Das zu verwendende Länderformat"
+			}
+		]
 	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
@@ -1890,6 +2584,36 @@ tools.add({
 	argsOld: {
 		en: "value, locale",
 		de: "wert, länderFormat"
+	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Text",
+				"type": "text",
+				"desc": "The Text to format"
+			},
+			{
+				"key" : "locale",
+				"label": "Locale",
+				"type": "text",
+				"desc": "Locale to use/override"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der zu formatierende Text"
+			},
+			{
+				"key" : "länderFormat",
+				"label": "Länderformat",
+				"type": "text",
+				"desc": "Das zu verwendende Länderformat"
+			}
+		]
 	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
@@ -1926,6 +2650,48 @@ tools.add({
 		en: "value, locale, ...",
 		de: "wert, länderFormat, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to format"
+			},
+			{
+				"key" : "locale",
+				"label": "Locale",
+				"type": "text",
+				"desc": "Locale to use/override"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Die zu formatierende Zahl"
+			},
+			{
+				"key" : "länderFormat",
+				"label": "Länderformat",
+				"type": "text",
+				"desc": "Das zu verwendende Länderformat"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -1954,6 +2720,10 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -1976,6 +2746,10 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -1997,6 +2771,10 @@ tools.add({
 	argsOld: {
 		en: "",
 		de: ""
+	},
+	args: {
+		en: [],
+		de: []
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
@@ -2043,6 +2821,48 @@ tools.add({
 	argsOld: {
 		en: "cloudinaryUrl, publicId, named_transformation",
 		de: "cloudinaryUrl, publicId, named_transformation"
+	},
+	args: {
+		en : [
+			{
+				"key" : "cloudinaryUrl",
+				"label": "Url",
+				"type": "text",
+				"desc": "The url to be used"
+			},
+			{
+				"key" : "publicId",
+				"label": "Public id",
+				"type": "text",
+				"desc": "The ID to use"
+			},
+			{
+				"key" : "named_transformation",
+				"label": "Transformation",
+				"type": "text",
+				"desc": "Transformation to perform of cloudinary"
+			}
+		],
+		de : [
+			{
+				"key" : "cloudinaryUrl",
+				"label": "Url",
+				"type": "text",
+				"desc": "Diese Url wird verwendet"
+			},
+			{
+				"key" : "publicId",
+				"label": "Public ID",
+				"type": "text",
+				"desc": "Diese ID wird verwendet"
+			},
+			{
+				"key" : "named_transformation",
+				"label": "Transformation",
+				"type": "text",
+				"desc": "Transformation durch Cloudinary"
+			}
+		]
 	},
 	tags: ["TAGS.CLOUDINARY"],
 	hideInToolbox: false,
@@ -2117,6 +2937,72 @@ tools.add({
 	argsOld: {
 		en: "value, factor, oldUnit, newUnit, decimalPlaces",
 		de: "wert, faktor, alteEinheit, neueEinheit, dezimalStellen"
+	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to convert"
+			},
+			{
+				"key" : "factor",
+				"label": "Factor",
+				"type": "text",
+				"desc": "Multiplied by this factor"
+			},
+			{
+				"key" : "oldUnit",
+				"label": "Old unit",
+				"type": "text",
+				"desc": "Old unit"
+			},
+			{
+				"key" : "newUnit",
+				"label": "New unit",
+				"type": "text",
+				"desc": "New unit to use"
+			},
+			{
+				"key" : "decimalPlaces",
+				"label": "Decimal Places",
+				"type": "text",
+				"desc": "Decimal Places"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Dieser Wert wird konvertiert"
+			},
+			{
+				"key" : "faktor",
+				"label": "Factor",
+				"type": "text",
+				"desc": "Multiplikator"
+			},
+			{
+				"key" : "alteEinheit",
+				"label": "Alte Einheit",
+				"type": "text",
+				"desc": "Alte Einheit"
+			},
+			{
+				"key" : "neueEinheit",
+				"label": "Neue Einheit",
+				"type": "text",
+				"desc": "Diese Einheit wird verwendet"
+			},
+			{
+				"key" : "dezimalStellen",
+				"label": "Dezimalstellen",
+				"type": "text",
+				"desc": "Dezimalstellen nach dem Komma"
+			}
+		]
 	},
 	tags: ["TAGS.UNIT"],
 	hideInToolbox: false,
@@ -2195,6 +3081,48 @@ tools.add({
 		en: "value, decimalSeparator, decimalPlaces",
 		de: "wert, dezimalTrennzeichen, dezimalStellen"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to convert"
+			},
+			{
+				"key" : "decimalSeparator",
+				"label": "Decimal separator",
+				"type": "text",
+				"desc": "Decimal separator"
+			},
+			{
+				"key" : "decimalPlaces",
+				"label": "Decimal places",
+				"type": "text",
+				"desc": "Decimal places"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Dieser Wert wird normalisiert"
+			},
+			{
+				"key" : "dezimalTrennzeichen",
+				"label": "Trennzeichen",
+				"type": "text",
+				"desc": "Trennzeichen"
+			},
+			{
+				"key" : "dezimalStellen",
+				"label": "Dezimalstellen",
+				"type": "text",
+				"desc": "Anzahl der Dezimalstellen"
+			}
+		]
+	},
 	tags: ["TAGS.UNIT"],
 	hideInToolbox: false,
 	hideOnSimpleMode: null,
@@ -2225,6 +3153,36 @@ tools.add({
 	argsOld: {
 		en: "value, text",
 		de: "wert, text"
+	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "If this text is found the value before is extracted"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "In diesem Attribut wird gesucht"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Wird dieser Text gefunden wird der Wert davor zurückgegeben"
+			}
+		]
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: false,
@@ -2260,6 +3218,36 @@ tools.add({
 		en: "value, text",
 		de: "wert, text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "If this text is found the value after is extracted"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "In diesem Attribut wird gesucht"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Wird dieser Text gefunden wird der Wert danach zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: false,
 	hideOnSimpleMode: null,
@@ -2284,6 +3272,24 @@ tools.add({
 	argsOld: {
 		en: "text",
 		de: "text"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text to escape"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text"
+			}
+		]
 	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: true,
@@ -2310,6 +3316,36 @@ tools.add({
 	argsOld: {
 		en: "text, separator",
 		de: "text, separator"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to split"
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": "What to use as separator"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribut das geteilt werden soll"
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": "Dieser Wert wird als Trennzeichen verwendet"
+			}
+		]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
@@ -2343,6 +3379,36 @@ tools.add({
 	argsOld: {
 		en: "text, separator",
 		de: "text, separator"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": ""
+			}
+		]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
@@ -2381,6 +3447,36 @@ tools.add({
 	argsOld: {
 		en: "text, search",
 		de: "text, suchwert"
+	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "search",
+				"label": "Search",
+				"type": "text",
+				"desc": "This text will be searched"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Attribut in dem gesucht werden soll"
+			},
+			{
+				"key" : "suchwert",
+				"label": "Suche",
+				"type": "text",
+				"desc": "Nach  diesem Wert wird gesucht"
+			}
+		]
 	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
@@ -2429,6 +3525,36 @@ tools.add({
 		en: "text, search",
 		de: "text, suchwert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "search",
+				"label": "Search",
+				"type": "text",
+				"desc": "This text will be searched"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Attribut in dem gesucht werden soll"
+			},
+			{
+				"key" : "suchwert",
+				"label": "Suche",
+				"type": "text",
+				"desc": "Nach  diesem Wert wird gesucht"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
 	hideOnSimpleMode: null,
@@ -2466,6 +3592,48 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "something2",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "argument2",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
 	hideOnSimpleMode: true,
@@ -2501,6 +3669,48 @@ tools.add({
 	argsOld: {
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
+	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "something2",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "argument2",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
@@ -2538,6 +3748,48 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "something2",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "argument2",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
 	hideOnSimpleMode: true,
@@ -2568,6 +3820,24 @@ tools.add({
 	argsOld: {
 		en: "value",
 		de: "wert"
+	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Boolean to be negated"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Boolean der negiert wird"
+			}
+		]
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
@@ -2602,6 +3872,36 @@ tools.add({
 		en: "formatting, dateToProcess",
 		de: "formatierung, datum"
 	},
+	args: {
+		en : [
+			{
+				"key" : "formatting",
+				"label": "Format",
+				"type": "text",
+				"desc": "Format of the date (optional)"
+			},
+			{
+				"key" : "dateToProcess",
+				"label": "Date",
+				"type": "text",
+				"desc": "Date to use (optional)"
+			}
+		],
+		de : [
+			{
+				"key" : "formatierung",
+				"label": "Format",
+				"type": "text",
+				"desc": "Datumsformatierung (optional)"
+			},
+			{
+				"key" : "datum",
+				"label": "Datum",
+				"type": "text",
+				"desc": "Datum (optional)"
+			}
+		]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
 	hideOnSimpleMode: null,
@@ -2629,8 +3929,38 @@ tools.add({
 		de: "zeitstempel"
 	},
 	argsOld: {
-		en: "format",
-		de: "format"
+		en: "formatting, dateToProcess",
+		de: "formatierung, datum"
+	},
+	args: {
+		en : [
+			{
+				"key" : "formatting",
+				"label": "Format",
+				"type": "text",
+				"desc": "Format of the date (optional)"
+			},
+			{
+				"key" : "dateToProcess",
+				"label": "Date",
+				"type": "text",
+				"desc": "Date to use (optional)"
+			}
+		],
+		de : [
+			{
+				"key" : "formatierung",
+				"label": "Format",
+				"type": "text",
+				"desc": "Datumsformatierung (optional)"
+			},
+			{
+				"key" : "datum",
+				"label": "Datum",
+				"type": "text",
+				"desc": "Datum (optional)"
+			}
+		]
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
@@ -2685,6 +4015,24 @@ tools.add({
 		en: "value",
 		de: "wert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Text with values to round"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Text mit Zahlen die gerundet werden"
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
 	hideOnSimpleMode: null,
@@ -2717,9 +4065,39 @@ tools.add({
 		en: "$global",
 		de: "$global"
 	},
-	args: {
+	argsOld: {
 		en: "key,value",
 		de: "schlüssel,wert"
+	},
+	args: {
+		en : [
+			{
+				"key" : "key",
+				"label": "Key",
+				"type": "text",
+				"desc": "Key"
+			},
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Value"
+			}
+		],
+		de : [
+			{
+				"key" : "schlüssel",
+				"label": "Schlüssel",
+				"type": "text",
+				"desc": "Schlüssel"
+			},
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Wert"
+			}
+		]
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
