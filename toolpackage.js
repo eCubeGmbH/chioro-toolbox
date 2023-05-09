@@ -126,6 +126,7 @@ class Tool {
 		this.tags = t.tags || []
 		this.tests = t.tests
         this.hideInToolbox = t.hideInToolbox
+        this.hideOnSimpleMode = t.hideOnSimpleMode
         // this.visibility = t.visibility || "PUBLIC"
 	}
 

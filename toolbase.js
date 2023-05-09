@@ -20,9 +20,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
 	}
@@ -44,9 +48,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
 	}
@@ -76,9 +84,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -122,9 +134,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -146,9 +162,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -193,9 +213,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -215,9 +239,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -251,9 +279,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color_s")).toBe("color_s");
 		tools.expect(target("color_t")).toBe("color_t");
@@ -276,9 +308,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color")).toBe("color");
 	}
@@ -300,9 +336,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color")).toBe("color");
 	}
@@ -323,9 +363,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -345,9 +389,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -371,9 +419,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -397,9 +449,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		var something_undefined;
 		tools.expect(stringOf(something_undefined)).toBe('');
@@ -441,9 +497,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -464,9 +524,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en : [],
+		de : []
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -494,9 +558,47 @@ tools.add({
 		en: "condition_1, toReplace_1, ...",
 		de: "bedingung_1, zuErsetzen_1, ..."
 	},
+	args: {
+		en : [{
+				"key" : "condition_1",
+				"label": "Condition 1",
+				"type": "text",
+				"desc": "Condition"
+			},
+			{
+				"key" : "toReplace_1",
+				"label": "To Replace 1",
+				"type": "text",
+				"desc": "Text which will be returned if condition evaluated as true"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}],
+		de : [{
+				"key" : "condition_1",
+				"label": "Bedingung 1",
+				"type": "text",
+				"desc": "Bedingung"
+			},
+			{
+				"key" : "toReplace_1",
+				"label": "To Replace 1",
+				"type": "text",
+				"desc": "Text, der zurückgegeben wird, wenn Bedingung als wahr bewertet wird"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideInSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -518,7 +620,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideInSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -540,7 +642,7 @@ tools.add({
 	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -568,9 +670,23 @@ tools.add({
 		en: "something",
 		de: "argument"
 	},
+	args: {
+		en : [{
+			"key" : "something",
+			"label": "Input",
+			"type": "text",
+			"desc": "Returns the length"
+		}],
+		de : [{
+			"key" : "something",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Gibt die Länge zurück"
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -594,9 +710,43 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "something1",
+			"label": "First input",
+			"type": "text",
+			"desc": "First input which will merged into a list"
+		}, {
+			"key" : "something2",
+			"label": "Second input",
+			"type": "text",
+			"desc": "Second input which will merged into a list"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "argument1",
+			"label": "Erste Eingabe",
+			"type": "text",
+			"desc": "Erste Eingabe die zu einer Liste zusammengefügt wird"
+		}, {
+			"key" : "argument2",
+			"label": "Erste Eingabe",
+			"type": "text",
+			"desc": "Zweite Eingabe die zu einer Liste zusammengefügt wird"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -622,9 +772,43 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "Argument1, Argument2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "something1",
+			"label": "Input",
+			"type": "text",
+			"desc": "First argument which will be checked if true"
+		}, {
+			"key" : "something2",
+			"label": "Input",
+			"type": "text",
+			"desc": "Second argument which will be checked if true"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "argument1",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Überprüfen ob erstes Argument true ist"
+		}, {
+			"key" : "argument2",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Überprüfen ob zweites Argument true ist"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -653,9 +837,33 @@ tools.add({
 		en: "list property, regexp list",
 		de: "listeneintrag, regexp liste"
 	},
+	args: {
+		en : [{
+			"key" : "list property",
+			"label": "List",
+			"type": "text",
+			"desc": "List input"
+		}, {
+			"key" : "regexp list",
+			"label": "Regexp list",
+			"type": "text",
+			"desc": "List of regex to filter for"
+		}],
+		de : [{
+			"key" : "listeneintrag",
+			"label": "Liste",
+			"type": "text",
+			"desc": "Eingabe Liste die gefiltert werden soll."
+		}, {
+			"key" : "regexp liste",
+			"label": "Regexp list",
+			"type": "text",
+			"desc": "Liste von Regexp nach denen gefiltert werden soll."
+		}]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -677,15 +885,69 @@ tools.add({
 	impl: asMap,
 	aliases: {
 		en: "asMap",
-		de: "speichereAlsTabelle"
+		de: "speichereAlsListe"
 	},
 	argsOld: {
 		en: "name1, value1, name2, value2, ...",
 		de: "name1, wert1, name2, wert2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "name1",
+			"label": "Key 1",
+			"type": "text",
+			"desc": "Key 1"
+		}, {
+			"key" : "value1",
+			"label": "Value 1",
+			"type": "text",
+			"desc": "Value 1"
+		}, {
+			"key" : "name2",
+			"label": "Key 2",
+			"type": "text",
+			"desc": "Key 2"
+		}, {
+			"key" : "value2",
+			"label": "Value 2",
+			"type": "text",
+			"desc": "Value 2"
+		},{
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "name1",
+			"label": "Schlüssel 1",
+			"type": "text",
+			"desc": "Schlüssel 1"
+		}, {
+			"key" : "wert1",
+			"label": "Wert 1",
+			"type": "text",
+			"desc": "Wert 1"
+		}, {
+			"key" : "name2",
+			"label": "Schlüssel 2",
+			"type": "text",
+			"desc": "Schlüssel 2"
+		}, {
+			"key" : "wert2",
+			"label": "Wert 2",
+			"type": "text",
+			"desc": "Wert 2"
+		},{
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -708,9 +970,23 @@ tools.add({
 		en: "list",
 		de: "liste"
 	},
+	args: {
+		en : [{
+			"key" : "list",
+			"label": "Input list",
+			"type": "text",
+			"desc": "List input which will be filtered."
+		}, ],
+		de : [{
+			"key" : "liste",
+			"label": "Eingabeliste",
+			"type": "text",
+			"desc": "Eingabeliste die gefiltert werden soll."
+		}]
+	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -730,9 +1006,23 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Output of the text in lowercase"
+		}, ],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Ausgabe des Textes in Kleinbuchstaben"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -752,9 +1042,23 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Output of the text in uppercase"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Ausgabe des Textes in Großbuchstaben"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -785,9 +1089,53 @@ tools.add({
 		en: "separator, text1, text2, ...",
 		de: "trennzeichen, text1, text2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "separator",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Separator which divides the text"
+		}, {
+			"key" : "text1",
+			"label": "Input text 1",
+			"type": "text",
+			"desc": "First text to join"
+		}, {
+			"key" : "text2",
+			"label": "Input text 2",
+			"type": "text",
+			"desc": "Second Text to join"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "trennzeichen",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Trennzeichen welches den Text teilt"
+		}, {
+			"key" : "text1",
+			"label": "Eingabetext 1",
+			"type": "text",
+			"desc": "Erster Text der mit Trennzeichen verbunden wird"
+		}, {
+			"key" : "text2",
+			"label": "Eingabetext 2",
+			"type": "text",
+			"desc": "Zweiter Text der mit Trennzeichen verbunden wird"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(joinText("-")).toBe("");
 		tools.expect(joinText("")).toBe("");
@@ -816,9 +1164,43 @@ tools.add({
 		en: "text1, text2, ...",
 		de: "text1, text2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "text1",
+			"label": "First input text",
+			"type": "text",
+			"desc": "First text which should concatenate"
+		}, {
+			"key" : "text2",
+			"label": "Second input text",
+			"type": "text",
+			"desc": "Second text which should concatenate"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "text1",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Erster Text der verkettet werden soll"
+		}, {
+			"key" : "text2",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Zweiter Text der verkettet werden soll"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -847,9 +1229,43 @@ tools.add({
 		en: "text, textToInsert, position",
 		de: "text, einfügeText, position"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where something should be inserted"
+		}, {
+			"key" : "textToInsert",
+			"label": "Insert text",
+			"type": "text",
+			"desc": "Text which should be inserted"
+		}, {
+			"key" : "position",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Position where the text should be inserted"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Ausgangstext",
+			"type": "text",
+			"desc": "Text in den was eingefügt werden soll"
+		}, {
+			"key" : "einfügeText",
+			"label": "Einfügetext",
+			"type": "text",
+			"desc": "Text der eingefügt werden soll"
+		}, {
+			"key" : "position",
+			"label": "Position",
+			"type": "text",
+			"desc": "Position an die eingefügt werden soll"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -875,9 +1291,43 @@ tools.add({
 		en: "text, position, length",
 		de: "text, position, länge"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where something should be extracted"
+		}, {
+			"key" : "position",
+			"label": "Position",
+			"type": "text",
+			"desc": "Position which should be begin to extract"
+		}, {
+			"key" : "length",
+			"label": "Length",
+			"type": "text",
+			"desc": "Length of how much should be extracted"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text woraus etwas extrahiert werden soll"
+		}, {
+			"key" : "position",
+			"label": "Position",
+			"type": "text",
+			"desc": "Position von der aus extrahiert werden soll"
+		}, {
+			"key" : "länge",
+			"label": "Länge",
+			"type": "text",
+			"desc": "Länge des zu extrahierenden Textes"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -897,9 +1347,23 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where spaces, tabs and line breaks will be removed"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -919,9 +1383,23 @@ tools.add({
 		en: "inputString",
 		de: "zeichenkette"
 	},
+	args: {
+		en : [{
+			"key" : "inputString",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where spaces, tabs and line breaks replaced with space."
+		}],
+		de : [{
+			"key" : "zeichenkette",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche durch Leerzeichen ersetzt werden"
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -954,9 +1432,43 @@ tools.add({
 		en: "text, textToSearch, replaceWith",
 		de: "text, suchtext, ersetzeDurch"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where something should be replaced."
+		}, {
+			"key" : "textToSearch",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text which should be replaced."
+		}, {
+			"key" : "replaceWith",
+			"label": "Replace text",
+			"type": "text",
+			"desc": "Text which should be replace something."
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text wo etwas ersetzt werden soll."
+		}, {
+			"key" : "suchtext",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der ersetzt werden soll."
+		}, {
+			"key" : "ersetzeDurch",
+			"label": "Einfügetext",
+			"type": "text",
+			"desc": "Text der für Suchtext eingefügt werden soll."
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
 		tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
@@ -983,9 +1495,33 @@ tools.add({
 		en: "text, textToSearch",
 		de: "text, suchtext"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text where position should be located"
+		}, {
+			"key" : "textToSearch",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text which should be located"
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text in dem gesucht werden soll."
+		}, {
+			"key" : "suchtext",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht werden soll."
+		}]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(locateInText("ene mene muh", "mene")).toBe(4);
 		tools.expect(locateInText("ene mene muh", "xxx")).toBe(-1);
@@ -1016,9 +1552,33 @@ tools.add({
 		en: "text, textToSearch",
 		de: "text, suchtext"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text in which is searched."
+		}, {
+			"key" : "textToSearch",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text that is searched."
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text in dem gesucht werden soll."
+		}, {
+			"key" : "suchtext",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht werden soll."
+		}]
+	},
 	tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -1040,9 +1600,53 @@ tools.add({
 		en: "searchItem, listItemToSearch1, listItemToSearch2, ...",
 		de: "suchbegriff, listeneintrag1, listeneintrag2, ..."
 	},
+	args: {
+		en : [{
+			"key" : "searchItem",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text which should be searched."
+		}, {
+			"key" : "listItemToSearch1",
+			"label": "List item 1",
+			"type": "text",
+			"desc": "Text where should be searched"
+		}, {
+			"key" : "listItemToSearch2",
+			"label": "Search text",
+			"type": "text",
+			"desc": "Text where should be searched"
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}],
+		de : [{
+			"key" : "suchbegriff",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht wird."
+		}, {
+			"key" : "listeneintrag1",
+			"label": "Listeneintrag eins",
+			"type": "text",
+			"desc": "Text in dem gesucht wird."
+		}, {
+			"key" : "listeneintrag2",
+			"label": "Listeneintrag zwei",
+			"type": "text",
+			"desc": "Text in dem gesucht wird."
+		}, {
+			"key" : "...",
+			"label": "",
+			"type": "text",
+			"desc": ""
+		}]
+	},
 	tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1074,9 +1678,43 @@ tools.add({
 		en: "text, muster, fallback",
 		de: "text, muster, fallback"
 	},
+	args: {
+		en : [{
+			"key" : "text",
+			"label": "Input text",
+			"type": "text",
+			"desc": "Text in which is searched."
+		}, {
+			"key" : "muster",
+			"label": "Search pattern",
+			"type": "text",
+			"desc": "Search pattern to search text."
+		}, {
+			"key" : "fallback",
+			"label": "Fallback text",
+			"type": "text",
+			"desc": "Fallback if nothing found."
+		}],
+		de : [{
+			"key" : "text",
+			"label": "Eingabetext",
+			"type": "text",
+			"desc": "Text in dem gesucht werden soll."
+		}, {
+			"key" : "muster",
+			"label": "Suchtext",
+			"type": "text",
+			"desc": "Text der gesucht werden soll."
+		}, {
+			"key" : "fallback",
+			"label": "Fallback",
+			"type": "text",
+			"desc": "Rückgabetext wenn nichts gefunden wurde."
+		}]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractFromText("ene mene muh", /m(.*)e/g, "dann halt nicht")).toBe("mene");
 		tools.expect(extractFromText("ene mxnx muh", /m(.*)e/g, "dann halt nicht")).toBe("dann halt nicht");
@@ -1084,7 +1722,7 @@ tools.add({
 	}
 })
 
-
+// LW ab hier args anpassen für simple Mode
 function extractAllMatchesFromText(text, pattern, withGroups) {
 	// TODO für GUH: Hier weitermachen
 	//var myRegexp = new RegExp(pattern, "g");
@@ -1123,9 +1761,51 @@ tools.add({
 		en: "text, pattern, withGroups",
 		de: "text, muster, mitGruppen"
 	},
+	args: {
+		en : [
+			{
+			    "key" : "text",
+			    "label": "Text",
+			    "type": "text",
+			    "desc": "Text to extract from"
+		    },
+			{
+				"key" : "pattern",
+				"label": "Search pattern",
+				"type": "text",
+				"desc": "Simple string or RegEx used for the search"
+			},
+			{
+				"key" : "withGroups",
+				"label": "One/all results",
+				"type": "text",
+				"desc": "Return only first occurrence or all occurrences"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "pattern",
+				"label": "Suchmuster",
+				"type": "text",
+				"desc": "Entweder ein einfacher Text oder RegEx"
+			},
+			{
+				"key" : "withGroups",
+				"label": "Erstes/alle Ergebnisse",
+				"type": "text",
+				"desc": "Nur das Erste oder alle Resultate zurückgeben"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.describe("Global (i.e. multi) matches", () => {
 			tools.expect(extractAllMatchesFromText("ene mene muhe", /m..e/g)).jsonToBe(['mene', 'muhe']);
@@ -1157,9 +1837,39 @@ tools.add({
 		en: "text, fallback",
 		de: "text, fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text to extract from"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "If there is no number found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "pattern",
+				"label": "Suchmuster",
+				"type": "text",
+				"desc": "Wenn die Suche nichts ergibt verwende diesen Wert"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractNumberFromText("Temperaturen heute: 23 bis 25 Grad")).toBe("25");
 	}
@@ -1179,9 +1889,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["pattern"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1200,9 +1914,27 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text to extract from"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractAllNumbersFromText("Temperaturen heute: 23 bis 25 Grad")).jsonToBe(["23", "25"]);
 		tools.expect(extractAllNumbersFromText("Temperaturen heute: -23,6 bis 25.1 Grad")).jsonToBe(["-23,6", "25.1"]);
@@ -1231,9 +1963,27 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "In this Text the special Chars are removed"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "In diesem Text werden die Sonderzeichen gelöscht"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -1268,9 +2018,27 @@ tools.add({
 		en: "text_or_object",
 		de: "text_oder_objekt"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input is empty"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe leer ist"
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(isBlank("2")).toBe(false);
 		tools.expect(isBlank(2)).toBe(false);
@@ -1299,9 +2067,27 @@ tools.add({
 		en: "text_or_object",
 		de: "text_oder_objekt"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input is not empty"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe nicht leer ist"
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(isNotBlank("2")).toBe(true);
 		tools.expect(isNotBlank(2)).toBe(true);
@@ -1330,9 +2116,27 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input starts with a number"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe mit einer Zahl beginnt"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -1352,9 +2156,27 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Check weather the input is a number"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Überprüfung ob die Eingabe eine Zahl ist"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(isNumeric("2")).toBe(true);
 		tools.expect(isNumeric("23")).toBe(true);
@@ -1399,9 +2221,99 @@ tools.add({
 		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
 		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Search",
+				"type": "text",
+				"desc": "First search string or pattern"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Replace",
+				"type": "text",
+				"desc": "First string for replace"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Search",
+				"type": "text",
+				"desc": "Second search string or pattern"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Replace",
+				"type": "text",
+				"desc": "Second string for replace"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Erster Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der erste Suchtext ersetzt"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweiter Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der zweite Suchtext ersetzt"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn die Suche nicht erfolgreich war"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(decode("some words", "some", "another", "")).toBe("another");
 	}
@@ -1446,9 +2358,99 @@ tools.add({
 		en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
 		de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Search",
+				"type": "text",
+				"desc": "First search string or pattern"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Replace",
+				"type": "text",
+				"desc": "First string for replace"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Search",
+				"type": "text",
+				"desc": "Second search string or pattern"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Replace",
+				"type": "text",
+				"desc": "Second string for replace"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "textToSearch_1",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Erster Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_1",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der erste Suchtext ersetzt"
+			},
+			{
+				"key" : "textToSearch_2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweiter Text nach dem gesucht wird"
+			},
+			{
+				"key" : "textToReplace_2",
+				"label": "Ersatztext",
+				"type": "text",
+				"desc": "Durch diesen Text wird der zweite Suchtext ersetzt"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "fallback",
+				"label": "Text",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn die Suche nicht erfolgreich war"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
 		tools.expect(decodeAll("some words")).jsonToBe([]);
@@ -1480,9 +2482,63 @@ tools.add({
 		en: "text, textToSearchAndShow_1, textToSearchAndShow_2, ...",
 		de: "text, zuExtrahierendesWort_1, zuExtrahierendesWort_2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "textToSearchAndShow_1",
+				"label": "Search",
+				"type": "text",
+				"desc": "First search string or pattern"
+			},
+			{
+				"key" : "textToSearchAndShow_2",
+				"label": "Search",
+				"type": "text",
+				"desc": "Second search string or pattern"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "zuExtrahierendesWort_1",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Erster Text nach dem gesucht wird"
+			},
+			{
+				"key" : "zuExtrahierendesWort_2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweiter Text nach dem gesucht wird"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(extractFirstTerm("some words", "some")).toBe("some");
 		tools.expect(extractFirstTerm("some words", "another")).toBe("");
@@ -1508,9 +2564,51 @@ tools.add({
 		en: "text, propertyName, fallback",
 		de: "text, nameDerEigenschaft, fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "propertyName",
+				"label": "Property",
+				"type": "text",
+				"desc": "Search for this property and return the value"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "nameDerEigenschaft",
+				"label": "Eigenschaft",
+				"type": "text",
+				"desc": "Suche nach dieser Eigenschaft und gib deren Wert zurück"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn nichts gefunden wurde"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "Größe")).toBe("XL");
 		tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "hinweise")).toBe(("nicht schleudern"));
@@ -1540,9 +2638,51 @@ tools.add({
 		en: "text, propertyName, fallback",
 		de: "text, nameDerEigenschaft, fallback"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "propertyName",
+				"label": "Property",
+				"type": "text",
+				"desc": "Search for this property and return the value"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "If there is nothing found use this fallback"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "nameDerEigenschaft",
+				"label": "Eigenschaft",
+				"type": "text",
+				"desc": "Suche nach dieser Eigenschaft und gib deren Wert zurück"
+			},
+			{
+				"key" : "fallback",
+				"label": "Fallback",
+				"type": "text",
+				"desc": "Dieser Text wird verwendet wenn nichts gefunden wurde"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractFromHtmlEnum("<li>someStuff: other</li>", "someStuff")).toBe("other");
 		tools.expect(extractFromHtmlEnum("<li><span style=\"font-size:14px;\"><span style=\"font-family: arial,helvetica,sans-serif;\">Wandstärke: 5- 6cm</span></span></li>", "Wandstärke")).toBe("5- 6cm");
@@ -1569,9 +2709,63 @@ tools.add({
 		en: "matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeSpalte, zuHolenderWertSpalte"
 	},
+	args: {
+		en : [
+			{
+				"key" : "matchingValue",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "lookupName",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "Search in this data table"
+			},
+			{
+				"key" : "matchingColumn",
+				"label": "Search column",
+				"type": "text",
+				"desc": "Search in this column of the data table"
+			},
+			{
+				"key" : "columnToRetrieveValueFrom",
+				"label": "Return column",
+				"type": "text",
+				"desc": "Give back the value of this column"
+			}
+		],
+		de : [
+			{
+				"key" : "passenderWert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "gesuchterWert",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "In dieser Datentabelle wird gesucht"
+			},
+			{
+				"key" : "passendeSpalte",
+				"label": "Suchspalte",
+				"type": "text",
+				"desc": "In dieser Spalte der Tabelle wird gesucht"
+			},
+			{
+				"key" : "zuHolenderWertSpalte",
+				"label": "Rückgabespalte",
+				"type": "text",
+				"desc": "Der Wert aus dieser Spalte wird zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(lookupGet("test", "test","test", "test")).toBe("valueFound");
 	}
@@ -1610,9 +2804,63 @@ tools.add({
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
 	},
+	args: {
+		en : [
+			{
+				"key" : "matchingValue",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "lookupName",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "Search in this data table"
+			},
+			{
+				"key" : "matchingRegExpColumn",
+				"label": "Search column",
+				"type": "text",
+				"desc": "Search in this column of the data table with RegEx"
+			},
+			{
+				"key" : "columnToRetrieveValueFrom",
+				"label": "Return column",
+				"type": "text",
+				"desc": "Give back the value of this column"
+			}
+		],
+		de : [
+			{
+				"key" : "passenderWert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "gesuchterWert",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "In dieser Datentabelle wird gesucht"
+			},
+			{
+				"key" : "passendeRegExpSpalte",
+				"label": "Suchspalte",
+				"type": "text",
+				"desc": "In dieser Spalte der Tabelle wird mit RegEx gesucht"
+			},
+			{
+				"key" : "zuHolenderWertSpalte",
+				"label": "Rückgabespalte",
+				"type": "text",
+				"desc": "Der Wert aus dieser Spalte wird zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(lookupGetRegExp("test", "test","test", "test")).toBe("valueFound");
 		tools.expect(lookupGetRegExp("test", "test",/test/g, "test")).toBe("valueFound");
@@ -1653,9 +2901,63 @@ tools.add({
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
 		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
 	},
+	args: {
+		en : [
+			{
+				"key" : "matchingValue",
+				"label": "Text",
+				"type": "text",
+				"desc": "The text to be searched"
+			},
+			{
+				"key" : "lookupName",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "Search in this data table"
+			},
+			{
+				"key" : "matchingRegExpColumn",
+				"label": "Search column",
+				"type": "text",
+				"desc": "Search in this column of the data table with RegEx"
+			},
+			{
+				"key" : "columnToRetrieveValueFrom",
+				"label": "Return column",
+				"type": "text",
+				"desc": "Give back the value of this column"
+			}
+		],
+		de : [
+			{
+				"key" : "passenderWert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der Text in dem gesucht wird"
+			},
+			{
+				"key" : "gesuchterWert",
+				"label": "Datentabelle",
+				"type": "text",
+				"desc": "In dieser Datentabelle wird gesucht"
+			},
+			{
+				"key" : "passendeRegExpSpalte",
+				"label": "Suchspalte",
+				"type": "text",
+				"desc": "In dieser Spalte der Tabelle wird mit RegEx gesucht"
+			},
+			{
+				"key" : "zuHolenderWertSpalte",
+				"label": "Rückgabespalte",
+				"type": "text",
+				"desc": "Der Wert aus dieser Spalte wird zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.LOOKUP"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(lookupGetAllRegExp("test", "test","test", "test")).toBe("valueFound");
 		tools.expect(lookupGetAllRegExp("test", "test",/test/g, "test")).toBe("valueFound");
@@ -1680,9 +2982,51 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Text",
+				"type": "text",
+				"desc": "First row"
+			},
+			{
+				"key" : "something2",
+				"label": "Text",
+				"type": "text",
+				"desc": "Second row"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Text",
+				"type": "text",
+				"desc": "Erste Zeile"
+			},
+			{
+				"key" : "argument2",
+				"label": "Suchtext",
+				"type": "text",
+				"desc": "Zweite Zeile"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1706,9 +3050,39 @@ tools.add({
 		en: "value, locale",
 		de: "wert, länderFormat"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to format"
+			},
+			{
+				"key" : "locale",
+				"label": "Locale",
+				"type": "text",
+				"desc": "Locale to use/override"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Die zu formatierende Zahl"
+			},
+			{
+				"key" : "länderFormat",
+				"label": "Länderformat",
+				"type": "text",
+				"desc": "Das zu verwendende Länderformat"
+			}
+		]
+	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(formatAsNumber("8.8")).toBe("8,8");
 	}
@@ -1733,9 +3107,39 @@ tools.add({
 		en: "value, locale",
 		de: "wert, länderFormat"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Text",
+				"type": "text",
+				"desc": "The Text to format"
+			},
+			{
+				"key" : "locale",
+				"label": "Locale",
+				"type": "text",
+				"desc": "Locale to use/override"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Text",
+				"type": "text",
+				"desc": "Der zu formatierende Text"
+			},
+			{
+				"key" : "länderFormat",
+				"label": "Länderformat",
+				"type": "text",
+				"desc": "Das zu verwendende Länderformat"
+			}
+		]
+	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: null,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(textToNumber("1,223.3", 'en-US')).toBe(1223.3);
 		tools.expect(textToNumber("1.223,3")).toBe(1223.3);
@@ -1768,9 +3172,51 @@ tools.add({
 		en: "value, locale, ...",
 		de: "wert, länderFormat, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to format"
+			},
+			{
+				"key" : "locale",
+				"label": "Locale",
+				"type": "text",
+				"desc": "Locale to use/override"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Die zu formatierende Zahl"
+			},
+			{
+				"key" : "länderFormat",
+				"label": "Länderformat",
+				"type": "text",
+				"desc": "Das zu verwendende Länderformat"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.FORMAT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1796,9 +3242,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1818,9 +3268,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1840,9 +3294,13 @@ tools.add({
 		en: "",
 		de: ""
 	},
+	args: {
+		en: [],
+		de: []
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 	}
 })
@@ -1864,7 +3322,7 @@ tools.add({
 	},
 	tags: ["TAGS.CLOUDINARY"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "cx32x44"))
 			.toBe("https://res.cloudinary.com/ecubede/cx32x44/bekleidung/4029051623453.jpeg");
@@ -1886,9 +3344,51 @@ tools.add({
 		en: "cloudinaryUrl, publicId, named_transformation",
 		de: "cloudinaryUrl, publicId, named_transformation"
 	},
+	args: {
+		en : [
+			{
+				"key" : "cloudinaryUrl",
+				"label": "Url",
+				"type": "text",
+				"desc": "The url to be used"
+			},
+			{
+				"key" : "publicId",
+				"label": "Public id",
+				"type": "text",
+				"desc": "The ID to use"
+			},
+			{
+				"key" : "named_transformation",
+				"label": "Transformation",
+				"type": "text",
+				"desc": "Transformation to perform of cloudinary"
+			}
+		],
+		de : [
+			{
+				"key" : "cloudinaryUrl",
+				"label": "Url",
+				"type": "text",
+				"desc": "Diese Url wird verwendet"
+			},
+			{
+				"key" : "publicId",
+				"label": "Public ID",
+				"type": "text",
+				"desc": "Diese ID wird verwendet"
+			},
+			{
+				"key" : "named_transformation",
+				"label": "Transformation",
+				"type": "text",
+				"desc": "Transformation durch Cloudinary"
+			}
+		]
+	},
 	tags: ["TAGS.CLOUDINARY"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(addCloudinaryNamedTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "josef"))
 			.toBe("https://res.cloudinary.com/ecubede/t_josef/bekleidung/4029051623453.jpeg");
@@ -1960,9 +3460,75 @@ tools.add({
 		en: "value, factor, oldUnit, newUnit, decimalPlaces",
 		de: "wert, faktor, alteEinheit, neueEinheit, dezimalStellen"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to convert"
+			},
+			{
+				"key" : "factor",
+				"label": "Factor",
+				"type": "text",
+				"desc": "Multiplied by this factor"
+			},
+			{
+				"key" : "oldUnit",
+				"label": "Old unit",
+				"type": "text",
+				"desc": "Old unit"
+			},
+			{
+				"key" : "newUnit",
+				"label": "New unit",
+				"type": "text",
+				"desc": "New unit to use"
+			},
+			{
+				"key" : "decimalPlaces",
+				"label": "Decimal Places",
+				"type": "text",
+				"desc": "Decimal Places"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Dieser Wert wird konvertiert"
+			},
+			{
+				"key" : "faktor",
+				"label": "Factor",
+				"type": "text",
+				"desc": "Multiplikator"
+			},
+			{
+				"key" : "alteEinheit",
+				"label": "Alte Einheit",
+				"type": "text",
+				"desc": "Alte Einheit"
+			},
+			{
+				"key" : "neueEinheit",
+				"label": "Neue Einheit",
+				"type": "text",
+				"desc": "Diese Einheit wird verwendet"
+			},
+			{
+				"key" : "dezimalStellen",
+				"label": "Dezimalstellen",
+				"type": "text",
+				"desc": "Dezimalstellen nach dem Komma"
+			}
+		]
+	},
 	tags: ["TAGS.UNIT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(convertUnit("23 cm and 23 cm", 10, "cm", "mm")).toBe("230 mm and 230 mm");
 		tools.expect(convertUnit("amazing 2,3 cm thing", 10, "cm", "mm")).toBe("amazing 23 mm thing");
@@ -2037,9 +3603,51 @@ tools.add({
 		en: "value, decimalSeparator, decimalPlaces",
 		de: "wert, dezimalTrennzeichen, dezimalStellen"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value to convert"
+			},
+			{
+				"key" : "decimalSeparator",
+				"label": "Decimal separator",
+				"type": "text",
+				"desc": "Decimal separator"
+			},
+			{
+				"key" : "decimalPlaces",
+				"label": "Decimal places",
+				"type": "text",
+				"desc": "Decimal places"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Dieser Wert wird normalisiert"
+			},
+			{
+				"key" : "dezimalTrennzeichen",
+				"label": "Trennzeichen",
+				"type": "text",
+				"desc": "Trennzeichen"
+			},
+			{
+				"key" : "dezimalStellen",
+				"label": "Dezimalstellen",
+				"type": "text",
+				"desc": "Anzahl der Dezimalstellen"
+			}
+		]
+	},
 	tags: ["TAGS.UNIT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(normalizeValues("23.1 and 23.22", '.', 1)).toBe("23.1 and 23.2");
 		tools.expect(normalizeValues("23 and 23.225 and some", '.', 1)).toBe("23.0 and 23.2 and some");
@@ -2068,9 +3676,39 @@ tools.add({
 		en: "value, text",
 		de: "wert, text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "If this text is found the value before is extracted"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "In diesem Attribut wird gesucht"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Wird dieser Text gefunden wird der Wert davor zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractValueBeforeText("some 23.1 mangos and 4 apples ", 'mangos')).toBe("23.1");
 		tools.expect(extractValueBeforeText("Dimensions of 25cm and ", 'cm')).toBe("25");
@@ -2102,9 +3740,39 @@ tools.add({
 		en: "value, text",
 		de: "wert, text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "If this text is found the value after is extracted"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "In diesem Attribut wird gesucht"
+			},
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Wird dieser Text gefunden wird der Wert danach zurückgegeben"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(extractValueAfterText("some 23.1 mangos and 4 apples ", 'some')).toBe("23.1");
 		tools.expect(extractValueAfterText("Price of $200", '$')).toBe("200");
@@ -2127,9 +3795,27 @@ tools.add({
 		en: "text",
 		de: "text"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text to escape"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Text"
+			}
+		]
+	},
 	tags: ["TAGS.EXTRACT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
@@ -2153,9 +3839,39 @@ tools.add({
 		en: "text, separator",
 		de: "text, separator"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to split"
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": "What to use as separator"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribut das geteilt werden soll"
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": "Dieser Wert wird als Trennzeichen verwendet"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(splitText("a,b,c")).jsonToBe(['a','b','c']);
 		tools.expect(splitText("a, b,  c")).jsonToBe(['a','b','c']);
@@ -2186,9 +3902,39 @@ tools.add({
 		en: "text, separator",
 		de: "text, separator"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": ""
+			},
+			{
+				"key" : "separator",
+				"label": "Separator",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: true,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(attributes()).jsonToBe(['attr1','attr2','attr3']);
 	}
@@ -2224,9 +3970,39 @@ tools.add({
 		en: "text, search",
 		de: "text, suchwert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "search",
+				"label": "Search",
+				"type": "text",
+				"desc": "This text will be searched"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Attribut in dem gesucht werden soll"
+			},
+			{
+				"key" : "suchwert",
+				"label": "Suche",
+				"type": "text",
+				"desc": "Nach  diesem Wert wird gesucht"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(startsWith("super", /u../)).toBe(false);
 		tools.expect(startsWith("super", /^s../)).toBe(true);
@@ -2271,9 +4047,39 @@ tools.add({
 		en: "text, search",
 		de: "text, suchwert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "text",
+				"label": "Value",
+				"type": "text",
+				"desc": "Attribute to search"
+			},
+			{
+				"key" : "search",
+				"label": "Search",
+				"type": "text",
+				"desc": "This text will be searched"
+			}
+		],
+		de : [
+			{
+				"key" : "text",
+				"label": "Text",
+				"type": "text",
+				"desc": "Attribut in dem gesucht werden soll"
+			},
+			{
+				"key" : "suchwert",
+				"label": "Suche",
+				"type": "text",
+				"desc": "Nach  diesem Wert wird gesucht"
+			}
+		]
+	},
 	tags: ["TAGS.TEXT"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(endsWith("super", /r/)).toBe(true);
 		tools.expect(endsWith("super", /u../)).toBe(false);
@@ -2308,9 +4114,51 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "something2",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "argument2",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(someOf(true)).toBe(true);
 		tools.expect(someOf(true, false)).toBe(true);
@@ -2344,9 +4192,51 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "something2",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "argument2",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(allOf(true)).toBe(true);
 		tools.expect(allOf(true, false)).toBe(false);
@@ -2380,9 +4270,51 @@ tools.add({
 		en: "something1, something2, ...",
 		de: "argument1, argument2, ..."
 	},
+	args: {
+		en : [
+			{
+				"key" : "something1",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "something2",
+				"label": "Value",
+				"type": "text",
+				"desc": "The value can be true or false"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		],
+		de : [
+			{
+				"key" : "argument1",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "argument2",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Kann wahr oder falsch sein"
+			},
+			{
+				"key" : "...",
+				"label": "",
+				"type": "text",
+				"desc": ""
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(noneOf(true)).toBe(false);
 		tools.expect(noneOf(true, false)).toBe(false);
@@ -2411,9 +4343,27 @@ tools.add({
 		en: "value",
 		de: "wert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Boolean to be negated"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Boolean der negiert wird"
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(not(true)).toBe(false);
 		tools.expect(not(false)).toBe(true);
@@ -2444,9 +4394,39 @@ tools.add({
 		en: "formatting, dateToProcess",
 		de: "formatierung, datum"
 	},
+	args: {
+		en : [
+			{
+				"key" : "formatting",
+				"label": "Format",
+				"type": "text",
+				"desc": "Format of the date (optional)"
+			},
+			{
+				"key" : "dateToProcess",
+				"label": "Date",
+				"type": "text",
+				"desc": "Date to use (optional)"
+			}
+		],
+		de : [
+			{
+				"key" : "formatierung",
+				"label": "Format",
+				"type": "text",
+				"desc": "Datumsformatierung (optional)"
+			},
+			{
+				"key" : "datum",
+				"label": "Datum",
+				"type": "text",
+				"desc": "Datum (optional)"
+			}
+		]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(date('dd.MM.yyyy', Date.parse("1980/01/01"))).toBe("01.01.1980");
 	}
@@ -2471,12 +4451,42 @@ tools.add({
 		de: "zeitstempel"
 	},
 	argsOld: {
-		en: "format",
-		de: "format"
+		en: "formatting, dateToProcess",
+		de: "formatierung, datum"
+	},
+	args: {
+		en : [
+			{
+				"key" : "formatting",
+				"label": "Format",
+				"type": "text",
+				"desc": "Format of the date (optional)"
+			},
+			{
+				"key" : "dateToProcess",
+				"label": "Date",
+				"type": "text",
+				"desc": "Date to use (optional)"
+			}
+		],
+		de : [
+			{
+				"key" : "formatierung",
+				"label": "Format",
+				"type": "text",
+				"desc": "Datumsformatierung (optional)"
+			},
+			{
+				"key" : "datum",
+				"label": "Datum",
+				"type": "text",
+				"desc": "Datum (optional)"
+			}
+		]
 	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(timestamp('yyyyMMddhhmm', Date.parse("1980/01/01"))).toBe("198001011200");
 	}
@@ -2527,9 +4537,27 @@ tools.add({
 		en: "value",
 		de: "wert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Text with values to round"
+			}
+		],
+		de : [
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Text mit Zahlen die gerundet werden"
+			}
+		]
+	},
 	tags: ["TAGS.CONDITIONAL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 		tools.expect(roundAllNumbers([88.6, 55.8])).jsonToBe([89, 56]);
 		tools.expect(roundAllNumbers(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
@@ -2559,13 +4587,43 @@ tools.add({
 		en: "$global",
 		de: "$global"
 	},
-	args: {
+	argsOld: {
 		en: "key,value",
 		de: "schlüssel,wert"
 	},
+	args: {
+		en : [
+			{
+				"key" : "key",
+				"label": "Key",
+				"type": "text",
+				"desc": "Key"
+			},
+			{
+				"key" : "value",
+				"label": "Value",
+				"type": "text",
+				"desc": "Value"
+			}
+		],
+		de : [
+			{
+				"key" : "schlüssel",
+				"label": "Schlüssel",
+				"type": "text",
+				"desc": "Schlüssel"
+			},
+			{
+				"key" : "wert",
+				"label": "Wert",
+				"type": "text",
+				"desc": "Wert"
+			}
+		]
+	},
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: false,
-
+	hideOnSimpleMode: null,
 	tests: () => {
 	}
 })
