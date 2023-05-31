@@ -4628,5 +4628,58 @@ tools.add({
 	}
 })
 
+function defaultValue(param, def) {
+	if(isBlank(param)) return def;
+	return param;
+}
+tools.add({
+	id:"default",
+	impl: defaultValue,
+	aliases: {
+		en: "defaultValue",
+		de: "standardWert"
+	},
+	argsOld: {
+		en: "argument, default",
+		de: "argument, standard wert "
+	},
+	args: {
+		en : [{
+			"key" : "argument",
+			"label": "Input",
+			"type": "text",
+			"desc": "First argument which will be checked if true"
+		}, {
+			"key" : "defaultValue",
+			"label": "Input",
+			"type": "text",
+			"desc": "Second argument which will be checked if true"
+		}],
+		de : [{
+			"key" : "argument",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Überprüfen ob erstes Argument true ist"
+		}, {
+			"key" : "standardWert",
+			"label": "Eingabe",
+			"type": "text",
+			"desc": "Überprüfen ob zweites Argument true ist"
+		}]
+	},
+	tags: ["TAGS.UTIL", "TAGS.LIST"],
+	hideInToolbox: false,
+	hideOnSimpleMode: true,
+	tests: () => {
+		tools.expect(defaultValue("123", "default")).toBe("123");
+		tools.expect(defaultValue("", "default")).toBe("default");
+		tools.expect(defaultValue(null, "default")).toBe("default");
+		tools.expect(defaultValue([], "default")).toBe("default");
+		tools.expect(defaultValue({}, "default")).toBe("default");
+		tools.expect(defaultValue({a: 1}, "default")).jsonToBe({a: 1});
+		tools.expect(defaultValue([1], "default")).jsonToBe([1]);
+	}
+})
+
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
