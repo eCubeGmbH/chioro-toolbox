@@ -1990,7 +1990,7 @@ tools.add({
 
 
 function isBlank(text_or_object) {
-	if(text_or_object === null) return true;
+	if(text_or_object === null || typeof text_or_object === 'undefined') return true;
 	if(
 			typeof text_or_object==='string' ||
 			typeof text_or_object==='boolean' ||
