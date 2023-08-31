@@ -1413,13 +1413,28 @@ function replaceAll(str, find, replace) {
 }
 
 function replaceInText(text, textToSearch, replaceWith) {
-	text = stringOf(text);
-	if(textToSearch instanceof RegExp) {
-		return text.replace(textToSearch, stringOf(replaceWith));
+
+	const replaceLogic = t => {
+		t = stringOf(t);
+		if(textToSearch instanceof RegExp) {
+			return t.replace(textToSearch, stringOf(replaceWith));
+		} else {
+			t = replaceAll(t,textToSearch,replaceWith);
+		}
+		return t;
+	}
+	if(Array.isArray(text)) {
+		//localized text support
+		text.map(tx => {
+			tx['value'] = replaceLogic(tx['value'])
+			return tx;
+		});
+
 	} else {
-		text = replaceAll(text,textToSearch,replaceWith);
-	}	
+		text = replaceLogic(text);
+	}
 	return text;
+
 }
 tools.add({
 	id:"replaceInText",
@@ -1472,6 +1487,7 @@ tools.add({
 	tests: () => {
 		tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
 		tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
+		tools.expect(replaceInText([{"lang": "en", "value": "ene mene\n muh"}], "\n", "")).jsonToBe([{"lang": "en", "value": "ene mene muh"}]);
 	}
 })
 
