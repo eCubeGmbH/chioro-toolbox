@@ -344,7 +344,34 @@ tools.add({
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
 	tests: () => {
-		tools.expect(source("color")).toBe("color");
+		tools.expect(target("color")).toBe("color");
+	}
+})
+
+function metadata(propertyName) {
+	if (typeof _metadata == 'undefined') return propertyName;
+	return _metadata[propertyName];
+}
+tools.add({
+	id:"metadata",
+	impl: metadata,
+	aliases: {
+		en: "metadata",
+		de: "metadaten"
+	},
+	argsOld: {
+		en: "",
+		de: ""
+	},
+	args: {
+		en : [],
+		de : []
+	},
+	tags: ["pattern"],
+	hideInToolbox: true,
+	hideOnSimpleMode: true,
+	tests: () => {
+		tools.expect(metadata("color")).toBe("color");
 	}
 })
 
