@@ -39,7 +39,7 @@ tools.add({
 function postJson(url, params, headers = null) {
 	if(typeof _apiFetcher === 'undefined') return {};
 	if (headers !== null) {
-		return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params), Object.from(headers)));
+		return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params), headers));
 	}
 	return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
 }
