@@ -5,8 +5,11 @@ const tools = new Toolpackage("Base Chioro Tools")
 tools.description = 'These are the toolbox tools included in chioro by default. All the tools defined here are available in the global namespace. '
 
 
-function getJson(url) {
+function getJson(url, headers = null) {
 	if(typeof _apiFetcher === 'undefined') return {};
+	if (headers !== null) {
+		return JSON.parse(_apiFetcher.getUrl(url, headers));
+	}
 	return JSON.parse(_apiFetcher.getUrl(url));
 }
 tools.add({
@@ -33,8 +36,11 @@ tools.add({
 })
 
 
-function postJson(url, params) {
+function postJson(url, params, headers = null) {
 	if(typeof _apiFetcher === 'undefined') return {};
+	if (headers !== null) {
+		return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params), Object.from(headers)));
+	}
 	return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
 }
 tools.add({
@@ -56,8 +62,37 @@ tools.add({
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
 	tests: () => {
-		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
+		tools.expect(postJson("https://some.interesting.url")).jsonToBe({});
 	}
+})
+
+function putJson(url, params, headers = null) {
+	if(typeof _apiFetcher === 'undefined') return;
+	if (headers !== null) {
+		_apiFetcher.putUrl(url, JSON.stringify(params), headers);
+	} else {
+		_apiFetcher.putUrl(url, JSON.stringify(params));
+	}
+}
+tools.add({
+	id:"putJson",
+	impl: putJson,
+	aliases: {
+		en: "putJson",
+		de: "putJson"
+	},
+	argsOld: {
+		en: "",
+		de: ""
+	},
+	args: {
+		en : [],
+		de : []
+	},
+	tags: ["pattern"],
+	hideInToolbox: true,
+	hideOnSimpleMode: true,
+	tests: () => {}
 })
 
 function getSub() {
@@ -250,23 +285,30 @@ tools.add({
 	}
 })
 
-
+let __sourceParsed = null;
 function get(propertyName) {
-	if(typeof _source === 'undefined' || typeof _target === 'undefined') return propertyName
-	const propertyNameWithoutPrefix = propertyName.replace(/^source\.|^target\./, '');
-	const source = JSON.parse(_source);
-	const target = _target;
-	if(propertyName.startsWith('source.'))
-		return source[propertyNameWithoutPrefix];
-	else if(propertyName.startsWith('target.'))
-		return target[propertyNameWithoutPrefix];
-	else {
-		if(target.hasOwnProperty(propertyNameWithoutPrefix)) {
-			return target[propertyNameWithoutPrefix];
-		} else {
-			return source[propertyNameWithoutPrefix];
-		}
+	const source = __sourceParsed ? __sourceParsed :
+			(__sourceParsed = (typeof _source != 'undefined' ? JSON.parse(_source) : {}));
+	const target = typeof _target != 'undefined' ? _target : {};
+	const metadata = typeof _metadata != 'undefined' ? _metadata : {};
+
+	if (propertyName.startsWith('source.')) {
+		const key = propertyName.slice(7);
+		return (source && source[key]) ? source[key] : null;
+	} else if (propertyName.startsWith('target.')) {
+		const key = propertyName.slice(7);
+		return (target && target[key]) ? target[key] : null;
+	} else if (propertyName.startsWith('metadata.')) {
+		const key = propertyName.slice(9);
+		return (metadata && metadata[key]) ? metadata[key] : null;
+	} else if (target && target[propertyName]) {
+		return target[propertyName];
+	} else if (source && source[propertyName]) {
+		return source[propertyName];
+	} else if (metadata && metadata[propertyName]) {
+		return metadata[propertyName];
 	}
+	return null;
 }
 tools.add({
 	id:"get",
@@ -287,15 +329,40 @@ tools.add({
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
 	tests: () => {
-		tools.expect(source("color_s")).toBe("color_s");
-		tools.expect(target("color_t")).toBe("color_t");
+		tools.expect(get("source.color")).toBe(null);
+		tools.expect(get("source.color_s")).toBe(null);
+		tools.expect(get("target.color")).toBe(null);
+		tools.expect(get("target.color_t")).toBe(null);
+		tools.expect(get("metadata.color")).toBe(null);
+		tools.expect(get("metadata.color_m")).toBe(null);
+		tools.expect(get("color")).toBe(null);
+		tools.expect(get("color_s")).toBe(null);
+		tools.expect(get("color_t")).toBe(null);
+		tools.expect(get("color_m")).toBe(null);
+		__sourceParsed = null;
+		_source = '{"color":"blue","color_s":"cyan"}';
+		_target = {"color":"red","color_t":"lila"}
+		_metadata = {"color":"yellow","color_m":"brown"}
+		tools.expect(get("source.color")).toBe("blue");
+		tools.expect(get("source.color_s")).toBe("cyan");
+		tools.expect(get("target.color")).toBe("red");
+		tools.expect(get("target.color_t")).toBe("lila");
+		tools.expect(get("metadata.color")).toBe("yellow");
+		tools.expect(get("metadata.color_m")).toBe("brown");
+		tools.expect(get("color")).toBe("red");
+		tools.expect(get("color_s")).toBe("cyan");
+		tools.expect(get("color_t")).toBe("lila");
+		tools.expect(get("color_m")).toBe("brown");
+		__sourceParsed = null;
+		delete _source;
+		delete _target;
+		delete _metadata;
 	}
-})
+});
 
 
 function source(propertyName) {
-	if(typeof _source === 'undefined') return propertyName;
-	return JSON.parse(_source)[propertyName];
+	return get('source.' + propertyName);
 }
 tools.add({
 	id:"source",
@@ -316,14 +383,13 @@ tools.add({
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
 	tests: () => {
-		tools.expect(source("color")).toBe("color");
+		tools.expect(source("color")).toBe(null);
 	}
 })
 
 
 function target(propertyName) {
-	if(typeof _target === 'undefined') return propertyName;
-	return _target[propertyName];
+	return get('target.' + propertyName);
 }
 tools.add({
 	id:"target",
@@ -344,7 +410,33 @@ tools.add({
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
 	tests: () => {
-		tools.expect(source("color")).toBe("color");
+		tools.expect(target("color")).toBe(null);
+	}
+})
+
+function metadata(propertyName) {
+	return get('metadata.' + propertyName);
+}
+tools.add({
+	id:"metadata",
+	impl: metadata,
+	aliases: {
+		en: "metadata",
+		de: "metadaten"
+	},
+	argsOld: {
+		en: "",
+		de: ""
+	},
+	args: {
+		en : [],
+		de : []
+	},
+	tags: ["pattern"],
+	hideInToolbox: true,
+	hideOnSimpleMode: true,
+	tests: () => {
+		tools.expect(metadata("color")).toBe(null);
 	}
 })
 
