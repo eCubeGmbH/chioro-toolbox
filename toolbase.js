@@ -39,6 +39,7 @@ tools.add({
 function postJson(url, params, headers = null) {
 	if(typeof _apiFetcher === 'undefined') return {};
 	if (headers !== null) {
+		if (!headers['content-type']) headers['content-type'] = 'application/json';
 		return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params), headers));
 	}
 	return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
@@ -69,6 +70,7 @@ tools.add({
 function putJson(url, params, headers = null) {
 	if(typeof _apiFetcher === 'undefined') return;
 	if (headers !== null) {
+		if (!headers['content-type']) headers['content-type'] = 'application/json';
 		_apiFetcher.putUrl(url, JSON.stringify(params), headers);
 	} else {
 		_apiFetcher.putUrl(url, JSON.stringify(params));
@@ -137,14 +139,19 @@ function $(propertyName) {
 
 	if(typeof propertyName !== 'string') return JSON.stringify(propertyName);
 
-	var result = '';
-	var prefix = '';
-	if(propertyName.startsWith('source.'))
+	let result = '';
+	let prefix = '';
+	if(propertyName.startsWith('source.')) {
 		prefix = 'source.';
-	if(propertyName.startsWith('target.'))
+		propertyName = propertyName.slice(7);
+	} else if(propertyName.startsWith('target.')) {
 		prefix = 'target.';
-	propertyName = propertyName.replace(/^source\.|^target\./, '');
-	var listOfArgs = propertyName.split('.');
+		propertyName = propertyName.slice(7);
+	} else if(propertyName.startsWith('metadata.')) {
+		prefix = 'metadata.';
+		propertyName = propertyName.slice(9);
+	}
+	const listOfArgs = propertyName.split('.');
 	if(listOfArgs.length > 0) listOfArgs[0] = prefix + listOfArgs[0];
 	const v = getSub.apply(null, listOfArgs);
 	if(v === null) return '';
