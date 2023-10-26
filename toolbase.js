@@ -292,14 +292,10 @@ tools.add({
 	}
 })
 
-let __sourceParsed = null;
-let __metadataParsed = null;
 function get(propertyName) {
-	const source = __sourceParsed ? __sourceParsed :
-			(__sourceParsed = (typeof _source != 'undefined' ? JSON.parse(_source) : {}));
+	const source = typeof _source != 'undefined' ? JSON.parse(_source) : {};
 	const target = typeof _target != 'undefined' ? _target : {};
-	const metadata = __metadataParsed ? __metadataParsed :
-			(__metadataParsed = (typeof _metadata != 'undefined' ? JSON.parse(_metadata) : {}));
+	const metadata = typeof _metadata != 'undefined' ? JSON.parse(_metadata) : {};
 
 	if (propertyName.startsWith('source.')) {
 		const key = propertyName.slice(7);
@@ -348,8 +344,6 @@ tools.add({
 		tools.expect(get("color_s")).toBe(null);
 		tools.expect(get("color_t")).toBe(null);
 		tools.expect(get("color_m")).toBe(null);
-		__sourceParsed = null;
-		__metadataParsed = null;
 		_source = '{"color":"blue","color_s":"cyan"}';
 		_target = {"color":"red","color_t":"lila"};
 		_metadata = '{"color":"yellow","color_m":"brown"}';
@@ -363,8 +357,6 @@ tools.add({
 		tools.expect(get("color_s")).toBe("cyan");
 		tools.expect(get("color_t")).toBe("lila");
 		tools.expect(get("color_m")).toBe("brown");
-		__sourceParsed = null;
-		__metadataParsed = null;
 		delete _source;
 		delete _target;
 		delete _metadata;
