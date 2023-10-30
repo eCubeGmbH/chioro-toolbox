@@ -147,9 +147,6 @@ function $(propertyName) {
 	} else if(propertyName.startsWith('target.')) {
 		prefix = 'target.';
 		propertyName = propertyName.slice(7);
-	} else if(propertyName.startsWith('metadata.')) {
-		prefix = 'metadata.';
-		propertyName = propertyName.slice(9);
 	}
 	const listOfArgs = propertyName.split('.');
 	if(listOfArgs.length > 0) listOfArgs[0] = prefix + listOfArgs[0];
@@ -295,7 +292,6 @@ tools.add({
 function get(propertyName) {
 	const source = typeof _source != 'undefined' ? JSON.parse(_source) : {};
 	const target = typeof _target != 'undefined' ? _target : {};
-	const metadata = typeof _metadata != 'undefined' ? JSON.parse(_metadata) : {};
 
 	if (propertyName.startsWith('source.')) {
 		const key = propertyName.slice(7);
@@ -303,15 +299,10 @@ function get(propertyName) {
 	} else if (propertyName.startsWith('target.')) {
 		const key = propertyName.slice(7);
 		return (target && target[key]) ? target[key] : null;
-	} else if (propertyName.startsWith('metadata.')) {
-		const key = propertyName.slice(9);
-		return (metadata && metadata[key]) ? metadata[key] : null;
 	} else if (target && target[propertyName]) {
 		return target[propertyName];
 	} else if (source && source[propertyName]) {
 		return source[propertyName];
-	} else if (metadata && metadata[propertyName]) {
-		return metadata[propertyName];
 	}
 	return null;
 }
@@ -338,28 +329,21 @@ tools.add({
 		tools.expect(get("source.color_s")).toBe(null);
 		tools.expect(get("target.color")).toBe(null);
 		tools.expect(get("target.color_t")).toBe(null);
-		tools.expect(get("metadata.color")).toBe(null);
-		tools.expect(get("metadata.color_m")).toBe(null);
 		tools.expect(get("color")).toBe(null);
 		tools.expect(get("color_s")).toBe(null);
 		tools.expect(get("color_t")).toBe(null);
 		tools.expect(get("color_m")).toBe(null);
 		_source = '{"color":"blue","color_s":"cyan"}';
 		_target = {"color":"red","color_t":"lila"};
-		_metadata = '{"color":"yellow","color_m":"brown"}';
 		tools.expect(get("source.color")).toBe("blue");
 		tools.expect(get("source.color_s")).toBe("cyan");
 		tools.expect(get("target.color")).toBe("red");
 		tools.expect(get("target.color_t")).toBe("lila");
-		tools.expect(get("metadata.color")).toBe("yellow");
-		tools.expect(get("metadata.color_m")).toBe("brown");
 		tools.expect(get("color")).toBe("red");
 		tools.expect(get("color_s")).toBe("cyan");
 		tools.expect(get("color_t")).toBe("lila");
-		tools.expect(get("color_m")).toBe("brown");
 		delete _source;
 		delete _target;
-		delete _metadata;
 	}
 });
 
@@ -417,15 +401,17 @@ tools.add({
 	}
 })
 
-function metadata(propertyName) {
-	return get('metadata.' + propertyName);
+function context(propertyName) {
+	const contextMap = (typeof _context !== 'undefined') ? JSON.parse(_context) : {};
+	return (contextMap && contextMap[propertyName]) ? contextMap[propertyName] : null;
+
 }
 tools.add({
-	id:"metadata",
-	impl: metadata,
+	id:"context",
+	impl: context,
 	aliases: {
-		en: "metadata",
-		de: "metadaten"
+		en: "context",
+		de: "kontext"
 	},
 	argsOld: {
 		en: "",
@@ -439,7 +425,9 @@ tools.add({
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
 	tests: () => {
-		tools.expect(metadata("color")).toBe(null);
+		_context='{"color": "red"}';
+		tools.expect(context("color")).toBe("red");
+		delete _context;
 	}
 })
 
