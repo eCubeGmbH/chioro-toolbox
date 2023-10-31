@@ -24,11 +24,31 @@ tools.add({
 		de: ""
 	},
 	args: {
-		en : [],
-		de : []
+		en : [{
+			"key" : "URL",
+			"label": "URL",
+			"type": "text",
+			"desc": "URL to use"
+		}, {
+			"key" : "header",
+			"label": "header",
+			"type": "text",
+			"desc": "The header to use"
+		}],
+		de : [{
+			"key" : "URL",
+			"label": "URL",
+			"type": "text",
+			"desc": "URL to use"
+		}, {
+			"key" : "header",
+			"label": "header",
+			"type": "text",
+			"desc": "The header to use"
+		}]
 	},
 	tags: ["pattern"],
-	hideInToolbox: true,
+	hideInToolbox: false,
 	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
@@ -56,11 +76,41 @@ tools.add({
 		de: ""
 	},
 	args: {
-		en : [],
-		de : []
+		en : [{
+			"key" : "URL",
+			"label": "URL",
+			"type": "text",
+			"desc": "URL to use"
+		}, {
+			"key" : "params",
+			"label": "params",
+			"type": "text",
+			"desc": "the payload"
+		}, {
+			"key" : "header",
+			"label": "header",
+			"type": "text",
+			"desc": "The header to use"	
+		}],
+		de : [{
+			"key" : "URL",
+			"label": "URL",
+			"type": "text",
+			"desc": "URL to use"
+		}, {
+			"key" : "params",
+			"label": "params",
+			"type": "text",
+			"desc": "the payload"
+		}, {
+			"key" : "header",
+			"label": "header",
+			"type": "text",
+			"desc": "The header to use"
+		}]
 	},
 	tags: ["pattern"],
-	hideInToolbox: true,
+	hideInToolbox: false,
 	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(postJson("https://some.interesting.url")).jsonToBe({});
