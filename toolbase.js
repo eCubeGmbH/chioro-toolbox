@@ -453,6 +453,20 @@ tools.add({
 
 function context(propertyName) {
 	const contextMap = (typeof _context !== 'undefined') ? JSON.parse(_context) : {};
+	if (propertyName.length === 0) {
+		return contextMap;
+	} else if (propertyName.search('.') !== -1) {
+		let keys = propertyName.split('.');
+		let tmp = contextMap;
+		while (keys.length > 0) {
+			let key = keys.shift();
+			if (tmp[key] == undefined) {
+				return null;
+			}
+			tmp = tmp[key];
+		}
+		return tmp;
+	}
 	return (contextMap && contextMap[propertyName]) ? contextMap[propertyName] : null;
 
 }
