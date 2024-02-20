@@ -673,15 +673,15 @@ tools.add({
 	args: {
 		en : [{
 			"key" : "something",
-			"label": "Input",
+			"label": "Input text",
 			"type": "text",
-			"desc": "Returns the length"
+			"desc": "Returns the length of the text"
 		}],
 		de : [{
 			"key" : "something",
-			"label": "Eingabe",
+			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Gibt die Länge zurück"
+			"desc": "Gibt die Länge des Textes zurück"
 		}]
 	},
 	tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
@@ -842,7 +842,7 @@ tools.add({
 			"key" : "list property",
 			"label": "List",
 			"type": "text",
-			"desc": "List input"
+			"desc": "List to filter"
 		}, {
 			"key" : "regexp list",
 			"label": "Regexp list",
@@ -853,10 +853,10 @@ tools.add({
 			"key" : "listeneintrag",
 			"label": "Liste",
 			"type": "text",
-			"desc": "Eingabe Liste die gefiltert werden soll."
+			"desc": "Liste die gefiltert werden soll."
 		}, {
 			"key" : "regexp liste",
-			"label": "Regexp list",
+			"label": "Regexp Liste",
 			"type": "text",
 			"desc": "Liste von Regexp nach denen gefiltert werden soll."
 		}]
@@ -975,13 +975,13 @@ tools.add({
 			"key" : "list",
 			"label": "Input list",
 			"type": "text",
-			"desc": "List input which will be filtered."
+			"desc": "List which will be filtered."
 		}, ],
 		de : [{
 			"key" : "liste",
 			"label": "Eingabeliste",
 			"type": "text",
-			"desc": "Eingabeliste die gefiltert werden soll."
+			"desc": "Liste die gefiltert werden soll."
 		}]
 	},
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
@@ -1009,15 +1009,15 @@ tools.add({
 	args: {
 		en : [{
 			"key" : "text",
-			"label": "Input text",
+			"label": "Text",
 			"type": "text",
-			"desc": "Output of the text in lowercase"
+			"desc": "Text that is changed to lower case"
 		}, ],
 		de : [{
 			"key" : "text",
 			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Ausgabe des Textes in Kleinbuchstaben"
+			"desc": "Text der in Kleinbuchstaben geändert wird"
 		}]
 	},
 	tags: ["TAGS.TEXT"],
@@ -1045,15 +1045,15 @@ tools.add({
 	args: {
 		en : [{
 			"key" : "text",
-			"label": "Input text",
+			"label": "Text",
 			"type": "text",
-			"desc": "Output of the text in uppercase"
+			"desc": "Text that is changed to uppercase"
 		}],
 		de : [{
 			"key" : "text",
 			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Ausgabe des Textes in Großbuchstaben"
+			"desc": "Text der in Großbuchstaben geändert wird"
 		}]
 	},
 	tags: ["TAGS.TEXT"],
@@ -1242,7 +1242,7 @@ tools.add({
 			"desc": "Text which should be inserted"
 		}, {
 			"key" : "position",
-			"label": "Input text",
+			"label": "Position",
 			"type": "text",
 			"desc": "Position where the text should be inserted"
 		}],
@@ -1250,7 +1250,7 @@ tools.add({
 			"key" : "text",
 			"label": "Ausgangstext",
 			"type": "text",
-			"desc": "Text in den was eingefügt werden soll"
+			"desc": "Text in den eingefügt werden soll"
 		}, {
 			"key" : "einfügeText",
 			"label": "Einfügetext",
@@ -1260,7 +1260,7 @@ tools.add({
 			"key" : "position",
 			"label": "Position",
 			"type": "text",
-			"desc": "Position an die eingefügt werden soll"
+			"desc": "Position an der eingefügt werden soll"
 		}]
 	},
 	tags: ["TAGS.TEXT"],
@@ -1301,18 +1301,18 @@ tools.add({
 			"key" : "position",
 			"label": "Position",
 			"type": "text",
-			"desc": "Position which should be begin to extract"
+			"desc": "Position from where to extract"
 		}, {
 			"key" : "length",
 			"label": "Length",
 			"type": "text",
-			"desc": "Length of how much should be extracted"
+			"desc": "How much should be extracted"
 		}],
 		de : [{
 			"key" : "text",
 			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Text woraus etwas extrahiert werden soll"
+			"desc": "Text woraus etwas ausgeschnitten werden soll"
 		}, {
 			"key" : "position",
 			"label": "Position",
@@ -1358,7 +1358,7 @@ tools.add({
 			"key" : "text",
 			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
+			"desc": "Text aus dem Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
 		}]
 	},
 	tags: ["TAGS.TEXT"],
@@ -1394,7 +1394,7 @@ tools.add({
 			"key" : "zeichenkette",
 			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche durch Leerzeichen ersetzt werden"
+			"desc": "Text in dem Leerzeichen, Tabulatoren und Zeilenumbrüche durch Leerzeichen ersetzt werden"
 		}]
 	},
 	tags: ["TAGS.TEXT"],
@@ -1435,17 +1435,17 @@ tools.add({
 	args: {
 		en : [{
 			"key" : "text",
-			"label": "Input text",
+			"label": "Inputtext",
 			"type": "text",
 			"desc": "Text where something should be replaced."
 		}, {
 			"key" : "textToSearch",
-			"label": "Search text",
+			"label": "Searchtext",
 			"type": "text",
 			"desc": "Text which should be replaced."
 		}, {
 			"key" : "replaceWith",
-			"label": "Replace text",
+			"label": "Replacement text",
 			"type": "text",
 			"desc": "Text which should be replace something."
 		}],
@@ -1453,17 +1453,17 @@ tools.add({
 			"key" : "text",
 			"label": "Eingabetext",
 			"type": "text",
-			"desc": "Text wo etwas ersetzt werden soll."
+			"desc": "Text in dem etwas ersetzt werden soll."
 		}, {
 			"key" : "suchtext",
 			"label": "Suchtext",
 			"type": "text",
-			"desc": "Text der ersetzt werden soll."
+			"desc": "Text der ersetzt werden soll (Suchtext)."
 		}, {
 			"key" : "ersetzeDurch",
 			"label": "Einfügetext",
 			"type": "text",
-			"desc": "Text der für Suchtext eingefügt werden soll."
+			"desc": "Text der für den Suchtext eingefügt werden soll."
 		}]
 	},
 	tags: ["TAGS.TEXT"],
@@ -1861,7 +1861,7 @@ tools.add({
 			},
 			{
 				"key" : "pattern",
-				"label": "Suchmuster",
+				"label": "Fallback",
 				"type": "text",
 				"desc": "Wenn die Suche nichts ergibt verwende diesen Wert"
 			}
@@ -1920,7 +1920,7 @@ tools.add({
 				"key" : "text",
 				"label": "Text",
 				"type": "text",
-				"desc": "Text to extract from"
+				"desc": "Text to extract all numbers from"
 			}
 		],
 		de : [
@@ -1928,7 +1928,7 @@ tools.add({
 				"key" : "text",
 				"label": "Text",
 				"type": "text",
-				"desc": "Der Text in dem gesucht wird"
+				"desc": "Alle Zahlen aus diesem Text werden zurückgegeben"
 			}
 		]
 	},
@@ -2130,7 +2130,7 @@ tools.add({
 				"key" : "text",
 				"label": "Text",
 				"type": "text",
-				"desc": "Überprüfung ob die Eingabe mit einer Zahl beginnt"
+				"desc": "Überprüfung ob der Text mit einer Zahl beginnt"
 			}
 		]
 	},
@@ -2662,9 +2662,9 @@ tools.add({
 		de : [
 			{
 				"key" : "text",
-				"label": "Text",
+				"label": "Text/HTML",
 				"type": "text",
-				"desc": "Der Text in dem gesucht wird"
+				"desc": "Text/HTML in dem gesucht wird"
 			},
 			{
 				"key" : "nameDerEigenschaft",
@@ -2741,7 +2741,7 @@ tools.add({
 				"key" : "passenderWert",
 				"label": "Text",
 				"type": "text",
-				"desc": "Der Text in dem gesucht wird"
+				"desc": "Hiernach wird gesucht"
 			},
 			{
 				"key" : "gesuchterWert",
@@ -2836,7 +2836,7 @@ tools.add({
 				"key" : "passenderWert",
 				"label": "Text",
 				"type": "text",
-				"desc": "Der Text in dem gesucht wird"
+				"desc": "Hiernach wird gesucht"
 			},
 			{
 				"key" : "gesuchterWert",
@@ -2933,7 +2933,7 @@ tools.add({
 				"key" : "passenderWert",
 				"label": "Text",
 				"type": "text",
-				"desc": "Der Text in dem gesucht wird"
+				"desc": "Hiernach wird gesucht"
 			},
 			{
 				"key" : "gesuchterWert",
@@ -3974,9 +3974,9 @@ tools.add({
 		en : [
 			{
 				"key" : "text",
-				"label": "Value",
+				"label": "Text",
 				"type": "text",
-				"desc": "Attribute to search"
+				"desc": "Text to search"
 			},
 			{
 				"key" : "search",
@@ -3990,7 +3990,7 @@ tools.add({
 				"key" : "text",
 				"label": "Text",
 				"type": "text",
-				"desc": "Attribut in dem gesucht werden soll"
+				"desc": "Text in dem gesucht werden soll"
 			},
 			{
 				"key" : "suchwert",
@@ -4067,7 +4067,7 @@ tools.add({
 				"key" : "text",
 				"label": "Text",
 				"type": "text",
-				"desc": "Attribut in dem gesucht werden soll"
+				"desc": "Text in dem gesucht werden soll"
 			},
 			{
 				"key" : "suchwert",
@@ -4414,7 +4414,7 @@ tools.add({
 				"key" : "formatierung",
 				"label": "Format",
 				"type": "text",
-				"desc": "Datumsformatierung (optional)"
+				"desc": "Datumsformat (optional)"
 			},
 			{
 				"key" : "datum",
@@ -4549,7 +4549,7 @@ tools.add({
 		de : [
 			{
 				"key" : "wert",
-				"label": "Wert",
+				"label": "Text",
 				"type": "text",
 				"desc": "Text mit Zahlen die gerundet werden"
 			}
