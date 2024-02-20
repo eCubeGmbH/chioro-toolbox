@@ -750,7 +750,7 @@ tools.add({
 			"label_de": "Eingabe",
 			"type": "text",
 			"desc_en": "Returns the length",
-			"desc_de": "Gibt die Länge zurück"
+			"desc_de": "Gibt die Länge des Textes zurück"
 		}
 	],
 	tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
@@ -897,7 +897,7 @@ tools.add({
 			"label_de": "Liste",
 			"type": "text",
 			"desc_en": "List input",
-			"desc_de": "Eingabe Liste die gefiltert werden soll."
+			"desc_de": "Liste die gefiltert werden soll."
 		},
 		{
 			"key": "regexp list",
@@ -1295,7 +1295,7 @@ tools.add({
 			"label_de": "Eingabetext",
 			"type": "text",
 			"desc_en": "Text where something should be extracted",
-			"desc_de": "Text woraus etwas extrahiert werden soll"
+			"desc_de": "Text aus dem extrahiert werden soll"
 		},
 		{
 			"key": "position",
@@ -1343,7 +1343,7 @@ tools.add({
 			"label_de": "Eingabetext",
 			"type": "text",
 			"desc_en": "Text where spaces, tabs and line breaks will be removed",
-			"desc_de": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
+			"desc_de": "Text in dem Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
 		}
 	],
 	tags: ["TAGS.TEXT"],
@@ -1375,7 +1375,7 @@ tools.add({
 			"label_de": "Eingabetext",
 			"type": "text",
 			"desc_en": "Text where spaces, tabs and line breaks replaced with space.",
-			"desc_de": "Text wo Leerzeichen, Tabulatoren und Zeilenumbrüche durch Leerzeichen ersetzt werden"
+			"desc_de": "Text in dem Leerzeichen, Tabulatoren und Zeilenumbrüche durch Leerzeichen ersetzt werden"
 		}
 	],
 	tags: ["TAGS.TEXT"],
@@ -1435,7 +1435,7 @@ tools.add({
 			"label_de": "Eingabetext",
 			"type": "text",
 			"desc_en": "Text where something should be replaced.",
-			"desc_de": "Text wo etwas ersetzt werden soll."
+			"desc_de": "Text in dem etwas ersetzt werden soll."
 		},
 		{
 			"key": "textToSearch",
@@ -1443,7 +1443,7 @@ tools.add({
 			"label_de": "Suchtext",
 			"type": "text",
 			"desc_en": "Text which should be replaced.",
-			"desc_de": "Text der ersetzt werden soll."
+			"desc_de": "Text der gesucht und ersetzt werden soll."
 		},
 		{
 			"key": "replaceWith",
@@ -1451,7 +1451,7 @@ tools.add({
 			"label_de": "Einfügetext",
 			"type": "text",
 			"desc_en": "Text which should be replace something.",
-			"desc_de": "Text der für Suchtext eingefügt werden soll."
+			"desc_de": "Text der für den Suchtext eingefügt werden soll."
 		}
 	],
 	tags: ["TAGS.TEXT"],
@@ -1787,7 +1787,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "Text to extract from",
-			"desc_de": "Der Text in dem gesucht wird"
+			"desc_de": "Der Text in dem Zahlen gesucht werden"
 		},
 		{
 			"key": "fallback",
@@ -1849,7 +1849,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "Text to extract from",
-			"desc_de": "Der Text in dem gesucht wird"
+			"desc_de": "Der Text aus dem alle Zahlen zurückgegeben werden"
 		}
 	],
 	tags: ["TAGS.EXTRACT"],
@@ -2019,7 +2019,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "Check weather the input starts with a number",
-			"desc_de": "Überprüfung ob die Eingabe mit einer Zahl beginnt"
+			"desc_de": "Überprüfung ob der Text mit einer Zahl beginnt"
 		}
 	],
 	tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
@@ -2480,7 +2480,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "The text to be searched",
-			"desc_de": "Der Text in dem gesucht wird"
+			"desc_de": "Der Text mit dem gesucht wird"
 		},
 		{
 			"key": "lookupName",
@@ -2555,7 +2555,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "The text to be searched",
-			"desc_de": "Der Text in dem gesucht wird"
+			"desc_de": "Der Text mit dem gesucht wird"
 		},
 		{
 			"key": "lookupName",
@@ -2623,7 +2623,7 @@ tools.add({
 	},
 	argsOld: {
 		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
-		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+		de: "suchWert, datentabelle, suchRegExpSpalte, zuHolenderWertSpalte"
 	},
 	args: [
 		{
@@ -2632,7 +2632,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "The text to be searched",
-			"desc_de": "Der Text in dem gesucht wird"
+			"desc_de": "Der Text mit dem gesucht wird"
 		},
 		{
 			"key": "lookupName",
@@ -3114,7 +3114,7 @@ tools.add({
 			"label_de": "Neue Einheit",
 			"type": "text",
 			"desc_en": "New unit to use",
-			"desc_de": "Diese Einheit wird verwendet"
+			"desc_de": "Diese neue Einheit wird verwendet"
 		},
 		{
 			"key": "decimalPlaces",
@@ -3208,7 +3208,7 @@ tools.add({
 			"label_en": "Value",
 			"label_de": "Wert",
 			"type": "text",
-			"desc_en": "The value to convert",
+			"desc_en": "The value to normalize",
 			"desc_de": "Dieser Wert wird normalisiert"
 		},
 		{
@@ -3274,7 +3274,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "If this text is found the value before is extracted",
-			"desc_de": "Wird dieser Text gefunden wird der Wert davor zurückgegeben"
+			"desc_de": "Wird dieser Text gefunden wird die Zahl davor zurückgegeben"
 		}
 	],
 	tags: ["TAGS.EXTRACT"],
@@ -3326,7 +3326,7 @@ tools.add({
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "If this text is found the value after is extracted",
-			"desc_de": "Wird dieser Text gefunden wird der Wert danach zurückgegeben"
+			"desc_de": "Wird dieser Text gefunden wird die Zahl danach zurückgegeben"
 		}
 	],
 	tags: ["TAGS.EXTRACT"],
@@ -3565,7 +3565,7 @@ tools.add({
 	args: [
 		{
 			"key": "text",
-			"label_en": "Value",
+			"label_en": "Text",
 			"label_de": "Text",
 			"type": "text",
 			"desc_en": "Attribute to search",
@@ -3577,7 +3577,7 @@ tools.add({
 			"label_de": "Suche",
 			"type": "text",
 			"desc_en": "This text will be searched",
-			"desc_de": "Nach  diesem Wert wird gesucht"
+			"desc_de": "Nach  diesem Text wird gesucht"
 		}
 	],
 	tags: ["TAGS.TEXT"],
