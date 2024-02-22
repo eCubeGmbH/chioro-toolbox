@@ -440,7 +440,14 @@ tools.add({
 		en: "",
 		de: ""
 	},
-	args: [],
+	args: [{
+		"key": "propertyName",
+		"label_en": "Property Name",
+		"label_de": "Name",
+		"type": "text",
+		"desc_en": "Property Name",
+		"desc_de": "Name"
+	}],
 	tags: ["pattern"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -516,7 +523,14 @@ tools.add({
 		en: "",
 		de: ""
 	},
-	args: [],
+	args: [{
+		"key": "map",
+		"label_en": "Param",
+		"label_de": "Param",
+		"type": "text",
+		"desc_en": "the map object",
+		"desc_de": "das Map Objekt"
+	}],
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -543,7 +557,14 @@ tools.add({
 		en: "",
 		de: ""
 	},
-	args: [],
+	args: [{
+		"key": "param",
+		"label_en": "param",
+		"label_de": "param",
+		"type": "text",
+		"desc_en": "the parameter",
+		"desc_de": "the parameter"
+	}],
 	tags: ["TAGS.UTIL"],
 	hideInToolbox: true,
 	hideOnSimpleMode: true,
@@ -659,14 +680,6 @@ tools.add({
 			"type": "text",
 			"desc_en": "Text which will be returned if condition evaluated as true",
 			"desc_de": "Text, der zurückgegeben wird, wenn Bedingung als wahr bewertet wird"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		}
 	],
 	tags: ["TAGS.CONDITIONAL"],
@@ -745,7 +758,7 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something",
+			"key": "input",
 			"label_en": "Input",
 			"label_de": "Eingabe",
 			"type": "text",
@@ -754,7 +767,7 @@ tools.add({
 		}
 	],
 	tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
-	hideInToolbox: null,
+	hideInToolbox: false,
 	hideOnSimpleMode: null,
 	tests: () => {
 	}
@@ -2111,7 +2124,7 @@ tools.add({
 			"desc_de": "Der Text in dem gesucht wird"
 		},
 		{
-			"key": "textToSearch_1",
+			"key": "textToSearch+",
 			"label_en": "Search",
 			"label_de": "Suchtext",
 			"type": "text",
@@ -2119,36 +2132,12 @@ tools.add({
 			"desc_de": "Erster Text nach dem gesucht wird"
 		},
 		{
-			"key": "textToReplace_1",
+			"key": "textToReplace+",
 			"label_en": "Replace",
 			"label_de": "Ersatztext",
 			"type": "text",
 			"desc_en": "First string for replace",
 			"desc_de": "Durch diesen Text wird der erste Suchtext ersetzt"
-		},
-		{
-			"key": "textToSearch_2",
-			"label_en": "Search",
-			"label_de": "Suchtext",
-			"type": "text",
-			"desc_en": "Second search string or pattern",
-			"desc_de": "Zweiter Text nach dem gesucht wird"
-		},
-		{
-			"key": "textToReplace_2",
-			"label_en": "Replace",
-			"label_de": "Ersatztext",
-			"type": "text",
-			"desc_en": "Second string for replace",
-			"desc_de": "Durch diesen Text wird der zweite Suchtext ersetzt"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		},
 		{
 			"key": "fallback",
