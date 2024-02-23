@@ -666,17 +666,17 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "condition_1",
-			"label_en": "Condition 1",
-			"label_de": "Bedingung 1",
+			"key": "condition+",
+			"label_en": "Condition",
+			"label_de": "Bedingung",
 			"type": "text",
 			"desc_en": "Condition",
 			"desc_de": "Bedingung"
 		},
 		{
-			"key": "toReplace_1",
-			"label_en": "To Replace 1",
-			"label_de": "To Replace 1",
+			"key": "toReplace+",
+			"label_en": "To Replace",
+			"label_de": "Zum Ersetzen",
 			"type": "text",
 			"desc_en": "Text which will be returned if condition evaluated as true",
 			"desc_de": "Text, der zurückgegeben wird, wenn Bedingung als wahr bewertet wird"
@@ -794,28 +794,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something1",
-			"label_en": "First input",
-			"label_de": "Erste Eingabe",
+			"key": "input+",
+			"label_en": "Input",
+			"label_de": "Eingabe",
 			"type": "text",
-			"desc_en": "First input which will merged into a list",
-			"desc_de": "Erste Eingabe die zu einer Liste zusammengefügt wird"
-		},
-		{
-			"key": "something2",
-			"label_en": "Second input",
-			"label_de": "Erste Eingabe",
-			"type": "text",
-			"desc_en": "Second input which will merged into a list",
-			"desc_de": "Zweite Eingabe die zu einer Liste zusammengefügt wird"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "Input which will merged into a list",
+			"desc_de": "Eingabe, die zu einer Liste zusammengefügt wird"
 		}
 	],
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
@@ -848,28 +832,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something1",
+			"key": "input+",
 			"label_en": "Input",
 			"label_de": "Eingabe",
 			"type": "text",
-			"desc_en": "First argument which will be checked if true",
-			"desc_de": "Überprüfen ob erstes Argument true ist"
-		},
-		{
-			"key": "something2",
-			"label_en": "Input",
-			"label_de": "Eingabe",
-			"type": "text",
-			"desc_en": "Second argument which will be checked if true",
-			"desc_de": "Überprüfen ob zweites Argument true ist"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "Input argument which will be evaluated",
+			"desc_de": "Überprüfen ob das Argument true ist"
 		}
 	],
 	tags: ["TAGS.UTIL", "TAGS.LIST"],
@@ -953,44 +921,20 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "name1",
-			"label_en": "Key 1",
-			"label_de": "Schlüssel 1",
+			"key": "key+",
+			"label_en": "Key",
+			"label_de": "Schlüssel",
 			"type": "text",
-			"desc_en": "Key 1",
-			"desc_de": "Schlüssel 1"
+			"desc_en": "Key",
+			"desc_de": "Schlüssel"
 		},
 		{
-			"key": "value1",
-			"label_en": "Value 1",
-			"label_de": "Wert 1",
+			"key": "value+",
+			"label_en": "Value",
+			"label_de": "Wert",
 			"type": "text",
-			"desc_en": "Value 1",
-			"desc_de": "Wert 1"
-		},
-		{
-			"key": "name2",
-			"label_en": "Key 2",
-			"label_de": "Schlüssel 2",
-			"type": "text",
-			"desc_en": "Key 2",
-			"desc_de": "Schlüssel 2"
-		},
-		{
-			"key": "value2",
-			"label_en": "Value 2",
-			"label_de": "Wert 2",
-			"type": "text",
-			"desc_en": "Value 2",
-			"desc_de": "Wert 2"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "Value",
+			"desc_de": "Wert"
 		}
 	],
 	tags: ["TAGS.UTIL"],
@@ -1135,28 +1079,12 @@ tools.add({
 			"desc_de": "Trennzeichen welches den Text teilt"
 		},
 		{
-			"key": "text1",
-			"label_en": "Input text 1",
-			"label_de": "Eingabetext 1",
+			"key": "text+",
+			"label_en": "Input text",
+			"label_de": "Eingabetext",
 			"type": "text",
-			"desc_en": "First text to join",
-			"desc_de": "Erster Text der mit Trennzeichen verbunden wird"
-		},
-		{
-			"key": "text2",
-			"label_en": "Input text 2",
-			"label_de": "Eingabetext 2",
-			"type": "text",
-			"desc_en": "Second Text to join",
-			"desc_de": "Zweiter Text der mit Trennzeichen verbunden wird"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "Text to join",
+			"desc_de": "Text der mit Trennzeichen verbunden wird"
 		}
 	],
 	tags: ["TAGS.TEXT"],
@@ -1584,28 +1512,12 @@ tools.add({
 			"desc_de": "Text der gesucht wird."
 		},
 		{
-			"key": "listItemToSearch1",
+			"key": "listItemToSearch+",
 			"label_en": "List item 1",
 			"label_de": "Listeneintrag eins",
 			"type": "text",
-			"desc_en": "Text where should be searched",
+			"desc_en": "The text to search for the searchItem",
 			"desc_de": "Text in dem gesucht wird."
-		},
-		{
-			"key": "listItemToSearch2",
-			"label_en": "Search text",
-			"label_de": "Listeneintrag zwei",
-			"type": "text",
-			"desc_en": "Text where should be searched",
-			"desc_de": "Text in dem gesucht wird."
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		}
 	],
 	tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
@@ -1933,7 +1845,7 @@ tools.add({
 			"label_en": "Text",
 			"label_de": "Text",
 			"type": "text",
-			"desc_en": "Check weather the input is empty",
+			"desc_en": "Check whether the input is empty",
 			"desc_de": "Überprüfung ob die Eingabe leer ist"
 		}
 	],
@@ -1974,7 +1886,7 @@ tools.add({
 			"label_en": "Text",
 			"label_de": "Text",
 			"type": "text",
-			"desc_en": "Check weather the input is not empty",
+			"desc_en": "Check if the input is not empty",
 			"desc_de": "Überprüfung ob die Eingabe nicht leer ist"
 		}
 	],
@@ -2015,7 +1927,7 @@ tools.add({
 			"label_en": "Text",
 			"label_de": "Text",
 			"type": "text",
-			"desc_en": "Check weather the input starts with a number",
+			"desc_en": "Check if the input starts with a number",
 			"desc_de": "Überprüfung ob der Text mit einer Zahl beginnt"
 		}
 	],
@@ -2047,7 +1959,7 @@ tools.add({
 			"label_en": "Text",
 			"label_de": "Text",
 			"type": "text",
-			"desc_en": "Check weather the input is a number",
+			"desc_en": "Check if the input is a number",
 			"desc_de": "Überprüfung ob die Eingabe eine Zahl ist"
 		}
 	],
@@ -2189,44 +2101,20 @@ tools.add({
 			"desc_de": "Der Text in dem gesucht wird"
 		},
 		{
-			"key": "textToSearch_1",
+			"key": "textToSearch+",
 			"label_en": "Search",
 			"label_de": "Suchtext",
 			"type": "text",
-			"desc_en": "First search string or pattern",
+			"desc_en": "search string or pattern",
 			"desc_de": "Erster Text nach dem gesucht wird"
 		},
 		{
-			"key": "textToReplace_1",
+			"key": "textToReplace+",
 			"label_en": "Replace",
 			"label_de": "Ersatztext",
 			"type": "text",
-			"desc_en": "First string for replace",
+			"desc_en": "string for replacement",
 			"desc_de": "Durch diesen Text wird der erste Suchtext ersetzt"
-		},
-		{
-			"key": "textToSearch_2",
-			"label_en": "Search",
-			"label_de": "Suchtext",
-			"type": "text",
-			"desc_en": "Second search string or pattern",
-			"desc_de": "Zweiter Text nach dem gesucht wird"
-		},
-		{
-			"key": "textToReplace_2",
-			"label_en": "Replace",
-			"label_de": "Ersatztext",
-			"type": "text",
-			"desc_en": "Second string for replace",
-			"desc_de": "Durch diesen Text wird der zweite Suchtext ersetzt"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		},
 		{
 			"key": "fallback",
@@ -2281,28 +2169,12 @@ tools.add({
 			"desc_de": "Der Text in dem gesucht wird"
 		},
 		{
-			"key": "textToSearchAndShow_1",
+			"key": "textToSearchAndShow+",
 			"label_en": "Search",
 			"label_de": "Suchtext",
 			"type": "text",
-			"desc_en": "First search string or pattern",
-			"desc_de": "Erster Text nach dem gesucht wird"
-		},
-		{
-			"key": "textToSearchAndShow_2",
-			"label_en": "Search",
-			"label_de": "Suchtext",
-			"type": "text",
-			"desc_en": "Second search string or pattern",
-			"desc_de": "Zweiter Text nach dem gesucht wird"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "search string or pattern",
+			"desc_de": "der Text nach dem gesucht wird"
 		}
 	],
 	tags: ["TAGS.EXTRACT"],
@@ -2661,28 +2533,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something1",
-			"label_en": "Text",
-			"label_de": "Text",
+			"key": "input+",
+			"label_en": "Bulletpoint",
+			"label_de": "Aufzählung",
 			"type": "text",
-			"desc_en": "First row",
-			"desc_de": "Erste Zeile"
-		},
-		{
-			"key": "something2",
-			"label_en": "Text",
-			"label_de": "Suchtext",
-			"type": "text",
-			"desc_en": "Second row",
-			"desc_de": "Zweite Zeile"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "Bulletpoint",
+			"desc_de": "Aufzählung"
 		}
 	],
 	tags: ["TAGS.FORMAT"],
@@ -3592,28 +3448,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something1",
+			"key": "input+",
 			"label_en": "Value",
 			"label_de": "Wert",
 			"type": "text",
 			"desc_en": "The value can be true or false",
 			"desc_de": "Kann wahr oder falsch sein"
-		},
-		{
-			"key": "something2",
-			"label_en": "Value",
-			"label_de": "Wert",
-			"type": "text",
-			"desc_en": "The value can be true or false",
-			"desc_de": "Kann wahr oder falsch sein"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		}
 	],
 	tags: ["TAGS.CONDITIONAL"],
@@ -3654,28 +3494,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something1",
+			"key": "input+",
 			"label_en": "Value",
 			"label_de": "Wert",
 			"type": "text",
 			"desc_en": "The value can be true or false",
 			"desc_de": "Kann wahr oder falsch sein"
-		},
-		{
-			"key": "something2",
-			"label_en": "Value",
-			"label_de": "Wert",
-			"type": "text",
-			"desc_en": "The value can be true or false",
-			"desc_de": "Kann wahr oder falsch sein"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		}
 	],
 	tags: ["TAGS.CONDITIONAL"],
@@ -3716,28 +3540,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "something1",
+			"key": "input+",
 			"label_en": "Value",
 			"label_de": "Wert",
 			"type": "text",
 			"desc_en": "The value can be true or false",
 			"desc_de": "Kann wahr oder falsch sein"
-		},
-		{
-			"key": "something2",
-			"label_en": "Value",
-			"label_de": "Wert",
-			"type": "text",
-			"desc_en": "The value can be true or false",
-			"desc_de": "Kann wahr oder falsch sein"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
 		}
 	],
 	tags: ["TAGS.CONDITIONAL"],
@@ -3998,7 +3806,7 @@ tools.add({
 		}
 	],
 	tags: ["TAGS.UTIL"],
-	hideInToolbox: false,
+	hideInToolbox: true,
 	hideOnSimpleMode: null,
 	tests: () => {
 	}
