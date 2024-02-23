@@ -1192,28 +1192,12 @@ tools.add({
 	},
 	args: [
 		{
-			"key": "text1",
-			"label_en": "First input text",
+			"key": "text+",
+			"label_en": "Input Text",
 			"label_de": "Eingabetext",
 			"type": "text",
-			"desc_en": "First text which should concatenate",
-			"desc_de": "Erster Text der verkettet werden soll"
-		},
-		{
-			"key": "text2",
-			"label_en": "Second input text",
-			"label_de": "Eingabetext",
-			"type": "text",
-			"desc_en": "Second text which should concatenate",
-			"desc_de": "Zweiter Text der verkettet werden soll"
-		},
-		{
-			"key": "...",
-			"label_en": "",
-			"label_de": "",
-			"type": "text",
-			"desc_en": "",
-			"desc_de": ""
+			"desc_en": "Text(s) which should concatenate",
+			"desc_de": "Texte, die verkettet werden sollen"
 		}
 	],
 	tags: ["TAGS.TEXT"],
@@ -2141,8 +2125,8 @@ tools.add({
 		},
 		{
 			"key": "fallback",
-			"label_en": "Text",
-			"label_de": "Text",
+			"label_en": "Default",
+			"label_de": "Default",
 			"type": "text",
 			"desc_en": "If there is nothing found use this fallback",
 			"desc_de": "Dieser Text wird verwendet wenn die Suche nicht erfolgreich war"
