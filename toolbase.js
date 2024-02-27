@@ -2438,6 +2438,75 @@ tools.add({
 })
 
 
+function lookupReplaceRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom) {
+	/* 'pool' is injected in environment */
+	if(typeof _lookups === 'undefined') return "valueFound";
+	if(!matchingRegExpColumn) matchingRegExpColumn = 'key';
+	if(!columnToRetrieveReplacementFrom) columnToRetrieveReplacementFrom = 'value';
+	var lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom).getAllEntries();
+	while(lookupItems.hasNext()) {
+		const lookupItem = lookupItems.getNext();
+		var regex = new RegExp(lookupItem.get(matchingRegExpColumn), 'ig');
+		if(matchingValue.match && matchingValue.match(regex)) {
+			return matchingValue.replace(regex, lookupItem.get(columnToRetrieveReplacementFrom));
+		}
+
+	}
+	return null;
+}
+tools.add({
+	id:"lookupReplaceRegExp",
+	impl: lookupReplaceRegExp,
+	aliases: {
+		en: "lookupReplaceRegExp",
+		de: "sucheUndErsetzeRegExp"
+	},
+	argsOld: {
+		en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
+		de: "passenderWert, gesuchterWert, passendeRegExpSpalte, zuHolenderWertSpalte"
+	},
+	args: [
+		{
+			"key": "matchingValue",
+			"label_en": "Text",
+			"label_de": "Text",
+			"type": "text",
+			"desc_en": "The text to be searched",
+			"desc_de": "Der Text mit dem gesucht wird"
+		},
+		{
+			"key": "lookupName",
+			"label_en": "Datentabelle",
+			"label_de": "Datentabelle",
+			"type": "text",
+			"desc_en": "Search in this data table",
+			"desc_de": "In dieser Datentabelle wird gesucht"
+		},
+		{
+			"key": "matchingRegExpColumn",
+			"label_en": "Search column",
+			"label_de": "Suchspalte",
+			"type": "text",
+			"desc_en": "Search in this column of the data table with RegEx",
+			"desc_de": "In dieser Spalte der Tabelle wird mit RegEx gesucht"
+		},
+		{
+			"key": "columnToRetrieveReplacementFrom",
+			"label_en": "Replace column",
+			"label_de": "Ersatzspalte",
+			"type": "text",
+			"desc_en": "replace based on the value of this column",
+			"desc_de": "Der Wert aus dieser Spalte wird ersetzt"
+		}
+	],
+	tags: ["TAGS.LOOKUP"],
+	hideInToolbox: null,
+	hideOnSimpleMode: null,
+	tests: () => {
+	}
+})
+
+
 function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) {
 	if(typeof _lookups === 'undefined') return "valueFound";
 	if(!matchingRegExpColumn) matchingRegExpColumn = 'key';
