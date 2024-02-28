@@ -381,7 +381,7 @@ tools.add({
 		"key": "attributeName",
 		"label_en": "Attribute Name",
 		"label_de": "Attributname",
-		"type": "attribute",
+		"attributeType": "attribute",
 		"desc_en": "Attribute Name from the source",
 		"desc_de": "Attributname in der Quelle"
 	}],
