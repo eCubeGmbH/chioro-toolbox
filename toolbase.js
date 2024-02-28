@@ -370,16 +370,23 @@ tools.add({
 	id:"source",
 	impl: source,
 	aliases: {
-		en: "source",
-		de: "quelle"
+		en: "sourceAttribute",
+		de: "quellAttribut"
 	},
 	argsOld: {
 		en: "",
 		de: ""
 	},
-	args: [],
+	args: [{
+		"key": "attributeName",
+		"label_en": "Attribute Name",
+		"label_de": "Attributname",
+		"type": "attribute",
+		"desc_en": "Attribute Name from the source",
+		"desc_de": "Attributname in der Quelle"
+	}],
 	tags: ["pattern"],
-	hideInToolbox: true,
+	hideInToolbox: false,
 	hideOnSimpleMode: true,
 	tests: () => {
 		tools.expect(source("color")).toBe(null);
