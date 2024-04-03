@@ -1,17 +1,22 @@
-const Toolpackage = require('./toolpackage')
-var format = require('date-fns/format')
+const Toolpackage = require('./toolpackage');
+const format = require('date-fns/format');
 
-const tools = new Toolpackage("Base Chioro Tools")
-tools.description = 'These are the toolbox tools included in chioro by default. All the tools defined here are available in the global namespace. '
+const tools = new Toolpackage("Base Chioro Tools");
+tools.description = 'These are the toolbox tools included in Chioro by default. All the tools defined here are available in the global namespace. ';
 
 
 function getJson(url, headers = null) {
-    if (typeof _apiFetcher === 'undefined') return {};
+    if (typeof _apiFetcher === 'undefined') {
+        return {};
+    }
+
     if (headers !== null) {
         return JSON.parse(_apiFetcher.getUrl(url, headers));
     }
+
     return JSON.parse(_apiFetcher.getUrl(url));
 }
+
 tools.add({
     id: "getJson",
     impl: getJson,
@@ -51,13 +56,21 @@ tools.add({
 
 
 function postJson(url, params, headers = null) {
-    if (typeof _apiFetcher === 'undefined') return {};
-    if (headers !== null) {
-        if (!headers['content-type']) headers['content-type'] = 'application/json';
-        return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params), headers));
+    if (typeof _apiFetcher === 'undefined') {
+        return {};
     }
-    return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
+
+    if (headers === null) {
+        return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params)));
+    }
+
+    if (!headers['content-type']) {
+        headers['content-type'] = 'application/json';
+    }
+
+    return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify(params), headers));
 }
+
 tools.add({
     id: "postJson",
     impl: postJson,
@@ -104,14 +117,22 @@ tools.add({
 })
 
 function putJson(url, params, headers = null) {
-    if (typeof _apiFetcher === 'undefined') return;
-    if (headers !== null) {
-        if (!headers['content-type']) headers['content-type'] = 'application/json';
-        _apiFetcher.putUrl(url, JSON.stringify(params), headers);
-    } else {
+    if (typeof _apiFetcher === 'undefined') {
+        return;
+    }
+
+    if (headers === null) {
         _apiFetcher.putUrl(url, JSON.stringify(params));
     }
+
+    if (!headers['content-type']) {
+        headers['content-type'] = 'application/json';
+    }
+
+    _apiFetcher.putUrl(url, JSON.stringify(params), headers);
 }
+
+// TODO: missing tests
 tools.add({
     id: "putJson",
     impl: putJson,
@@ -127,22 +148,29 @@ tools.add({
     tags: ["pattern"],
     hideInToolbox: true,
     hideOnSimpleMode: true,
-    tests: () => { }
+    tests: () => {
+    }
 })
 
+// TODO: What does this do?
 function getSub() {
     let tmp = get(arguments[0]);
-    if (!tmp) return null;
-    for (let i = 1; i < arguments.length; i++) {
-        if (typeof tmp === 'object') {
-            tmp = tmp[arguments[i]]
-        }
-        else {
-            return null
-        }
+    if (!tmp) {
+        return null;
     }
+
+    for (let i = 1; i < arguments.length; i++) {
+        if (typeof tmp !== 'object') {
+            return null;
+        }
+
+        tmp = tmp[arguments[i]];
+    }
+
     return tmp;
 }
+
+// TODO: missing tests
 tools.add({
     id: "getSub",
     impl: getSub,
@@ -164,10 +192,17 @@ tools.add({
 
 
 function $(propertyName) {
-    if (typeof propertyName === 'undefined') return $(current());
-    if (propertyName === '') return '';
+    if (typeof propertyName === 'undefined') {
+        return $(current());
+    }
 
-    if (typeof propertyName !== 'string') return JSON.stringify(propertyName);
+    if (propertyName === '') {
+        return '';
+    }
+
+    if (typeof propertyName !== 'string') {
+        return JSON.stringify(propertyName);
+    }
 
     let result = '';
     let prefix = '';
@@ -178,20 +213,33 @@ function $(propertyName) {
         prefix = 'target.';
         propertyName = propertyName.slice(7);
     }
+
     const listOfArgs = propertyName.split('.');
-    if (listOfArgs.length > 0) listOfArgs[0] = prefix + listOfArgs[0];
+
+    if (listOfArgs.length > 0) {
+        listOfArgs[0] = prefix + listOfArgs[0];
+    }
+
     const v = getSub.apply(null, listOfArgs);
-    if (v === null) return '';
+
+    if (v === null) {
+        return '';
+    }
+
     result = v;
 
     if (typeof result === 'string') {
         return result;
     }
+
     if (result === null || typeof result === 'undefined') {
         return '';
     }
+
     return result;
 }
+
+// TODO: missing tests
 tools.add({
     id: "$",
     impl: $,
@@ -211,12 +259,14 @@ tools.add({
     }
 })
 
+// TODO: missing tests and use arrow function
 function current() {
     if (typeof _targetAttributeName === 'undefined') {
         return '';
     }
     return _targetAttributeName;
 }
+
 tools.add({
     id: "current",
     impl: current,
@@ -236,16 +286,18 @@ tools.add({
     }
 })
 
+// TODO: missing tests
 function $$(propertyName) {
 
-    arrayWithOneValueChecking = function (val) {
+    const arrayWithOneValueChecking = val => {
         if (Array.isArray(val) && val.length === 1) {
             return val[0];
         }
         return val;
     };
-    var result = '';
-    var v = $(propertyName);
+
+    let result = '';
+    const v = $(propertyName);
     if (typeof v['value'] !== 'undefined' && v['value']) {
         result = v['value'];
         if (typeof v['unit'] !== 'undefined' && v['unit']) {
@@ -254,17 +306,28 @@ function $$(propertyName) {
     } else {
         result = v;
     }
+
     result = arrayWithOneValueChecking(result);
+
     if (typeof result === 'string') {
         return result;
     }
+
     if (result === null || typeof result === 'undefined') {
         return '';
     }
-    if (Array.isArray(result)) return result[0];
-    if (typeof result === 'object' && Object.keys(result).length > 0) return result[Object.keys(result)[0]];
+
+    if (Array.isArray(result)) {
+        return result[0];
+    }
+
+    if (typeof result === 'object' && Object.keys(result).length > 0) {
+        return result[Object.keys(result)[0]];
+    }
+
     return JSON.stringify(result);
 }
+
 tools.add({
     id: "$$",
     impl: $$,
@@ -288,6 +351,8 @@ tools.add({
 function copy(propertyName) {
     return source(propertyName);
 }
+
+// TODO: missing tests
 tools.add({
     id: "copy",
     impl: copy,
@@ -314,16 +379,24 @@ function get(propertyName) {
     if (propertyName.startsWith('source.')) {
         const key = propertyName.slice(7);
         return (source && source[key]) ? source[key] : null;
-    } else if (propertyName.startsWith('target.')) {
+    }
+
+    if (propertyName.startsWith('target.')) {
         const key = propertyName.slice(7);
         return (target && target[key]) ? target[key] : null;
-    } else if (target && target[propertyName]) {
+    }
+
+    if (target && target[propertyName]) {
         return target[propertyName];
-    } else if (source && source[propertyName]) {
+    }
+
+    if (source && source[propertyName]) {
         return source[propertyName];
     }
+
     return null;
 }
+
 tools.add({
     id: "get",
     impl: get,
@@ -349,7 +422,7 @@ tools.add({
         tools.expect(get("color_t")).toBe(null);
         tools.expect(get("color_m")).toBe(null);
         _source = '{"color":"blue","color_s":"cyan"}';
-        _target = { "color": "red", "color_t": "lila" };
+        _target = {"color": "red", "color_t": "lila"};
         tools.expect(get("source.color")).toBe("blue");
         tools.expect(get("source.color_s")).toBe("cyan");
         tools.expect(get("target.color")).toBe("red");
@@ -366,6 +439,7 @@ tools.add({
 function source(propertyName) {
     return get('source.' + propertyName);
 }
+
 tools.add({
     id: "source",
     impl: source,
@@ -397,6 +471,7 @@ tools.add({
 function target(propertyName) {
     return get('target.' + propertyName);
 }
+
 tools.add({
     id: "target",
     impl: target,
@@ -417,11 +492,14 @@ tools.add({
     }
 })
 
+// TODO: what is this doing?
 function context(propertyName) {
-    const contextMap = (typeof _context !== 'undefined') ? JSON.parse(_context) : {};
+    const contextMap = typeof _context !== 'undefined' ? JSON.parse(_context) : {};
     if (propertyName.length === 0) {
         return contextMap;
-    } else if (propertyName.search('.') !== -1) {
+    }
+
+    if (propertyName.search('.') !== -1) {
         let keys = propertyName.split('.');
         let tmp = contextMap;
         while (keys.length > 0) {
@@ -431,11 +509,17 @@ function context(propertyName) {
             }
             tmp = tmp[key];
         }
+
         return tmp;
     }
-    return (contextMap && contextMap[propertyName]) ? contextMap[propertyName] : null;
 
+    if (contextMap && contextMap[propertyName]) {
+        return contextMap[propertyName];
+    } 
+    
+    return null;    
 }
+
 tools.add({
     id: "context",
     impl: context,
@@ -469,6 +553,7 @@ tools.add({
 function getUnit(name) {
     return getSub(name, "unit")
 }
+
 tools.add({
     id: "getUnit",
     impl: getUnit,
@@ -490,8 +575,9 @@ tools.add({
 
 
 function getValue(name) {
-    return getSub(name, "value")
+    return getSub(name, "value");
 }
+
 tools.add({
     id: "getValue",
     impl: getValue,
@@ -513,12 +599,16 @@ tools.add({
 
 
 function mapSize(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
+    let size = 0;
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            size++;
+        }
     }
+
     return size;
 }
+
 tools.add({
     id: "mapSize",
     impl: mapSize,
@@ -549,10 +639,11 @@ tools.add({
 function stringOf(input) {
     if (input !== null && typeof input !== 'undefined') {
         return input.toString();
-    } else {
-        return '';
     }
+
+    return '';
 }
+
 tools.add({
     id: "stringOf",
     impl: stringOf,
@@ -592,19 +683,29 @@ function similarCategory(categoryValue, comparisonValue) {
     if (!comparisonValue || !categoryValue ||
         typeof comparisonValue !== 'string' ||
         typeof categoryValue !== 'string'
-    ) return false;
+    ) {
+        return false;
+    }
 
-    if (categoryValue[categoryValue.length - 1] !== '|')
+    if (categoryValue[categoryValue.length - 1] !== '|') {
         categoryValue += '|';
-    if (categoryValue[0] !== '|')
+    }
+
+    if (categoryValue[0] !== '|') {
         categoryValue = '|' + categoryValue;
-    if (comparisonValue[comparisonValue.length - 1] !== '|')
+    }
+
+    if (comparisonValue[comparisonValue.length - 1] !== '|') {
         comparisonValue += '|';
-    if (comparisonValue[0] !== '|')
+    }
+
+    if (comparisonValue[0] !== '|') {
         comparisonValue = '|' + comparisonValue;
+    }
 
     return categoryValue.startsWith(comparisonValue);
 }
+
 tools.add({
     id: "similarCategory",
     impl: similarCategory,
@@ -626,9 +727,11 @@ tools.add({
 
 
 function isInteger(value) {
-    var integer = parseInt(value, 10);
+    const integer = parseInt(value, 10);
     return !isNaN(integer);
 }
+
+// TODO: missing tests
 tools.add({
     id: "isInteger",
     impl: isInteger,
@@ -650,16 +753,22 @@ tools.add({
 
 
 function decodeConditions() {
-    for (var i = 0; i < arguments.length - 1; i += 2) {
+    for (let i = 0; i < arguments.length - 1; i += 2) {
         const condition = arguments[i];
         const replacement = arguments[i + 1];
-        if (condition) return replacement
+        if (condition) {
+            return replacement
+        }
     }
+
     if (arguments[i]) {
         return arguments[i];
     }
+
     return "";
 }
+
+// TODO: missing tests
 tools.add({
     id: "decodeConditions",
     impl: decodeConditions,
@@ -700,6 +809,8 @@ tools.add({
 function isString(value) {
     return typeof value === "string";
 }
+
+// TODO: missing tests
 tools.add({
     id: "isString",
     impl: isString,
@@ -722,6 +833,8 @@ tools.add({
 function isList(value) {
     return Array.isArray(value);
 }
+
+// TODO: missing tests
 tools.add({
     id: "isList",
     impl: isList,
@@ -742,16 +855,22 @@ tools.add({
 
 
 function size(something) {
-    if (typeof something === 'number')
+    if (typeof something === 'number') {
         something = something.toString();
-    if (something)
-        if (something.length) {
-            return something.length
-        } else {
-            return mapSize(something)
-        }
-    return 0;
+    }
+
+    if (!something) {
+        return 0;
+    }
+
+    if (something.length) {
+        return something.length;
+    }
+
+    return mapSize(something);
 }
+
+// TODO: missing tests
 tools.add({
     id: "size",
     impl: size,
@@ -782,12 +901,15 @@ tools.add({
 
 
 function asList() {
-    var arr = [];
-    for (var i = 0; i < arguments.length; i++) {
+    let arr = [];
+    for (let i = 0; i < arguments.length; i++) {
         arr.push(arguments[i]);
     }
+
     return arr;
 }
+
+// TODO: missing tests
 tools.add({
     id: "asList",
     impl: asList,
@@ -818,14 +940,21 @@ tools.add({
 
 
 function anyOf() {
-    if (arguments.length < 1)
+    if (arguments.length < 1) {
         return '';
-    var arr = Array.from(arguments).flat(1);
-    for (var i = 0; i < arr.length; i++) {
-        if (arguments[i] || arguments[i] === 0) return arguments[i];
     }
+
+    const arr = Array.from(arguments).flat(1);
+    for (let i = 0; i < arr.length; i++) {
+        if (arguments[i] || arguments[i] === 0) {
+            return arguments[i];
+        }
+    }
+
     return '';
 }
+
+// TODO: missing tests
 tools.add({
     id: "anyOf",
     impl: anyOf,
@@ -855,18 +984,20 @@ tools.add({
 })
 
 
+// TODO: missing tests. Introduce type check methods as this is repeating 100x
 function filterList(listProperty, regExpList) {
-    var targetList = listProperty;
-    if (typeof listProperty === 'string')
+    let targetList = listProperty;
+    if (typeof listProperty === 'string') {
         targetList = JSON.parse(listProperty);
-    if (!targetList || !targetList.filter || !regExpList.some)
+    }
+
+    if (!targetList || !targetList.filter || !regExpList.some) {
         return [];
-    return targetList.filter(function (text) {
-        return regExpList.some(function (regex) {
-            return regex.test(text);
-        });
-    });
+    }
+
+    return targetList.filter(text => regExpList.some(regex => regex.test(text)));
 }
+
 tools.add({
     id: "filterList",
     impl: filterList,
@@ -905,16 +1036,20 @@ tools.add({
 
 
 function asMap() {
-    var result = {};
-    for (var i = 0; i < arguments.length - 1; i += 2) {
-        var name = stringOf(arguments[i]);
+    const result = {};
+    for (let i = 0; i < arguments.length - 1; i += 2) { // TODO: why += 2 ?
+        const name = stringOf(arguments[i]);
         if (name === "") {
-            throw "In asMap(): Key should not be empty."
+            throw "In asMap(): Key should not be empty.";
         }
+
         result[name] = arguments[i + 1];
     }
-    return result
-}
+
+    return result;
+};
+
+// TODO: missing tests
 tools.add({
     id: "asMap",
     impl: asMap,
@@ -953,11 +1088,16 @@ tools.add({
 
 
 function removeEmptyListEntries() {
-    if (arguments.length < 1)
+    if (arguments.length < 1) {
         return [];
-    return Array.from(arguments).flat(1)
-        .filter(s => s !== null)
+    }
+
+    return Array.from(arguments)
+        .flat(1)
+        .filter(s => s !== null);
 }
+
+// TODO: missing tests
 tools.add({
     id: "removeEmptyListEntries",
     impl: removeEmptyListEntries,
@@ -990,6 +1130,8 @@ tools.add({
 function lowerCaseText(text) {
     return stringOf(text).toLowerCase();
 }
+
+// TODO: missing tests
 tools.add({
     id: "lowerCaseText",
     impl: lowerCaseText,
@@ -1022,6 +1164,8 @@ tools.add({
 function upperCaseText(text) {
     return stringOf(text).toUpperCase();
 }
+
+// TODO: missing tests
 tools.add({
     id: "upperCaseText",
     impl: upperCaseText,
@@ -1052,19 +1196,23 @@ tools.add({
 
 
 function joinText() {
-    if (arguments.length < 2)
+    if (arguments.length < 2) {
         return '';
-    var arr = [];
-    var separator = arguments[0];
-    for (var i = 1; i < arguments.length; i++) {
+    }
+
+    const arr = [];
+    const separator = arguments[0];
+    for (let i = 1; i < arguments.length; i++) {
         if (Array.isArray(arguments[i])) {
-            arr.push(joinText.apply(this, [separator].concat(arguments[i])))
+            arr.push(joinText.apply(this, [separator].concat(arguments[i])));
         } else {
             arr.push(stringOf(arguments[i]));
         }
     }
+
     return arr.join(arguments[0]);
 }
+
 tools.add({
     id: "joinText",
     impl: joinText,
@@ -1108,12 +1256,15 @@ tools.add({
 
 
 function concatenateText() {
-    var arr = [];
-    for (var i = 0; i < arguments.length; i++) {
+    const arr = [];
+    for (let i = 0; i < arguments.length; i++) {
         arr.push(stringOf(arguments[i]));
     }
+
     return arr.join('');
 }
+
+// TODO: missing tests
 tools.add({
     id: "concatenateText",
     impl: concatenateText,
@@ -1144,17 +1295,19 @@ tools.add({
 
 
 function insertTextAtPosition(text, textToInsert, position) {
-
     text = stringOf(text);
     textToInsert = stringOf(textToInsert);
 
     if (!isInteger(position)) {
-        throw ("In insertTextAtPosition(): position has to be a number")
+        throw "In insertTextAtPosition(): position has to be a number";
     }
+
     return text.slice(0, position)
         + textToInsert
         + text.slice(position);
 }
+
+// TODO: missing tests
 tools.add({
     id: "insertTextAtPosition",
     impl: insertTextAtPosition,
@@ -1204,11 +1357,15 @@ function textAtPosition(text, position, length) {
     if (!isInteger(position)) {
         throw "In insertTextAtPosition(): position has to be a number";
     }
+
     if ((length || length === 0) && !isInteger(length)) {
         throw "In insertTextAtPosition(): length has to be a number";
     }
-    return stringOf(text).substr(position, length);
+
+    return stringOf(text).substr(position, length); // TODO: deprecation
 }
+
+// TODO: missing tests
 tools.add({
     id: "textAtPosition",
     impl: textAtPosition,
@@ -1257,6 +1414,8 @@ tools.add({
 function trimText(text) {
     return stringOf(text).trim();
 }
+
+// TODO: missing tests
 tools.add({
     id: "trimText",
     impl: trimText,
@@ -1289,6 +1448,8 @@ tools.add({
 function normalizeWhitespaces(text) {
     return stringOf(text).replace(/\s+/g, " ");
 }
+
+// TODO: missing tests
 tools.add({
     id: "normalizeWhitespaces",
     impl: normalizeWhitespaces,
@@ -1336,19 +1497,22 @@ function replaceInText(text, textToSearch, replaceWith) {
         }
         return t;
     }
+
     if (Array.isArray(text)) {
         //localized text support
         text.map(tx => {
-            tx['value'] = replaceLogic(tx['value'])
+            tx['value'] = replaceLogic(tx['value']);
             return tx;
         });
 
     } else {
         text = replaceLogic(text);
     }
+
     return text;
 
 }
+
 tools.add({
     id: "replaceInText",
     impl: replaceInText,
@@ -1392,7 +1556,10 @@ tools.add({
     tests: () => {
         tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
         tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
-        tools.expect(replaceInText([{ "lang": "en", "value": "ene mene\n muh" }], "\n", "")).jsonToBe([{ "lang": "en", "value": "ene mene muh" }]);
+        tools.expect(replaceInText([{"lang": "en", "value": "ene mene\n muh"}], "\n", "")).jsonToBe([{
+            "lang": "en",
+            "value": "ene mene muh"
+        }]);
     }
 })
 
@@ -1400,11 +1567,11 @@ tools.add({
 function locateInText(text, textToSearch) {
     if (textToSearch instanceof RegExp) {
         return stringOf(text).search(textToSearch);
-    }
-    else {
-        return stringOf(text).toLowerCase().indexOf(stringOf(textToSearch).toLowerCase())
+    } else {
+        return stringOf(text).toLowerCase().indexOf(stringOf(textToSearch).toLowerCase());
     }
 }
+
 tools.add({
     id: "locateInText",
     impl: locateInText,
@@ -1450,12 +1617,16 @@ function containsText(text, textToSearch) {
     if (Array.isArray(textToSearch) && textToSearch.length > 0) {
         for (let i = 0; i < textToSearch.length; i++) {
             const result = containsText(text, textToSearch[i]);
-            if (result) return true;
+            if (result) {
+                return true;
+            }
         }
+
         return false;
     }
     return locateInText(text, textToSearch) >= 0;
 }
+
 tools.add({
     id: "containsText",
     impl: containsText,
@@ -1494,10 +1665,14 @@ tools.add({
 
 
 function inList() {
-    var arr = Array.from(arguments).flat(1);
-    if (arr.length < 2) return false;
+    const arr = Array.from(arguments).flat(1);
+    if (arr.length < 2) {
+        return false;
+    }
+
     return arr.find((s, i) => s == arr[0] && i > 0);
 }
+
 tools.add({
     id: "inList",
     impl: inList,
@@ -1537,19 +1712,21 @@ tools.add({
 
 function extractFromText(text, pattern, fallback, withGroups) {
     if (!pattern instanceof RegExp) {
-        pattern = new RegExp(pattern, 'ig')
+        pattern = new RegExp(pattern, 'ig');
     }
+
     let matched = stringOf(text).match(pattern);
-    if (matched !== null) {
-        if (withGroups) {
-            return matched[1] || matched[0];
-        }
-        return matched[0];
-    }
-    else {
+    if (matched === null) {
         return stringOf(fallback);
     }
+
+    if (withGroups) {
+        return matched[1] || matched[0];
+    }
+
+    return matched[0];
 }
+
 tools.add({
     id: "extractFromText",
     impl: extractFromText,
@@ -1601,30 +1778,30 @@ tools.add({
 function extractAllMatchesFromText(text, pattern, withGroups) {
     // TODO für GUH: Hier weitermachen
     //var myRegexp = new RegExp(pattern, "g");
-    var myRegexp;
+    let myRegexp;
     if (pattern instanceof RegExp) {
         myRegexp = new RegExp(pattern, pattern.flags.replace("g", "") + "g");
     } else {
         myRegexp = new RegExp(pattern, "g");
     }
-    var arr = [];
+    const arr = [];
 
-    while (match = myRegexp.exec(text)) {
+    while (match = myRegexp.exec(text))
+    {
         if (withGroups) {
-            var subArray = [];
-            for (var i = 1; i < match.length; i++) {
+            const subArray = [];
+            for (let i = 1; i < match.length; i++) {
                 subArray.push(match[i]);
             }
             arr.push(subArray);
         } else {
-            arr.push(match[0])
+            arr.push(match[0]);
         }
     }
 
     return arr;
-
-
 }
+
 tools.add({
     id: "extractAllMatchesFromText",
     impl: extractAllMatchesFromText,
@@ -1685,6 +1862,7 @@ tools.add({
 function extractNumberFromText(text, fallback) {
     return extractFromText(text, numberPattern(), fallback, true);
 }
+
 tools.add({
     id: "extractNumberFromText",
     impl: extractNumberFromText,
@@ -1723,8 +1901,9 @@ tools.add({
 })
 
 function numberPattern() {
-    return /(((?<=[^\d])-)|^-)?[\d.,]*\d/g
+    return /(((?<=[^\d])-)|^-)?[\d.,]*\d/g;
 }
+
 tools.add({
     id: "numberPattern",
     impl: numberPattern,
@@ -1747,6 +1926,7 @@ tools.add({
 function extractAllNumbersFromText(text) {
     return extractAllMatchesFromText(text, numberPattern()).map(s => s.trim());
 }
+
 tools.add({
     id: "extractAllNumbersFromText",
     impl: extractAllNumbersFromText,
@@ -1788,6 +1968,8 @@ tools.add({
 function deleteSpecialCharacters(text) {
     return stringOf(text).replace(/[^a-zA-Z0-9]/g, "");
 }
+
+// TODO: missing tests
 tools.add({
     id: "deleteSpecialCharacters",
     impl: deleteSpecialCharacters,
@@ -1818,7 +2000,10 @@ tools.add({
 
 
 function isBlank(text_or_object) {
-    if (text_or_object === null || typeof text_or_object === 'undefined') return true;
+    if (text_or_object === null || typeof text_or_object === 'undefined') {
+        return true;
+    }
+
     if (
         typeof text_or_object === 'string' ||
         typeof text_or_object === 'boolean' ||
@@ -1826,15 +2011,19 @@ function isBlank(text_or_object) {
     ) {
         return stringOf(text_or_object).trim().length < 1;
     }
+
     if (text_or_object.length) {
         return text_or_object.length < 1;
     }
-    var keys = Object.keys(text_or_object);
+
+    const keys = Object.keys(text_or_object);
     if (keys.length) {
         return keys.length < 1;
     }
+
     return true;
 }
+
 tools.add({
     id: "isBlank",
     impl: isBlank,
@@ -1868,7 +2057,7 @@ tools.add({
         tools.expect(isBlank({})).toBe(true);
         tools.expect(isBlank(null)).toBe(true);
         tools.expect(isBlank(['a'])).toBe(false);
-        tools.expect(isBlank({ a: 'b' })).toBe(false);
+        tools.expect(isBlank({a: 'b'})).toBe(false);
     }
 })
 
@@ -1876,6 +2065,7 @@ tools.add({
 function isNotBlank(text_or_object) {
     return !isBlank(text_or_object);
 }
+
 tools.add({
     id: "isNotBlank",
     impl: isNotBlank,
@@ -1909,7 +2099,7 @@ tools.add({
         tools.expect(isNotBlank({})).toBe(false);
         tools.expect(isNotBlank(null)).toBe(false);
         tools.expect(isNotBlank(['a'])).toBe(true);
-        tools.expect(isNotBlank({ a: 'b' })).toBe(true);
+        tools.expect(isNotBlank({a: 'b'})).toBe(true);
     }
 })
 
@@ -1917,6 +2107,8 @@ tools.add({
 function startsNumeric(text) {
     return matches(text, /^[\d]/);
 }
+
+// TODO: missing tests
 tools.add({
     id: "startsNumeric",
     impl: startsNumeric,
@@ -1949,6 +2141,7 @@ tools.add({
 function isNumeric(text) {
     return matches(text, '^' + numberPattern().source + '$');
 }
+
 tools.add({
     id: "isNumeric",
     impl: isNumeric,
@@ -1986,26 +2179,28 @@ tools.add({
 
 
 function decode() {
-    var input = arguments[0];
+    const input = arguments[0];
 
-    for (var i = 1; i < arguments.length - 1; i += 2) {
-        var replacement = stringOf(arguments[i + 1]);
+    for (let i = 1; i < arguments.length - 1; i += 2) {
+        const replacement = stringOf(arguments[i + 1]);
         if (arguments[i] instanceof RegExp) {
-            var match = arguments[i];
+            const match = arguments[i];
             if (match.test(stringOf(input))) {
-                return replacement
+                return replacement;
             }
-        } else {
-            if (containsText(input, arguments[i])) {
-                return replacement
-            }
+        } else if (containsText(input, arguments[i])) {
+            return replacement;
         }
     }
+
     if (arguments[i]) {
-        return arguments[i].toString()
+        return arguments[i].toString();
     }
-    return ""
+
+    return "";
 }
+
+// TODO: missing tests. Not enough
 tools.add({
     id: "decode",
     impl: decode,
@@ -2061,32 +2256,32 @@ tools.add({
 
 
 function decodeAll() {
-    var checkDuplicate = function (arr, elm) {
+    const checkDuplicate = function (arr, elm) {
         if (arr.indexOf(elm) < 0) {
             arr.push(elm);
         }
         return arr;
     };
-    var input = arguments[0];
-    var replacements = [];
-    for (var i = 1; i < arguments.length - 1; i += 2) {
-        var replacement = stringOf(arguments[i + 1]);
+
+    const input = arguments[0];
+    const replacements = [];
+    for (let i = 1; i < arguments.length - 1; i += 2) {
+        const replacement = stringOf(arguments[i + 1]);
         if (arguments[i] instanceof RegExp) {
-            var match = arguments[i];
+            let match = arguments[i];
             if (match.test(stringOf(input))) {
-                checkDuplicate(replacements, replacement)
+                checkDuplicate(replacements, replacement);
             }
-        } else {
-            if (containsText(input, arguments[i])) {
-                checkDuplicate(replacements, replacement)
-            }
+        } else if (containsText(input, arguments[i])) {
+            checkDuplicate(replacements, replacement);
         }
     }
     if (arguments[i] && replacements.length === 0) {
-        replacements.push(arguments[i])
+        replacements.push(arguments[i]);
     }
     return replacements;
 }
+
 tools.add({
     id: "decodeAll",
     impl: decodeAll,
@@ -2155,6 +2350,7 @@ function extractFirstTerm() {
     }
     return decode.apply(this, decodeInputs);
 }
+
 tools.add({
     id: "extractFirstTerm",
     impl: extractFirstTerm,
@@ -2197,10 +2393,11 @@ tools.add({
 
 
 function extractProperty(text, propertyName, fallback) {
-    var regex = stringOf(propertyName) + / *[:=](.*?)[,;|\n]/.source;
-    var m = stringOf(text + '|').match(new RegExp(regex, 'i'));
+    const regex = stringOf(propertyName) + / *[:=](.*?)[,;|\n]/.source;
+    const m = stringOf(text + '|').match(new RegExp(regex, 'i'));
     return (m ? trimText(m[1]) : stringOf(fallback));
 }
+
 tools.add({
     id: "extractProperty",
     impl: extractProperty,
@@ -2250,15 +2447,16 @@ tools.add({
 
 
 function extractFromHtmlEnum(text, propertyName, fallback) {
-    var sanitizedText = text.replace(/<div.*?>/igm, '')
+    const sanitizedText = text.replace(/<div.*?>/igm, '')
         .replace(/<\/div>/igm, '')
         .replace(/<span.*?>/igm, '')
         .replace(/<\/span>/igm, '')
         .replace(/<br>|<br\/>/igm, '');
-    var regex = "<li>\\s*" + stringOf(propertyName) + "[ :=](.*?)</li>";
-    var m = stringOf(sanitizedText).match(new RegExp(regex, 'i'));
+    const regex = "<li>\\s*" + stringOf(propertyName) + "[ :=](.*?)</li>";
+    const m = stringOf(sanitizedText).match(new RegExp(regex, 'i'));
     return (m ? trimText(m[1]) : stringOf(fallback));
 }
+
 tools.add({
     id: "extractFromHtmlEnum",
     impl: extractFromHtmlEnum,
@@ -2308,12 +2506,22 @@ tools.add({
 
 function lookupGet(matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom) {
     /* 'lookups' is injected in environment, an instance of LookupCache class in java */
-    if (typeof _lookups === 'undefined') return "valueFound";
-    if (!matchingColumn) matchingColumn = 'key';
-    if (!columnToRetrieveValueFrom) columnToRetrieveValueFrom = 'value';
+    if (typeof _lookups === 'undefined') {
+        return "valueFound";
+    }
+
+    if (!matchingColumn) {
+        matchingColumn = 'key';
+    }
+
+    if (!columnToRetrieveValueFrom) {
+        columnToRetrieveValueFrom = 'value';
+    }
+
     return _lookups.getLookup(lookupName, matchingColumn, columnToRetrieveValueFrom)
         .get(matchingValue, columnToRetrieveValueFrom);
 }
+
 tools.add({
     id: "lookupGet",
     impl: lookupGet,
@@ -2370,13 +2578,22 @@ tools.add({
 
 function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) {
     /* 'pool' is injected in environment */
-    if (typeof _lookups === 'undefined') return "valueFound";
-    if (!matchingRegExpColumn) matchingRegExpColumn = 'key';
-    if (!columnToRetrieveValueFrom) columnToRetrieveValueFrom = 'value';
-    var lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveValueFrom).getAllEntries();
+    if (typeof _lookups === 'undefined') {
+        return "valueFound";
+    }
+
+    if (!matchingRegExpColumn) {
+        matchingRegExpColumn = 'key';
+    }
+
+    if (!columnToRetrieveValueFrom) {
+        columnToRetrieveValueFrom = 'value';
+    }
+
+    const lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveValueFrom).getAllEntries();
     while (lookupItems.hasNext()) {
         const lookupItem = lookupItems.getNext();
-        var regex = lookupItem.get(matchingRegExpColumn);
+        const regex = lookupItem.get(matchingRegExpColumn);
         if (!regex instanceof RegExp) {
             if (matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
                 return lookupItem.get(columnToRetrieveValueFrom);
@@ -2389,6 +2606,7 @@ function lookupGetRegExp(matchingValue, lookupName, matchingRegExpColumn, column
     }
     return null;
 }
+
 tools.add({
     id: "lookupGetRegExp",
     impl: lookupGetRegExp,
@@ -2447,20 +2665,32 @@ tools.add({
 
 function lookupReplaceRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom) {
     /* 'pool' is injected in environment */
-    if (typeof _lookups === 'undefined') return "valueFound";
-    if (!matchingRegExpColumn) matchingRegExpColumn = 'key';
-    if (!columnToRetrieveReplacementFrom) columnToRetrieveReplacementFrom = 'value';
-    var lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom).getAllEntries();
+    if (typeof _lookups === 'undefined') {
+        return "valueFound";
+    }
+
+    if (!matchingRegExpColumn) {
+        matchingRegExpColumn = 'key';
+    }
+
+    if (!columnToRetrieveReplacementFrom) {
+        columnToRetrieveReplacementFrom = 'value';
+    }
+
+    const lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom).getAllEntries();
     while (lookupItems.hasNext()) {
         const lookupItem = lookupItems.getNext();
-        var regex = new RegExp(lookupItem.get(matchingRegExpColumn), 'ig');
+        const regex = new RegExp(lookupItem.get(matchingRegExpColumn), 'ig');
         if (matchingValue.match && matchingValue.match(regex)) {
             return matchingValue.replace(regex, lookupItem.get(columnToRetrieveReplacementFrom));
         }
 
     }
+
     return null;
 }
+
+// TODO: missing tests
 tools.add({
     id: "lookupReplaceRegExp",
     impl: lookupReplaceRegExp,
@@ -2515,26 +2745,36 @@ tools.add({
 
 
 function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) {
-    if (typeof _lookups === 'undefined') return "valueFound";
-    if (!matchingRegExpColumn) matchingRegExpColumn = 'key';
-    if (!columnToRetrieveValueFrom) columnToRetrieveValueFrom = 'value';
-    var results = [];
-    var lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveValueFrom).getAllEntries();
+    if (typeof _lookups === 'undefined') {
+        return "valueFound";
+    }
+
+    if (!matchingRegExpColumn) {
+        matchingRegExpColumn = 'key';
+    }
+
+    if (!columnToRetrieveValueFrom) {
+        columnToRetrieveValueFrom = 'value';
+    }
+
+    const results = [];
+    const lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveValueFrom).getAllEntries();
     while (lookupItems.hasNext()) {
         const lookupItem = lookupItems.getNext();
-        var regex = lookupItem.get(matchingRegExpColumn);
+        const regex = lookupItem.get(matchingRegExpColumn);
         if (!regex instanceof RegExp) {
             if (matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
                 results.push(lookupItem.get(columnToRetrieveValueFrom));
             }
-        } else {
-            if (matchingValue.match && matchingValue.match(regex)) {
-                results.push(lookupItem.get(columnToRetrieveValueFrom));
-            }
+        } else if (matchingValue.match && matchingValue.match(regex)) {
+            results.push(lookupItem.get(columnToRetrieveValueFrom));
         }
     }
+
     return results;
 }
+
+// TODO: missing tests
 tools.add({
     id: "lookupGetAllRegExp",
     impl: lookupGetAllRegExp,
@@ -2592,10 +2832,14 @@ tools.add({
 
 
 function formatAsHtmlBulletpoints() {
-    if (arguments.length < 1)
+    if (arguments.length < 1) {
         return '';
+    }
+
     return '<ul><li>' + Array.from(arguments).flat().join('</li><li>') + '</li></ul>';
 }
+
+// TODO: missing tests
 tools.add({
     id: "formatAsHtmlBulletpoints",
     impl: formatAsHtmlBulletpoints,
@@ -2626,12 +2870,23 @@ tools.add({
 
 
 function formatAsNumber(value, overrideLocale) {
-    if (typeof _locale === 'undefined') _locale = "de-DE";
+    if (typeof _locale === 'undefined') {
+        _locale = "de-DE";
+    }
+
     let locale = overrideLocale;
-    if (!locale && typeof _locale !== 'undefined') locale = _locale;
-    if (!locale) locale = 'de-DE';
+    if (!locale && typeof _locale !== 'undefined') {
+        locale = _locale;
+    }
+
+    if (!locale) {
+        locale = 'de-DE';
+    }
+
     return new Intl.NumberFormat(locale).format(value);
 }
+
+// TODO: missing tests
 tools.add({
     id: "formatAsNumber",
     impl: formatAsNumber,
@@ -2671,12 +2926,22 @@ tools.add({
 
 
 function textToNumber(value, overrideLocale) {
-    if (typeof _locale === 'undefined') _locale = "de-DE";
+    if (typeof _locale === 'undefined') {
+        _locale = "de-DE";
+    }
+
     let locale = overrideLocale;
-    if (!locale && typeof _locale !== 'undefined') locale = _locale;
-    if (!locale) locale = 'de-DE';
+    if (!locale && typeof _locale !== 'undefined') {
+        locale = _locale;
+    }
+
+    if (!locale) {
+        locale = 'de-DE';
+    }
+
     return _numberParser(value, locale);
 }
+
 tools.add({
     id: "textToNumber",
     impl: textToNumber,
@@ -2719,17 +2984,19 @@ tools.add({
 
 function _numberParser(value, locale) {
     const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
-    const numerals = [...new Intl.NumberFormat(locale, { useGrouping: false }).format(9876543210)].reverse();
+    const numerals = [...new Intl.NumberFormat(locale, {useGrouping: false}).format(9876543210)].reverse();
     const index = new Map(numerals.map((d, i) => [d, i]));
     let _group = new RegExp(`[${parts.find(d => d.type === "group").value}]`, "g");
     let _decimal = new RegExp(`[${parts.find(d => d.type === "decimal").value}]`);
     let _numeral = new RegExp(`[${numerals.join("")}]`, "g");
     let _index = d => index.get(d);
-    return (v = value.trim()
+    return (v = value.trim() // TODO: What?
         .replace(_group, "")
         .replace(_decimal, ".")
         .replace(_numeral, _index)) ? +v : null;
 }
+
+// TODO: missing tests
 tools.add({
     id: "_numberParser",
     impl: _numberParser,
@@ -2776,14 +3043,15 @@ tools.add({
 
 
 function regExpMatch(input, match, fallback) {
-    var matched = stringOf(input).match(match);
+    const matched = stringOf(input).match(match);
     if (matched !== null) {
         return matched[0];
     }
-    else {
-        return fallback !== undefined ? fallback : input;
-    }
+
+    return fallback !== undefined ? fallback : input;
 }
+
+// TODO: missing tests
 tools.add({
     id: "regExpMatch",
     impl: regExpMatch,
@@ -2807,6 +3075,7 @@ tools.add({
 function regExpReplace(input, search, replace) {
     return replaceInText(input, search, replace);
 }
+
 tools.add({
     id: "regExpReplace",
     impl: regExpReplace,
@@ -2830,6 +3099,8 @@ tools.add({
 function matches(input, expr) {
     return stringOf(input).search(expr) >= 0;
 }
+
+// TODO: missing tests
 tools.add({
     id: "matches",
     impl: matches,
@@ -2853,6 +3124,7 @@ tools.add({
 function addCloudinaryTransformation(cloudinaryUrl, publicId, transformation) {
     return replaceInText(cloudinaryUrl, publicId, transformation + "/" + publicId);
 }
+
 tools.add({
     id: "addCloudinaryTransformation",
     impl: addCloudinaryTransformation,
@@ -2877,6 +3149,7 @@ tools.add({
 function addCloudinaryNamedTransformation(cloudinaryUrl, publicId, transformation) {
     return addCloudinaryTransformation(cloudinaryUrl, publicId, "t_" + transformation);
 }
+
 tools.add({
     id: "addCloudinaryNamedTransformation",
     impl: addCloudinaryNamedTransformation,
@@ -2925,9 +3198,18 @@ tools.add({
 
 
 function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
-    if (!oldUnit) { oldUnit = '' }
-    if (!newUnit) { newUnit = '' }
-    if (deciPlaces == null) { deciPlaces = 0 }
+    if (!oldUnit) {
+        oldUnit = '';
+    }
+
+    if (!newUnit) {
+        newUnit = '';
+    }
+
+    if (deciPlaces == null) {
+        deciPlaces = 0;
+    }
+
     let result = "";
     const toFactor = (wert) => {
         if (deciPlaces === 0) {
@@ -2936,32 +3218,36 @@ function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
             return String((parseFloat(wert) * factor).toFixed(deciPlaces));
         }
     }
+
+    // TODO: unreadable
     if (value) {
         let rest = [];
         let werte = value.match(/-?\d*[,.]?\d+/g);
         if (!werte) {
             return value;
         }
-        for (i = 0; i < (werte.length); i++) {
+        for (let i = 0; i < (werte.length); i++) {
             rest[i] = value.slice(0, value.indexOf(werte[i]));
             value = value.slice(value.indexOf(werte[i]) + werte[i].length, value.length);
         }
-        result = result + rest[0]
+        result = result + rest[0];
         rest[werte.length] = value;
         let realDecimalSeparator = '.';
-        for (i = 0; i < werte.length; i++) {
+        for (let i = 0; i < werte.length; i++) {
             let wert = werte[i];
-            if (wert.includes(',')) realDecimalSeparator = ','
+            if (wert.includes(',')) {
+                realDecimalSeparator = ',';
+            }
             wert = wert.replace(',', '.');
             const unit = rest[i + 1].match(/\w*/g)
             if (oldUnit && newUnit) {
                 if (unit[1] && unit[1] === oldUnit) {
-                    wert = toFactor(wert)
+                    wert = toFactor(wert);
                     rest[i + 1] = rest[i + 1].replace(oldUnit, newUnit);
                 }
             } else if (!oldUnit && newUnit) {
                 if (unit[1] && newUnit !== unit[1]) {
-                    wert = toFactor(wert)
+                    wert = toFactor(wert);
                     rest[i + 1] = " " + newUnit + rest[i + 1];
                 }
             } else if (!oldUnit && !newUnit) {
@@ -2970,13 +3256,13 @@ function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
             wert = wert.replace(',', realDecimalSeparator);
             wert = wert.replace('.', realDecimalSeparator);
             result = result + wert + rest[i + 1];
-
         }
     } else {
         return value;
     }
     return result;
 }
+
 tools.add({
     id: "convertUnit",
     impl: convertUnit,
@@ -3061,41 +3347,52 @@ tools.add({
 
 
 function normalizeValues(value, deciSeparator, deciPlaces) {
-    if (deciPlaces == null) { deciPlaces = 0 }
-    let result = "";
-    if (value) {
-        var rest = [];
-        werte = value.match(/-?\d*[,.]?\d+/g);
-        if (werte == null) {
-            return value;
-        }
-        for (i = 0; i < (werte.length); i++) {
-            rest[i] = value.slice(0, value.indexOf(werte[i]));
-            value = value.slice(value.indexOf(werte[i]) + werte[i].length, value.length);
-        }
-        result = result + rest[0]
-        rest[werte.length] = value;
-        for (i = 0; i < (werte.length); i++) {
-            let realDecimalSeparator = '.';
-            let wert = werte[i];
-            if (wert.includes(',')) realDecimalSeparator = ',';
-            wert = wert.replace(',', '.');
-            if (deciPlaces !== 0) {
-                wert = String((parseFloat(wert)).toFixed(deciPlaces));
-            }
-            if (deciSeparator) {
-                wert = wert.replace('.', deciSeparator);
-            }
-            else {
-                wert = wert.replace('.', realDecimalSeparator);
-            }
-            result = result + wert + rest[i + 1];
-        }
-    } else {
+    if (deciPlaces == null) {
+        deciPlaces = 0;
+    }
+
+    if (!value) {
         return value;
     }
+
+    // TODO: readability
+    const rest = [];
+    const werte = value.match(/-?\d*[,.]?\d+/g);
+    if (werte == null) {
+        return value;
+    }
+    for (let i = 0; i < (werte.length); i++) {
+        rest[i] = value.slice(0, value.indexOf(werte[i]));
+        value = value.slice(value.indexOf(werte[i]) + werte[i].length, value.length);
+    }
+
+    let result = "";
+    result = result + rest[0];
+    rest[werte.length] = value;
+    for (let i = 0; i < (werte.length); i++) {
+        let realDecimalSeparator = '.';
+        let wert = werte[i];
+        if (wert.includes(',')) {
+            realDecimalSeparator = ',';
+        }
+        wert = wert.replace(',', '.');
+        if (deciPlaces !== 0) {
+            wert = String((parseFloat(wert)).toFixed(deciPlaces));
+        }
+
+        if (deciSeparator) {
+            wert = wert.replace('.', deciSeparator);
+        } else {
+            wert = wert.replace('.', realDecimalSeparator);
+        }
+
+        result = result + wert + rest[i + 1];
+    }
+
     return result;
 }
+
+// TODO: missing tests. Should be more
 tools.add({
     id: "normalizeValues",
     impl: normalizeValues,
@@ -3146,13 +3443,14 @@ tools.add({
 
 function extractValueBeforeText(value, text) {
     if (value.includes(text)) {
-        let werte = new RegExp('(?<value>-?\\d*[,.]?\\d+)(\\s)*?' + escapeRegExp(text), 'g').exec(value)
+        let werte = new RegExp('(?<value>-?\\d*[,.]?\\d+)(\\s)*?' + escapeRegExp(text), 'g').exec(value);
         if (werte && werte.groups.value) {
             return werte.groups.value;
         }
     }
     return value;
 }
+
 tools.add({
     id: "extractValueBeforeText",
     impl: extractValueBeforeText,
@@ -3197,7 +3495,7 @@ tools.add({
 
 function extractValueAfterText(value, text) {
     if (value.includes(text)) {
-        let werte = new RegExp(escapeRegExp(text) + '(\\s)*?(?<value>-?\\d*[,.]?\\d+)', 'g').exec(value)
+        let werte = new RegExp(escapeRegExp(text) + '(\\s)*?(?<value>-?\\d*[,.]?\\d+)', 'g').exec(value);
         if (werte && werte.groups.value) {
             return werte.groups.value;
         }
@@ -3205,6 +3503,7 @@ function extractValueAfterText(value, text) {
 
     return value;
 }
+
 tools.add({
     id: "extractValueAfterText",
     impl: extractValueAfterText,
@@ -3245,9 +3544,11 @@ tools.add({
 })
 
 
-function escapeRegExp(string) {
+function escapeRegExp(string) { // TODO: double declaration
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
+
+// TODO: missing tests
 tools.add({
     id: "escapeRegExp",
     impl: escapeRegExp,
@@ -3278,12 +3579,17 @@ tools.add({
 
 
 function splitText(text, separator) {
-    if (!separator) { separator = "," }
-    if (text != null && text.split) {
-        return text.split(separator).map(v => v.trim());
+    if (!separator) {
+        separator = ",";
     }
+
+    if (text != null && text.split) {
+        return text.split(separator).map(v => v.trim()); // TODO: Should this really trim?
+    }
+
     return null;
 }
+
 tools.add({
     id: "splitText",
     impl: splitText,
@@ -3325,16 +3631,21 @@ tools.add({
         tools.expect(splitText("very nice, not nice, too nice")).jsonToBe(['very nice', 'not nice', 'too nice']);
         tools.expect(splitText(['a', 'b'], ',')).jsonToBe(null);
         tools.expect(splitText([])).jsonToBe(null);
-        tools.expect(splitText({ a: 1, b: 2 })).jsonToBe(null);
+        tools.expect(splitText({a: 1, b: 2})).jsonToBe(null);
         tools.expect(splitText(null, ",")).jsonToBe(null);
     }
 })
 
 
 function attributes() {
-    if (typeof _source === 'undefined') return ['attr1', 'attr2', 'attr3'];
+    if (typeof _source === 'undefined') {
+        return ['attr1', 'attr2', 'attr3'];
+    }
+
     return Object.keys(JSON.parse(_source)).filter(k => !k.startsWith("_"));
 }
+
+// TODO: missing tests. Not enough
 tools.add({
     id: "attributes",
     impl: attributes,
@@ -3374,23 +3685,23 @@ tools.add({
 
 
 function startsWith(text, search) {
-
     if (search instanceof RegExp) {
-        const obj = { flags: search.flags, source: search.source };
+        const obj = {flags: search.flags, source: search.source};
         if (!obj.source.startsWith("^")) {
             obj.source = "^" + obj.source;
-            search = new RegExp(obj.source, obj.flags)
+            search = new RegExp(obj.source, obj.flags);
         }
+
         if (search.test(stringOf(text))) {
-            return true
+            return true;
         }
-    } else {
-        if (text != null && text.startsWith && text.startsWith(search)) {
-            return true
-        }
+    } else if (text != null && text.startsWith && text.startsWith(search)) {
+        return true;
     }
-    return false
+
+    return false;
 }
+
 tools.add({
     id: "startsWith",
     impl: startsWith,
@@ -3439,23 +3750,23 @@ tools.add({
 
 
 function endsWith(text, search) {
-
     if (search instanceof RegExp) {
-        const obj = { flags: search.flags, source: search.source };
+        const obj = {flags: search.flags, source: search.source};
         if (!obj.source.endsWith("$")) {
             obj.source = obj.source + "$";
-            search = new RegExp(obj.source, obj.flags)
+            search = new RegExp(obj.source, obj.flags);
         }
+
         if (search.test(stringOf(text))) {
-            return true
+            return true;
         }
-    } else {
-        if (text != null && text.endsWith && text.endsWith(search)) {
-            return true
-        }
+    } else if (text != null && text.endsWith && text.endsWith(search)) {
+        return true;
     }
-    return false
+
+    return false;
 }
+
 tools.add({
     id: "endsWith",
     impl: endsWith,
@@ -3503,14 +3814,16 @@ tools.add({
 })
 
 
-function someOf() {
-    for (var i = 0; i < arguments.length; i++) {
+function someOf() { // TODO: missleading name its more like anyOf
+    for (let i = 0; i < arguments.length; i++) {
         if (arguments[i] === true) {
-            return true
+            return true;
         }
     }
+
     return false;
 }
+
 tools.add({
     id: "someOf",
     impl: someOf,
@@ -3550,13 +3863,16 @@ function allOf() {
     if (arguments.length === 0) {
         return false;
     }
-    for (var i = 0; i < arguments.length; i++) {
+
+    for (let i = 0; i < arguments.length; i++) {
         if (arguments[i] !== true) {
             return false;
         }
     }
+
     return true;
 }
+
 tools.add({
     id: "allOf",
     impl: allOf,
@@ -3592,17 +3908,20 @@ tools.add({
 })
 
 
-function noneOf() {
+function noneOf() { // TODO: missleading name
     if (arguments.length === 0) {
         return false;
     }
-    for (var i = 0; i < arguments.length; i++) {
+
+    for (let i = 0; i < arguments.length; i++) {
         if (arguments[i] !== false) {
             return false;
         }
     }
+
     return true;
 }
+
 tools.add({
     id: "noneOf",
     impl: noneOf,
@@ -3642,8 +3961,10 @@ function not(value) {
     if (typeof value === "boolean") {
         return !value;
     }
+
     return false;
 }
+
 tools.add({
     id: "not",
     impl: not,
@@ -3677,16 +3998,20 @@ tools.add({
     }
 })
 
+
 function date(formatting, initialDate) {
     if (typeof initialDate === "undefined" || !initialDate) {
         initialDate = new Date();
     }
+
     if (typeof formatting === "undefined" || !formatting) {
-        return format(initialDate, "dd.MM.yyyy")
-    } else {
-        return format(initialDate, formatting);
+        return format(initialDate, "dd.MM.yyyy");
     }
+
+    return format(initialDate, formatting);
 }
+
+// TODO: missing tests
 tools.add({
     id: "date",
     impl: date,
@@ -3728,13 +4053,15 @@ function timestamp(formatting, initialDate) {
     if (typeof initialDate === "undefined" || !initialDate) {
         initialDate = new Date();
     }
+
     if (typeof formatting === "undefined" || !formatting) {
-        return format(initialDate, "yyyyMMddhhmm")
-    } else {
-        return format(initialDate, formatting);
+        return format(initialDate, "yyyyMMddhhmm");
     }
+
+    return format(initialDate, formatting);
 }
 
+// TODO: missing tests
 tools.add({
     id: "timestamp",
     impl: timestamp,
@@ -3779,33 +4106,35 @@ function roundAllNumbers(value) {
 
     const round = v => {
         if (typeof v === "string") {
-            var listOfNumbersFromString = extractAllNumbersFromText(v);
+            const listOfNumbersFromString = extractAllNumbersFromText(v);
             listOfNumbersFromString.forEach(number => {
-                v = v.replace(number, Math.round(parseFloat(number.replace(',', '.'))))
+                v = v.replace(number, Math.round(parseFloat(number.replace(',', '.'))));
             })
         } else {
             v = Math.round(v);
         }
         return v;
-
     }
+
     if (Array.isArray(value)) {
         for (let i = 0; i < value.length; i++) {
             value[i] = round(value[i]);
         }
-        return value
 
+        return value;
     }
+
     if (typeof value === "object") {
         Object.keys(value).forEach(key => {
             value[key] = round(value[key]);
         });
-        return value
+
+        return value;
     }
 
     return round(value);
-
 }
+
 tools.add({
     id: "roundAllNumbers",
     impl: roundAllNumbers,
@@ -3836,8 +4165,8 @@ tools.add({
         tools.expect(roundAllNumbers(["88,6", "66"])).jsonToBe(["89", "66"]);
         tools.expect(roundAllNumbers('Größe:98 x 50,5 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
         tools.expect(roundAllNumbers('asfdhgfj 55,4 ashfgklfa')).toBe('asfdhgfj 55 ashfgklfa');
-        tools.expect(roundAllNumbers({ 'a': 88.5, 'b': 55 })).jsonToBe({ a: 89, b: 55 });
-        tools.expect(roundAllNumbers({ 'a': 'blabla', 'b': 'blabla' })).jsonToBe({ a: 'blabla', b: 'blabla' });
+        tools.expect(roundAllNumbers({'a': 88.5, 'b': 55})).jsonToBe({a: 89, b: 55});
+        tools.expect(roundAllNumbers({'a': 'blabla', 'b': 'blabla'})).jsonToBe({a: 'blabla', b: 'blabla'});
         tools.expect(roundAllNumbers(null)).toBe(null);
         tools.expect(roundAllNumbers("")).toBe(null);
         tools.expect(roundAllNumbers('hello world')).toBe('hello world');
@@ -3846,12 +4175,18 @@ tools.add({
 })
 
 function $global(key, value) {
-    if (typeof _globalContext === 'undefined') _globalContext = {}
+    if (typeof _globalContext === 'undefined') {
+        _globalContext = {};
+    }
+
     if (typeof value !== 'undefined') {
         _globalContext[key] = value;
     }
+
     return _globalContext[key];
 }
+
+// TODO: missing tests
 tools.add({
     id: "$global",
     impl: $global,
@@ -3889,9 +4224,13 @@ tools.add({
 })
 
 function defaultValue(param, def) {
-    if (isBlank(param)) return def;
+    if (isBlank(param)) {
+        return def;
+    }
+
     return param;
 }
+
 tools.add({
     id: "default",
     impl: defaultValue,
@@ -3930,7 +4269,7 @@ tools.add({
         tools.expect(defaultValue(null, "default")).toBe("default");
         tools.expect(defaultValue([], "default")).toBe("default");
         tools.expect(defaultValue({}, "default")).toBe("default");
-        tools.expect(defaultValue({ a: 1 }, "default")).jsonToBe({ a: 1 });
+        tools.expect(defaultValue({a: 1}, "default")).jsonToBe({a: 1});
         tools.expect(defaultValue([1], "default")).jsonToBe([1]);
     }
 })
