@@ -113,6 +113,7 @@ tools.add({
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(postJson("https://some.interesting.url")).jsonToBe({});
+        tools.expect(postJson("https://some.interesting.url", {"test_param": "test_value"})).jsonToBe({});
     }
 })
 
@@ -259,7 +260,7 @@ tools.add({
     }
 })
 
-// TODO: missing tests and use arrow function
+// TODO: missing tests
 function current() {
     if (typeof _targetAttributeName === 'undefined') {
         return '';
@@ -515,9 +516,9 @@ function context(propertyName) {
 
     if (contextMap && contextMap[propertyName]) {
         return contextMap[propertyName];
-    } 
-    
-    return null;    
+    }
+
+    return null;
 }
 
 tools.add({
@@ -667,7 +668,7 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
-        var something_undefined;
+        let something_undefined;
         tools.expect(stringOf(something_undefined)).toBe('');
         tools.expect(stringOf(null)).toBe('');
         tools.expect(stringOf('')).toBe('');
@@ -1786,8 +1787,7 @@ function extractAllMatchesFromText(text, pattern, withGroups) {
     }
     const arr = [];
 
-    while (match = myRegexp.exec(text))
-    {
+    while (match = myRegexp.exec(text)) {
         if (withGroups) {
             const subArray = [];
             for (let i = 1; i < match.length; i++) {
@@ -2193,8 +2193,8 @@ function decode() {
         }
     }
 
-    if (arguments[i]) {
-        return arguments[i].toString();
+    if (arduments.length > 3 && arguments[arguments.length - 1]) {
+        return arguments[arguments.length - 1].toString();
     }
 
     return "";
@@ -2276,9 +2276,12 @@ function decodeAll() {
             checkDuplicate(replacements, replacement);
         }
     }
-    if (arguments[i] && replacements.length === 0) {
-        replacements.push(arguments[i]);
+
+    const fallbackValue = arguments[arguments.length - 1];
+    if (replacements.length === 0 && arguments.length > 3 && fallbackValue) {
+        replacements.push(fallbackValue)
     }
+
     return replacements;
 }
 
@@ -2341,10 +2344,12 @@ tools.add({
 
 
 function extractFirstTerm() {
-    if (arguments.length < 2) return "";
-    var decodeInputs = [arguments[0]];
+    if (arguments.length < 2) {
+        return "";
+    }
 
-    for (var i = 1; i < arguments.length; i += 1) {
+    const decodeInputs = [arguments[0]];
+    for (let i = 1; i <= arguments.length; i++) {
         decodeInputs.push(stringOf(arguments[i]));
         decodeInputs.push(stringOf(arguments[i]));
     }
