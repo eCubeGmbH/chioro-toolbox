@@ -27,21 +27,21 @@ module.exports = class Toolpackage {
     allTools() {
 		return Object.values(this.tbox)
     }
-        
+
     describe(msg, fn) {
         console.log('\t' + msg)
         return fn()
     }
-    
+
     it(msg, fn) {
         return this.describe('\t' + msg, fn)
     }
-    
+
     expect(result) {
         return this.matchers(result)
     }
 
-    matchers(result) { 
+    matchers(result) {
         return {
             toBe: (expected) => {
                 if (result === expected) {
@@ -59,15 +59,20 @@ module.exports = class Toolpackage {
                     expected = JSON.stringify(expected);
                 }
                 this.matchers(JSON.stringify(result)).toBe(expected);
+            },
+            listToBe: (expected) => {
+                const expectedJson = JSON.stringify(expected);
+                const actual = JSON.stringify(result);
+                this.matchers(actual).toBe(expectedJson);
             }
         }
     }
-    
+
     test(msg, fn) {
         console.log(msg);
         fn()
     };
-    
+
     testTool(tool) {
         if (tool.tests) {
             console.log("Running tests for '" + tool.impl.name + "'");
@@ -92,7 +97,7 @@ module.exports = class Toolpackage {
 	    console.log("Running tests for all tools in '" + this.name + "'")
         this.allTools().forEach(t => this.testTool(t))
     }
-    
+
     stats() {
         console.log("---------------------------------------------------------");
         console.log(this.cntPass + " test(s) passed.");

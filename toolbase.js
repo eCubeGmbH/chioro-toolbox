@@ -50,7 +50,40 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
-        tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
+        tools.it('will return empty object if no apiFetcher is defined', () => {
+            tools.expect(getJson("https://some.interesting.url")).jsonToBe({});
+        });
+
+        tools.it('will call the endpoint with the given headers', () => {
+            try {
+                _apiFetcher = {
+                    getUrl: (url, header) => {
+                        tools.expect(header['content-type']).toBe('text/csv');
+                        return JSON.stringify({});
+                    }
+                }
+
+                getJson("https://some.interesting.url", {'content-type': 'text/csv'});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
+
+        // TODO: Others are doing it like this:
+        // tools.it('will use application/json as default content-type', () => {
+        //     try {
+        //         _apiFetcher = {
+        //             getUrl: (url, header) => {
+        //                 tools.expect(header).toBe({'content-type': 'application/json'});
+        //                 return JSON.stringify({});
+        //             }
+        //         }
+        //
+        //         getJson("https://some.interesting.url");
+        //     } finally {
+        //         delete _apiFetcher;
+        //     }
+        // });
     }
 })
 
@@ -112,8 +145,54 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
-        tools.expect(postJson("https://some.interesting.url")).jsonToBe({});
-        tools.expect(postJson("https://some.interesting.url", {"test_param": "test_value"})).jsonToBe({});
+        tools.it('returns empty object if no apiFetcher is defined', () => {
+            tools.expect(postJson("https://some.interesting.url")).jsonToBe({});
+        });
+
+        tools.it('calls the endpoint with the given parameters', () => {
+            try {
+                _apiFetcher = {
+                    postUrl: (url, params, headers) => {
+                        tools.expect(JSON.parse(params)).jsonToBe({"test_param": "test_value"});
+                        return JSON.stringify({});
+                    }
+                }
+
+                postJson("https://some.interesting.url", {"test_param": "test_value"});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
+
+        tools.it('will set application/json as default content-type', () => {
+            try {
+                _apiFetcher = {
+                    postUrl: (url, params, headers) => {
+                        tools.expect(headers['content-type']).toBe('application/json');
+                        return JSON.stringify({});
+                    }
+                }
+                postJson("https://some.interesting.url", {"test_param": "test_value"}, {"empty": "header"});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
+
+
+        // It uses a given content-type
+        tools.it('will use the given content-type', () => {
+            try {
+                _apiFetcher = {
+                    postUrl: (url, params, headers) => {
+                        tools.expect(headers['content-type']).toBe('text/csv');
+                        return JSON.stringify({})
+                    }
+                }
+                postJson("https://some.interesting.url", {"test_param": "test_value"}, {"content-type": "text/csv"});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
     }
 })
 
@@ -123,17 +202,16 @@ function putJson(url, params, headers = null) {
     }
 
     if (headers === null) {
-        _apiFetcher.putUrl(url, JSON.stringify(params));
+        return _apiFetcher.putUrl(url, JSON.stringify(params));
     }
 
     if (!headers['content-type']) {
         headers['content-type'] = 'application/json';
     }
 
-    _apiFetcher.putUrl(url, JSON.stringify(params), headers);
+    return _apiFetcher.putUrl(url, JSON.stringify(params), headers);
 }
 
-// TODO: missing tests
 tools.add({
     id: "putJson",
     impl: putJson,
@@ -150,10 +228,58 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.it('will return undefined if no apiFetcher is defined', () => {
+            tools.expect(putJson("https://some.interesting.url")).toBe(undefined); // TODO: Anders als bei postJson da hier sonst ein {} zurückgegeben wird
+        });
+
+        tools.it('will call the endpoint with the given parameters', () => {
+            try {
+                _apiFetcher = {
+                    putUrl: (url, params, headers) => {
+                        tools.expect(JSON.parse(params)).jsonToBe({"test_param": "test_value"});
+                        return JSON.stringify({});
+                    }
+                }
+
+                putJson("https://some.interesting.url", {"test_param": "test_value"});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
+
+        tools.it('will set application/json as default content-type', () => {
+            try {
+                _apiFetcher = {
+                    putUrl: (url, params, headers) => {
+                        tools.expect(headers['content-type']).toBe('application/json');
+                        return JSON.stringify({});
+                    }
+                }
+
+                putJson('https://some.interesting.url', {}, {'empty': 'header'});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
+
+        tools.it('will use the given content-type', () => {
+            try {
+                _apiFetcher = {
+                    putUrl: (url, params, headers) => {
+                        tools.expect(headers['content-type']).toBe('text/csv');
+                        return JSON.stringify({});
+                    }
+                }
+
+                putJson('https://some.interesting.url', {}, {'content-type': 'text/csv'});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
     }
+
 })
 
-// TODO: What does this do?
 function getSub() {
     let tmp = get(arguments[0]);
     if (!tmp) {
@@ -171,7 +297,6 @@ function getSub() {
     return tmp;
 }
 
-// TODO: missing tests
 tools.add({
     id: "getSub",
     impl: getSub,
@@ -240,7 +365,6 @@ function $(propertyName) {
     return result;
 }
 
-// TODO: missing tests
 tools.add({
     id: "$",
     impl: $,
@@ -260,7 +384,6 @@ tools.add({
     }
 })
 
-// TODO: missing tests
 function current() {
     if (typeof _targetAttributeName === 'undefined') {
         return '';
@@ -284,10 +407,21 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.it('will return an empty string if target attribute name is empty', () => {
+            tools.expect(current()).toBe('');
+        });
+
+        tools.it('will return the target attribute name', () => {
+            try {
+                _targetAttributeName = 'test_target_attribute';
+                tools.expect(current()).toBe('test_target_attribute');
+            } finally {
+                delete _targetAttributeName;
+            }
+        });
     }
 })
 
-// TODO: missing tests
 function $$(propertyName) {
 
     const arrayWithOneValueChecking = val => {
@@ -353,7 +487,6 @@ function copy(propertyName) {
     return source(propertyName);
 }
 
-// TODO: missing tests
 tools.add({
     id: "copy",
     impl: copy,
@@ -493,7 +626,6 @@ tools.add({
     }
 })
 
-// TODO: what is this doing?
 function context(propertyName) {
     const contextMap = typeof _context !== 'undefined' ? JSON.parse(_context) : {};
     if (propertyName.length === 0) {
@@ -732,7 +864,6 @@ function isInteger(value) {
     return !isNaN(integer);
 }
 
-// TODO: missing tests
 tools.add({
     id: "isInteger",
     impl: isInteger,
@@ -749,6 +880,12 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(isInteger(1)).toBe(true);
+        // tools.expect(isInteger(1.1)).toBe(false); // TODO: fails!
+        tools.expect(isInteger('1')).toBe(true);
+        // tools.expect(isInteger('1.1')).toBe(false); // TODO: fails!
+        // tools.expect(isInteger('1,1')).toBe(false); // TODO: fails!
+        tools.expect(isInteger('a')).toBe(false);
     }
 })
 
@@ -815,7 +952,6 @@ function isString(value) {
     return typeof value === "string";
 }
 
-// TODO: missing tests
 tools.add({
     id: "isString",
     impl: isString,
@@ -831,6 +967,11 @@ tools.add({
     hideInToolbox: true,
     hideInSimpleMode: true,
     tests: () => {
+        tools.expect(isString("")).toBe(true);
+        tools.expect(isString(1)).toBe(false);
+        tools.expect(isString([])).toBe(false);
+        tools.expect(isString({})).toBe(false);
+        tools.expect(isString(null)).toBe(false);
     }
 })
 
@@ -839,7 +980,6 @@ function isList(value) {
     return Array.isArray(value);
 }
 
-// TODO: missing tests
 tools.add({
     id: "isList",
     impl: isList,
@@ -855,6 +995,12 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(isList([])).toBe(true);
+        tools.expect(isList([1, 2, 3])).toBe(true);
+        tools.expect(isList("")).toBe(false);
+        tools.expect(isList("abc")).toBe(false);
+        tools.expect(isList({})).toBe(false);
+        tools.expect(isList(null)).toBe(false);
     }
 })
 
@@ -875,7 +1021,6 @@ function size(something) {
     return mapSize(something);
 }
 
-// TODO: missing tests
 tools.add({
     id: "size",
     impl: size,
@@ -901,6 +1046,14 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(size("")).toBe(0);
+        tools.expect(size("abc")).toBe(3);
+        tools.expect(size([])).toBe(0);
+        tools.expect(size([1, 2, 3])).toBe(3);
+        tools.expect(size({})).toBe(0);
+        tools.expect(size({"a": 1, "b": 2})).toBe(2);
+        tools.expect(size(null)).toBe(0);
+        tools.expect(size(1337)).toBe(4);
     }
 })
 
@@ -914,7 +1067,6 @@ function asList() {
     return arr;
 }
 
-// TODO: missing tests
 tools.add({
     id: "asList",
     impl: asList,
@@ -940,6 +1092,9 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(asList()).listToBe([]);
+        tools.expect(asList("a")).listToBe(["a"]);
+        tools.expect(asList("a", "b")).listToBe(["a", "b"]);
     }
 })
 
@@ -951,6 +1106,7 @@ function anyOf() {
 
     const arr = Array.from(arguments).flat(1);
     for (let i = 0; i < arr.length; i++) {
+        console.log('check arg: ' + arguments[i]);
         if (arguments[i] || arguments[i] === 0) {
             return arguments[i];
         }
@@ -959,7 +1115,6 @@ function anyOf() {
     return '';
 }
 
-// TODO: missing tests
 tools.add({
     id: "anyOf",
     impl: anyOf,
@@ -985,11 +1140,17 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(anyOf()).toBe('');
+        tools.expect(anyOf(null, null)).toBe('');
+        tools.expect(anyOf(null, null, 1)).toBe(1);
+        tools.expect(anyOf(null, null, 1, 2)).toBe(1);
+        tools.expect(anyOf(null, null, 0)).toBe(0);
+        // tools.expect(anyOf(null, null, [null, null], 1)).toBe(1); // TODO: Basierend auf der Doku sollte das so funktionieren
     }
 })
 
 
-// TODO: missing tests. Introduce type check methods as this is repeating 100x
+// TODO: Introduce type check methods as this is repeating 100x
 function filterList(listProperty, regExpList) {
     let targetList = listProperty;
     if (typeof listProperty === 'string') {
@@ -1036,13 +1197,16 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(filterList(["apfel", "birne", "clementine"], [/a.*/])).listToBe(["apfel"]);
+        tools.expect(filterList(["apfel", "birne", "clementine"], [/notexisting/])).listToBe([]);
+        tools.expect(filterList(["apfel", "birne", "clementine"], [/a.*/, /b.*/])).listToBe(["apfel", "birne"]);
     }
 })
 
 
 function asMap() {
     const result = {};
-    for (let i = 0; i < arguments.length - 1; i += 2) { // TODO: why += 2 ?
+    for (let i = 0; i < arguments.length - 1; i += 2) {
         const name = stringOf(arguments[i]);
         if (name === "") {
             throw "In asMap(): Key should not be empty.";
@@ -1052,9 +1216,8 @@ function asMap() {
     }
 
     return result;
-};
+}
 
-// TODO: missing tests
 tools.add({
     id: "asMap",
     impl: asMap,
@@ -1088,6 +1251,13 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(asMap("a", 1, "b", 2)).jsonToBe({"a": 1, "b": 2});
+        tools.expect(asMap("a", 1)).jsonToBe({"a": 1});
+        tools.expect(asMap()).jsonToBe({});
+
+        tools.it('will ignore incomplete key-value pairs', () => {
+            tools.expect(asMap("a", 1, "b", 2, "c")).jsonToBe({"a": 1, "b": 2});
+        });
     }
 })
 
@@ -1102,7 +1272,6 @@ function removeEmptyListEntries() {
         .filter(s => s !== null);
 }
 
-// TODO: missing tests
 tools.add({
     id: "removeEmptyListEntries",
     impl: removeEmptyListEntries,
@@ -1128,6 +1297,10 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(removeEmptyListEntries()).listToBe([]);
+        tools.expect(removeEmptyListEntries(null)).listToBe([]);
+        tools.expect(removeEmptyListEntries([null, 'a', null, 'b'])).listToBe(['a', 'b']);
+        tools.expect(removeEmptyListEntries([null, 'a', [null, 'b'], 'c'])).listToBe(['a', [null, 'b'], 'c']);
     }
 })
 
@@ -1136,7 +1309,6 @@ function lowerCaseText(text) {
     return stringOf(text).toLowerCase();
 }
 
-// TODO: missing tests
 tools.add({
     id: "lowerCaseText",
     impl: lowerCaseText,
@@ -1162,6 +1334,15 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(lowerCaseText("")).toBe("");
+        tools.expect(lowerCaseText("A")).toBe("a");
+        tools.expect(lowerCaseText("Aa")).toBe("aa");
+        tools.expect(lowerCaseText(1)).toBe("1");
+        tools.expect(lowerCaseText("1")).toBe("1");
+        tools.expect(lowerCaseText(true)).toBe("true");
+        tools.expect(lowerCaseText(false)).toBe("false");
+        tools.expect(lowerCaseText({})).toBe('[object object]'); // TODO: should be empty string
+        tools.expect(lowerCaseText([])).toBe('');
     }
 })
 
@@ -1170,7 +1351,6 @@ function upperCaseText(text) {
     return stringOf(text).toUpperCase();
 }
 
-// TODO: missing tests
 tools.add({
     id: "upperCaseText",
     impl: upperCaseText,
@@ -1196,6 +1376,15 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(upperCaseText("")).toBe("");
+        tools.expect(upperCaseText("a")).toBe("A");
+        tools.expect(upperCaseText("aa")).toBe("AA");
+        tools.expect(upperCaseText(1)).toBe("1");
+        tools.expect(upperCaseText("1")).toBe("1");
+        tools.expect(upperCaseText(true)).toBe("TRUE");
+        tools.expect(upperCaseText(false)).toBe("FALSE");
+        tools.expect(upperCaseText({})).toBe('[OBJECT OBJECT]'); // TODO: should be empty string
+        tools.expect(upperCaseText([])).toBe('');
     }
 })
 
@@ -1269,7 +1458,6 @@ function concatenateText() {
     return arr.join('');
 }
 
-// TODO: missing tests
 tools.add({
     id: "concatenateText",
     impl: concatenateText,
@@ -1295,6 +1483,16 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(concatenateText()).toBe("");
+        tools.expect(concatenateText("a")).toBe("a");
+        tools.expect(concatenateText("a", "b")).toBe("ab");
+        tools.expect(concatenateText("a", "b", "c")).toBe("abc");
+        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("ab,cd"); // TODO: Problem?
+        tools.expect(concatenateText(1, 'a')).toBe("1a");
+        tools.expect(concatenateText(true, 'a')).toBe("truea");
+        tools.expect(concatenateText(false, 'a')).toBe("falsea");
+        tools.expect(concatenateText({}, 'a')).toBe("[object Object]a"); // TODO: should be only 'a' instead
+        tools.expect(concatenateText([], 'a')).toBe("a");
     }
 })
 
@@ -1312,7 +1510,6 @@ function insertTextAtPosition(text, textToInsert, position) {
         + text.slice(position);
 }
 
-// TODO: missing tests
 tools.add({
     id: "insertTextAtPosition",
     impl: insertTextAtPosition,
@@ -1354,23 +1551,31 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(insertTextAtPosition("01234", "#", 1)).toBe("0#1234");
+        tools.expect(insertTextAtPosition("01234", "#", 0)).toBe("#01234");
+        tools.expect(insertTextAtPosition("01234", "#", 3)).toBe("012#34");
+        tools.expect(insertTextAtPosition("01234", "#", 4)).toBe("0123#4");
+        tools.expect(insertTextAtPosition("01234", "#", 5)).toBe("01234#");
+        tools.expect(insertTextAtPosition("01234", "#", -1)).toBe("0123#4");
+        tools.expect(insertTextAtPosition("01234", "#", -2)).toBe("012#34");
+        tools.expect(insertTextAtPosition("01234", true, -3)).toBe("01true234");
+        tools.expect(insertTextAtPosition("01234", null, 1)).toBe("01234");
     }
 })
 
 
 function textAtPosition(text, position, length) {
     if (!isInteger(position)) {
-        throw "In insertTextAtPosition(): position has to be a number";
+        throw "In textAtPosition(): position has to be a number";
     }
 
     if ((length || length === 0) && !isInteger(length)) {
-        throw "In insertTextAtPosition(): length has to be a number";
+        throw "In textAtPosition(): length has to be a number";
     }
 
-    return stringOf(text).substr(position, length); // TODO: deprecation
+    return stringOf(text).substring(position, position + length);
 }
 
-// TODO: missing tests
 tools.add({
     id: "textAtPosition",
     impl: textAtPosition,
@@ -1412,6 +1617,10 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(textAtPosition("01234", 1, 1)).toBe("1");
+        tools.expect(textAtPosition("01234", 0, 1)).toBe("0");
+        tools.expect(textAtPosition("01234", 3, 2)).toBe("34");
+        tools.expect(textAtPosition("01234", 5, 1)).toBe("");
     }
 })
 
@@ -1420,7 +1629,6 @@ function trimText(text) {
     return stringOf(text).trim();
 }
 
-// TODO: missing tests
 tools.add({
     id: "trimText",
     impl: trimText,
@@ -1438,14 +1646,20 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "Text where spaces, tabs and line breaks will be removed",
-            "desc_de": "Text in dem Leerzeichen, Tabulatoren und Zeilenumbrüche entfernt werden"
+            "desc_en": "Text where spaces, tabs and line breaks will be removed from the beginning and the end",
+            "desc_de": "Text in dem Leerzeichen, Tabulatoren und Zeilenumbrüche vom Anfang und Ende entfernt werden"
         }
     ],
     tags: ["TAGS.TEXT"],
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(trimText(" a ")).toBe("a");
+        tools.expect(trimText("  a")).toBe("a");
+        tools.expect(trimText("a  ")).toBe("a");
+        tools.expect(trimText("a")).toBe("a");
+        tools.expect(trimText("")).toBe("");
+        tools.expect(trimText("a\n")).toBe("a");
     }
 })
 
@@ -1454,7 +1668,6 @@ function normalizeWhitespaces(text) {
     return stringOf(text).replace(/\s+/g, " ");
 }
 
-// TODO: missing tests
 tools.add({
     id: "normalizeWhitespaces",
     impl: normalizeWhitespaces,
@@ -1480,12 +1693,13 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(normalizeWhitespaces(" ")).toBe(" ");
+        tools.expect(normalizeWhitespaces(" ")).toBe(" ");
+        tools.expect(normalizeWhitespaces(" ")).toBe(" ");
+        tools.expect(normalizeWhitespaces(" ")).toBe(" ");
+        tools.expect(normalizeWhitespaces(" ")).toBe(" ");
     }
 })
-
-function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-}
 
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
@@ -1665,6 +1879,10 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(containsText("ene mene muh", "mene")).toBe(true);
+        tools.expect(containsText("ene mene muh", "xxx")).toBe(false);
+        tools.expect(containsText("ene mene muh", ["mene", "xxx"])).toBe(true);
+        tools.expect(containsText("ene mene muh", ["xxx", "yyy"])).toBe(false);
     }
 })
 
@@ -1711,6 +1929,10 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
+        // tools.expect(inList("a", "a", "b")).toBe(true); // TODO: Funktion suggeriert boolean, gibt aber den Wert zurück
+        // tools.expect(inList("a", "b", "a")).toBe(true);
+        // tools.expect(inList("a", "b", "c")).toBe(false);
+        // tools.expect(inList("a")).toBe(false);
     }
 })
 
@@ -1901,6 +2123,13 @@ tools.add({
     hideOnSimpleMode: null,
     tests: () => {
         tools.expect(extractNumberFromText("Temperaturen heute: 23 bis 25 Grad")).toBe("25");
+        tools.expect(extractNumberFromText("Temperaturen heute: -23,6 bis 25.1 Grad")).toBe("25.1");
+        tools.expect(extractNumberFromText("  23-25 ")).toBe("25");
+        tools.expect(extractNumberFromText("-23-25")).toBe("25");
+        tools.expect(extractNumberFromText("-23 - -25")).toBe("-25");
+        tools.expect(extractNumberFromText('Text ohne zahlen', 10)).toBe('10');
+        tools.expect(extractNumberFromText('Text ohne zahlen')).toBe('');
+        tools.expect(extractNumberFromText('Text ohne zahlen', '20')).toBe('20');
     }
 })
 
@@ -1924,6 +2153,7 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(numberPattern().source).toBe("(((?<=[^\\d])-)|^-)?[\\d.,]*\\d");
     }
 })
 
@@ -1973,7 +2203,6 @@ function deleteSpecialCharacters(text) {
     return stringOf(text).replace(/[^a-zA-Z0-9]/g, "");
 }
 
-// TODO: missing tests
 tools.add({
     id: "deleteSpecialCharacters",
     impl: deleteSpecialCharacters,
@@ -1999,6 +2228,10 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(deleteSpecialCharacters("a-b-c")).toBe("abc");
+        tools.expect(deleteSpecialCharacters("a b c")).toBe("abc");
+        tools.expect(deleteSpecialCharacters("a b c!")).toBe("abc");
+        tools.expect(deleteSpecialCharacters("text!\"§$%&/()=?*#'+-.,;:_")).toBe("text");
     }
 })
 
@@ -2112,7 +2345,6 @@ function startsNumeric(text) {
     return matches(text, /^[\d]/);
 }
 
-// TODO: missing tests
 tools.add({
     id: "startsNumeric",
     impl: startsNumeric,
@@ -2138,6 +2370,12 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(startsNumeric("1")).toBe(true);
+        tools.expect(startsNumeric("23")).toBe(true);
+        tools.expect(startsNumeric("3,4")).toBe(true);
+        tools.expect(startsNumeric("4abcd")).toBe(true);
+        tools.expect(startsNumeric("abcd")).toBe(false);
+        tools.expect(startsNumeric("   5")).toBe(false);
     }
 })
 
@@ -2204,7 +2442,6 @@ function decode() {
     return "";
 }
 
-// TODO: missing tests. Not enough
 tools.add({
     id: "decode",
     impl: decode,
@@ -2255,6 +2492,9 @@ tools.add({
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(decode("some words", "some", "another", "")).toBe("another");
+        tools.expect(decode("some words", "some", "a", "words", "b")).toBe("a");
+        tools.expect(decode("some words", /so.*/, "a", "words", "b")).toBe("a");
+        tools.expect(decode("some words", "not", "not_replace", "found", "found_replace", "fallback")).toBe("fallback");
     }
 })
 
@@ -2343,6 +2583,7 @@ tools.add({
         tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
         tools.expect(decodeAll("some words", "some", "a", "words", "a")).jsonToBe(["a"]);
         tools.expect(decodeAll("some other things", "josef", "a", "words", "b", "nothing")).jsonToBe(["nothing"]);
+        tools.expect(decodeAll("some words", /so.*/, "a", "words", "b")).jsonToBe(["a", "b"]);
     }
 })
 
@@ -2509,6 +2750,8 @@ tools.add({
     tests: () => {
         tools.expect(extractFromHtmlEnum("<li>someStuff: other</li>", "someStuff")).toBe("other");
         tools.expect(extractFromHtmlEnum("<li><span style=\"font-size:14px;\"><span style=\"font-family: arial,helvetica,sans-serif;\">Wandstärke: 5- 6cm</span></span></li>", "Wandstärke")).toBe("5- 6cm");
+        tools.expect(extractFromHtmlEnum("<li>someStuff: other</li>", "someStuff", "fallback")).toBe("other");
+        tools.expect(extractFromHtmlEnum("<li>someStuff: unimportant</li>", "someOtherStuff", "fallback")).toBe("fallback");
     }
 })
 
@@ -2580,7 +2823,11 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
-        tools.expect(lookupGet("test", "test", "test", "test")).toBe("valueFound");
+        tools.it("will return valueFound if _lookups is not defined", () => {
+            tools.expect(lookupGet("test", "test", "test", "test")).toBe("valueFound");
+        });
+
+        // TODO: This needs more tests
     }
 })
 
@@ -2665,6 +2912,7 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        // TODO: Not real tests as _lookups is never defined
         tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("valueFound");
         tools.expect(lookupGetRegExp("test", "test", /test/g, "test")).toBe("valueFound");
         tools.expect(lookupGetRegExp("test", "test", /\w+/g, "test")).toBe("valueFound");
@@ -2699,7 +2947,6 @@ function lookupReplaceRegExp(matchingValue, lookupName, matchingRegExpColumn, co
     return null;
 }
 
-// TODO: missing tests
 tools.add({
     id: "lookupReplaceRegExp",
     impl: lookupReplaceRegExp,
@@ -2749,6 +2996,7 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        // TODO: Needs Tests
     }
 })
 
@@ -2783,7 +3031,6 @@ function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, col
     return results;
 }
 
-// TODO: missing tests
 tools.add({
     id: "lookupGetAllRegExp",
     impl: lookupGetAllRegExp,
@@ -2833,6 +3080,7 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
+        // TODO: Not real tests as _lookups is never defined
         tools.expect(lookupGetAllRegExp("test", "test", "test", "test")).toBe("valueFound");
         tools.expect(lookupGetAllRegExp("test", "test", /test/g, "test")).toBe("valueFound");
         tools.expect(lookupGetAllRegExp("test", "test", /\w+/g, "test")).toBe("valueFound");
@@ -2848,7 +3096,6 @@ function formatAsHtmlBulletpoints() {
     return '<ul><li>' + Array.from(arguments).flat().join('</li><li>') + '</li></ul>';
 }
 
-// TODO: missing tests
 tools.add({
     id: "formatAsHtmlBulletpoints",
     impl: formatAsHtmlBulletpoints,
@@ -2874,6 +3121,11 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(formatAsHtmlBulletpoints("a", "b", "c")).toBe("<ul><li>a</li><li>b</li><li>c</li></ul>");
+        tools.expect(formatAsHtmlBulletpoints("a")).toBe("<ul><li>a</li></ul>");
+        tools.expect(formatAsHtmlBulletpoints()).toBe('');
+        tools.expect(formatAsHtmlBulletpoints(true)).toBe("<ul><li>true</li></ul>");
+        tools.expect(formatAsHtmlBulletpoints("a", ["b", "c"], "d")).toBe("<ul><li>a</li><li>b</li><li>c</li><li>d</li></ul>");
     }
 })
 
@@ -2895,7 +3147,6 @@ function formatAsNumber(value, overrideLocale) {
     return new Intl.NumberFormat(locale).format(value);
 }
 
-// TODO: missing tests
 tools.add({
     id: "formatAsNumber",
     impl: formatAsNumber,
@@ -2930,6 +3181,12 @@ tools.add({
     hideOnSimpleMode: null,
     tests: () => {
         tools.expect(formatAsNumber("8.8")).toBe("8,8");
+        tools.expect(formatAsNumber(8.8)).toBe("8,8");
+        tools.expect(formatAsNumber(1234)).toBe("1.234");
+        tools.expect(formatAsNumber(1234.567)).toBe("1.234,567");
+        tools.expect(formatAsNumber("1.223.3")).toBe("NaN"); // TODO: Should this be NaN or '' instead?
+        tools.expect(formatAsNumber("12233", 'en-US')).toBe("12,233");
+        // tools.expect(formatAsNumber("1.223,30", 'en-US')).toBe("1.223,30"); // TODO: This shouldn't fail
     }
 })
 
@@ -2987,6 +3244,7 @@ tools.add({
         tools.expect(textToNumber("1,223.3", 'en-US')).toBe(1223.3);
         tools.expect(textToNumber("1.223,3")).toBe(1223.3);
         tools.expect(textToNumber("1234")).toBe(1234);
+        tools.expect(textToNumber("1.234,567")).toBe(1234.567);
     }
 })
 
@@ -2999,13 +3257,12 @@ function _numberParser(value, locale) {
     let _decimal = new RegExp(`[${parts.find(d => d.type === "decimal").value}]`);
     let _numeral = new RegExp(`[${numerals.join("")}]`, "g");
     let _index = d => index.get(d);
-    return (v = value.trim() // TODO: What?
+    return (v = value.trim()
         .replace(_group, "")
         .replace(_decimal, ".")
         .replace(_numeral, _index)) ? +v : null;
 }
 
-// TODO: missing tests
 tools.add({
     id: "_numberParser",
     impl: _numberParser,
@@ -3035,7 +3292,7 @@ tools.add({
             "desc_de": "Das zu verwendende Länderformat"
         },
         {
-            "key": "...",
+            "key": "...", // TODO: Warum ist das hier?
             "label_en": "",
             "label_de": "",
             "type": "text",
@@ -3047,6 +3304,10 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(_numberParser("1,223.3", 'en-US')).toBe(1223.3);
+        tools.expect(_numberParser("1,223.3")).toBe(1223.3); // TODO: Nutzt die system locale. Das kann zu Problemen führen
+        tools.expect(_numberParser("1234")).toBe(1234);
+        tools.expect(_numberParser("1.234,567")).toBe(1.234567);
     }
 })
 
@@ -3060,7 +3321,6 @@ function regExpMatch(input, match, fallback) {
     return fallback !== undefined ? fallback : input;
 }
 
-// TODO: missing tests
 tools.add({
     id: "regExpMatch",
     impl: regExpMatch,
@@ -3077,6 +3337,10 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(regExpMatch("some words", "some")).toBe("some");
+        tools.expect(regExpMatch("some words", "another")).toBe("some words");
+        tools.expect(regExpMatch("some words", "some", "fallback")).toBe("some");
+        tools.expect(regExpMatch("some words", "another", "fallback")).toBe("fallback");
     }
 })
 
@@ -3101,6 +3365,7 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(regExpReplace("some words", "some", "another")).toBe("another words");
     }
 })
 
@@ -3109,7 +3374,6 @@ function matches(input, expr) {
     return stringOf(input).search(expr) >= 0;
 }
 
-// TODO: missing tests
 tools.add({
     id: "matches",
     impl: matches,
@@ -3126,6 +3390,9 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(matches("some words", "some")).toBe(true);
+        tools.expect(matches("some words", "another")).toBe(false);
+        tools.expect(matches("some some some", "some")).toBe(true);
     }
 })
 
@@ -3207,6 +3474,10 @@ tools.add({
 
 
 function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
+    if (!value) {
+        return value;
+    }
+
     if (!oldUnit) {
         oldUnit = '';
     }
@@ -3228,47 +3499,49 @@ function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
         }
     }
 
-    // TODO: unreadable
-    if (value) {
-        let rest = [];
-        let werte = value.match(/-?\d*[,.]?\d+/g);
-        if (!werte) {
-            return value;
-        }
-        for (let i = 0; i < (werte.length); i++) {
-            rest[i] = value.slice(0, value.indexOf(werte[i]));
-            value = value.slice(value.indexOf(werte[i]) + werte[i].length, value.length);
-        }
-        result = result + rest[0];
-        rest[werte.length] = value;
-        let realDecimalSeparator = '.';
-        for (let i = 0; i < werte.length; i++) {
-            let wert = werte[i];
-            if (wert.includes(',')) {
-                realDecimalSeparator = ',';
-            }
-            wert = wert.replace(',', '.');
-            const unit = rest[i + 1].match(/\w*/g)
-            if (oldUnit && newUnit) {
-                if (unit[1] && unit[1] === oldUnit) {
-                    wert = toFactor(wert);
-                    rest[i + 1] = rest[i + 1].replace(oldUnit, newUnit);
-                }
-            } else if (!oldUnit && newUnit) {
-                if (unit[1] && newUnit !== unit[1]) {
-                    wert = toFactor(wert);
-                    rest[i + 1] = " " + newUnit + rest[i + 1];
-                }
-            } else if (!oldUnit && !newUnit) {
-                wert = toFactor(wert);
-            }
-            wert = wert.replace(',', realDecimalSeparator);
-            wert = wert.replace('.', realDecimalSeparator);
-            result = result + wert + rest[i + 1];
-        }
-    } else {
+    let rest = [];
+    let werte = value.match(/-?\d*[,.]?\d+/g);
+    if (!werte) {
         return value;
     }
+
+    for (let i = 0; i < (werte.length); i++) {
+        rest[i] = value.slice(0, value.indexOf(werte[i]));
+        value = value.slice(value.indexOf(werte[i]) + werte[i].length, value.length);
+    }
+
+    result = result + rest[0];
+    rest[werte.length] = value;
+    let realDecimalSeparator = '.';
+    for (let i = 0; i < werte.length; i++) {
+        let wert = werte[i];
+
+        if (wert.includes(',')) {
+            realDecimalSeparator = ',';
+        }
+
+        wert = wert.replace(',', '.');
+        const unit = rest[i + 1].match(/\w*/g)
+
+        if (oldUnit && newUnit) {
+            if (unit[1] && unit[1] === oldUnit) {
+                wert = toFactor(wert);
+                rest[i + 1] = rest[i + 1].replace(oldUnit, newUnit);
+            }
+        } else if (!oldUnit && newUnit) {
+            if (unit[1] && newUnit !== unit[1]) {
+                wert = toFactor(wert);
+                rest[i + 1] = " " + newUnit + rest[i + 1];
+            }
+        } else if (!oldUnit && !newUnit) {
+            wert = toFactor(wert);
+        }
+
+        wert = wert.replace(',', realDecimalSeparator);
+        wert = wert.replace('.', realDecimalSeparator);
+        result = result + wert + rest[i + 1];
+    }
+
     return result;
 }
 
@@ -3364,12 +3637,12 @@ function normalizeValues(value, deciSeparator, deciPlaces) {
         return value;
     }
 
-    // TODO: readability
     const rest = [];
     const werte = value.match(/-?\d*[,.]?\d+/g);
     if (werte == null) {
         return value;
     }
+
     for (let i = 0; i < (werte.length); i++) {
         rest[i] = value.slice(0, value.indexOf(werte[i]));
         value = value.slice(value.indexOf(werte[i]) + werte[i].length, value.length);
@@ -3381,10 +3654,13 @@ function normalizeValues(value, deciSeparator, deciPlaces) {
     for (let i = 0; i < (werte.length); i++) {
         let realDecimalSeparator = '.';
         let wert = werte[i];
+
         if (wert.includes(',')) {
             realDecimalSeparator = ',';
         }
+
         wert = wert.replace(',', '.');
+
         if (deciPlaces !== 0) {
             wert = String((parseFloat(wert)).toFixed(deciPlaces));
         }
@@ -3401,7 +3677,6 @@ function normalizeValues(value, deciSeparator, deciPlaces) {
     return result;
 }
 
-// TODO: missing tests. Should be more
 tools.add({
     id: "normalizeValues",
     impl: normalizeValues,
@@ -3446,6 +3721,9 @@ tools.add({
         tools.expect(normalizeValues("23.1 and 23.22", '.', 1)).toBe("23.1 and 23.2");
         tools.expect(normalizeValues("23 and 23.225 and some", '.', 1)).toBe("23.0 and 23.2 and some");
         tools.expect(normalizeValues("etwa 2,3 megawatts", '.')).toBe("etwa 2.3 megawatts");
+        tools.expect(normalizeValues("etwa 2,3 megawatts", ',', 1)).toBe("etwa 2,3 megawatts");
+        tools.expect(normalizeValues("etwa 2,3 megawatts", ',', 2)).toBe("etwa 2,30 megawatts");
+        tools.expect(normalizeValues("etwa 2,3 megawatts", ',', 3)).toBe("etwa 2,300 megawatts");
     }
 })
 
@@ -3553,11 +3831,10 @@ tools.add({
 })
 
 
-function escapeRegExp(string) { // TODO: double declaration
+function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
-// TODO: missing tests
 tools.add({
     id: "escapeRegExp",
     impl: escapeRegExp,
@@ -3583,6 +3860,11 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: null,
     tests: () => {
+        tools.expect(escapeRegExp("a.b")).toBe("a\\.b");
+        tools.expect(escapeRegExp("a.b*")).toBe("a\\.b\\*");
+        tools.expect(escapeRegExp('\\')).toBe('\\\\');
+        tools.expect(escapeRegExp('a\sb')).toBe('a\sb'); // TODO: Should this be escaped?
+        tools.expect(escapeRegExp('a\\sb')).toBe('a\\\\sb');
     }
 })
 
@@ -3593,7 +3875,7 @@ function splitText(text, separator) {
     }
 
     if (text != null && text.split) {
-        return text.split(separator).map(v => v.trim()); // TODO: Should this really trim?
+        return text.split(separator).map(v => v.trim());
     }
 
     return null;
@@ -3648,13 +3930,12 @@ tools.add({
 
 function attributes() {
     if (typeof _source === 'undefined') {
-        return ['attr1', 'attr2', 'attr3'];
+        return ['attr1', 'attr2', 'attr3']; // TODO: Ist das ein sinnvoller default?
     }
 
     return Object.keys(JSON.parse(_source)).filter(k => !k.startsWith("_"));
 }
 
-// TODO: missing tests. Not enough
 tools.add({
     id: "attributes",
     impl: attributes,
@@ -3689,6 +3970,15 @@ tools.add({
     hideOnSimpleMode: null,
     tests: () => {
         tools.expect(attributes()).jsonToBe(['attr1', 'attr2', 'attr3']);
+
+        tools.it('will extract all attributes without _ prefix from the _source object', () => {
+            try {
+                _source = JSON.stringify({attr1: 1, _attr2: 2, attr3: 3});
+                tools.expect(attributes()).jsonToBe(['attr1', 'attr3']);
+            } finally {
+                delete _source;
+            }
+        });
     }
 })
 
@@ -3823,7 +4113,7 @@ tools.add({
 })
 
 
-function someOf() { // TODO: missleading name its more like anyOf
+function someOf() { // TODO: misleading name its more like anyOf
     for (let i = 0; i < arguments.length; i++) {
         if (arguments[i] === true) {
             return true;
@@ -3864,6 +4154,7 @@ tools.add({
         tools.expect(someOf([], {})).toBe(false);
         tools.expect(someOf([], true, false)).toBe(true);
         tools.expect(someOf()).toBe(false);
+        tools.expect(someOf(false, false, false, true)).toBe(true);
     }
 })
 
@@ -3913,11 +4204,12 @@ tools.add({
         tools.expect(allOf([], {})).toBe(false);
         tools.expect(allOf([], true, false)).toBe(false);
         tools.expect(allOf()).toBe(false);
+        // tools.expect(allOf(1, "", [], {})).toBe(true); // TODO: Funktion könnte truthy verwenden
     }
 })
 
 
-function noneOf() { // TODO: missleading name
+function noneOf() {
     if (arguments.length === 0) {
         return false;
     }
@@ -4020,7 +4312,6 @@ function date(formatting, initialDate) {
     return format(initialDate, formatting);
 }
 
-// TODO: missing tests
 tools.add({
     id: "date",
     impl: date,
@@ -4055,6 +4346,11 @@ tools.add({
     hideOnSimpleMode: null,
     tests: () => {
         tools.expect(date('dd.MM.yyyy', Date.parse("1980/01/01"))).toBe("01.01.1980");
+        tools.expect(date('dd.MM.yyyy', Date.parse("01.01.1980"))).toBe("01.01.1980");
+        tools.expect(date('dd.MM.yyyy', Date.parse("01.01.1980 12:00:00"))).toBe("01.01.1980");
+        tools.expect(date('dd.MM.yyyy', Date.parse("1980-01.01"))).toBe("01.01.1980");
+        tools.expect(date('yyyy-MM-dd hh:mm:ss', Date.parse("1980-01-01 01:02:03"))).toBe("1980-01-01 01:02:03");
+        tools.expect(date('yyyy-MM-dd hh:mm:ss', Date.parse("1980-01-01"))).toBe("1980-01-01 01:00:00");
     }
 })
 
@@ -4070,7 +4366,6 @@ function timestamp(formatting, initialDate) {
     return format(initialDate, formatting);
 }
 
-// TODO: missing tests
 tools.add({
     id: "timestamp",
     impl: timestamp,
@@ -4105,6 +4400,10 @@ tools.add({
     hideOnSimpleMode: null,
     tests: () => {
         tools.expect(timestamp('yyyyMMddhhmm', Date.parse("1980/01/01"))).toBe("198001011200");
+        tools.expect(timestamp('yyyyMMddhhmm', Date.parse("01.01.1980"))).toBe("198001011200");
+        tools.expect(timestamp('yyyyMMddhhmm', Date.parse("01.01.1980 12:00:00"))).toBe("198001011200");
+        tools.expect(timestamp('yyyyMMddhhmm', Date.parse("1980-01-01"))).toBe("198001010100");
+        tools.expect(timestamp('yyyyMMddhhmmss', Date.parse("1980-01-01 01:02:03"))).toBe("19800101010203");
     }
 })
 
@@ -4195,7 +4494,6 @@ function $global(key, value) {
     return _globalContext[key];
 }
 
-// TODO: missing tests
 tools.add({
     id: "$global",
     impl: $global,
@@ -4229,6 +4527,14 @@ tools.add({
     hideInToolbox: true,
     hideOnSimpleMode: null,
     tests: () => {
+        try {
+            tools.expect($global('test_key', 'test_value')).toBe('test_value');
+            tools.expect($global('test_key')).toBe('test_value');
+        } finally {
+            delete _globalContext;
+        }
+
+        tools.expect($global('test_key')).toBe(undefined);
     }
 })
 
