@@ -762,14 +762,15 @@ function decodeConditions() {
         }
     }
 
-    if (arguments[i]) {
-        return arguments[i];
+
+    const lastArg = arguments[arguments.length - 1];
+    if (lastArg) {
+        return lastArg
     }
 
     return "";
 }
 
-// TODO: missing tests
 tools.add({
     id: "decodeConditions",
     impl: decodeConditions,
@@ -803,6 +804,9 @@ tools.add({
     hideInToolbox: false,
     hideInSimpleMode: true,
     tests: () => {
+        tools.expect(decodeConditions(true, "true", false, "false")).toBe("true");
+        tools.expect(decodeConditions(false, "fallback")).toBe("fallback");
+        tools.expect(decodeConditions(false, "not expected", true, "expected", "fallback")).toBe("expected");
     }
 })
 
@@ -2193,7 +2197,7 @@ function decode() {
         }
     }
 
-    if (arduments.length > 3 && arguments[arguments.length - 1]) {
+    if (arguments.length > 3 && arguments[arguments.length - 1]) {
         return arguments[arguments.length - 1].toString();
     }
 
