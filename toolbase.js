@@ -4,6 +4,21 @@ const format = require('date-fns/format');
 const tools = new Toolpackage("Base Chioro Tools");
 tools.description = 'These are the toolbox tools included in Chioro by default. All the tools defined here are available in the global namespace. ';
 
+function isUndefined(value) {
+    return typeof value === 'undefined';
+}
+
+function isObject(value) {
+    return typeof value === 'object';
+}
+
+function isBoolean(value) {
+    return typeof value === 'boolean';
+}
+
+function isNumber(value) {
+    return typeof value === 'number';
+}
 
 function getJson(url, headers = null) {
     if (typeof _apiFetcher === 'undefined') {
@@ -318,7 +333,7 @@ tools.add({
 
 
 function $(propertyName) {
-    if (typeof propertyName === 'undefined') {
+    if (isUndefined(propertyName)) {
         return $(current());
     }
 
@@ -326,7 +341,7 @@ function $(propertyName) {
         return '';
     }
 
-    if (typeof propertyName !== 'string') {
+    if (!isString(propertyName)) {
         return JSON.stringify(propertyName);
     }
 
@@ -354,11 +369,11 @@ function $(propertyName) {
 
     result = v;
 
-    if (typeof result === 'string') {
+    if (isString(result)) {
         return result;
     }
 
-    if (result === null || typeof result === 'undefined') {
+    if (result === null || isUndefined(result)) {
         return '';
     }
 
@@ -433,9 +448,9 @@ function $$(propertyName) {
 
     let result = '';
     const v = $(propertyName);
-    if (typeof v['value'] !== 'undefined' && v['value']) {
+    if (!isUndefined(v['value']) && v['value']) {
         result = v['value'];
-        if (typeof v['unit'] !== 'undefined' && v['unit']) {
+        if (!isUndefined(v['unit']) && v['unit']) {
             result = result + ' ' + v['unit'];
         }
     } else {
@@ -444,11 +459,11 @@ function $$(propertyName) {
 
     result = arrayWithOneValueChecking(result);
 
-    if (typeof result === 'string') {
+    if (isString(result)) {
         return result;
     }
 
-    if (result === null || typeof result === 'undefined') {
+    if (result === null || isUndefined(result)) {
         return '';
     }
 
@@ -456,7 +471,7 @@ function $$(propertyName) {
         return result[0];
     }
 
-    if (typeof result === 'object' && Object.keys(result).length > 0) {
+    if (isObject(result) && Object.keys(result).length > 0) {
         return result[Object.keys(result)[0]];
     }
 
@@ -770,7 +785,7 @@ tools.add({
 
 
 function stringOf(input) {
-    if (input !== null && typeof input !== 'undefined') {
+    if (input !== null && !isUndefined(input)) {
         return input.toString();
     }
 
@@ -814,8 +829,8 @@ tools.add({
 
 function similarCategory(categoryValue, comparisonValue) {
     if (!comparisonValue || !categoryValue ||
-        typeof comparisonValue !== 'string' ||
-        typeof categoryValue !== 'string'
+        !isString(comparisonValue) ||
+        !isString(categoryValue)
     ) {
         return false;
     }
@@ -1006,7 +1021,7 @@ tools.add({
 
 
 function size(something) {
-    if (typeof something === 'number') {
+    if (isNumber(something)) {
         something = something.toString();
     }
 
@@ -1153,7 +1168,7 @@ tools.add({
 // TODO: Introduce type check methods as this is repeating 100x
 function filterList(listProperty, regExpList) {
     let targetList = listProperty;
-    if (typeof listProperty === 'string') {
+    if (isString(listProperty)) {
         targetList = JSON.parse(listProperty);
     }
 
@@ -2235,16 +2250,15 @@ tools.add({
     }
 })
 
-
 function isBlank(text_or_object) {
-    if (text_or_object === null || typeof text_or_object === 'undefined') {
+    if (text_or_object === null || isUndefined(text_or_object)) {
         return true;
     }
 
     if (
-        typeof text_or_object === 'string' ||
-        typeof text_or_object === 'boolean' ||
-        typeof text_or_object === 'number'
+        isString(text_or_object) ||
+        isBoolean(text_or_object) ||
+        isNumber(text_or_object)
     ) {
         return stringOf(text_or_object).trim().length < 1;
     }
@@ -4259,7 +4273,7 @@ tools.add({
 
 
 function not(value) {
-    if (typeof value === "boolean") {
+    if (isBoolean(value)) {
         return !value;
     }
 
@@ -4301,11 +4315,11 @@ tools.add({
 
 
 function date(formatting, initialDate) {
-    if (typeof initialDate === "undefined" || !initialDate) {
+    if (isUndefined(initialDate) || !initialDate) {
         initialDate = new Date();
     }
 
-    if (typeof formatting === "undefined" || !formatting) {
+    if (isUndefined(formatting) || !formatting) {
         return format(initialDate, "dd.MM.yyyy");
     }
 
@@ -4355,11 +4369,11 @@ tools.add({
 })
 
 function timestamp(formatting, initialDate) {
-    if (typeof initialDate === "undefined" || !initialDate) {
+    if (isUndefined(initialDate) || !initialDate) {
         initialDate = new Date();
     }
 
-    if (typeof formatting === "undefined" || !formatting) {
+    if (isUndefined(formatting) || !formatting) {
         return format(initialDate, "yyyyMMddhhmm");
     }
 
@@ -4413,7 +4427,7 @@ function roundAllNumbers(value) {
     }
 
     const round = v => {
-        if (typeof v === "string") {
+        if (isString(v)) {
             const listOfNumbersFromString = extractAllNumbersFromText(v);
             listOfNumbersFromString.forEach(number => {
                 v = v.replace(number, Math.round(parseFloat(number.replace(',', '.'))));
@@ -4432,7 +4446,7 @@ function roundAllNumbers(value) {
         return value;
     }
 
-    if (typeof value === "object") {
+    if (isObject(value)) {
         Object.keys(value).forEach(key => {
             value[key] = round(value[key]);
         });
