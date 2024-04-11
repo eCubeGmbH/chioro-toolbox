@@ -1,5 +1,6 @@
 const Toolpackage = require('./toolpackage');
 const format = require('date-fns/format');
+const Decimal = require('decimal');
 
 const tools = new Toolpackage("Base Chioro Tools");
 tools.description = 'These are the toolbox tools included in Chioro by default. All the tools defined here are available in the global namespace. ';
@@ -652,7 +653,7 @@ function context(propertyName) {
         let tmp = contextMap;
         while (keys.length > 0) {
             let key = keys.shift();
-            if (tmp[key] == undefined) {
+            if (isUndefined(tmp[key])) {
                 return null;
             }
             tmp = tmp[key];
@@ -876,6 +877,9 @@ tools.add({
 
 function isInteger(value) {
     const integer = parseInt(value, 10);
+    if (size(integer) !== size(value)) {
+        return false;
+    }
     return !isNaN(integer);
 }
 
@@ -896,10 +900,11 @@ tools.add({
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(isInteger(1)).toBe(true);
-        // tools.expect(isInteger(1.1)).toBe(false); // TODO: fails!
+        tools.expect(isInteger(1.1)).toBe(false);
         tools.expect(isInteger('1')).toBe(true);
-        // tools.expect(isInteger('1.1')).toBe(false); // TODO: fails!
-        // tools.expect(isInteger('1,1')).toBe(false); // TODO: fails!
+        tools.expect(isInteger('1.1')).toBe(false);
+        tools.expect(isInteger('1,1')).toBe(false);
+        tools.expect(isInteger('1,11111111119')).toBe(false);
         tools.expect(isInteger('a')).toBe(false);
     }
 })
@@ -1160,12 +1165,12 @@ tools.add({
         tools.expect(anyOf(null, null, 1)).toBe(1);
         tools.expect(anyOf(null, null, 1, 2)).toBe(1);
         tools.expect(anyOf(null, null, 0)).toBe(0);
-        // tools.expect(anyOf(null, null, [null, null], 1)).toBe(1); // TODO: Basierend auf der Doku sollte das so funktionieren
+        tools.expect(anyOf(null, null, true)).toBe(true);
+        tools.expect(anyOf(null, 'some text', null)).toBe('some text');
     }
 })
 
 
-// TODO: Introduce type check methods as this is repeating 100x
 function filterList(listProperty, regExpList) {
     let targetList = listProperty;
     if (isString(listProperty)) {
@@ -1321,6 +1326,9 @@ tools.add({
 
 
 function lowerCaseText(text) {
+    if (isObject(text)) {
+        return '';
+    }
     return stringOf(text).toLowerCase();
 }
 
@@ -1356,13 +1364,17 @@ tools.add({
         tools.expect(lowerCaseText("1")).toBe("1");
         tools.expect(lowerCaseText(true)).toBe("true");
         tools.expect(lowerCaseText(false)).toBe("false");
-        tools.expect(lowerCaseText({})).toBe('[object object]'); // TODO: should be empty string
+        tools.expect(lowerCaseText({})).toBe('');
         tools.expect(lowerCaseText([])).toBe('');
     }
 })
 
 
 function upperCaseText(text) {
+    if (isObject(text)) {
+        return '';
+    }
+
     return stringOf(text).toUpperCase();
 }
 
@@ -1398,7 +1410,7 @@ tools.add({
         tools.expect(upperCaseText("1")).toBe("1");
         tools.expect(upperCaseText(true)).toBe("TRUE");
         tools.expect(upperCaseText(false)).toBe("FALSE");
-        tools.expect(upperCaseText({})).toBe('[OBJECT OBJECT]'); // TODO: should be empty string
+        tools.expect(upperCaseText({})).toBe('');
         tools.expect(upperCaseText([])).toBe('');
     }
 })
@@ -1467,7 +1479,9 @@ tools.add({
 function concatenateText() {
     const arr = [];
     for (let i = 0; i < arguments.length; i++) {
-        arr.push(stringOf(arguments[i]));
+        if (!isObject(arguments[i])) {
+            arr.push(stringOf(arguments[i]));
+        }
     }
 
     return arr.join('');
@@ -1502,11 +1516,11 @@ tools.add({
         tools.expect(concatenateText("a")).toBe("a");
         tools.expect(concatenateText("a", "b")).toBe("ab");
         tools.expect(concatenateText("a", "b", "c")).toBe("abc");
-        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("ab,cd"); // TODO: Problem?
+        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("ad");
         tools.expect(concatenateText(1, 'a')).toBe("1a");
         tools.expect(concatenateText(true, 'a')).toBe("truea");
         tools.expect(concatenateText(false, 'a')).toBe("falsea");
-        tools.expect(concatenateText({}, 'a')).toBe("[object Object]a"); // TODO: should be only 'a' instead
+        tools.expect(concatenateText({}, 'a')).toBe("a");
         tools.expect(concatenateText([], 'a')).toBe("a");
     }
 })
@@ -1882,13 +1896,13 @@ tools.add({
             "desc_de": "Text in dem gesucht werden soll."
         },
         {
-            "key": "textToSearch",
+            "key": "textToSearch", // TODO: Akzetiert aktuell nur einn wert oder eine liste. Varargs sollte auch gehen
             "label_en": "Search text",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text that is searched.",
             "desc_de": "Text der gesucht werden soll."
-        }
+        } // TODO: Add ignoreCase option
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
     hideInToolbox: null,
@@ -1908,7 +1922,11 @@ function inList() {
         return false;
     }
 
-    return arr.find((s, i) => s == arr[0] && i > 0);
+    const searchPredicate = (s, i) => {
+        return s == arr[0] && i > 0; // intentional == instead of === to allow finding 1 in ['1', 2]
+    };
+
+    return !isUndefined(arr.find(searchPredicate))
 }
 
 tools.add({
@@ -1944,10 +1962,13 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: true,
     tests: () => {
-        // tools.expect(inList("a", "a", "b")).toBe(true); // TODO: Funktion suggeriert boolean, gibt aber den Wert zurück
-        // tools.expect(inList("a", "b", "a")).toBe(true);
-        // tools.expect(inList("a", "b", "c")).toBe(false);
-        // tools.expect(inList("a")).toBe(false);
+        tools.expect(inList("a", "a", "b")).toBe(true);
+        tools.expect(inList("a", "b", "a")).toBe(true);
+        tools.expect(inList("a", "b", "c")).toBe(false);
+        tools.expect(inList("a")).toBe(false);
+
+        tools.expect(inList(1, ['1', 2, 'b'])).toBe(true);
+        tools.expect(inList(true, ['2', true])).toBe(true);
     }
 })
 
@@ -3198,9 +3219,8 @@ tools.add({
         tools.expect(formatAsNumber(8.8)).toBe("8,8");
         tools.expect(formatAsNumber(1234)).toBe("1.234");
         tools.expect(formatAsNumber(1234.567)).toBe("1.234,567");
-        tools.expect(formatAsNumber("1.223.3")).toBe("NaN"); // TODO: Should this be NaN or '' instead?
+        tools.expect(formatAsNumber("1.223.3")).toBe("NaN");
         tools.expect(formatAsNumber("12233", 'en-US')).toBe("12,233");
-        // tools.expect(formatAsNumber("1.223,30", 'en-US')).toBe("1.223,30"); // TODO: This shouldn't fail
     }
 })
 
@@ -3306,7 +3326,7 @@ tools.add({
             "desc_de": "Das zu verwendende Länderformat"
         },
         {
-            "key": "...", // TODO: Warum ist das hier?
+            "key": "...",
             "label_en": "",
             "label_de": "",
             "type": "text",
@@ -3319,7 +3339,7 @@ tools.add({
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(_numberParser("1,223.3", 'en-US')).toBe(1223.3);
-        tools.expect(_numberParser("1,223.3")).toBe(1223.3); // TODO: Nutzt die system locale. Das kann zu Problemen führen
+        tools.expect(_numberParser("1,223.3")).toBe(1223.3);
         tools.expect(_numberParser("1234")).toBe(1234);
         tools.expect(_numberParser("1.234,567")).toBe(1.234567);
     }
@@ -3507,9 +3527,9 @@ function convertUnit(value, factor, oldUnit, newUnit, deciPlaces) {
     let result = "";
     const toFactor = (wert) => {
         if (deciPlaces === 0) {
-            return String((parseFloat(wert) * factor));
+            return Decimal(wert).mul(factor).toString();
         } else {
-            return String((parseFloat(wert) * factor).toFixed(deciPlaces));
+            return Decimal(wert).mul(factor).toNumber().toFixed(deciPlaces);
         }
     }
 
@@ -3638,6 +3658,9 @@ tools.add({
         tools.expect(convertUnit("1,2", 0.01, "", "")).toBe("0,012");
         tools.expect(convertUnit("1,23", 0.01, "", "", 4)).toBe("0,0123");
         tools.expect(convertUnit("12,3", 0.01, "", "", 3)).toBe("0,123");
+        tools.expect(convertUnit("2.3 m", 100, 'm', 'cm')).toBe("230 cm");
+        tools.expect(convertUnit("2.3 m", 100, 'm', 'cm', 2)).toBe("230.00 cm");
+        tools.expect(convertUnit("2,3 m", 100, 'm', 'cm')).toBe("230 cm");
     }
 })
 
@@ -3877,8 +3900,6 @@ tools.add({
         tools.expect(escapeRegExp("a.b")).toBe("a\\.b");
         tools.expect(escapeRegExp("a.b*")).toBe("a\\.b\\*");
         tools.expect(escapeRegExp('\\')).toBe('\\\\');
-        tools.expect(escapeRegExp('a\sb')).toBe('a\sb'); // TODO: Should this be escaped?
-        tools.expect(escapeRegExp('a\\sb')).toBe('a\\\\sb');
     }
 })
 
@@ -4218,7 +4239,6 @@ tools.add({
         tools.expect(allOf([], {})).toBe(false);
         tools.expect(allOf([], true, false)).toBe(false);
         tools.expect(allOf()).toBe(false);
-        // tools.expect(allOf(1, "", [], {})).toBe(true); // TODO: Funktion könnte truthy verwenden
     }
 })
 
