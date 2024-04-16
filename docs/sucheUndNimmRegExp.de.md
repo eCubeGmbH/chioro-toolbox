@@ -1,5 +1,5 @@
 #### Beschreibung
-Diese Funktion durchsucht eine Datentabelle nach einem Wert, der einem bestimmten Muster entspricht. Die Datentabelle enthält eine Spalte mit regulären Ausdrücken und eine weitere Spalte mit den Werten, die zurückgegeben werden sollen, wenn der reguläre Ausdruck mit dem Suchwert übereinstimmt.
+Diese Funktion durchsucht eine Datentabelle nach einem Wert, der einem bestimmten Muster entspricht. Die Datentabelle enthält eine Spalte mit regulären Ausdrücken und eine weitere Spalte mit den Werten, die zurückgegeben werden sollen, wenn der reguläre Ausdruck mit dem Suchwert übereinstimmt. Der erste Treffer wird verwendet.
 
 #### Parameter
 * `valueToMatch` - Der Wert, der mit den regulären Ausdrücken in der Datentabelle verglichen werden soll.

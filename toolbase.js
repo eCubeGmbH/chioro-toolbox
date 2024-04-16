@@ -2868,7 +2868,6 @@ tools.add({
 
 
 function lookupGetRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
-    /* 'pool' is injected in environment */
     if (typeof _lookups === 'undefined') {
         return "valueFound"; // TODO: Strange default value
     }
@@ -3124,14 +3123,13 @@ tools.add({
     }
 })
 
-
-function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) {
+function lookupGetAllRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
     if (typeof _lookups === 'undefined') {
         return "valueFound";
     }
 
-    if (!matchingRegExpColumn) {
-        matchingRegExpColumn = 'key';
+    if (!columnContainingRegex) {
+        columnContainingRegex = 'key';
     }
 
     if (!columnToRetrieveValueFrom) {
@@ -3139,15 +3137,12 @@ function lookupGetAllRegExp(matchingValue, lookupName, matchingRegExpColumn, col
     }
 
     const results = [];
-    const lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveValueFrom).getAllEntries();
+    const lookupItems = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
     while (lookupItems.hasNext()) {
         const lookupItem = lookupItems.getNext();
-        const regex = lookupItem.get(matchingRegExpColumn);
-        if (!regex instanceof RegExp) {
-            if (matchingValue.match && matchingValue.match(new RegExp(regex, 'ig'))) {
-                results.push(lookupItem.get(columnToRetrieveValueFrom));
-            }
-        } else if (matchingValue.match && matchingValue.match(regex)) {
+        const regex = lookupItem.get(columnContainingRegex);
+
+        if (regex && valueToMatch.match && valueToMatch.match(new RegExp(regex, 'ig'))) {
             results.push(lookupItem.get(columnToRetrieveValueFrom));
         }
     }
@@ -3204,10 +3199,158 @@ tools.add({
     hideInToolbox: null,
     hideOnSimpleMode: null,
     tests: () => {
-        // TODO: Not real tests as _lookups is never defined
-        tools.expect(lookupGetAllRegExp("test", "test", "test", "test")).toBe("valueFound");
-        tools.expect(lookupGetAllRegExp("test", "test", /test/g, "test")).toBe("valueFound");
-        tools.expect(lookupGetAllRegExp("test", "test", /\w+/g, "test")).toBe("valueFound");
+        {
+            tools.it('will return a default value if _lookups is not defined', () => {
+                tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("valueFound");
+            });
+
+            tools.it('will return null if no match is found', () => {
+                const lookupItem = {
+                    get: (columnName) => {
+                        if (columnName === 'key') {
+                            return ".*notMatchingRegex.*"
+                        }
+                    }
+                }
+                let firstRun = true;
+                const lookupList = {
+                    hasNext: () => {
+                        const hasNext = firstRun;
+                        firstRun = false;
+                        return hasNext;
+                    },
+                    getNext: () => lookupItem
+                }
+                const lookupTable = {
+                    getAllEntries: () => lookupList
+                }
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupGetAllRegExp("some text to search for", "test_table")).listToBe([]);
+                } finally {
+                    delete _lookups;
+                }
+            });
+
+            tools.it('will use key and value columns if not specified', () => {
+                const lookupItem = {
+                    get: (columnName) => {
+                        if (columnName === 'key') {
+                            return ".*for$"
+                        } else if (columnName === 'value') {
+                            return "matchedByRegex";
+                        }
+                        return `${columnName} not found`;
+                    }
+                }
+
+                let firstRun = true;
+                const lookupList = {
+                    hasNext: () => firstRun,
+                    getNext: () => {
+                        firstRun = !firstRun;
+                        return lookupItem
+                    }
+                }
+                const lookupTable = {
+                    getAllEntries: () => lookupList
+                }
+
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupGetAllRegExp("some text to search for", "test_table")).listToBe(["matchedByRegex"]);
+                } finally {
+                    delete _lookups;
+                }
+            });
+
+            tools.it('will use a specified key and value if specified', () => {
+
+                const lookupItem = {
+                    get: (columnName) => {
+                        if (columnName === 'regexColumn') {
+                            return ".*for$"
+                        } else if (columnName === 'valueColumn') {
+                            return "matchedByRegex";
+                        }
+                        return `${columnName} not found`;
+                    }
+                }
+
+                let firstRun = true;
+                const lookupList = {
+                    hasNext: () => firstRun,
+                    getNext: () => {
+                        firstRun = !firstRun;
+                        return lookupItem
+                    }
+                }
+                const lookupTable = {
+                    getAllEntries: () => lookupList
+                }
+
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupGetAllRegExp("some text to search for", "test_table", "regexColumn", "valueColumn")).listToBe(["matchedByRegex"]);
+                } finally {
+                    delete _lookups;
+                }
+
+            });
+            tools.it('will return every value for multiple matches', () => {
+                const firstRow = {
+                    get: (columnName) => {
+                        if (columnName === 'key') {
+                            return "^some text.*"
+                        }
+                        return "firstMatch";
+                    }
+                }
+                const secondRow = {
+                    get: (columnName) => {
+                        if (columnName === 'key') {
+                            return ".*search for$"
+                        }
+                        return "secondMatch";
+                    }
+                }
+
+                let runCount = 0;
+                const lookupList = {
+                    hasNext: () => runCount < 2,
+                    getNext: () => {
+                        runCount++;
+                        return runCount === 1 ? firstRow : secondRow;
+                    }
+                }
+                const lookupTable = {
+                    getAllEntries: () => lookupList
+                }
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupGetAllRegExp("some text to search for", "test_table")).listToBe(['firstMatch', 'secondMatch']);
+                } finally {
+                    delete _lookups;
+                }
+            });
+        }
+
     }
 })
 

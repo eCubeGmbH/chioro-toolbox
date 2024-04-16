@@ -1,16 +1,12 @@
-lookupGetAllRegExp
+#### Description
+This function searches a data table for a value that matches a specific pattern. The data table contains a column with regular expressions and another column with the values to be returned if the regular expression matches the search value. All regular expressions in the data table are searched, and all matching values are returned.
 
-**Examples**:
+#### Parameters
+* `valueToMatch` - The value to be compared with the regular expressions in the data table.
+* `lookupTableName` - The name of the data table to search.
+* `columnContainingRegex` - (Optional) The name of the column containing the regular expressions. The default is "key".
+* `columnToRetrieveValueFrom` - (Optional) The name of the column from which to return the value if a match is found. The default is "value".
 
-Given the following data table named 'colors':
-
-| english       | deutsch       | hex           |
-| ------------- |:-------------:|:-------------:|
-| black         | schwarz       | #000000       |
-| white         | weiß          | #FFFFFF       |
-| red           | rot           | #FF0000       |
-
-- if $('description') is 'There is a white and a black horse in the pasture.': `lookupGetAllRegExp($('description'), 'colors', 'english', 'english')` &#8594; ['white','black']
-- if $('description') is 'There is a white and a black horse in the pasture.': `lookupGetAllRegExp($('description'), 'colors', 'english', 'deutsch')` &#8594; ['weiß','schwarz']
-
-All table entries that match are returned.
+#### Examples
+* `lookupGetRegExp("abc", "myTable", "regex", "result")` searches the "regex" column of the "myTable" data table for a regular expression that matches "abc" and returns the corresponding value from the "result" column.
+* `lookupGetRegExp("123", "lookupTable")` searches the "key" column of the "lookupTable" data table for a regular expression that matches "123" and returns the corresponding value from the "value" column.
