@@ -1,19 +1,12 @@
-Wenn `suchtext_x` gefunden wurde, wird `zuErsetzenderText_x` zurückgegeben. Wenn `suchtext_x` nicht gefunden wurde, wird die gleiche Prozedur
-mit `suchtext_x+1` durchgeführt.
+Diese Funktion dekodiert einen Eingabetext anhand einer Reihe von Regeln. Die Regeln werden als Paare von Suchmustern und Ersetzungen angegeben. Das erste Suchmuster, das mit dem Eingabetext übereinstimmt, bestimmt die Ersetzung, die zurückgegeben wird. Falls kein Suchmuster übereinstimmt, wird ein optionaler Fallback-Wert zurückgegeben oder ein leerer String.
 
-Wenn keiner der `suchtext_x`'s ein Ergebnis liefert, wird `fallback` zurückgegeben (oder ein leerer Text,
-wenn kein `fallback` definiert wurde.
+##### Parameter
+* **input** - Der zu dekodierende Text.
+* **...args** - Eine Folge von Paaren aus Suchmustern und Ersetzungen. Ein Suchmuster kann ein regulärer Ausdruck oder ein einfacher Text sein.
+* **fallback (optional)** - Der Wert, der zurückgegeben werden soll, falls kein Suchmuster übereinstimmt.
 
-**Beispiel**
-
-`findeUndMappen(beschreibung,
-	/damen/i, 'F',
-	/frauen/i, 'F',
-	/herren/i, 'M',
-	/männer/i, 'M',
-	'uni'
-)`
-
-- "Damenoberteil" &#8594; "F"
-- "Schuhe für Männer" &#8594; "M"
-- "Flauschiger Schaal" &#8594; "uni"
+##### Beispiele
+* `decode("Damenoberteil in rot", /Herren/i, "H", /Damen/i, "F", /Kinder/i, "K")` Ausgabe: `F`
+* `decode("Kindershirt in blau", /Herren/i, "H", /Damen/i, "F", /Kinder/i, "K")` Ausgabe: `K`
+* `decode("Unisexmantel in grün", /Herren/i, "H", /Damen/i, "F", /Kinder/i, "K", "U")` Ausgabe: `U`
+* `decode("Kein Treffer")` Ausgabe: `""` 
