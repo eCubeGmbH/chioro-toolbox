@@ -1,15 +1,9 @@
-In `text` one or more terms (`textToSearchAndShow_x`) are searched for. The first value found is returned.
-- `text` is the text in which the search is performed.
-- `textToSearchAndShow_x` is the text that is searched for or returned.
+Determines the first matching term from a list of arguments based on the `decode` function. The function expects at least two arguments, where the first argument is the text to be examined and the following arguments are pairs of search patterns and replacement terms.
 
-If `textToSearchAndShow_x` was found, the `textToSearchAndShow_x` is returned.
+##### Parameters
+* A list of arguments, where the first argument is the text to be examined and the following arguments are pairs of search patterns (strings or RegExp) and replacement terms.
 
-If no `textToSearchAndShow_x` was found at all, an empty text is returned.
-
-**Example**
-
-`extractFirstTerm(text,'ladies','women','men','uni')`
-
-- text = "women's top" &#8594; "women"
-- text = "men or women shoes" &#8594; "men"
-- text = "something" &#8594; ""
+##### Examples
+* `extractFirstTerm('Hello World', /World/, 'Max')` Output: `Max`
+* `extractFirstTerm('Name: Max', 'Name:', 'Age:')` Output: `Age:`
+* `extractFirstTerm('Size: unknown', /Size/, 'Age:')` Output: `Age:` 

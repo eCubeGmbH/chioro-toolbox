@@ -1,15 +1,9 @@
-In 'text' wird nach einem oder mehreren Begriffen ('zuExtrahierendesWort_x')gesucht. Der erste gefundene Wert wird zurückgegeben. 
-- `text` ist der Text in welchem gesucht wird.
-- `zuExtrahierendesWort_x` ist der Text nach dem gesucht wird bzw. der zurückgeliefert wird
+Ermittelt den ersten passenden Term aus einer Liste von Argumenten anhand der `findeUndMappe`-Funktion. Die Funktion erwartet mindestens zwei Argumente, wobei das erste Argument der zu untersuchende Text ist und die folgenden Argumente Paare aus Suchmustern und Ersetzungstermen darstellen.
 
-Wurde `zuExtrahierendesWort_x` gefunden, wird abgebrochen und `zuExtrahierendesWort_x` zurückgeliefert.
+##### Parameter
+* Eine Liste von Argumenten, wobei das erste Argument der zu untersuchende Text ist und die folgenden Argumente Paare aus Suchmustern (Strings oder RegExp) und Ersetzungstermen sind.
 
-Wenn gar kein `zuExtrahierendesWort_x` gefunden wurde, wird ein leerer Text ausgegeben.
-
-**Beispiel**
-
-`extrahiereErstenBegriff(text, 'damen',	'frauen', 'herren',	'uni')`
-
-- text = "Damenoberteil" &#8594; "damen"
-- text = "Schuhe für Frauen" &#8594; "frauen"
-- text = "irgendein Text" &#8594; ""
+##### Beispiele
+* `extractFirstTerm('Hallo Welt', /Welt/, 'Max')` Ausgabe: `Max`
+* `extractFirstTerm('Name: Max', 'Name:', 'Alter:')` Ausgabe: `Alter:`
+* `extractFirstTerm('Größe: unbekannt', /Größe/, 'Alter:')` Ausgabe: `Alter:` 
