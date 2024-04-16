@@ -1,13 +1,11 @@
-Applies the regular expression `pattern` to the input text and returns a list. The exact content of the list
-depends on whether the regular expression uses the "g" modifier:
+This function applies a regular expression to a text and returns a list of matches found. Depending on whether the regular expression uses the "g" modifier, the list will contain either all matches or only the first match and its groups.
 
-- With "g", a list of all occurrences are returned (or an empty list if there are no occurrences).
-- Without "g", the first occurrence is returned as the first list element. If the regular expression contains one or more parenthesis/group expressions,
-  those are returned as additional list elements. This can be used to extract parts of a larger context. Further occurrences are ignored.
+##### Parameters
+* `text` - The text to search for matches.
+* `pattern` - The regular expression to use for searching. Can be either a string or a RegExp object.
+* `withGroups` - A boolean value indicating whether the groups of the regular expression should be included in the result list.
 
-**Examples**
-- `extractAllMatchesFromText("ene mene muhe", /m..e/g)` &#8594; ['mene', 'muhe']
-- `extractAllMatchesFromText("ene mene muhe", /m..e/)` &#8594; ['mene']
-- `extractAllMatchesFromText("ene mene muhe", /m(..)e/g)` &#8594; ['mene', 'muhe']
-- `extractAllMatchesFromText("ene mene muhe", /m(..)e/)` &#8594; ['mene', 'en']
-- `extractAllMatchesFromText("Weight 23 kg gross.", /(\d+)\s*([km]*g)/)` &#8594; ['23 kg', '23', 'kg']
+##### Examples
+* `extractAllMatchesFromText("The quick brown fox", /fox/i)` Output: `["fox"]`
+* `extractAllMatchesFromText("The quick brown fox jumps", /(\w+)\s(\w+)/g)` Output: `["The quick", "brown fox"]`
+* `extractAllMatchesFromText("123 Main Street", /(\d+) (\w+) (.*)/)` Output: `["123 Main Street"]` 

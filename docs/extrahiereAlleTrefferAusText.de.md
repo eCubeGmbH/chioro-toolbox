@@ -1,13 +1,11 @@
-Wendet den Regulären Ausdruck `muster` auf den übergebenen Text an iund liefert eine Liste zurück. Der genaue Inhalt der Liste
-hängt davon ab, ob im Regulären Ausdruck der "g" Modifikator verwendet wird:
+Diese Funktion wendet einen regulären Ausdruck auf einen Text an und gibt eine Liste der gefundenen Übereinstimmungen zurück. Je nachdem, ob der reguläre Ausdruck den "g"-Modifikator verwendet, enthält die Liste entweder alle Treffer oder nur den ersten Treffer und dessen Gruppen.
 
-- Mit "g" wird eine Liste aller Fundstellen zurückgegeben (oder eine leere Liste, falls es keine Fundstellen gibt).
-- Ohne "g" wird als erstes Listenelement die erste Fundstelle geliefert. Enthält der Reguläre Ausdruck einen oder mehrere Klammerausdrücke,
-so werden diese als weitere Listenelemente geliefert. Dies kann benutzt werden, um Teile aus einem größeren Kontext zu extrahieren. Weitere Fundstellen werden ignoriert.
+##### Parameter
+* `text` - Der Text, in dem nach Übereinstimmungen gesucht werden soll.
+* `pattern` - Der reguläre Ausdruck, der zum Suchen verwendet wird. Kann entweder als String oder als RegExp-Objekt übergeben werden.
+* `withGroups` - Ein boolescher Wert, der angibt, ob die Gruppen des regulären Ausdrucks in der Ergebnisliste enthalten sein sollen.
 
-**Beispiele:**
-- `extrahiereAlleTrefferAusText("ene mene muhe", /m..e/g)` &#8594; ['mene', 'muhe']
-- `extrahiereAlleTrefferAusText("ene mene muhe", /m..e/)` &#8594; ['mene']
-- `extrahiereAlleTrefferAusText("ene mene muhe", /m(..)e/g)` &#8594; ['mene', 'muhe']
-- `extrahiereAlleTrefferAusText("ene mene muhe", /m(..)e/)` &#8594; ['mene', 'en']
-- `extrahiereAlleTrefferAusText("Gewicht 23 kg brutto.", /(\d+)\s*([km]*g)/)` &#8594; ['23 kg', '23', 'kg']
+##### Beispiele
+* `extractAllMatchesFromText("Der schnelle braune Fuchs", /fuchs/i)` Ausgabe: `["Fuchs"]`
+* `extractAllMatchesFromText("Der schnelle braune Fuchs springt", /(\w+)\s(\w+)/g)` Ausgabe: `["schnelle braune", "braune Fuchs"]`
+* `extractAllMatchesFromText("123 Main Street", /(\d+) (\w+) (.*)/)` Ausgabe: `["123 Main Street"]` 
