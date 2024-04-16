@@ -1,18 +1,11 @@
-Eine Datumsformatierungsfunktion, die die Daten in verschiedenen Formaten zurückgibt. 
-Standardmäßig, wenn keine Parameter angegeben werden, gibt `datum` das aktuelle Datum im folgenden Format zurück:
-`dd.MM.yyyy` z.B. `29.01.2020`
+Diese Funktion formatiert ein Datum in das gewünschte Format. Falls kein Datum angegeben wird, wird das aktuelle Datum verwendet.
 
-Wenn der Parameter `Formatierung` angegeben wird, wird das Datum entsprechend formatiert. Eine vollständige Liste der unterstützten Formatierungen finden Sie hier:
-[Liste der Formatierungen](https://date-fns.org/v2.29.3/docs/format)
+##### Parameter
+* **formatting** - Ein String, der das gewünschte Format für das Datum angibt.
+* **initialDate** - Ein optionales Datumsobjekt oder ein String, der ein Datum darstellt.
 
-Wenn der Parameter `Datum` angegeben wird, wird statt des aktuellen Datums das `Datum` verwendet. Bitte beachten Sie, dass dieser Parameter
-ein echtes Javascript-Date-Objekt sein sollte.
+##### Beispiele
 
-
-**Beispiele**
-
-Wenn heute der 29.01.2020 ist, dann
-
-- `datum()` &#8594; "29.01.2020"
-- `datum('dd/MM')` &#8594; "29/01"
-- `datum('yyyy', Date.parse("1980/01/01"))` &#8594; "1980"
+* `date('dd.MM.yyyy')` Ausgabe: z.B. `16.04.2024`
+* `date('yyyy-MM-dd hh:mm:ss', Date.parse("1980-01-01"))` Ausgabe: `1980-01-01 00:00:00`
+* `date('hh:mm:ss')` Ausgabe: `02:20:00` 
