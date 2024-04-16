@@ -1,6 +1,5 @@
-***Description***
+This function returns the name of the currently set target attribute. If no attribute is set, an empty string is returned.
 
-This function returns the name of the current target attribute of the rule.
-
-***Examples***
-- `current()` &#8594; `'test_attribute'` (assuming the target attribute is set to `'test_attribute'`)
+##### Examples
+* `current()` Output: `""` (if no target attribute is set)
+* `current()` Output: `"data-id"` (if the target attribute is set to "data-id")
