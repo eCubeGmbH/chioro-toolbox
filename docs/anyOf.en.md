@@ -1,8 +1,9 @@
-Returns the first non-empty object which are passed as arguments.
-If all the arguments are empty, an empty text is returned.
-One or more lists can be passed instead of single values. Single values and lists can be mixed.
+Returns the first value from a list of arguments that evaluates to true, or an empty string if no such value is found.
 
-Can be used e.g. if the desired value can occur in one of several attributes.
+##### Parameters
+* A list of arguments to be checked for truthiness.
 
-**Example**
-- Assuming `attr1` is empty and `attr2` is not, then `anyOf($('attr1'),$('attr2'),$('attr3')` returns the value of `attr2`.
+##### Examples
+* `anyOf()` Output: ""
+* `anyOf(null, 0, "Hello", 123)` Output: "Hello"
+* `anyOf(undefined, false, "", NaN)` Output: ""
