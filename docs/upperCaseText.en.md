@@ -1,8 +1,8 @@
-Converts the given text to uppercase. If an object is provided, the function returns an empty string.
+Converts a text to uppercase letters.
 
 ##### Parameters
-text - The text to be converted to uppercase.
+* `text` - The text to be converted.
 
 ##### Examples
-`upperCaseText("Hello World")` Output: "HELLO WORLD"
-`upperCaseText("123")` Output: "123" 
+* `upperCaseText("Hello World")` Output: `HELLO WORLD`
+* `upperCaseText("123 abc")` Output: `123 ABC` 
