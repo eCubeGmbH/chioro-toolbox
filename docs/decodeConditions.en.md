@@ -1,14 +1,11 @@
-A powerful function to "rekey" to a fixed set of conditions.
+This function allows you to return different results based on various conditions. It checks multiple conditions sequentially and returns the corresponding value as soon as a condition is met.
 
-- `condition_x` is the condition.
-- `toReplace_x` is the value returned if `condition_x` is evaluated as True.
+##### Parameters
+* **condition_x** - An expression that evaluates to true or false.
+* **replacement_x** - The value to be returned if the corresponding condition is true.
+* **fallback** (optional) - A value to be returned if none of the conditions are met.
 
-If none of the `condition_x`'s are evaluated as True, `fallback` will be returned (or an empty text,
-if no `fallback` was defined.
-
-**Examples**:
-
-- if $('a') is 1 : `decodeConditions($('a') > 10, "yes", $('a') < 5, 'no')` &#8594; "no"
-- if $('a') is 11 : `decodeConditions($('a') > 10, "yes", $('a') < 5, 'no')` &#8594; "yes"
-- if $('a') is 6 : `decodeConditions($('a') > 10, "yes", $('a') < 5, 'no', "maybe")` &#8594; "maybe"
-- if $('a') is 6 : `decodeConditions($('a') > 10, "yes", $('a') < 5, 'no')` &#8594; ""
+##### Examples
+* `decodeConditions($('a') > 10, "greater than 10", $('a') < 5, 'less than 5', "something in between")`
+* `decodeConditions($('a') > 0, "positive", $('a') < 0, 'negative', "equal to zero")`
+* `decodeConditions($('a').length > 10, "long text", $('a').length == 0, 'empty text')` 

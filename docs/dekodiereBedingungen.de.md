@@ -1,14 +1,11 @@
-Eine mächtige Funktion zum "umschlüsseln" auf ein fixes Set von Bedingungen.
+Diese Funktion ermöglicht es, basierend auf verschiedenen Bedingungen unterschiedliche Ergebnisse zu liefern. Sie prüft nacheinander mehrere Bedingungen und gibt den zugehörigen Wert zurück, sobald eine Bedingung erfüllt ist.
 
-- `bedingung_x` ist der Bedingung.
-- `zuErsetzen_x` ist die Wert, die zurückgegeben wird, wenn `bedingung_x` als Wahr evaluiert ist.
+##### Parameter
+* **bedingung_x** - Ein Ausdruck, der als wahr oder falsch bewertet wird.
+* **zuErsetzen_x** - Der Wert, der zurückgegeben wird, wenn die zugehörige Bedingung wahr ist.
+* **fallback** (optional) - Ein Wert, der zurückgegeben wird, wenn keine der Bedingungen erfüllt ist.
 
-Wenn gar kein `bedingung_x` als Wahr evaluiert wurde, wird `fallback` zurückgegeben (oder ein leerer Text,
-falls kein `fallback` definiert wurde.
-
-**Beispiele**:
-
-- wenn $('a') ist 1  : `dekodiereBedingungen($('a') > 10, "ja", $('a') < 5, 'nein')` &#8594; "nein"
-- wenn $('a') ist 11 : `dekodiereBedingungen($('a') > 10, "ja", $('a') < 5, 'nein')` &#8594; "ja"
-- wenn $('a') ist 6  : `dekodiereBedingungen($('a') > 10, "ja", $('a') < 5, 'nein', "vielleicht")` &#8594; "vielleicht"
-- wenn $('a') ist 6  : `dekodiereBedingungen($('a') > 10, "ja", $('a') < 5, 'nein')` &#8594; ""
+##### Beispiele
+* `decodeConditions($('a') > 10, "größer als 10", $('a') < 5, 'kleiner als 5', "ein Wert dazwischen")`
+* `decodeConditions($('a') > 0, "positiv", $('a') < 0, 'negativ', "gleich Null")`
+* `decodeConditions($('a').length > 10, "langer Text", $('a').length == 0, 'leerer Text')` 
