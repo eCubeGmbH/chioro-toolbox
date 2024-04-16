@@ -1,8 +1,10 @@
-Prüft, ob im übergebenen `text`, `Suchtext` vorkommt. `Suchtext` kann ein Text, eine Liste von Texten,
-ein Regulärer Ausdruck ("Regex") oder eine Liste von Regulären Ausdrücken beinhalten. Wenn eine Liste übergeben wird,
-gibt die Funktion `wahr` zurück, sobald eines der ListItems gefunden wird.
+Diese Funktion prüft, ob ein bestimmter Text innerhalb eines anderen Textes vorhanden ist. Sie kann auch mit regulären Ausdrücken verwendet werden, um komplexere Suchmuster zu erstellen.
 
-**Beispiele**
-- (ohne Regex):    `beinhaltetText("ene mene muh", "mene")` &#8594; wahr
-- (mit Regex):  `beinhaltetText("ene mene muh", /m.*e/)` &#8594; wahr
-- (mit Liste):  `beinhaltetText("ene mene muh", ['ene', 'mene'])` &#8594; wahr
+##### Parameter
+* **text** - Der Text, in dem gesucht werden soll.
+* **textToSearch** - Der Text oder reguläre Ausdruck, nach dem gesucht werden soll.
+
+##### Beispiele
+* `containsText("Hallo Welt", "Welt")` Ausgabe: `true`
+* `containsText("Hallo Welt", "hallo")` Ausgabe: `true`
+* `containsText("Hallo Welt", /.*el.*/)` Ausgabe: `true`
