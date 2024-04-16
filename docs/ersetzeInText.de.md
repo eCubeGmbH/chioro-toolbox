@@ -1,11 +1,11 @@
-Sucht im übergebenen `text` nach `suchtext` und ersetzt alle Fundstellen durch `ersetzeDurch`.
+Ersetzt Text innerhalb eines Strings oder Arrays von Strings. Unterstützt sowohl einfache String-Ersetzungen als auch reguläre Ausdrücke.
 
-Als `suchtext` kann auch ein Regulärer Ausdruck ("Regex") übergeben werden.
-In diesem Fall kann in `ersetzeDurch` mit $1, $2, ... auf Klammerausdrücke in der Regex verwiesen werden.
+##### Parameter
+* `text` - Der String oder das Array von Strings, in dem der Text ersetzt werden soll.
+* `textToSearch` - Der String oder reguläre Ausdruck, der gesucht werden soll.
+* `replaceWith` - Der String, der den gefundenen Text ersetzen soll.
 
-Achtung: Bei Verwendung einer Regex muss der Modifikator "g" verwendet werden, um *alle* Fundstellen zu ersetzen.
-Andernfalls wird nur die erste Fundstelle ersetzt.
-
-**Beispiele**
-- (ohne Regex):    `ersetzeInText("ene mene muh", "en", "AAA")` &#8594; `"AAAe mAAAe muh"`
-- (mit Regex):    `ersetzeInText("ene mene muh", /m(.)/g, "A$1A")` &#8594; `"AAAe mAAAe muh"`
+##### Beispiele
+* `replaceInText("Guten Tag", "Tag", "Abend")` Ausgabe: "Guten Abend"
+* `replaceInText("Das ist ein Text", /ein/g, "kein")` Ausgabe: "Das ist kein Text"
+* `replaceInText(["Apfel", "Banane", "Kirsche"], /e/g, "i")` Ausgabe: ["Apfil", "Banani", "Kirschi"] 

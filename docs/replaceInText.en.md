@@ -1,12 +1,11 @@
-Searches for the `textToSearch` in the given `text` and replaces all the matches with `replaceWith`.
+Replaces text within a string or array of strings. Supports both simple string replacements and regular expressions.
 
-A regular expression ("regex") can also be used as the `textToSearch`.
-In this case `replaceWith` can be used with $1, $2, ... to refer to the groups/parenthesized expressions in the regex.
+##### Parameters
+* `text` - The string or array of strings in which to replace text.
+* `textToSearch` - The string or regular expression to search for.
+* `replaceWith` - The string to replace the found text with.
 
-Please note that when using a regex, the modifier "g" must be used to replace *all* the occurrences.
-Otherwise, only the first occurrence will be replaced.
-
-**Examples**
-
-- (without Regex):    `replaceInText("ene mene muh", "en", "AAA")` &#8594; `"AAAe mAAAe muh"`
-- (with Regex):    `replaceInText("ene mene muh", /m(.)/g, "A$1A")` &#8594; `"AAAe mAAAe muh"`
+##### Examples
+* `replaceInText("Good Morning", "Morning", "Evening")` Output: "Good Evening"
+* `replaceInText("This is a sentence", /sentence/g, "paragraph")` Output: "This is a paragraph"
+* `replaceInText(["Apple", "Banana", "Cherry"], /a/g, "o")` Output: ["Opple", "Bonono", "Cherry"] 
