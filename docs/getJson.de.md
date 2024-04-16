@@ -1,4 +1,4 @@
-Diese Funktion ruft Daten von einer angegebenen URL ab und wandelt sie in ein JavaScript-Objekt um. Sie nutzt eine interne Methode, um die Anfrage zu stellen und die Antwort zu verarbeiten.
+Diese Funktion ruft Daten von einer angegebenen URL ab und wandelt sie in ein JavaScript-Objekt um.
 
 ##### Parameter
 * `url` - Die URL, von der die Daten abgerufen werden sollen.

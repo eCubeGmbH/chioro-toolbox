@@ -1,4 +1,4 @@
-This function retrieves data from a specified URL and converts it into a JavaScript object. It uses an internal method to make the request and handle the response.
+This function retrieves data from a specified URL and converts it into a JavaScript object.
 
 ##### Parameters
 * `url` - The URL from which to retrieve the data.
