@@ -1,5 +1,9 @@
-Extrahiert die erste im übergebenen Text vorkommende Zahl.
-Enthält der Text keine Zahl, wird `fallback` zurück geliefert (oder ein leerer Text, wenn `fallback` nicht angegeben ist).
+Diese Funktion extrahiert die erste Zahl aus einem Text. Falls keine Zahl gefunden wird, wird der angegebene Fallback-Wert zurückgegeben.
 
-### Beispiel:
-`extrahiereZifferAusText("Temperaturen heute: 23 bis 25 Grad")` &#8594; '23'
+##### Parameter
+* **text** - Der Text, aus dem die Zahl extrahiert werden soll.
+* **fallback** - Der Wert, der zurückgegeben werden soll, falls keine Zahl gefunden wird.
+
+##### Beispiele
+* `extractNumberFromText("Ihre Rechnung beträgt 123,45 €")` Ausgabe: `123.45`
+* `extractNumberFromText("Es wurden keine Ergebnisse gefunden", 0)` Ausgabe: `0`

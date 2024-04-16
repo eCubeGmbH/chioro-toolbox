@@ -1,5 +1,9 @@
-Extract the first number occurring in the given text.
-If the text does not contain a number, `fallback` is returned (or an empty text if `fallback` is not specified).
+This function extracts the first number found in a text. If no number is found, it returns the provided fallback value.
 
-### Example:
-`extractNumberFromText("Temperatures today: 23 to 25 degrees")` &#8594; '23'
+##### Parameters
+* **text** - The text to extract the number from.
+* **fallback** - The value to return if no number is found.
+
+##### Examples
+* `extractNumberFromText("Your bill is 123.45 €")` Output: `123.45`
+* `extractNumberFromText("No results found", 0)` Output: `0` 
