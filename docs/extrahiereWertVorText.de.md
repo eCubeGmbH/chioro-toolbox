@@ -1,8 +1,10 @@
-Versucht, den angegebenen `text`-Parameter in der `input` zu finden und den numerischen Wert davor zu extrahieren. 
-Der `text` und die numerischen Werte können durch eine beliebige Anzahl von Leerzeichen getrennt werden.
+Extrahiert den numerischen Wert, der direkt vor einem bestimmten Text in einem String steht. Wenn der Text nicht gefunden wird, wird der gesamte String zurückgegeben.
 
-**Beispiele**
+##### Parameter
+* `value` - Der String, aus dem der Wert extrahiert werden soll.
+* `text` - Der Text, vor dem der numerische Wert gesucht werden soll.
 
-- `extrahiereWertVorText("some 23.1 mangos and 4 apples", "mangos")` &#8594; "23.1"
-- `extrahiereWertVorText("Dimensions of 25cm and ", "cm")` &#8594; "25"
-- `extrahiereWertVorText("range of 3..5 ", "..")` &#8594; "3"
+##### Beispiele
+* `extractValueBeforeText('Größe: 180 cm', 'cm')` Ausgabe: `180`
+* `extractValueBeforeText('Gewicht: 75,5 kg', 'kg')` Ausgabe: `75,5`
+* `extractValueBeforeText('Alter: unbekannt', 'Jahre')` Ausgabe: `Alter: unbekannt` 

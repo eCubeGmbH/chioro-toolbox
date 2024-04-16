@@ -1,8 +1,10 @@
-Try to find the given `text` parameter in the `input` and extract the numeric value before it. The `text` and numeric values
-could be separated with arbitrary number of space characters. 
+Extracts the numerical value directly preceding a specific text within a string. If the text is not found, the entire string is returned.
 
-**Examples**
+##### Parameters
+* `value` - The string to extract the value from.
+* `text` - The text to search for after the numerical value.
 
-- `extractValueBeforeText("some 23.1 mangos and 4 apples", "mangos")` &#8594; "23.1"
-- `extractValueBeforeText("Dimensions of 25cm and ", "cm")` &#8594; "25"
-- `extractValueBeforeText("range of 3..5 ", "..")` &#8594; "3"
+##### Examples
+* `extractValueBeforeText('Size: 180 cm', 'cm')` Output: `180`
+* `extractValueBeforeText('Weight: 75.5 kg', 'kg')` Output: `75.5`
+* `extractValueBeforeText('Age: unknown', 'years')` Output: `Age: unknown` 
