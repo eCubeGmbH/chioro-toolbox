@@ -8,5 +8,5 @@ This function searches a data table for a value that matches a specific pattern.
 * `columnToRetrieveValueFrom` - (Optional) The name of the column from which to return the value if a match is found. The default is "value".
 
 #### Examples
-* `lookupGetRegExp("abc", "myTable", "regex", "result")` searches the "regex" column of the "myTable" data table for a regular expression that matches "abc" and returns the corresponding value from the "result" column.
-* `lookupGetRegExp("123", "lookupTable")` searches the "key" column of the "lookupTable" data table for a regular expression that matches "123" and returns the corresponding value from the "value" column.
+* `lookupGetAllRegExp("abc", "myTable", "regex", "result")` searches the "regex" column of the "myTable" data table for all regular expressions that match "abc" and return the corresponding values from the "result" column.
+* `lookupGetAllRegExp("123", "lookupTable")` searches the "key" column of the "lookupTable" data table for all regular expressions that match "123" and returns all the corresponding values from the "value" column.
