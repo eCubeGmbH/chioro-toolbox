@@ -1,8 +1,10 @@
-Check if the `text` starts with specific characters (`search`).
-`search` can be a text or a regular expression.
+Checks if a text starts with a specific search term or a regular expression.
 
-**Examples**
-- `startWith("search", /s../)` &#8594; `true`
-- `startWith("search", "se")` &#8594; `true`
-- `startWith("Search", /s../i)` &#8594; `true`
-- `startWith("Search", "ar)` &#8594; `false`
+##### Parameters
+* `text` - The text to be checked.
+* `search` - The search term or regular expression.
+
+##### Examples
+* `startsWith("Hello World", "Hello")` Output: `true`
+* `startsWith("123 abc", "123")` Output: `true`
+* `startsWith("Test String", /s../i)` Output: `true`

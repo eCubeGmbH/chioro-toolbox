@@ -1,8 +1,10 @@
-Überprüft ob der `text` mit bestimmten Zeichen (`search`) beginnt.
-`search` kann hierbei ein Text oder ein Regulärer Ausdruck sein.
+Prüft, ob ein Text mit einem bestimmten Suchbegriff oder einem regulären Ausdruck beginnt.
 
-**Beispiele**
-- `startWith("suche", /s../)` &#8594; `true`
-- `startWith("suche", "su")` &#8594; `true`
-- `startWith("Super", /s../i)` &#8594; `true`
-- `startWith("Super", "up)` &#8594; `false`
+##### Parameter
+* `text` - Der Text, der überprüft werden soll.
+* `search` - Der Suchbegriff oder der reguläre Ausdruck.
+
+##### Beispiele
+* `startsWith("Hallo Welt", "Hallo")` Ausgabe: `true`
+* `startsWith("123 abc", "123")` Ausgabe: `true`
+* `startsWith("Test String", /s../i)` Ausgabe: `true` 
