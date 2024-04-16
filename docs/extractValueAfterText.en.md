@@ -1,8 +1,10 @@
-Try to find the given `text` parameter in the `input` and extract the numeric value after it. The `text` and numeric values
-could be separated with arbitrary number of space characters. 
+Extracts the numerical value directly following a specific text within a string. If the text is not found, the original string is returned.
 
-**Examples**
+##### Parameters
+* `value` - The string to extract the value from.
+* `text` - The text to search for before the numerical value.
 
-- `extractValueAfterText("some 23.1 mangos and 4 apples", "some")` &#8594; "23.1"
-- `extractValueAfterText("Price of $200", "$")` &#8594; "200"
-- `extractValueAfterText("range of 3..5 ", "..")` &#8594; "5"
+##### Examples
+* `extractValueAfterText('Size: 180 cm', 'Size:')` Output: `180`
+* `extractValueAfterText('Weight: 75.5 kg', 'Weight:')` Output: `75.5`
+* `extractValueAfterText('Age: unknown', 'Age:')` Output: `Age: unknown` 
