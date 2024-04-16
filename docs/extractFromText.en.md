@@ -1,8 +1,13 @@
-Applies the regular expression `pattern` to the given text.
-If `pattern` "matches", the first matching occurrence is returned.
-If not, `fallback` is returned, or an empty text if `fallback` is not specified.
+Extracts the first match of a regular expression from a text. If no match is found, an optional fallback value is returned.
 
-**Examples**
-- `extractFromText("ene men1 muh", /m.*1/)` &#8594; 'men1'
-- `extractFromText("ene mene muh", /ene (\w+) muh/)` &#8594; 'mene'
-- `extractFromText("ene mene muh", /tomato/, "then just not")` &#8594; 'then just not'
+##### Parameters
+* `text` - The text to extract from.
+* `pattern` - A text or regular expression defining the text to extract.
+* `fallback` - (Optional) A fallback value to return if no match is found.
+* `withGroups` - (Optional) A boolean indicating whether to return the first capturing group of the match.
+
+##### Examples
+* `extractFromText('Hello World!', 'World')` Output: `World`
+* `extractFromText('Hello World!', /World/)` Output: `World`
+* `extractFromText('Hello Mars!', /World/, 'somewhere')` Output: `somewhere`
+* `extractFromText('Username: Max', /Username: (.*)/, 'unknown', true)` Output: `Max` 

@@ -1,8 +1,13 @@
-Wendet den Regulären Ausdruck `muster` auf den übergebenen Text an.
-Falls `muster` "passt", wird die erste passende Fundstelle zurück geliefert.
-Falls nicht, wird `fallback` zurückgeliefert, bzw. ein leerer Text, falls `fallback` nicht angegeben ist.
+Extrahiert den ersten Treffer eines Texts oder regulären Ausdrucks aus einem Text. Falls kein Treffer gefunden wird, wird ein optionaler Fallback-Wert zurückgegeben.
 
-**Beispiel**
-- `extrahiereAusText("ene men1 muh", /m.*1/)` &#8594; 'mene'
-- `extrahiereAusText("ene mene muh", /ene (\w+) muh/)` &#8594; 'mene'
-- `extrahiereAusText("ene mene muh", /tomato/, "dann halt nicht")` &#8594; 'dann halt nicht'
+##### Parameter
+* `text` - Der Text, aus dem extrahiert werden soll.
+* `pattern` - Ein text oder regulärer Ausdruck, der den zu extrahierenden Text definiert.
+* `fallback` - (Optional) Ein Fallback-Wert, der zurückgegeben wird, falls kein Treffer gefunden wird.
+* `withGroups` - (Optional) Ein boolescher Wert, der angibt, ob die erste Gruppe des Treffers zurückgegeben werden soll.
+
+##### Beispiele
+* `extractFromText('Hallo Welt!', 'Welt')` Ausgabe: `Welt`
+* `extractFromText('Hallo Welt!', /Welt/)` Ausgabe: `Welt`
+* `extractFromText('Hallo Mars!', /Welt/, 'irgendwo')` Ausgabe: `irgendwo`
+* `extractFromText('Benutzername: Max', /Benutzername: (.*)/, 'unbekannt', true)` Ausgabe: `Max` 
