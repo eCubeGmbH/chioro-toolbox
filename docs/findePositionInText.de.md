@@ -1,7 +1,10 @@
-Sucht im übergebenen `text` nach `suchtext` und liefert die Position der ersten Fundstelle
-bzw. -1, wenn der Text nicht gefunden wurde.
-Als `suchtext` kann auch ein Regulärer Ausdruck ("Regex") übergeben werden.
+Diese Funktion sucht nach einem bestimmten Text innerhalb eines gegebenen Textes. Dabei kann entweder ein regulärer Ausdruck oder ein einfacher Text als Suchbegriff verwendet werden. Die Funktion gibt die Position des ersten Treffers zurück oder -1, falls der Suchbegriff nicht gefunden wurde.
 
-**Beispiele**
-- (ohne Regex):    `findeTextstelle("ene mene muh", "mene")` &#8594; 4
-- (mit Regex):  `findeTextstelle("ene mene muh", /m.*e/)` &#8594; 4
+##### Parameter
+* **text** - Der Text, in dem gesucht werden soll.
+* **textToSearch** - Der Suchbegriff, entweder als regulärer Ausdruck oder als einfacher Text.
+
+##### Beispiele
+* `locateInText("Hallo Welt", "Welt")` Ausgabe: `6`
+* `locateInText("Dies ist ein Test", /Test/)` Ausgabe: `10`
+* `locateInText("Kein Treffer", "Suche")` Ausgabe: `-1`

@@ -1,7 +1,10 @@
-Searches for `textToSearch` in the given `text` and returns the position of the first found location
-or -1 if the text was not found.
-A regular expression ("regex") can also be given as `textToSearch`.
+This function searches for a specific text within a given text. It can use either a regular expression or a simple text as the search term. The function returns the position of the first match or -1 if the search term is not found.
 
-**Examples**
-- (without regex): `locateInText("ene mene muh", "mene")` &#8594; 4
-- (with regex): `locateInText("ene mene muh", /m.*e/)` &#8594; 4
+##### Parameters
+* **text** - The text to search within.
+* **textToSearch** - The search term, either as a regular expression or as a simple text.
+
+##### Examples
+* `locateInText("Hello World", "World")` Output: `6`
+* `locateInText("This is a test", /Test/)` Output: `10`
+* `locateInText("No match", "Search")` Output: `-1`
