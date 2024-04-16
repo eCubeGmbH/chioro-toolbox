@@ -1,11 +1,10 @@
-Attempts to extract a property value from the input text. The following heuristics are used:
-1. It searches for the passed name (`propertyName`) followed by an "assignment character" (space, colon or equal sign).
-2. Everything between the assignment character and an "end character" (comma, semicolon) or up to the end of the line is returned as the value of the property.
-3. If the property is not found, `fallback` is returned (or an empty text if `fallback` is not defined.
+Extracts the value of a property from a text. The property is identified by its name and can be separated by a colon or equals sign.
 
-**Examples**:
+##### Parameters
+* `text` - The text to extract the property value from.
+* `propertyName` - The name of the property to extract the value of.
+* `fallback` - (Optional) A fallback value to return if the property is not found.
 
-text = "Product properties: Color: red, Size: XL, Notes: do not spin."
-
-- `extractProperty(text, "size")` &#8594; "XL"
-- `extractProperty(text, "Notes")` &#8594; "Do not spin".
+##### Examples
+* `extractProperty('name: Max', 'name')` Output: `Max`
+* `extractProperty('Age = 30 years', 'Age')` Output: `30 years` 

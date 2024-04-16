@@ -1,10 +1,10 @@
-Versucht, aus dem übergebenen Text einen Property-Wert zu extrahieren. Dabei wird folgende Heuristik benutzt:
-1. Es wird nach dem übergebenen Namen (`nameDerEigenschaft`) gefolgt von einem "Zuweisungszeichen" (Leerzeichen, Doppelpunkt oder Gleichheitszeichen) gesucht.
-2. Alles zwischen dem Zuweisungszeichen und einem "Ende-Zeichen" (Komma, Semikolon) oder bis zum Zeilenende wird als Wert des Properties zurückgegeben.
-3. Wird das Property nicht gefunden, wird `fallback` zurückgegeben (oder ein leerer Text, wenn `fallback` nicht definiert ist.
+Extrahiert den Wert einer Eigenschaft aus einem Text. Die Eigenschaft wird anhand ihres Namens identifiziert und kann durch einen Doppelpunkt oder ein Gleichheitszeichen getrennt sein.
 
-**Beispiele**:
-text = "Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern"
+##### Parameter
+* `text` - Der Text, aus dem der Eigenschaftswert extrahiert werden soll.
+* `propertyName` - Der Name der Eigenschaft, deren Wert extrahiert werden soll.
+* `fallback` - (Optional) Ein Fallback-Wert, der zurückgegeben wird, falls die Eigenschaft nicht gefunden wird.
 
-- `extrahiereEigenschaft(text, "Größe")` &#8594; "XL"
-- `extrahiereEigenschaft(text, "Hinweise)"` &#8594; "Nicht Schleudern"
+##### Beispiele
+* `extractProperty('name: Max', 'name')` Ausgabe: `Max`
+* `extractProperty('Alter = 30 Jahre', 'Alter')` Ausgabe: `30 Jahre` 
