@@ -1,8 +1,11 @@
-Überprüft ob der `text` mit bestimmten Zeichen (`search`) endet.
-`search` kann hierbei ein Text oder ein Regulärer Ausdruck sein.
+Diese Funktion prüft, ob ein Text mit einer bestimmten Zeichenkette oder einem regulären Ausdruck endet.
 
-**Beispiele**
-- `endsWith("super", /e./)` &#8594; `true`
-- `endsWith("SupeR", /er/i)` &#8594; `true`
-- `endsWith("Super", "er")` &#8594; `true`
-- `endsWith("Super", "up)` &#8594; `false`
+##### Parameter
+* **text** - Der Text, der überprüft werden soll.
+* **search** - Die Zeichenkette oder der reguläre Ausdruck, mit dem der Text enden soll.
+
+##### Beispiele
+* `endsWith("Hallo Welt", "Welt")` Ausgabe: `true`
+* `endsWith("Hallo Welt", /Welt$/)` Ausgabe: `true`
+* `endsWith("Hallo Welt", /welt$/i)` Ausgabe: `true`
+* `endsWith("Hallo Welt", "Hallo")` Ausgabe: `false`

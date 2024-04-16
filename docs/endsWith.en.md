@@ -1,8 +1,11 @@
-Check if the `text` ends with specific characters (`search`).
-`search` can be a text or a regular expression.
+This function checks if a text ends with a specific string or regular expression.
 
-**Beispiele**
-- `endsWith("super", /e./)` &#8594; `true`
-- `endsWith("SupeR", /er/i)` &#8594; `true`
-- `endsWith("Super", "er")` &#8594; `true`
-- `endsWith("Super", "up)` &#8594; `false`
+##### Parameters
+* **text** - The text to be checked.
+* **search** - The string or regular expression that the text should end with.
+
+##### Examples
+* `endsWith("Hello World", "World")` Output: `true`
+* `endsWith("Hello World", /World$/)` Output: `true`
+* `endsWith("Hello World", /world$/i)` Output: `true`
+* `endsWith("Hello World", "Hello")` Output: `false`
