@@ -7,4 +7,4 @@ Returns a substring from a text starting at a specific position and with a speci
 
 ##### Examples
 * `textAtPosition('Hello World', 6, 5)` Output: World
-* `textAtPosition('This is JavaScript', 11)` Output: Script
+* `textAtPosition('This is JavaScript', 12)` Output: Script

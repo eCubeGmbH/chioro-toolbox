@@ -1,6 +1,9 @@
-Diese Funktion wird benutzt, um die 'Größe' des übergebenen Objektes zu ermitteln.
-Je nach Art des Objektes ist die Größe unterschiedlich definiert:
-- Die Anzahl der Elemente in einer Liste
-- Die Anzahl der Paare einer Name-Wert Tabelle
-- Die Länge eines Textes
-- Die Länge der Textrepräsentation einer Zahl
+Ermittelt die Größe eines Elements. Für Zahlen wird die Länge der String-Repräsentation zurückgegeben, für Strings die String-Länge und für Maps die Anzahl der Einträge.
+
+##### Parameter
+* `something` - Das Element, dessen Größe ermittelt werden soll.
+
+##### Beispiele
+* `size(123)` Ausgabe: 3
+* `size('Hallo')` Ausgabe: 5
+* `size({'a': 1, 'b': 2})` Ausgabe: 2 
