@@ -1,8 +1,8 @@
-Merges the input arguments `text1`, `text2`, ... to a single text, separated by a `separator`.
-Instead of single values, one or more lists can be given. Single values and lists can be mixed.
+Combines multiple text parts or arrays into a single string. A separator can be specified, which is inserted between the individual elements.
 
-**Examples**
+##### Parameters
+* `...args` - A variable number of text parts or arrays to be joined together. The first argument is used as the separator.
 
-- `joinText(' - ', 'ene')` &#8594; 'ene'
-- `joinText(' - ', 'ene', 'mene', 'muh')` &#8594; 'ene - mene - muh'
-- `joinText(' - ', ['ene', 'mene'], 'muh')` &#8594; 'ene - mene - muh'
+##### Examples
+* `joinText(", ", "Hello", "World")` Output: Hello, World
+* `joinText(" | ", "Apple", ["Banana", "Cherry"])` Output: Apple | Banana, Cherry

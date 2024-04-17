@@ -1,7 +1,8 @@
-Fügt die als Argumente übergebenen Werte `text1`, `text2`, ... zu einem einzigen Text zusammen, getrennt durch ein`trennzeichen`.
-Statt einzelner Werte kann auch eine,oder mehrere, Listen übergeben werden. Einzelne Werte und Listen können gemischt werden.
+Verbindet mehrere Textteile oder Arrays zu einem einzelnen String. Dabei kann ein Trennzeichen angegeben werden, das zwischen die einzelnen Elemente eingefügt wird.
 
-**Beispiele:**
-- `verbindeTextMitTrennzeichen(' - ', 'ene')` &#8594; 'ene'
-- `verbindeTextMitTrennzeichen(' - ', 'ene', 'mene', 'muh')` &#8594; 'ene - mene - muh'
-- `verbindeTextMitTrennzeichen(' - ', ['ene', 'mene'], 'muh')` &#8594; 'ene - mene - muh'
+##### Parameter
+* `...args` - Eine variable Anzahl von Textteilen oder Arrays, die miteinander verbunden werden sollen. Das erste Argument wird als Trennzeichen verwendet.
+
+##### Beispiele
+* `joinText(", ", "Hallo", "Welt")` Ausgabe: Hallo, Welt
+* `joinText(" | ", "Apfel", ["Banane", "Kirsche"])` Ausgabe: Apfel | Banane, Kirsche
