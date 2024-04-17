@@ -1,4 +1,4 @@
-Diese Funktion ähnelt der Funktion `decode`, sucht jedoch nach allen möglichen Ersetzungen im Eingabetext und gibt diese als Liste zurück.
+Diese Funktion ähnelt der Funktion `findeUndMappe`, sucht jedoch nach allen möglichen Ersetzungen im Eingabetext und gibt diese als Liste zurück.
 
 ##### Parameter
 * **input** - Der zu dekodierende Text.
