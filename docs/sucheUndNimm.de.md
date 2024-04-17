@@ -1,14 +1,11 @@
-sucheUndNimm
+Ermöglicht das Abrufen eines bestimmten Wertes aus einer vorgegebenen Datentabelle anhand eines Suchwertes.
 
-**Beispiele**:
-Mit folgender Datentabelle :
+##### Parameter
+* `valueToMatch` - Der Wert, der in der angegebenen Spalte der Datentabelle gesucht werden soll.
+* `lookupTableName` - Der Name der Datentabelle, aus der der Wert abgerufen werden soll.
+* `columnToCompare` - Der Name der Spalte in der Datentabelle, in der nach dem Suchwert gesucht werden soll.
+* `columnToRetrieveValueFrom` - Der Name der Spalte in der Datentabelle, aus der der Wert abgerufen werden soll.
 
-| key           | value         |
-| ------------- |:-------------:|
-| 111           | value1        |
-| 222           | value2        |
-| 333           | value3        |
-
-- wenn $('attribut') ist '111' : `sucheUndNimm($('attribut'), '111', 'key', 'value')` &#8594; "value1"
-- wenn $('attribut') ist '222' : `sucheUndNimm($('attribut'), '222')` &#8594; "value2"
-- wenn $('attribut') ist '444' : `sucheUndNimm($('attribut'), '444', 'key', 'value')` &#8594; ""
+##### Beispiele
+* `lookupGet('Apfelkuchen', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
+* `lookupGet('#FF0000', 'Farbtabelle', 'hexcode', 'farbname')` Ausgabe: `Rot` 

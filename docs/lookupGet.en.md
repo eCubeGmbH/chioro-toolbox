@@ -1,15 +1,11 @@
-Lookupget
+Allows you to retrieve a specific value from a given data table based on a search value.
 
-**Examples**:
+##### Parameters
+* `valueToMatch` - The value to search for in the specified column of the data table.
+* `lookupTableName` - The name of the data table from which to retrieve the value.
+* `columnToCompare` - The name of the column in the data table to search for the matching value.
+* `columnToRetrieveValueFrom` - The name of the column in the data table from which to retrieve the value.
 
-With the following data table :
-
-| key           | value         |
-| ------------- |:-------------:|
-| 111           | value1        |
-| 222           | value2        |
-| 333           | value3        |
-
-- when $('something') is '111' : `lookupGet($('something'), lookupName, 'key', 'value')` &#8594; "value1"
-- when $('something') is '222' : `lookupGet($('something'), lookupName)` &#8594; "value2"
-- when $('something') is '444' : `lookupGet($('something'), lookupName, 'key', 'value')` &#8594; ""
+##### Examples
+* `lookupGet('Apple Pie', 'product_table', 'product_name', 'product_id')` Output: `12345`
+* `lookupGet('#FF0000', 'color_table', 'hex_code', 'color_name')` Output: `Red` 

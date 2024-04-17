@@ -2796,22 +2796,22 @@ tools.add({
 })
 
 
-function lookupGet(matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom) {
+function lookupGet(valueToMatch, lookupTableName, columnToCompare, columnToRetrieveValueFrom) {
     /* 'lookups' is injected in environment, an instance of LookupCache class in java */
     if (typeof _lookups === 'undefined') {
         return "valueFound";
     }
 
-    if (!matchingColumn) {
-        matchingColumn = 'key';
+    if (!columnToCompare) {
+        columnToCompare = 'key';
     }
 
     if (!columnToRetrieveValueFrom) {
         columnToRetrieveValueFrom = 'value';
     }
 
-    return _lookups.getLookup(lookupName, matchingColumn, columnToRetrieveValueFrom)
-        .get(matchingValue, columnToRetrieveValueFrom);
+    return _lookups.getLookup(lookupTableName, columnToCompare, columnToRetrieveValueFrom)
+        .get(valueToMatch, columnToRetrieveValueFrom);
 }
 
 tools.add({
@@ -3049,7 +3049,6 @@ tools.add({
 
 
 function lookupReplaceRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
-    /* 'pool' is injected in environment */
     if (typeof _lookups === 'undefined') {
         return "valueFound";
     }
