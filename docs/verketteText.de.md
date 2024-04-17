@@ -5,5 +5,5 @@ Ist identisch zu `verbindeTextMitTrennzeichen()`
 * `...args` - Eine variable Anzahl von Textteilen, die miteinander verbunden werden sollen.
 
 ##### Beispiele
-* `concatenateText("Hallo", " ", "Welt")` Ausgabe: Hallo Welt
-* `concatenateText("Teil 1", 123, "Teil 2")` Ausgabe: Teil 1Teil 2 
+* `verketteText("Hallo", " ", "Welt")` Ausgabe: Hallo Welt
+* `verketteText("Teil 1", 123, "Teil 2")` Ausgabe: Teil 1Teil 2 

@@ -10,6 +10,6 @@ Die Funktion unterstützt auch das Angeben der Anzahl der Dezimalstellen und das
 * `deciPlaces` - (Optional) Die Anzahl der Dezimalstellen, die im Ergebnis angezeigt werden sollen.
 
 ##### Beispiele
-- `convertUnit("23 apples and 25 bananas", 1, "apples", "carrots")` Ausgabe: "23 carrots and 25 bananas"
-- `convertUnit("2,3 m", 100, 'm', 'cm')` Ausgabe: "230 cm"
-- `convertUnit("2.3 and 2.4", 100, '', 'cm')` Ausgabe: "230 cm and 240 cm" 
+* `rechneEinheitUm("23 apples and 25 bananas", 1, "apples", "carrots")` Ausgabe: "23 carrots and 25 bananas"
+* `rechneEinheitUm("2,3 m", 100, 'm', 'cm')` Ausgabe: "230 cm"
+* `rechneEinheitUm("2.3 and 2.4", 100, '', 'cm')` Ausgabe: "230 cm and 240 cm" 

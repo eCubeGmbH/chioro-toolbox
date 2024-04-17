@@ -4,6 +4,6 @@ Diese Funktion negiert einen booleschen Wert. Wenn der übergebene Wert ein bool
 value - Der Wert, der negiert werden soll.
 
 ##### Beispiele
-* `not(true)` Ausgabe: `false`
-* `not(false)` Ausgabe: `true`
-* `not("Hallo")` Ausgabe: `false` 
+* `nicht(true)` Ausgabe: `false`
+* `nicht(false)` Ausgabe: `true`
+* `nicht("Hallo")` Ausgabe: `false` 

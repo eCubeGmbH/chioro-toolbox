@@ -4,5 +4,5 @@ Diese Funktion erstellt ein Objekt (Map) aus einer Liste von Schlüssel-Wert-Paa
 * `...args` - Eine Liste von Schlüssel-Wert-Paaren. Schlüssel müssen Strings sein.
 
 ##### Beispiele
-* `asMap('name', 'John', 'age', 30)` Ausgabe: `{name: 'John', age: 30}`
-* `asMap('title', 'CEO', 'company', 'Acme Inc.')` Ausgabe: `{title: 'CEO', company: 'Acme Inc.'}`
+* `speichereAlsListe('name', 'John', 'age', 30)` Ausgabe: `{name: 'John', age: 30}`
+* `speichereAlsListe('title', 'CEO', 'company', 'Acme Inc.')` Ausgabe: `{title: 'CEO', company: 'Acme Inc.'}`

@@ -5,6 +5,6 @@ Extrahiert den numerischen Wert, der direkt nach einem bestimmten Text in einem 
 * `text` - Der Text, nach dem der numerische Wert gesucht werden soll.
 
 ##### Beispiele
-* `extractValueAfterText('Größe: 180 cm', 'Größe:')` Ausgabe: `180`
-* `extractValueAfterText('Gewicht: 75,5 kg', 'Gewicht:')` Ausgabe: `75,5`
-* `extractValueAfterText('Alter: unbekannt', 'Alter:')` Ausgabe: `Alter: unbekannt` 
+* `extrahiereWertNachText('Größe: 180 cm', 'Größe:')` Ausgabe: `180`
+* `extrahiereWertNachText('Gewicht: 75,5 kg', 'Gewicht:')` Ausgabe: `75,5`
+* `extrahiereWertNachText('Alter: unbekannt', 'Alter:')` Ausgabe: `Alter: unbekannt` 

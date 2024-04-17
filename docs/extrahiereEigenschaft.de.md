@@ -6,5 +6,5 @@ Extrahiert den Wert einer Eigenschaft aus einem Text. Die Eigenschaft wird anhan
 * `fallback` - (Optional) Ein Fallback-Wert, der zurückgegeben wird, falls die Eigenschaft nicht gefunden wird.
 
 ##### Beispiele
-* `extractProperty('name: Max', 'name')` Ausgabe: `Max`
-* `extractProperty('Alter = 30 Jahre', 'Alter')` Ausgabe: `30 Jahre` 
+* `extrahiereEigenschaft('name: Max', 'name')` Ausgabe: `Max`
+* `extrahiereEigenschaft('Alter = 30 Jahre', 'Alter')` Ausgabe: `30 Jahre` 

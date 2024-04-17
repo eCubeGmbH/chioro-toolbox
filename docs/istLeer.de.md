@@ -4,9 +4,9 @@ Diese Funktion prüft, ob ein gegebener Wert leer ist. Dies umfasst verschiedene
 * `text_or_object` - Der Wert, der auf Leerheit geprüft werden soll.
 
 ##### Beispiele
-* `isBlank(null)` Ausgabe: `true`
-* `isBlank('')` Ausgabe: `true`
-* `isBlank('   ')` Ausgabe: `true`
-* `isBlank([])` Ausgabe: `true`
-* `isBlank({})` Ausgabe: `true`
-* `isBlank(0)` Ausgabe: `false`
+* `istLeer(null)` Ausgabe: `true`
+* `istLeer('')` Ausgabe: `true`
+* `istLeer('   ')` Ausgabe: `true`
+* `istLeer([])` Ausgabe: `true`
+* `istLeer({})` Ausgabe: `true`
+* `istLeer(0)` Ausgabe: `false`

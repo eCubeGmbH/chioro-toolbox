@@ -5,5 +5,5 @@ Wandelt einen gegebenen Textwert in eine Zahl um, wobei die Formatierung des Tex
 * `overrideLocale` - (Optional) Die Lokalisierung, die für die Interpretation des Textwertes verwendet werden soll.
 
 ##### Beispiele
-* `textToNumber('1.234,56')` Ausgabe: `1234.56`
-* `textToNumber('1,234.56', 'en-US')` Ausgabe: `1234.56` 
+* `textAlsZahl('1.234,56')` Ausgabe: `1234.56`
+* `textAlsZahl('1,234.56', 'en-US')` Ausgabe: `1234.56` 

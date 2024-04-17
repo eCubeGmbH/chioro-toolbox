@@ -5,6 +5,6 @@ Diese Funktion gibt entweder den übergebenen Parameterwert oder einen Standardw
 * `def` - Der Standardwert, der zurückgegeben wird, wenn der Parameter leer ist.
 
 ##### Beispiele
-* `defaultValue('Hallo', 'Welt')` Ausgabe: `'Hallo'`
-* `defaultValue('', 'leer')` Ausgabe: `'leer'`
-* `defaultValue(null, 0)` Ausgabe: `0`
+* `standardWert('Hallo', 'Welt')` Ausgabe: `'Hallo'`
+* `standardWert('', 'leer')` Ausgabe: `'leer'`
+* `standardWert(null, 0)` Ausgabe: `0`

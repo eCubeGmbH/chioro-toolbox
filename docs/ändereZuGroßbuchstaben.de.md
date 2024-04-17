@@ -4,5 +4,5 @@ Wandelt einen Text in Großbuchstaben um.
 * `text` - Der Text, der umgewandelt werden soll.
 
 ##### Beispiele
-* `upperCaseText("Hallo Welt")` Ausgabe: `HALLO WELT`
-* `upperCaseText("123 abc")` Ausgabe: `123 ABC` 
+* `ändereZuGroßbuchstaben("Hallo Welt")` Ausgabe: `HALLO WELT`
+* `ändereZuGroßbuchstaben("123 abc")` Ausgabe: `123 ABC` 

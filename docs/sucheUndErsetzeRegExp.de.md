@@ -7,5 +7,5 @@ Ermöglicht das Suchen und Ersetzen von Werten in einem String basierend auf def
 * `valueToMatch` - Der String, in dem die Suche und Ersetzung durchgeführt werden soll.
 
 ##### Beispiele
-* `replaceUsingLookup('produkttabelle', 'produktname', 'produktID', 'Apfelkuchen')` Ausgabe: `12345`
-* `replaceUsingLookup('Farbtabelle', 'hexcode', 'farbname', '#FF0000')` Ausgabe: `Rot` 
+* `suchuUndErsetzeRegExp('produkttabelle', 'produktname', 'produktID', 'Apfelkuchen')` Ausgabe: `12345`
+* `suchuUndErsetzeRegExp('Farbtabelle', 'hexcode', 'farbname', '#FF0000')` Ausgabe: `Rot` 

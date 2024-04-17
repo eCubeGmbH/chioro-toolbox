@@ -4,6 +4,6 @@
 * `text` - Der Text, der überprüft werden soll.
 
 ##### Beispiele
-* `startsNumeric("123 abc")` Ausgabe: `true`
-* `startsNumeric("abc 123")` Ausgabe: `false`
-* `startsNumeric("0.5")` Ausgabe: `true`
+* `beginntMitZahl("123 abc")` Ausgabe: `true`
+* `beginntMitZahl("abc 123")` Ausgabe: `false`
+* `beginntMitZahl("0.5")` Ausgabe: `true`

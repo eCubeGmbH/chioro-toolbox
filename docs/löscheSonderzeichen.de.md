@@ -4,5 +4,5 @@ Diese Funktion entfernt alle Sonderzeichen aus einem Text und gibt eine neue Zei
 text - Der Text, aus dem die Sonderzeichen entfernt werden sollen.
 
 ##### Beispiele
-* `deleteSpecialCharacters("Hallo, Welt!")` Ausgabe: `HalloWelt`
-* `deleteSpecialCharacters("123 abc!")` Ausgabe: `123abc`
+* `löscheSonderzeichen("Hallo, Welt!")` Ausgabe: `HalloWelt`
+* `löscheSonderzeichen("123 abc!")` Ausgabe: `123abc`

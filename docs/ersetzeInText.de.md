@@ -6,6 +6,6 @@ Ersetzt Text innerhalb eines Strings oder Arrays von Strings. Unterstützt sowoh
 * `replaceWith` - Der String, der den gefundenen Text ersetzen soll.
 
 ##### Beispiele
-* `replaceInText("Guten Tag", "Tag", "Abend")` Ausgabe: "Guten Abend"
-* `replaceInText("Das ist ein Text", /ein/g, "kein")` Ausgabe: "Das ist kein Text"
-* `replaceInText(["Apfel", "Banane", "Kirsche"], /e/g, "i")` Ausgabe: ["Apfil", "Banani", "Kirschi"] 
+* `ersetzeInText("Guten Tag", "Tag", "Abend")` Ausgabe: "Guten Abend"
+* `ersetzeInText("Das ist ein Text", /ein/g, "kein")` Ausgabe: "Das ist kein Text"
+* `ersetzeInText(["Apfel", "Banane", "Kirsche"], /e/g, "i")` Ausgabe: ["Apfil", "Banani", "Kirschi"] 

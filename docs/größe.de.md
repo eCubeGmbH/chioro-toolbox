@@ -4,6 +4,6 @@ Ermittelt die Größe eines Elements. Für Zahlen wird die Länge der String-Rep
 * `something` - Das Element, dessen Größe ermittelt werden soll.
 
 ##### Beispiele
-* `size(123)` Ausgabe: 3
-* `size('Hallo')` Ausgabe: 5
-* `size({'a': 1, 'b': 2})` Ausgabe: 2 
+* `größe(123)` Ausgabe: 3
+* `größe('Hallo')` Ausgabe: 5
+* `größe({'a': 1, 'b': 2})` Ausgabe: 2 

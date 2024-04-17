@@ -7,5 +7,5 @@ Diese Funktion durchsucht eine Datentabelle nach einem Wert, der einem bestimmte
 * `columnToRetrieveValueFrom` - (Optional) Der Name der Spalte, aus der der Wert zurückgegeben werden soll, wenn eine Übereinstimmung gefunden wird. Standardmäßig wird "value" verwendet.
 
 ##### Beispiele
-* `lookupGetRegExp("abc", "meineTabelle", "regex", "ergebnis")` Ausgabe: `Wert aus 'ergebnis' Splate`
-* `lookupGetRegExp("123", "suchTabelle")` Ausgabe: `Wert aus 'value' Spalte` 
+* `sucheUndNimmRegExp("abc", "meineTabelle", "regex", "ergebnis")` Ausgabe: `Wert aus 'ergebnis' Splate`
+* `sucheUndNimmRegExp("123", "suchTabelle")` Ausgabe: `Wert aus 'value' Spalte` 

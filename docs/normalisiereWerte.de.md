@@ -6,5 +6,5 @@ Diese Funktion normalisiert numerische Werte in einem Text. Sie kann Dezimaltren
 * deciPlaces - Die Anzahl der gewünschten Nachkommastellen (optional, Standard ist 0).
 
 ##### Beispiele
-* `normalizeValues("etwa 2,3 megawatts", ".")` Output: `etwa 2.3 megawatts`
-* `normalizeValues("23.1 and 23.22", '.', 1)` Output: `23.1 and 23.2`
+* `normalisiereWerte("etwa 2,3 megawatts", ".")` Output: `etwa 2.3 megawatts`
+* `normalisiereWerte("23.1 and 23.22", '.', 1)` Output: `23.1 and 23.2`

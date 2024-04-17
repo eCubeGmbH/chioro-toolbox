@@ -7,7 +7,7 @@ Extrahiert den ersten Treffer eines Texts oder regulären Ausdrucks aus einem Te
 * `withGroups` - (Optional) Ein boolescher Wert, der angibt, ob die erste Gruppe des Treffers zurückgegeben werden soll.
 
 ##### Beispiele
-* `extractFromText('Hallo Welt!', 'Welt')` Ausgabe: `Welt`
-* `extractFromText('Hallo Welt!', /Welt/)` Ausgabe: `Welt`
-* `extractFromText('Hallo Mars!', /Welt/, 'irgendwo')` Ausgabe: `irgendwo`
-* `extractFromText('Benutzername: Max', /Benutzername: (.*)/, 'unbekannt', true)` Ausgabe: `Max` 
+* `extrahiereAusText('Hallo Welt!', 'Welt')` Ausgabe: `Welt`
+* `extrahiereAusText('Hallo Welt!', /Welt/)` Ausgabe: `Welt`
+* `extrahiereAusText('Hallo Mars!', /Welt/, 'irgendwo')` Ausgabe: `irgendwo`
+* `extrahiereAusText('Benutzername: Max', /Benutzername: (.*)/, 'unbekannt', true)` Ausgabe: `Max` 

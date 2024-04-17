@@ -4,6 +4,6 @@ Diese Funktion prüft, ob alle übergebenen Argumente den Wert `true` haben. Fal
 * `...args` - Eine beliebige Anzahl von Argumenten, die geprüft werden sollen.
 
 ##### Beispiele
-* `allOf(true, 1 === 1, 'test' !== '')` Ausgabe: `true`
-* `allOf(true, false, 1 === 1)` Ausgabe: `false`
-* `allOf()` Ausgabe: `false`
+* `sindAlleElementeWahr(true, 1 === 1, 'test' !== '')` Ausgabe: `true`
+* `sindAlleElementeWahr(true, false, 1 === 1)` Ausgabe: `false`
+* `sindAlleElementeWahr()` Ausgabe: `false`

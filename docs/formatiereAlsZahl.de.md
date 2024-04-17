@@ -5,5 +5,5 @@ Formatiert eine Zahl gemäß den Formatierungsregeln des angegebenen Gebietssche
 * `overrideLocale` - (Optional) Ein String, der das zu verwendende Gebietsschema angibt (z. B. 'de-DE' für Deutsch).
 
 ##### Beispiele
-* `formatAsNumber(1234.56)` Ausgabe: 1.234,56
-* `formatAsNumber(1234.56, 'en-US')` Ausgabe: 1,234.56
+* `formatiereAlsZahl(1234.56)` Ausgabe: 1.234,56
+* `formatiereAlsZahl(1234.56, 'en-US')` Ausgabe: 1,234.56

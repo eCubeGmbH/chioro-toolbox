@@ -5,5 +5,5 @@ Ist identisch zu `verketteText()`
 * `...args` - Eine variable Anzahl von Textteilen oder Arrays, die miteinander verbunden werden sollen. Das erste Argument wird als Trennzeichen verwendet.
 
 ##### Beispiele
-* `joinText(", ", "Hallo", "Welt")` Ausgabe: Hallo, Welt
-* `joinText(" | ", "Apfel", ["Banane", "Kirsche"])` Ausgabe: Apfel | Banane, Kirsche
+* `verbindeTextMitTrennzeichen(", ", "Hallo", "Welt")` Ausgabe: Hallo, Welt
+* `verbindeTextMitTrennzeichen(" | ", "Apfel", ["Banane", "Kirsche"])` Ausgabe: Apfel | Banane, Kirsche

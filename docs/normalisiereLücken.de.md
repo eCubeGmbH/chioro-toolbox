@@ -4,5 +4,5 @@ Diese Funktion normalisiert die Leerzeichen in einem Text. Mehrere aufeinanderfo
 text - Der Text, in dem die Leerzeichen normalisiert werden sollen.
 
 ##### Beispiele
-* `normalizeWhitespaces("Hallo   Welt!")` Ausgabe: `Hallo Welt!`
-* `normalizeWhitespaces("  123  abc  ")` Ausgabe: ` 123 abc ` 
+* `normalisiereLücken("Hallo   Welt!")` Ausgabe: `Hallo Welt!`
+* `normalisiereLücken("  123  abc  ")` Ausgabe: ` 123 abc ` 

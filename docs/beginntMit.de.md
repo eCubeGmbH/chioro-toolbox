@@ -5,6 +5,6 @@ Prüft, ob ein Text mit einem bestimmten Suchbegriff oder einem regulären Ausdr
 * `search` - Der Suchbegriff oder der reguläre Ausdruck.
 
 ##### Beispiele
-* `startsWith("Hallo Welt", "Hallo")` Ausgabe: `true`
-* `startsWith("123 abc", "123")` Ausgabe: `true`
-* `startsWith("Test String", /s../i)` Ausgabe: `true` 
+* `beginntMit("Hallo Welt", "Hallo")` Ausgabe: `true`
+* `beginntMit("123 abc", "123")` Ausgabe: `true`
+* `beginntMit("Test String", /s../i)` Ausgabe: `true` 

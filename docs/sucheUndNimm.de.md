@@ -7,5 +7,5 @@ Ermöglicht das Abrufen eines bestimmten Wertes aus einer vorgegebenen Datentabe
 * `columnToRetrieveValueFrom` - Der Name der Spalte in der Datentabelle, aus der der Wert abgerufen werden soll.
 
 ##### Beispiele
-* `lookupGet('Apfelkuchen', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
-* `lookupGet('#FF0000', 'Farbtabelle', 'hexcode', 'farbname')` Ausgabe: `Rot` 
+* `sucheUndNimm('Apfelkuchen', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
+* `sucheUndNimm('#FF0000', 'Farbtabelle', 'hexcode', 'farbname')` Ausgabe: `Rot` 

@@ -6,6 +6,6 @@ Diese Funktion wendet einen regulären Ausdruck auf einen Text an und gibt eine 
 * `withGroups` - Ein boolescher Wert, der angibt, ob die Gruppen des regulären Ausdrucks in der Ergebnisliste enthalten sein sollen.
 
 ##### Beispiele
-* `extractAllMatchesFromText("Der schnelle braune Fuchs", /fuchs/i)` Ausgabe: `["Fuchs"]`
-* `extractAllMatchesFromText("Der schnelle braune Fuchs springt", /(\w+)\s(\w+)/g)` Ausgabe: `["schnelle braune", "braune Fuchs"]`
-* `extractAllMatchesFromText("123 Main Street", /(\d+) (\w+) (.*)/)` Ausgabe: `["123 Main Street"]` 
+* `extrahiereAlleTrefferAusText("Der schnelle braune Fuchs", /fuchs/i)` Ausgabe: `["Fuchs"]`
+* `extrahiereAlleTrefferAusText("Der schnelle braune Fuchs springt", /(\w+)\s(\w+)/g)` Ausgabe: `["schnelle braune", "braune Fuchs"]`
+* `extrahiereAlleTrefferAusText("123 Main Street", /(\d+) (\w+) (.*)/)` Ausgabe: `["123 Main Street"]` 

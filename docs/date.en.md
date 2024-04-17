@@ -1,8 +1,8 @@
 This function formats a date into the desired format. If no date is provided, the current date is used.
 
 ##### Parameters
-* **formatting** - A string that specifies the desired format for the date.
-* **initialDate** - An optional date object or a string representing a date.
+* `formatting` - A string that specifies the desired format for the date.
+* `initialDate` - An optional date object or a string representing a date.
 
 ##### Examples
 

@@ -4,4 +4,4 @@ Die Funktion entfernt alle führenden und nachfolgenden Leerzeichen aus einem ge
 * `text` - Der Text, aus dem die Leerzeichen entfernt werden sollen.
 
 ##### Beispiele
-* `trimText('  Hallo Welt!  ')` Ausgabe: `'Hallo Welt!'`
+* `schneideTextZu('  Hallo Welt!  ')` Ausgabe: `'Hallo Welt!'`

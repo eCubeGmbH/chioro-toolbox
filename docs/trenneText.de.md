@@ -5,5 +5,5 @@ Zerlegt einen Text in einzelne Elemente anhand eines Trennzeichens und entfernt 
 * `separator` - (Optional) Das Trennzeichen, das zum Zerlegen des Textes verwendet werden soll. Standardmäßig wird ein Komma (",") verwendet.
 
 ##### Beispiele
-* `splitText("Apfel, Birne, Banane")` Ausgabe: `["Apfel", "Birne", "Banane"]`
-* `splitText("eins; zwei; drei", ";")` Ausgabe: `["eins", "zwei", "drei"]`
+* `trenneText("Apfel, Birne, Banane")` Ausgabe: `["Apfel", "Birne", "Banane"]`
+* `trenneText("eins; zwei; drei", ";")` Ausgabe: `["eins", "zwei", "drei"]`

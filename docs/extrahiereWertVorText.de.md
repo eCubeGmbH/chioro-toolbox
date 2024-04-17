@@ -5,6 +5,6 @@ Extrahiert den numerischen Wert, der direkt vor einem bestimmten Text in einem S
 * `text` - Der Text, vor dem der numerische Wert gesucht werden soll.
 
 ##### Beispiele
-* `extractValueBeforeText('Größe: 180 cm', 'cm')` Ausgabe: `180`
-* `extractValueBeforeText('Gewicht: 75,5 kg', 'kg')` Ausgabe: `75,5`
-* `extractValueBeforeText('Alter: unbekannt', 'Jahre')` Ausgabe: `Alter: unbekannt` 
+* `extrahiereWertVorText('Größe: 180 cm', 'cm')` Ausgabe: `180`
+* `extrahiereWertVorText('Gewicht: 75,5 kg', 'kg')` Ausgabe: `75,5`
+* `extrahiereWertVorText('Alter: unbekannt', 'Jahre')` Ausgabe: `Alter: unbekannt` 

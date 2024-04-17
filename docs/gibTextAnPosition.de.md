@@ -6,5 +6,5 @@ Gibt einen Teilstring aus einem Text zurück, der an einer bestimmten Position b
 * `length` - (Optional) Die Länge des Teilstrings (als Zahl). Wenn keine Länge angegeben wird, wird der gesamte Text ab der Startposition zurückgegeben.
 
 ##### Beispiele
-* `textAtPosition('Hallo Welt', 6, 5)` Ausgabe: Welt
-* `textAtPosition('Das ist JavaScript', 12)` Ausgabe: Script
+* `gibTextAnPosition('Hallo Welt', 6, 5)` Ausgabe: Welt
+* `gibTextAnPosition('Das ist JavaScript', 12)` Ausgabe: Script

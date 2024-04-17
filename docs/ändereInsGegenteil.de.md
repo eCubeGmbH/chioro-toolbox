@@ -1,5 +1,5 @@
 Negiert das aktuelle Element.
 
-**Beispiele**
-- `negation(true)` &#8594; `false`
-- `negation(false)` &#8594; `true`
+##### Beispiele
+* `ändereInsGegenteil(true)` Ausgabe: `false`
+* `ändereInsGegenteil(false)` Ausgabe: `true`
