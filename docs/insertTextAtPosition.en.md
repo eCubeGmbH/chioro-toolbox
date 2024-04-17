@@ -1,7 +1,10 @@
-Inserts one text into another before the given position.
+Inserts a text into another text at a specified position.
 
-(Note: The numbering of the characters starts with 0, i.e. `position` specifies how many characters should be 'skipped').
+##### Parameters
+* `text` - The text to insert into.
+* `textToInsert` - The text to be inserted.
+* `position` - The position at which to insert the text (as a number, starts at 0).
 
-**Example**
-
-- `insertTextAtPosition('ene muh', 'mene ', 4)` &#8594; 'ene mene muh'.
+##### Examples
+* `insertTextAtPosition('Hello World', 'beautiful ', 6)` Output: Hello beautiful World
+* `insertTextAtPosition('Script', 'Java', 0)` Output: JavaScript

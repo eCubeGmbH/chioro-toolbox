@@ -1,6 +1,10 @@
-Fügt einen Text in einen anderen vor der angegebenen Position ein.
+Fügt einen Text an einer bestimmten Position in einen anderen Text ein.
 
-(Hinweis: Die Nummerierung der Zeichen beginnt mit 0, d.h. `position` gibt an, wie viele Zeichen 'übersprungen' werden sollen.)
+##### Parameter
+* `text` - Der Text, in den eingefügt werden soll.
+* `textToInsert` - Der Text, der eingefügt werden soll.
+* `position` - Die Position, an der der Text eingefügt werden soll (als Zahl, beginnend mit 0).
 
-**Beispiel:**
-- `fügeTextAnPositionEin('ene muh', 'mene ', 4)` &#8594; 'ene mene muh'.
+##### Beispiele
+* `insertTextAtPosition('Hallo Welt', 'schöne ', 6)` Ausgabe: Hallo schöne Welt
+* `insertTextAtPosition('Script', 'Java', 0)` Ausgabe: JavaScript 
