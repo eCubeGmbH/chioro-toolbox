@@ -1,17 +1,10 @@
-A timestamp formatting function to return the timestamps in different formats. By default, if no parameters are provided, 
-`timestamp` will return the current date/time in the following format(given that the date is 29.01.2020 and the time is 12:31):
-`yyyyMMddhhmm` e.g `202001291231`
+Creates a timestamp in the specified format. If no format is specified, a default format is used. Optionally, a date can be passed for which the timestamp should be created.
 
-If `formatting` parameter is provided, the timestamp will be formatted according to it. A complete list of supported formatting can be found here:
-[List of Formatting](https://date-fns.org/v2.29.3/docs/format)
+##### Parameters
+* `formatting` - A string describing the desired format of the timestamp.
+* `initialDate` - An optional date for which the timestamp should be created.
 
-If the `initialDate` parameter is provided, instead of using the current date, the `initialDate` will be used. Please note that this parameter
-should be a real javascript Date object.
-
-
-**Examples**
-
-If today is 29.01.2020 12:31 pm, then
-
-- `timestamp()` &#8594; "202001291231"
-- `timestamp('yyyy', Date.parse("1980/01/01"))` &#8594; "1980"
+##### Examples
+* `timestamp()` Output: 202404171347 (current date in default format)
+* `timestamp("yyyy-MM-dd")` Output: 2024-04-17 (current date in yyyy-MM-dd format)
+* `timestamp("hh:mm:ss", new Date(2023, 0, 1))` Output: 00:00:00 (timestamp for January 1, 2023) 
