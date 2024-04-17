@@ -1,1 +1,7 @@
-Removes all the spaces, tabs and line breaks at the beginning and end of the `text`.
+The function removes all leading and trailing whitespace from a given text.
+
+##### Parameters
+* `text` - The text from which to remove whitespace.
+
+##### Examples
+* `trimText('  Hello World!  ')` Output: `'Hello World!'`
