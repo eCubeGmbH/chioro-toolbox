@@ -1698,7 +1698,7 @@ tools.add({
 })
 
 
-function normalizeWhitespaces(text) {
+function normalizeWhitespaces(text) { // TODO: Alte doku meinte auch tabs und newlines werden normalisiert. Implementieren?
     return stringOf(text).replace(/\s+/g, " ");
 }
 
