@@ -1092,7 +1092,7 @@ tools.add({
     impl: asList,
     aliases: {
         en: "asList",
-        de: "speichereAlsTabelle"
+        de: "speichereAlsTabelle" // TODO: Ist das nicht eig. speichereAlsListe?
     },
     argsOld: {
         en: "something1, something2, ...",
@@ -1243,7 +1243,7 @@ tools.add({
     impl: asMap,
     aliases: {
         en: "asMap",
-        de: "speichereAlsListe"
+        de: "speichereAlsListe" // TODO: Ist das nicht eig. speichereAlsMap?
     },
     argsOld: {
         en: "name1, value1, name2, value2, ...",
