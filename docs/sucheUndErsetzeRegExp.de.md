@@ -1,14 +1,11 @@
-sucheUndErsetzeRegExp
+Ermöglicht das Suchen und Ersetzen von Werten in einem String basierend auf definierten Regeln in einer Datentabelle.
 
-**Beispiele**:
-Mit folgender Datentabelle :
+##### Parameter
+* `lookupTableName` - Der Name der Datentabelle, die die Such- und Ersetzungsmuster enthält.
+* `columnContainingRegex` - Der Name der Spalte in der Datentabelle, die den regulären Ausdruck für die Suche enthält.
+* `columnToRetrieveValueFrom` - Der Name der Spalte in der Datentabelle, die den Ersetzungswert enthält.
+* `valueToMatch` - Der String, in dem die Suche und Ersetzung durchgeführt werden soll.
 
-| key          |   value   |
-|--------------|:---------:|
-| bl(.*)       | value1_$1 |
-| \d\d         |  value2   |
-| some (value) |    $1     |
-
-- wenn $('attribut') ist 'bla' : `sucheUndErsetzeRegExp($('attribut'), lookupName, 'key', 'value')` &#8594; "value1_a"
-- wenn $('attribut') ist '22' : `sucheUndErsetzeRegExp($('attribut'), lookupName)` &#8594; "value2"
-- wenn $('attribut') ist 'SOME VALUE' : `sucheUndErsetzeRegExp($('attribut'), lookupName, 'key', 'value')` &#8594; "value"
+##### Beispiele
+* `replaceUsingLookup('produkttabelle', 'produktname', 'produktID', 'Apfelkuchen')` Ausgabe: `12345`
+* `replaceUsingLookup('Farbtabelle', 'hexcode', 'farbname', '#FF0000')` Ausgabe: `Rot` 

@@ -1,15 +1,11 @@
-lookupReplaceRegExp
+Allows you to search and replace values in a string based on defined rules within a data table.
 
-**Examples**:
+##### Parameters
+* `lookupTableName` - The name of the data table containing the search and replace patterns.
+* `columnContainingRegex` - The name of the column in the data table containing the regular expression for the search.
+* `columnToRetrieveValueFrom` - The name of the column in the data table containing the replacement value.
+* `valueToMatch` - The string in which to perform the search and replace.
 
-Given the following data table :
-
-| key          |   value   |
-|--------------|:---------:|
-| bl(.*)       | value1_$1 |
-| \d\d         |  value2   |
-| some (value) |    $1     |
-
-- when $('something') is 'bla' : `lookupReplaceRegExp($('something'), lookupName, 'key', 'value')` &#8594; "value1_a"
-- when $('something') is '22' : `lookupReplaceRegExp($('something'), lookupName, 'key', 'value')` &#8594; "value2"
-- when $('something') is 'SOME VALUE' : `lookupReplaceRegExp($('something'), lookupName, 'key', 'value')` &#8594; "value"
+##### Examples
+* `replaceUsingLookup('product_table', 'product_name', 'product_id', 'Apple Pie')` Output: `12345`
+* `replaceUsingLookup('color_table', 'hex_code', 'color_name', '#FF0000')` Output: `Red` 

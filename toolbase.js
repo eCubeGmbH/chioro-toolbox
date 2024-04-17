@@ -3048,26 +3048,26 @@ tools.add({
 })
 
 
-function lookupReplaceRegExp(matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom) {
+function lookupReplaceRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
     /* 'pool' is injected in environment */
     if (typeof _lookups === 'undefined') {
         return "valueFound";
     }
 
-    if (!matchingRegExpColumn) {
-        matchingRegExpColumn = 'key';
+    if (!columnContainingRegex) {
+        columnContainingRegex = 'key';
     }
 
-    if (!columnToRetrieveReplacementFrom) {
-        columnToRetrieveReplacementFrom = 'value';
+    if (!columnToRetrieveValueFrom) {
+        columnToRetrieveValueFrom = 'value';
     }
 
-    const lookupItems = _lookups.getLookup(lookupName, matchingRegExpColumn, columnToRetrieveReplacementFrom).getAllEntries();
+    const lookupItems = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
     while (lookupItems.hasNext()) {
         const lookupItem = lookupItems.getNext();
-        const regex = new RegExp(lookupItem.get(matchingRegExpColumn), 'ig');
-        if (matchingValue.match && matchingValue.match(regex)) {
-            return matchingValue.replace(regex, lookupItem.get(columnToRetrieveReplacementFrom));
+        const regex = new RegExp(lookupItem.get(columnContainingRegex), 'ig');
+        if (valueToMatch.match && valueToMatch.match(regex)) {
+            return valueToMatch.replace(regex, lookupItem.get(columnToRetrieveValueFrom));
         }
 
     }
