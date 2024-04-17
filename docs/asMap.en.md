@@ -1,9 +1,8 @@
-Creates a name-value table from the names and values passed.
+This function creates an object (map) from a list of key-value pairs. The pairs are passed as arguments, where each odd argument is a key and the following even argument is the corresponding value.
 
-**Example**
+##### Parameters
+* `...args` - A list of key-value pairs. Keys must be strings.
 
-`asMap('length', '100', 'width', '20', 'height', 10)` creates the following name-value table:
-
-- length &#8594; 100
-- width &#8594; 20
-- height &#8594; 10
+##### Examples
+* `asMap('name', 'John', 'age', 30)` Output: `{name: 'John', age: 30}`
+* `asMap('title', 'CEO', 'company', 'Acme Inc.')` Output: `{title: 'CEO', company: 'Acme Inc.'}`
