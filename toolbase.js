@@ -2535,7 +2535,7 @@ tools.add({
 
 
 function decodeAll() {
-    const checkDuplicate = function (arr, elm) {
+    const pushIfUnique = function (arr, elm) {
         if (arr.indexOf(elm) < 0) {
             arr.push(elm);
         }
@@ -2549,10 +2549,10 @@ function decodeAll() {
         if (arguments[i] instanceof RegExp) {
             let match = arguments[i];
             if (match.test(stringOf(input))) {
-                checkDuplicate(replacements, replacement);
+                pushIfUnique(replacements, replacement);
             }
         } else if (containsText(input, arguments[i])) {
-            checkDuplicate(replacements, replacement);
+            pushIfUnique(replacements, replacement);
         }
     }
 

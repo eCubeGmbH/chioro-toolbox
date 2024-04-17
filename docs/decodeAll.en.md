@@ -1,26 +1,11 @@
-A powerful function to "decode" a fixed set of values.
+This function is similar to the `decode` function, but it searches for all possible replacements in the input text and returns them as a list.
 
-- `text` is the text to search.
-- `textToSearch_x` is the text (or regular expression) to search for.
-- `textToReplace_x` is the text that will be returned if `textToSearch1` was found.
+##### Parameters
+* **input** - The text to decode.
+* **...args** - A sequence of pairs of search patterns and replacements. A search pattern can be a regular expression or a simple text.
+* **fallback (optional)** - The value to add to the list if no search pattern matches.
 
-If `textToSearch_x` was found, `textToReplace_x` will be returned. If `textToSearch_x` was not found, the same producure will
-be performed on `textToSearch_x+1` until a result is found.
-
-If no `textToSearch_x` was found at all, `fallback` is returned (or an empty text,
-if no `fallback` was defined.
-
-**Example**
-
-`
-decodeAll(description,
-/ladies/i, 'F',
-/women/i, 'F',
-/gentlemen/i, 'M',
-/men/i, 'M',
-'uni'
-)`
-
-- "Women's top" &#8594; "F"
-- "Men's shoes" &#8594; "M"
-- "Fluffy scarf" &#8594; "uni"
+##### Examples
+* `decodeAll("Gloves for Woman or Man", /Woman/i, "W", /M.n/i, "M", /Kids/i, "K")` Output: `["F", "M"]`
+* `decodeAll("Gloves for Woman or Man", /Kids/i, "K", /Teens/, "K", "U")` Output: `["U"]`
+* `decodeAll("No hit", "Search", "Replace value")` Output: `[]`
