@@ -1602,6 +1602,10 @@ function textAtPosition(text, position, length) {
         throw "In textAtPosition(): length has to be a number";
     }
 
+    if (!length || length === 0) {
+        return stringOf(text).substring(position);
+    }
+
     return stringOf(text).substring(position, position + length);
 }
 
@@ -1650,6 +1654,7 @@ tools.add({
         tools.expect(textAtPosition("01234", 0, 1)).toBe("0");
         tools.expect(textAtPosition("01234", 3, 2)).toBe("34");
         tools.expect(textAtPosition("01234", 5, 1)).toBe("");
+        tools.expect(textAtPosition("This is expected", 8)).toBe("expected");
     }
 })
 

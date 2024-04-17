@@ -1,9 +1,10 @@
-Extrahiert ein Stück Text der Länge `länge` aus `text`, beginnend mit dem Zeichen an `position`.
+Gibt einen Teilstring aus einem Text zurück, der an einer bestimmten Position beginnt und eine bestimmte Länge hat.
 
-Wenn `position` negativ ist, wird vom Ende her gezählt.
+##### Parameter
+* `text` - Der Text, aus dem der Teilstring extrahiert werden soll.
+* `position` - Die Startposition des Teilstrings (als Zahl).
+* `length` - (Optional) Die Länge des Teilstrings (als Zahl). Wenn keine Länge angegeben wird, wird der gesamte Text ab der Startposition zurückgegeben.
 
-(Hinweis: Die Nummerierung der Zeichen beginnt mit 0, d.h. `position` gibt an, wie viele Zeichen 'übersprungen' werden sollen.)
-
-**Beispiele:**
-- `gibTextAnPosition('ene mene muh', 4, 2)` &#8594; 'me'.
-- `gibTextAnPosition('ene mene muh', -3, 2)` &#8594; 'mu'.
+##### Beispiele
+* `textAtPosition('Hallo Welt', 6, 5)` Ausgabe: Welt
+* `textAtPosition('Das ist JavaScript', 12)` Ausgabe: Script

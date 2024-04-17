@@ -1,10 +1,10 @@
-Extracts part of the input text with the length `length` from the input `text`, starting with the character at `position`.
+Returns a substring from a text starting at a specific position and with a specific length.
 
-If the `position` is negative, it is counted from the end.
+##### Parameters
+* `text` - The text from which to extract the substring.
+* `position` - The starting position of the substring (as a number).
+* `length` - (Optional) The length of the substring (as a number). If no length is specified, the entire text from the starting position is returned.
 
-(Note: The numbering of the characters starts with 0, i.e. `position` specifies how many characters are to be `skipped`).
-
-**Examples:**
-
-- `textAtPosition('ene mene muh', 4, 2)` &#8594; 'me'.
-- `textAtPosition('ene mene muh', -3, 2)` &#8594; 'mu'.
+##### Examples
+* `textAtPosition('Hello World', 6, 5)` Output: World
+* `textAtPosition('This is JavaScript', 11)` Output: Script
