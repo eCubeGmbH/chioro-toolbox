@@ -1,3 +1,10 @@
-Merges the input arguments into a single text.
+Combines multiple text parts into a single string. Non-text elements are ignored.
 
-Is identical to `joinText('', ...)`
+> Is identical to `joinText()`
+
+##### Parameters
+* `...args` - A variable number of text parts to be joined together.
+
+##### Examples
+* `concatenateText("Hello", " ", "World")` Output: Hello World
+* `concatenateText("Part 1", 123, "Part 2")` Output: Part 1Part 2

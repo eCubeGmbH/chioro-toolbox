@@ -1,3 +1,10 @@
-Fügt die übergebenen Werte zu einem einzigen Text zusammen.
+Verbindet mehrere Textteile zu einem einzelnen String. Nicht-Text-Elemente werden ignoriert.
 
-Ist identisch zu `verbindeTextMitTrennzeichen('', ...)`
+> Ist identisch zu `verbindeTextMitTrennzeichen()`
+
+##### Parameter
+* `...args` - Eine variable Anzahl von Textteilen, die miteinander verbunden werden sollen.
+
+##### Beispiele
+* `concatenateText("Hallo", " ", "Welt")` Ausgabe: Hallo Welt
+* `concatenateText("Teil 1", 123, "Teil 2")` Ausgabe: Teil 1Teil 2 
