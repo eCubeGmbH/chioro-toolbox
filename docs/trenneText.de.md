@@ -1,8 +1,9 @@
-Splittet den `text` an den jeweiligen Stellen wo ein `separator` vorkommt.
+Zerlegt einen Text in einzelne Elemente anhand eines Trennzeichens und entfernt dabei überflüssige Leerzeichen.
 
-Achtung: Falls kein `separator` angegeben wird, wird standardmäßig nach einem Komma der Text aufgesplittet.
+##### Parameter
+* `text` - Der Text, der zerlegt werden soll.
+* `separator` - (Optional) Das Trennzeichen, das zum Zerlegen des Textes verwendet werden soll. Standardmäßig wird ein Komma (",") verwendet.
 
-**Beispiele**
-- (mit Separator `|`):    `trenneText("a|b|c", "|")` &#8594; `["a", "b", "c"]`
-- (ohne Separator):    `trenneText("a|b|c")` &#8594; `["a|b|c"]`
-- (ohne Separator):    `trenneText("a,b,c")` &#8594; `["a", "b", "c"]`
+##### Beispiele
+* `splitText("Apfel, Birne, Banane")` Ausgabe: `["Apfel", "Birne", "Banane"]`
+* `splitText("eins; zwei; drei", ";")` Ausgabe: `["eins", "zwei", "drei"]`
