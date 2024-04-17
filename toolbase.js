@@ -2161,7 +2161,7 @@ tools.add({
         {
             "key": "fallback",
             "label_en": "Fallback",
-            "label_de": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Text to return if nothing was found.",
             "desc_de": "Text, der zurückgegeben wird wenn nichts gefunden wurde."
@@ -2288,7 +2288,7 @@ tools.add({
         {
             "key": "fallback",
             "label_en": "Fallback",
-            "label_de": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if no number was found",
             "desc_de": "Wert, der zurückgegeben wird, wenn keine Zahl gefunden wurde"
@@ -2655,7 +2655,7 @@ tools.add({
         },
         {
             "key": "fallback",
-            "label_en": "Default",
+            "label_en": "Fallback",
             "label_de": "Default",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
@@ -2742,8 +2742,8 @@ tools.add({
         },
         {
             "key": "fallback",
-            "label_en": "Default",
-            "label_de": "Standardwert",
+            "label_en": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
             "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
@@ -2853,8 +2853,8 @@ tools.add({
         },
         {
             "key": "fallback",
-            "label_en": "Default",
-            "label_de": "Standardwert",
+            "label_en": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
             "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
@@ -2912,8 +2912,8 @@ tools.add({
         },
         {
             "key": "fallback",
-            "label_en": "Default",
-            "label_de": "Standardwert",
+            "label_en": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
             "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
@@ -3756,8 +3756,8 @@ tools.add({
         },
         {
             "key": "fallback",
-            "label_en": "Default",
-            "label_de": "Standardwert",
+            "label_en": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
             "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
@@ -5066,8 +5066,8 @@ tools.add({
         },
         {
             "key": "defaultValue",
-            "label_en": "Default",
-            "label_de": "Standardwert",
+            "label_en": "Fallback",
+            "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if input is empty",
             "desc_de": "Wert, der zurückgegeben wird wenn Eingabe leer ist"
