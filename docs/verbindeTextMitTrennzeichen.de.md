@@ -1,4 +1,5 @@
-Verbindet mehrere Textteile oder Arrays zu einem einzelnen String. Dabei kann ein Trennzeichen angegeben werden, das zwischen die einzelnen Elemente eingefügt wird.
+Verbindet mehrere Textteile oder Arrays zu einem einzelnen String. Dabei kann ein Trennzeichen angegeben werden, das zwischen die einzelnen Elemente eingefügt wird.  
+Ist identisch zu `verketteText()`
 
 ##### Parameter
 * `...args` - Eine variable Anzahl von Textteilen oder Arrays, die miteinander verbunden werden sollen. Das erste Argument wird als Trennzeichen verwendet.

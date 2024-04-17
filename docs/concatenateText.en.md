@@ -1,6 +1,6 @@
 Combines multiple text parts into a single string. Non-text elements are ignored.
 
-> Is identical to `joinText()`
+Is identical to `joinText()`
 
 ##### Parameters
 * `...args` - A variable number of text parts to be joined together.
