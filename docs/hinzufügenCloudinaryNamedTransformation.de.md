@@ -1,10 +1,10 @@
-Ähnlich wie `addCloudinaryTransformation`, aber für den speziellen Fall des Hinzufügens einer Named-Transformation. Die folgenden Parameter werden unterstützt:
+Fügt einer Cloudinary-URL eine benannte Transformation hinzu. Benannte Transformationen werden in Cloudinary definiert und ermöglichen die Wiederverwendung von Transformationseinstellungen.
 
-- `cloudinaryUrl`: Die URL der Cloudinary Assets
-- `publicId`: Die öffentliche ID des Assets in Cloudinary
-- `namedTransformation`: Die ID der Named-Transformation.
+##### Parameter
+* `cloudinaryUrl` - Die Cloudinary-URL, zu der die Transformation hinzugefügt werden soll.
+* `publicId` - Die Public ID des Bildes in Cloudinary.
+* `transformation` - Der Name der benannten Transformation.
 
-
-**Beispiele**
-
-- `addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453", 'bekleidung/4029051623453', 't1')` &#8594; "https://res.cloudinary.com/ecubede/t_t1/bekleidung/4029051623453"
+##### Beispiele
+* `addCloudinaryNamedTransformation('https://res.cloudinary.com/demo/image/upload/sample', 'sample', 'thumbnail')` Ausgabe: https://res.cloudinary.com/demo/image/upload/t_thumbnail/sample
+* `addCloudinaryNamedTransformation('https://res.cloudinary.com/demo/image/upload/w_200/sample', 'sample', 'sepia')` Ausgabe: https://res.cloudinary.com/demo/image/upload/w_200/t_sepia/sample
