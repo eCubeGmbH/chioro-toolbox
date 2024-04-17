@@ -1,5 +1,9 @@
-Formats the input value in `value` as a number. `locale` defines the country-specific formatting to be used,
-i.e. in particular the decimal separator to be used.
+Formats a number according to the formatting rules of the given locale. If no locale is specified, the default locale is used.
 
-If the value passed in `value` cannot be interpreted as a number, the original value will be returned unchanged.
-will be returned.
+##### Parameters
+* `value` - The number to format.
+* `overrideLocale` - (Optional) A string specifying the locale to use (e.g., 'en-US' for English).
+
+##### Examples
+* `formatAsNumber(1234.56)` Output: 1,234.56
+* `formatAsNumber(1234.56, 'de-DE')` Output: 1.234,56 

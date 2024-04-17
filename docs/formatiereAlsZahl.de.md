@@ -1,5 +1,9 @@
-Formatiert den in `wert` übergebenen Wert als Zahl. `länderFormat` definiert die zu verwendende länderspezifische Formatierung ('de-DE', 'en-EN',...),
-d.h. insbesondere den zu verwendenden Dezimaltrenner.
+Formatiert eine Zahl gemäß den Formatierungsregeln des angegebenen Gebietsschemas. Falls kein Gebietsschema angegeben wird, wird das Standardgebietsschema verwendet.
 
-Falls die in `wert` übergebene Ziffer nicht als Zahl interpretiert werden kann, wird der ursprüngliche Wert unverändert
-zurück geliefert.
+##### Parameter
+* `value` - Die zu formatierende Zahl.
+* `overrideLocale` - (Optional) Ein String, der das zu verwendende Gebietsschema angibt (z. B. 'de-DE' für Deutsch).
+
+##### Beispiele
+* `formatAsNumber(1234.56)` Ausgabe: 1.234,56
+* `formatAsNumber(1234.56, 'en-US')` Ausgabe: 1,234.56
