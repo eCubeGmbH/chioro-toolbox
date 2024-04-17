@@ -1,6 +1,12 @@
-Diese Funktion rundet alle Zahlen die es findet.
+Die Funktion rundet alle numerischen Werte in einem gegebenen Wert. 
+Sie kann Zahlen, Strings mit Zahlen, Arrays von Zahlen oder Objekten mit numerischen Werten verarbeiten. 
+Die Funktion erkennt Zahlen in Strings und rundet sie einzeln.
 
-**Beispiele**
+##### Parameter
+* `value` - Der Wert, in dem alle Zahlen gerundet werden sollen. Dies kann eine Zahl, ein String, ein Array oder ein Objekt sein.
 
-- `roundAllNumbers(88,9)` &#8594; "89"
-- `roundAllNumbers("Größe:98 x 50,5 x 5 cm:de”)` &#8594; "Größe:98 x 51 x 5 cm:de”
+##### Beispiele
+* `roundAllNumbers(3.14159)` Ausgabe: `3`
+* `roundAllNumbers('Die Temperatur beträgt 26.5 Grad.')` Ausgabe: `Die Temperatur beträgt 27 Grad.`
+* `roundAllNumbers([1.2, 3.7, 5.9])` Ausgabe: `[1, 4, 6]`
+* `roundAllNumbers({x: 10.2, y: 20.8})` Ausgabe: `{x: 10, y: 21}` 
