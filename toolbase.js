@@ -2241,7 +2241,7 @@ tools.add({
 
 
 function deleteSpecialCharacters(text) {
-    return stringOf(text).replace(/[^a-zA-Z0-9]/g, "");
+    return stringOf(text).replace(/[^a-zA-Z0-9]/g, ""); // TODO: Space mit Absicht auch entfernt?
 }
 
 tools.add({
