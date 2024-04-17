@@ -1,10 +1,10 @@
-Ermittelt alle numerischen Werte und formatiert sie gemäß den Eingabeparametern konsistent um: `Dezimaltrennzeichen` und `DezimalStellen`.
+This function normalizes numerical values within a text. It can unify decimal separators and set the number of decimal places.
 
-- `DezimalTrennzeichen`: "." oder "," Zeichen, das als Dezimaltrennzeichen verwendet werden soll.
-- `DezimalStellen`: Die Anzahl der Nachkommastellen nach dem Dezimaltrennzeichen.
+##### Parameters
+value - The text containing the numbers to be normalized.
+deciSeparator - The desired decimal separator (e.g., "," or ".").
+deciPlaces - The desired number of decimal places (optional, default is 0).
 
-
-**Beispiele**
-
-- `normalizeValues("23 and 23.225 and some", '.', 1)` &#8594; "23.0 and 23.2 and some"
-- `normalizeValues("23.1 and 23.22", '.', 1)` &#8594; "23.1 and 23.2"
+##### Examples
+* `normalizeValues("etwa 2,3 megawatts", ".")` Output: `etwa 2.3 megawatts`
+* `normalizeValues("23.1 and 23.22", '.', 1)` Output: `23.1 and 23.2`
