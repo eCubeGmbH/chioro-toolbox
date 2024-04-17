@@ -1,8 +1,9 @@
-Liefert das erste nicht-leere der als Argumente übergebenen Objekte.
-Falls es ein solches nicht gibt, wird ein leerer Text zurückgegeben.
-Statt einzelner Werte kann auch eine oder mehrere Listen übergeben werden. Einzelne Werte und Listen können gemischt werden.
+Diese Funktion prüft, ob mindestens eines der übergebenen Argumente den Wert `true` hat. Sie durchläuft alle Argumente und gibt `true` zurück, sobald ein Argument `true` ist. Andernfalls gibt sie `false` zurück.
 
-Kann man z.B. gut verwenden wenn der gewünschte Wert in einem von mehreren Attributen vorkommen kann.
+##### Parameter
+* `...args`: Die zu prüfenden Argumente.
 
-**Beispiel:**
-- Angenommen `attr1` ist leer und `attr2` nicht, dann liefert `erstesVon($('attr1'),$('attr2'),$('attr3')` den Wert von `attr2`.
+##### Beispiele
+* `istEinElementWahr(false, false, true)` Ausgabe: `true`
+* `istEinElementWahr(false, 0, "test")` Ausgabe: `false`
+* `istEinElementWahr(1, "test", true)` Ausgabe: `true` 
