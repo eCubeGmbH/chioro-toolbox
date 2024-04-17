@@ -1,10 +1,10 @@
-A Cloudinary specific utility function to add transformations to the Cloudinary URL based on the given parameters: 
+This function adds a transformation to a Cloudinary URL. It replaces the public ID in the URL with the specified transformation and the public ID to deliver the image with the desired modifications.
 
-- `cloudinaryUrl`: The URL of the cloudinary assets
-- `publicId`: The asset's public ID in Cloudinary
-- `transformation`: The transformation instructions or a named transformation.
+##### Parameters
+* **cloudinaryUrl** - The URL of the Cloudinary image.
+* **publicId** - The public ID of the image
+* **transformation** - The transformation to apply to the image, e.g., `w_200` for resizing width.
 
-
-**Examples**
-
-- `addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453", 'bekleidung/4029051623453', 'w_70,h_53,c_scale')` &#8594; "https://res.cloudinary.com/ecubede/w_70,h_53,c_scale/bekleidung/4029051623453"
+##### Examples
+* `addCloudinaryTransformation('https://res.cloudinary.com/demo/image/upload/sample', 'sample', 'w_200')` Output: `https://res.cloudinary.com/demo/image/upload/w_200/sample` (Image with a width of 200 pixels)
+* `addCloudinaryTransformation('https://res.cloudinary.com/demo/image/upload/w_200/sample', 'sample', 'c_fill,h_100,w_100')` Output: `https://res.cloudinary.com/demo/image/upload/c_fill,h_100,w_100/sample` (Image cropped to a square with 100x100 pixels) 
