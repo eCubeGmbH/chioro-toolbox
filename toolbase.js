@@ -48,18 +48,18 @@ tools.add({
         {
             "key": "URL",
             "label_en": "URL",
-            "label_de": "URL",
+            "label_de": "Adresse",
             "type": "text",
-            "desc_en": "URL to use",
-            "desc_de": "URL to use"
+            "desc_en": "URL to call",
+            "desc_de": "Aufzurufende Adresse"
         },
         {
             "key": "header",
-            "label_en": "header",
-            "label_de": "header",
+            "label_en": "HTTP headers",
+            "label_de": "HTTP headers",
             "type": "text",
-            "desc_en": "The header to use",
-            "desc_de": "The header to use"
+            "desc_en": "The headers to use (e.g. {'content-type': 'text/csv'})",
+            "desc_de": "Zu verwendende header (z.B. {'content-type': 'text/csv'})"
         }
     ],
     tags: ["pattern"],
@@ -135,26 +135,26 @@ tools.add({
         {
             "key": "URL",
             "label_en": "URL",
-            "label_de": "URL",
+            "label_de": "Adresse",
             "type": "text",
-            "desc_en": "URL to use",
-            "desc_de": "URL to use"
+            "desc_en": "URL to send to",
+            "desc_de": "Aufzurufende Adresse"
         },
         {
             "key": "params",
-            "label_en": "params",
-            "label_de": "params",
+            "label_en": "HTTP params",
+            "label_de": "HTTP params",
             "type": "text",
             "desc_en": "the payload",
-            "desc_de": "the payload"
+            "desc_de": "Der zu sendende Inhalt"
         },
         {
             "key": "header",
-            "label_en": "header",
-            "label_de": "header",
+            "label_en": "HTTP headers",
+            "label_de": "HTTP headers",
             "type": "text",
-            "desc_en": "The header to use",
-            "desc_de": "The header to use"
+            "desc_en": "The headers to use (e.g. {'content-type': 'text/csv'})",
+            "desc_de": "Zu verwendende header (z.B. {'content-type': 'text/csv'})\""
         }
     ],
     tags: ["pattern"],
@@ -237,7 +237,7 @@ tools.add({
     },
     argsOld: {
         en: "url, params, headers",
-        de: "adresse parameter header"
+        de: "adresse parameter headers"
     },
     args: [
         {
@@ -246,23 +246,23 @@ tools.add({
             "label_de": "Adresse",
             "type": "text",
             "desc_en": "URL to send to",
-            "desc_de": "Adresse, an die gesendet werden soll"
+            "desc_de": "Aufzurufende Adresse"
         },
         {
             "key": "params",
-            "label_en": "params",
-            "label_de": "params",
+            "label_en": "HTTP params",
+            "label_de": "HTTP params",
             "type": "text",
             "desc_en": "The payload",
             "desc_de": "Der Inhalt"
         },
         {
             "key": "header",
-            "label_en": "header",
-            "label_de": "header",
+            "label_en": "HTTP headers",
+            "label_de": "HTTP headers",
             "type": "text",
-            "desc_en": "The header to use",
-            "desc_de": "Zusätzliche header-Informationen, die genutzt werden sollen"
+            "desc_en": "The headers to use (e.g. {'content-type': 'text/csv'})",
+            "desc_de": "Zu verwendende header (z.B. {'content-type': 'text/csv'})"
         }
     ],
     tags: ["pattern"],
@@ -1193,7 +1193,7 @@ tools.add({
             "label_de": "Eingabewert",
             "type": "text",
             "desc_en": "Value of which the length should be returned",
-            "desc_de": "Wert dessen Länge zurückgegeben werden soll"
+            "desc_de": "Wert, dessen Länge zurückgegeben werden soll"
         }
     ],
     tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
@@ -1688,7 +1688,7 @@ tools.add({
         {
             "key": "text",
             "label_en": "Input text",
-            "label_de": "Ausgangstext",
+            "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text where something should be inserted",
             "desc_de": "Text, in dem eingefügt werden soll"
@@ -1706,8 +1706,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Position",
             "type": "text",
-            "desc_en": "Position where the text should be inserted",
-            "desc_de": "Position, an der der Text eingefügt werden soll"
+            "desc_en": "Position where the text should be inserted (starting at 0)",
+            "desc_de": "Position, an der der Text eingefügt werden soll (beginnend bei 0)"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -1768,8 +1768,8 @@ tools.add({
             "label_en": "Position",
             "label_de": "Position",
             "type": "text",
-            "desc_en": "Position from which to extract",
-            "desc_de": "Position, von der aus extrahiert werden soll"
+            "desc_en": "Position, to start extracting from (starting at 0)",
+            "desc_de": "Position, ab der extrahiert wird (beginnend bei 0)"
         },
         {
             "key": "length",
@@ -1815,7 +1815,7 @@ tools.add({
             "label_de": "Text",
             "type": "text",
             "desc_en": "Text where spaces at the beginning and end should be removed",
-            "desc_de": "Text bei dem Leerzeichen am Anfang und Ende entfernt werden sollen"
+            "desc_de": "Text, aus dem Leerzeichen, am Anfang & Ende entfernt werden"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -1853,8 +1853,8 @@ tools.add({
             "label_en": "Text",
             "label_de": "Text",
             "type": "text",
-            "desc_en": "Text where multiple spaces should be replaced by a single space",
-            "desc_de": "Text bei dem mehrere Leerzeichen durch ein einzelnes ersetzt werden sollen"
+            "desc_en": "Text with multiple whitespaces",
+            "desc_de": "Text, mit mehrfachen Leerzeichen"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -2094,8 +2094,8 @@ tools.add({
             "label_en": "List item",
             "label_de": "Listeneintrag",
             "type": "text",
-            "desc_en": "List entry in which the search text should be found.",
-            "desc_de": "Listeneintrag, in dem der Suchtext gefunden werden soll."
+            "desc_en": "List entry in which is searched.",
+            "desc_de": "Listeneintrag, in dem gesucht wird."
         }
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
@@ -2291,7 +2291,7 @@ tools.add({
             "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if no number was found",
-            "desc_de": "Wert, der zurückgegeben wird, wenn keine Zahl gefunden wurde"
+            "desc_de": "Rückgabetext, wenn keine Zahl gefunden wurde"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2656,7 +2656,7 @@ tools.add({
         {
             "key": "fallback",
             "label_en": "Fallback",
-            "label_de": "Default",
+            "label_de": "Ersatztext",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
             "desc_de": "Rückgabetext, wenn die Suche nichts ergeben hat"
@@ -2966,8 +2966,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text mit dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, der gesucht wird"
         },
         {
             "key": "lookupTableName",
@@ -3251,7 +3251,7 @@ tools.add({
             "label_de": "Ersatzspalte",
             "type": "text",
             "desc_en": "Column name of the data table to return the replacement value from",
-            "desc_de": "Spaltenname der Datentabelle, mit Ersatzwert"
+            "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
     ],
     tags: ["TAGS.LOOKUP"],
@@ -3812,8 +3812,8 @@ tools.add({
             "label_en": "Replace",
             "label_de": "Ersetze",
             "type": "text",
-            "desc_en": "The text to replace the search with",
-            "desc_de": "Der Text, durch den das Muster ersetzt wird"
+            "desc_en": "The text to replace the match with",
+            "desc_de": "Text, durch den der Treffer ersetzt wird"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -3888,10 +3888,10 @@ tools.add({
         {
             "key": "cloudinaryUrl",
             "label_en": "Url",
-            "label_de": "Url",
+            "label_de": "Adresse",
             "type": "text",
             "desc_en": "Url to be used",
-            "desc_de": "Url, die angepasst werden soll"
+            "desc_de": "Adresse, die angepasst werden soll"
         },
         {
             "key": "publicId",
@@ -3939,10 +3939,10 @@ tools.add({
         {
             "key": "cloudinaryUrl",
             "label_en": "Url",
-            "label_de": "Url",
+            "label_de": "Adresse",
             "type": "text",
             "desc_en": "The url to be used",
-            "desc_de": "Url, die angepasst werden soll"
+            "desc_de": "Adresse, die angepasst werden soll"
         },
         {
             "key": "publicId",
@@ -4077,7 +4077,7 @@ tools.add({
             "label_de": "Alte Einheit",
             "type": "text",
             "desc_en": "Old unit to replace",
-            "desc_de": "Die Einheit, die ersetzt wird"
+            "desc_de": "Einheit, die ersetzt werden soll"
         },
         {
             "key": "newUnit",
@@ -4085,7 +4085,7 @@ tools.add({
             "label_de": "Neue Einheit",
             "type": "text",
             "desc_en": "New unit to use",
-            "desc_de": "Die Einheit, die verwendet wird"
+            "desc_de": "Einheit, die eingesetzt werden soll"
         },
         {
             "key": "decimalPlaces",
