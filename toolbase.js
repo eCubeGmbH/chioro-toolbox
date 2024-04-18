@@ -1064,11 +1064,11 @@ tools.add({
         },
         {
             "key": "toReplace+",
-            "label_en": "To Replace",
-            "label_de": "Zum Ersetzen",
+            "label_en": "Returnvalue",
+            "label_de": "Rückgabetext",
             "type": "text",
-            "desc_en": "Text which will be returned if condition evaluated as true",
-            "desc_de": "Rückgabetext, wenn Bedingung als wahr bewertet wird"
+            "desc_en": "Text to return, if condition evaluated as true",
+            "desc_de": "Rückgabetext, wenn Bedingung wahr ist"
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
@@ -1923,7 +1923,7 @@ tools.add({
         },
         {
             "key": "textToSearch",
-            "label_en": "Search text",
+            "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text which should be replaced.",
@@ -1982,7 +1982,7 @@ tools.add({
         },
         {
             "key": "textToSearch",
-            "label_en": "Search text",
+            "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text that should be searched.",
@@ -2037,7 +2037,7 @@ tools.add({
         },
         {
             "key": "textToSearch", // TODO: Akzeptiert aktuell nur einen Wert oder eine Liste. Varargs sollte auch gehen
-            "label_en": "Search text",
+            "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text which should be searched.",
@@ -2083,7 +2083,7 @@ tools.add({
     args: [
         {
             "key": "searchItem",
-            "label_en": "Search text",
+            "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text which should be searched.",
@@ -2152,11 +2152,11 @@ tools.add({
         },
         {
             "key": "muster",
-            "label_en": "Search pattern",
-            "label_de": "Suchtext oder Muster",
+            "label_en": "Search",
+            "label_de": "Suche",
             "type": "text",
             "desc_en": "Simple string or RegExp used for the search.",
-            "desc_de": "Entweder ein einfacher Text oder RegExp."
+            "desc_de": "Text oder RegExp-Muster zum Suchen."
         },
         {
             "key": "fallback",
@@ -2226,8 +2226,8 @@ tools.add({
         },
         {
             "key": "pattern",
-            "label_en": "Search text or pattern",
-            "label_de": "Suchtext oder RegExp-Muster",
+            "label_en": "Search",
+            "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Simple text or RegExp pattern to search with",
             "desc_de": "Einfacher Text oder RegExp-Muster mit dem gesucht werden soll"
@@ -2639,8 +2639,8 @@ tools.add({
         },
         {
             "key": "textToSearch+",
-            "label_en": "Searchtext or pattern",
-            "label_de": "Suchtext oder Muster",
+            "label_en": "Search",
+            "label_de": "Suche",
             "type": "text",
             "desc_en": "Text or RegExp pattern to search for",
             "desc_de": "Text oder RegExp-Muster nach dem gesucht wird"
@@ -2798,7 +2798,7 @@ tools.add({
         },
         {
             "key": "textToSearchAndShow+",
-            "label_en": "Search text",
+            "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text to search for and return",
@@ -3239,7 +3239,7 @@ tools.add({
         },
         {
             "key": "matchingRegExpColumn",
-            "label_en": "Search pattern column",
+            "label_en": "Pattern column",
             "label_de": "Suchmuster-Spalte",
             "type": "text",
             "desc_en": "Column name containing RegExp patterns to search with",
@@ -3748,7 +3748,7 @@ tools.add({
         },
         {
             "key": "match",
-            "label_en": "Match",
+            "label_en": "Search",
             "label_de": "Suche",
             "type": "text",
             "desc_en": "The RegExp pattern to search for",
@@ -4314,7 +4314,7 @@ tools.add({
         },
         {
             "key": "text",
-            "label_en": "Text in front of value",
+            "label_en": "Text before value",
             "label_de": "Text vor Wert",
             "type": "text",
             "desc_en": "Text to search for to extract the value after",
