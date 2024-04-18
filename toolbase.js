@@ -1068,7 +1068,7 @@ tools.add({
             "label_de": "Zum Ersetzen",
             "type": "text",
             "desc_en": "Text which will be returned if condition evaluated as true",
-            "desc_de": "Text, der zurückgegeben wird, wenn Bedingung als wahr bewertet wird"
+            "desc_de": "Rückgabetext, wenn Bedingung als wahr bewertet wird"
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
@@ -1326,8 +1326,8 @@ tools.add({
         de: "filtereListe"
     },
     argsOld: {
-        en: "list property, regexp list",
-        de: "listeneintrag, regexp liste"
+        en: "list property, RegExp list",
+        de: "listeneintrag, RegExp liste"
     },
     args: [
         {
@@ -1343,8 +1343,8 @@ tools.add({
             "label_en": "Regexp list",
             "label_de": "Regexp list",
             "type": "text",
-            "desc_en": "List of regex to filter for",
-            "desc_de": "Liste von Regexp nach denen gefiltert werden soll."
+            "desc_en": "List of RegExp to filter for",
+            "desc_de": "Liste von RegExp nach denen gefiltert werden soll."
         }
     ],
     tags: ["TAGS.UTIL"],
@@ -1691,7 +1691,7 @@ tools.add({
             "label_de": "Ausgangstext",
             "type": "text",
             "desc_en": "Text where something should be inserted",
-            "desc_de": "Text in dem etwas eingefügt werden soll"
+            "desc_de": "Text, in dem eingefügt werden soll"
         },
         {
             "key": "textToInsert",
@@ -1761,7 +1761,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text from which something should be extracted",
-            "desc_de": "Text aus dem etwas extrahiert werden soll"
+            "desc_de": "Text, aus dem etwas extrahiert werden soll"
         },
         {
             "key": "position",
@@ -1919,7 +1919,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text in which something should be replaced.",
-            "desc_de": "Text in dem etwas ersetzt werden soll."
+            "desc_de": "Text, in dem etwas ersetzt werden soll."
         },
         {
             "key": "textToSearch",
@@ -1978,7 +1978,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text in which is searched.",
-            "desc_de": "Text in dem gesucht wird."
+            "desc_de": "Text, in dem gesucht wird."
         },
         {
             "key": "textToSearch",
@@ -2033,7 +2033,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text in which is searched.",
-            "desc_de": "Text in dem gesucht wird."
+            "desc_de": "Text, in dem gesucht wird."
         },
         {
             "key": "textToSearch", // TODO: Akzeptiert aktuell nur einen Wert oder eine Liste. Varargs sollte auch gehen
@@ -2148,15 +2148,15 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text from which something should be extracted.",
-            "desc_de": "Text aus dem etwas extrahiert werden soll."
+            "desc_de": "Text, aus dem etwas extrahiert werden soll."
         },
         {
             "key": "muster",
             "label_en": "Search pattern",
             "label_de": "Suchtext oder Muster",
             "type": "text",
-            "desc_en": "Simple string or RegEx used for the search.",
-            "desc_de": "Entweder ein einfacher Text oder RegEx."
+            "desc_en": "Simple string or RegExp used for the search.",
+            "desc_de": "Entweder ein einfacher Text oder RegExp."
         },
         {
             "key": "fallback",
@@ -2164,7 +2164,7 @@ tools.add({
             "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Text to return if nothing was found.",
-            "desc_de": "Text, der zurückgegeben wird wenn nichts gefunden wurde."
+            "desc_de": "Rückgabetext, wenn nichts gefunden wurde."
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2222,23 +2222,23 @@ tools.add({
             "label_de": "Text",
             "type": "text",
             "desc_en": "Text from which something should be extracted",
-            "desc_de": "Text aus dem etwas extrahiert werden soll"
+            "desc_de": "Text, aus dem etwas extrahiert werden soll"
         },
         {
             "key": "pattern",
             "label_en": "Search text or pattern",
-            "label_de": "Suchtext oder Muster",
+            "label_de": "Suchtext oder RegExp-Muster",
             "type": "text",
-            "desc_en": "Simple text or RegEx pattern to search with",
-            "desc_de": "Einfacher Text oder RegEx-Muster mit dem gesucht werden soll"
+            "desc_en": "Simple text or RegExp pattern to search with",
+            "desc_de": "Einfacher Text oder RegExp-Muster mit dem gesucht werden soll"
         },
         {
             "key": "withGroups",
             "label_en": "One/all results",
             "label_de": "Erstes/alle Ergebnisse",
             "type": "text",
-            "desc_en": "Return only the first or all results (active if not empty)",
-            "desc_de": "Nur den ersten oder alle Treffer zurückgeben (aktiv wenn nicht leer)"
+            "desc_en": "Return all results (active if not empty)",
+            "desc_de": "Alle Treffer zurückgeben (aktiv wenn nicht leer)"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2283,7 +2283,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text from which a number should be extracted",
-            "desc_de": "Text aus dem eine Zahl extrahiert werden soll"
+            "desc_de": "Text, aus dem eine Zahl extrahiert werden soll"
         },
         {
             "key": "fallback",
@@ -2354,8 +2354,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text from which all numbers should be extracted",
-            "desc_de": "Der Text aus dem alle Zahlen extrahiert werden sollen"
+            "desc_en": "Text from which all numbers should be extracted",
+            "desc_de": "Text, aus dem alle Zahlen extrahiert werden sollen"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2397,7 +2397,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text from which special characters should be removed",
-            "desc_de": "Text aus dem Sonderzeichen entfernt werden sollen"
+            "desc_de": "Text, aus dem Sonderzeichen entfernt werden sollen"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -2538,7 +2538,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text to check if it starts with a number",
-            "desc_de": "Text bei dem überprüft werden soll ob er mit einer Zahl beginnt"
+            "desc_de": "Text bei dem überprüft werden soll, ob er mit einer Zahl beginnt"
         }
     ],
     tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
@@ -2577,7 +2577,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text to check if it is a number",
-            "desc_de": "Text bei dem überprüft werden soll ob es eine Zahl ist"
+            "desc_de": "Text bei dem überprüft werden soll, ob es eine Zahl ist"
         }
     ],
     tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
@@ -2634,16 +2634,16 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "textToSearch+",
             "label_en": "Searchtext or pattern",
             "label_de": "Suchtext oder Muster",
             "type": "text",
-            "desc_en": "Text or RegEx pattern to search for",
-            "desc_de": "Text oder RegEx-Muster nach dem gesucht wird"
+            "desc_en": "Text or RegExp pattern to search for",
+            "desc_de": "Text oder RegExp-Muster nach dem gesucht wird"
         },
         {
             "key": "textToReplace+",
@@ -2659,7 +2659,7 @@ tools.add({
             "label_de": "Default",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
-            "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
+            "desc_de": "Rückgabetext, wenn die Suche nichts ergeben hat"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2721,16 +2721,16 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "textToSearch+",
             "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
-            "desc_en": "Text or RegEx pattern to search for",
-            "desc_de": "Text oder RegEx-Muster nach dem gesucht wird"
+            "desc_en": "Text or RegExp pattern to search for",
+            "desc_de": "Text oder RegExp-Muster nach dem gesucht wird"
         },
         {
             "key": "textToReplace+",
@@ -2746,7 +2746,7 @@ tools.add({
             "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
-            "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
+            "desc_de": "Rückgabetext, wenn die Suche nichts ergeben hat"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2793,8 +2793,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "textToSearchAndShow+",
@@ -2840,8 +2840,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "propertyName",
@@ -2857,7 +2857,7 @@ tools.add({
             "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
-            "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
+            "desc_de": "Rückgabetext, wenn die Suche nichts ergeben hat"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -2916,7 +2916,7 @@ tools.add({
             "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
-            "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
+            "desc_de": "Rückgabetext, wenn die Suche nichts ergeben hat"
         }
     ],
     tags: ["TAGS.EXTRACT"],
@@ -3049,8 +3049,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "lookupName",
@@ -3065,8 +3065,8 @@ tools.add({
             "label_en": "Search pattern column",
             "label_de": "Suchmuster-Spalte",
             "type": "text",
-            "desc_en": "Column name of the data table containing RegEx patterns to search with",
-            "desc_de": "Spaltenname der Datentabelle, mit RegEx-Mustern, mit denen gesucht wird"
+            "desc_en": "Column name containing RegExp patterns to search with",
+            "desc_de": "Spaltenname mit RegExp-Mustern zur Suche"
         },
         {
             "key": "columnToRetrieveValueFrom",
@@ -3226,8 +3226,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "lookupName",
@@ -3242,8 +3242,8 @@ tools.add({
             "label_en": "Search pattern column",
             "label_de": "Suchmuster-Spalte",
             "type": "text",
-            "desc_en": "Column name of the data table containing RegEx patterns to search with",
-            "desc_de": "Spaltenname der Datentabelle, mit RegEx-Mustern, mit denen gesucht wird"
+            "desc_en": "Column name containing RegExp patterns to search with",
+            "desc_de": "Spaltenname mit RegExp-Mustern, zur Suche"
         },
         {
             "key": "columnToRetrieveReplacementFrom",
@@ -3306,8 +3306,8 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "lookupName",
@@ -3322,8 +3322,8 @@ tools.add({
             "label_en": "Search pattern column",
             "label_de": "Suchmuster-Spalte",
             "type": "text",
-            "desc_en": "Column name of the data table containing RegEx patterns to search with",
-            "desc_de": "Spaltenname der Datentabelle, mit RegEx-Mustern, mit denen gesucht wird"
+            "desc_en": "Column name containing RegExp patterns to search with",
+            "desc_de": "Spaltenname mit RegExp-Mustern, zur Suche"
         },
         {
             "key": "columnToRetrieveValueFrom",
@@ -3743,16 +3743,16 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "match",
             "label_en": "Match",
             "label_de": "Suche",
             "type": "text",
-            "desc_en": "The pattern to search for",
-            "desc_de": "Das Muster nach dem gesucht wird"
+            "desc_en": "The RegExp pattern to search for",
+            "desc_de": "Das RegExp-Muster nach dem gesucht wird"
         },
         {
             "key": "fallback",
@@ -3760,7 +3760,7 @@ tools.add({
             "label_de": "Ersatzwert",
             "type": "text",
             "desc_en": "Value to return if nothing was found",
-            "desc_de": "Text, der zurückgegeben wird wenn die Suche nichts ergeben hat"
+            "desc_de": "Rückgabetext, wenn die Suche nichts ergeben hat"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -3796,16 +3796,16 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "search",
             "label_en": "Search",
             "label_de": "Suche",
             "type": "text",
-            "desc_en": "The pattern to search for",
-            "desc_de": "Das Muster nach dem gesucht wird"
+            "desc_en": "The RegExp pattern to search for",
+            "desc_de": "Das RegExp-Muster nach dem gesucht wird"
         },
         {
             "key": "replace",
@@ -3846,16 +3846,16 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "The text to be searched",
-            "desc_de": "Der Text in dem gesucht wird"
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "expr",
             "label_en": "Expression",
             "label_de": "Ausdruck",
             "type": "text",
-            "desc_en": "The pattern to search for",
-            "desc_de": "Das Muster nach dem gesucht wird"
+            "desc_en": "The RegExp pattern to search for",
+            "desc_de": "Das RegExp-Muster nach dem gesucht wird"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -4257,7 +4257,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text to search in",
-            "desc_de": "Text in dem gesucht wird"
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "text",
@@ -4310,7 +4310,7 @@ tools.add({
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text to search in",
-            "desc_de": "Text in dem gesucht wird"
+            "desc_de": "Text, in dem gesucht wird"
         },
         {
             "key": "text",
