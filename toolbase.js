@@ -4881,8 +4881,8 @@ tools.add({
             "label_en": "Date format",
             "label_de": "Datumsformat",
             "type": "text",
-            "desc_en": "Date format (empty for default)",
-            "desc_de": "Formatierung des Datums (leer für Standard)"
+            "desc_en": "Target format (empty for default e.g. yyyy-MM-dd hh:mm:ss)",
+            "desc_de": "Datumsformat (leer für Standard z.B. yyyy-MM-dd hh:mm:ss)"
         },
         {
             "key": "dateToProcess",
