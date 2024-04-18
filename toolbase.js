@@ -2973,7 +2973,7 @@ tools.add({
             "key": "lookupTableName",
             "label_en": "Datatable name",
             "label_de": "Datentablellenname",
-            "type": "text",
+            "type": "data_table",
             "desc_en": "Name of the data table to search in",
             "desc_de": "Name der Datentabelle, in der gesucht wird"
         },
@@ -2981,7 +2981,7 @@ tools.add({
             "key": "columnToCompare",
             "label_en": "Search column",
             "label_de": "Suchspalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name of the data table to search in",
             "desc_de": "Spaltenname der Datentabelle, in der gesucht wird"
         },
@@ -2989,7 +2989,7 @@ tools.add({
             "key": "columnToRetrieveValueFrom",
             "label_en": "Return column",
             "label_de": "Rückgabespalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name of the data table to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
@@ -3056,7 +3056,7 @@ tools.add({
             "key": "lookupName",
             "label_en": "Datatable name",
             "label_de": "Datentabellenname",
-            "type": "text",
+            "type": "data_table",
             "desc_en": "Name of the data table to search in",
             "desc_de": "Name der Datentabelle, in der gesucht wird"
         },
@@ -3064,7 +3064,7 @@ tools.add({
             "key": "columnContainingRegex",
             "label_en": "Search pattern column",
             "label_de": "Suchmuster-Spalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name containing RegExp patterns to search with",
             "desc_de": "Spaltenname mit RegExp-Mustern zur Suche"
         },
@@ -3072,7 +3072,7 @@ tools.add({
             "key": "columnToRetrieveValueFrom",
             "label_en": "Return column",
             "label_de": "Rückgabespalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name of the data table to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
@@ -3233,7 +3233,7 @@ tools.add({
             "key": "lookupName",
             "label_en": "Datatable name",
             "label_de": "Datentabellenname",
-            "type": "text",
+            "type": "data_table",
             "desc_en": "Name of the data table to search in",
             "desc_de": "Name der Datentabelle, in der gesucht wird"
         },
@@ -3241,7 +3241,7 @@ tools.add({
             "key": "matchingRegExpColumn",
             "label_en": "Pattern column",
             "label_de": "Suchmuster-Spalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name containing RegExp patterns to search with",
             "desc_de": "Spaltenname mit RegExp-Mustern, zur Suche"
         },
@@ -3249,7 +3249,7 @@ tools.add({
             "key": "columnToRetrieveReplacementFrom",
             "label_en": "Replace column",
             "label_de": "Ersatzspalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name of the data table to return the replacement value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
@@ -3313,7 +3313,7 @@ tools.add({
             "key": "lookupName",
             "label_en": "Datatable name",
             "label_de": "Datentabellenname",
-            "type": "text",
+            "type": "data_table",
             "desc_en": "Name of the data table to search in",
             "desc_de": "Name der Datentabelle, in der gesucht wird"
         },
@@ -3321,7 +3321,7 @@ tools.add({
             "key": "matchingRegExpColumn",
             "label_en": "Search pattern column",
             "label_de": "Suchmuster-Spalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name containing RegExp patterns to search with",
             "desc_de": "Spaltenname mit RegExp-Mustern, zur Suche"
         },
@@ -3329,7 +3329,7 @@ tools.add({
             "key": "columnToRetrieveValueFrom",
             "label_en": "Return column",
             "label_de": "Rückgabespalte",
-            "type": "text",
+            "type": "data_table_column",
             "desc_en": "Column name of the data table to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
