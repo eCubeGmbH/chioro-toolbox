@@ -943,7 +943,7 @@ function similarCategory(categoryValue, comparisonValue) {
         comparisonValue = '|' + comparisonValue;
     }
 
-    return categoryValue.startsWith(comparisonValue);
+    return categoryValue.toLowerCase().startsWith(comparisonValue.toLowerCase());
 }
 
 tools.add({
@@ -2045,7 +2045,7 @@ tools.add({
             "type": "text",
             "desc_en": "Text which should be searched.",
             "desc_de": "Text, der gesucht werden soll."
-        } // TODO: ignoreCase für sinnvolle methoden hinzufügen. Sollte default sein
+        }
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
     hideInToolbox: false,
@@ -3031,7 +3031,7 @@ function lookupGetRegExp(valueToMatch, lookupTableName, columnContainingRegex, c
         }
     }
 
-    return null;
+    return "";
 }
 
 tools.add({
@@ -3087,7 +3087,7 @@ tools.add({
             tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("");
         });
 
-        tools.it('will return null if no match is found', () => {
+        tools.it('will return an empty string if no match is found', () => {
             const lookupItem = {
                 get: (columnName) => {
                     if (columnName === 'key') {
@@ -3113,7 +3113,7 @@ tools.add({
                     getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
                 };
 
-                tools.expect(lookupGetRegExp("some text to search for", "test_table")).toBe(null);
+                tools.expect(lookupGetRegExp("some text to search for", "test_table")).toBe("");
             } finally {
                 delete _lookups;
             }
