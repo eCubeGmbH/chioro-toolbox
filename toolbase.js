@@ -1380,7 +1380,7 @@ tools.add({
     impl: asMap,
     aliases: {
         en: "asMap",
-        de: "speichereAlsMap"
+        de: "speichereAlsTabelle"
     },
     argsOld: {
         en: "name1, value1, name2, value2, ...",
