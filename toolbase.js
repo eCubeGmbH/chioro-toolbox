@@ -2613,7 +2613,7 @@ function decode() {
         }
     }
 
-    if (arguments.length > 3 && arguments[arguments.length - 1]) {
+    if (arguments.length % 2 === 0 && arguments[arguments.length - 1]) {
         return arguments[arguments.length - 1].toString();
     }
 
@@ -2669,6 +2669,7 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(decode("some words", "default")).toBe("default")
         tools.expect(decode("some words", "some", "another", "")).toBe("another");
         tools.expect(decode("some words", "some", "a", "words", "b")).toBe("a");
         tools.expect(decode("some words", /so.*/, "a", "words", "b")).toBe("a");
@@ -2700,7 +2701,7 @@ function decodeAll() {
     }
 
     const fallbackValue = arguments[arguments.length - 1];
-    if (replacements.length === 0 && arguments.length > 3 && fallbackValue) {
+    if (replacements.length === 0 && arguments.length % 2 === 0 && fallbackValue) {
         replacements.push(fallbackValue)
     }
 
@@ -2756,6 +2757,7 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
+        tools.expect(decodeAll("some words", "fallback")).jsonToBe(["fallback"]);
         tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
         tools.expect(decodeAll("some words")).jsonToBe([]);
         tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
@@ -2934,7 +2936,7 @@ tools.add({
 })
 
 
-function lookupGet(valueToMatch, lookupTableName, columnToCompare, columnToRetrieveValueFrom) {
+function lookupGet(valueToMatch, lookupTableName, columnToCompare, columnToRetrieveValueFrom) {  // TODO: add default
     if (typeof _lookups === 'undefined') {
         return "";
     }
@@ -3004,7 +3006,7 @@ tools.add({
 })
 
 
-function lookupGetRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
+function lookupGetRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) { // TODO: add default
     if (typeof _lookups === 'undefined') {
         return "";
     }
@@ -3202,7 +3204,7 @@ function lookupReplaceRegExp(valueToMatch, lookupTableName, columnContainingRege
 
     }
 
-    return null;
+    return "";
 }
 
 tools.add({
