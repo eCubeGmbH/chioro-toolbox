@@ -1064,7 +1064,7 @@ tools.add({
         },
         {
             "key": "toReplace+",
-            "label_en": "Returnvalue",
+            "label_en": "Return value",
             "label_de": "Rückgabetext",
             "type": "text",
             "desc_en": "Text to return, if condition evaluated as true",
@@ -1340,8 +1340,8 @@ tools.add({
         },
         {
             "key": "regexp list",
-            "label_en": "Regexp list",
-            "label_de": "Regexp list",
+            "label_en": "RegExp list",
+            "label_de": "RegExp Liste",
             "type": "text",
             "desc_en": "List of RegExp to filter for",
             "desc_de": "Liste von RegExp nach denen gefiltert werden soll."
@@ -1377,7 +1377,7 @@ tools.add({
     impl: asMap,
     aliases: {
         en: "asMap",
-        de: "speichereAlsListe" // TODO: Ist das nicht eig. speichereAlsMap?
+        de: "speichereAlsListe" // TODO: Ist das nicht eig. speichereAlsMap? Can be changed
     },
     argsOld: {
         en: "name1, value1, name2, value2, ...",
@@ -1590,10 +1590,10 @@ tools.add({
         },
         {
             "key": "text+",
-            "label_en": "Input text",
-            "label_de": "Eingabetext",
+            "label_en": "Text part",
+            "label_de": "Teiltext",
             "type": "text",
-            "desc_en": "Text to join",
+            "desc_en": "Text part to join with separator",
             "desc_de": "Text, der mit Trennzeichen verbunden wird"
         }
     ],
@@ -1703,7 +1703,7 @@ tools.add({
         },
         {
             "key": "position",
-            "label_en": "Input text",
+            "label_en": "Position",
             "label_de": "Position",
             "type": "text",
             "desc_en": "Position where the text should be inserted (starting at 0)",
@@ -1832,7 +1832,7 @@ tools.add({
 })
 
 
-function normalizeWhitespaces(text) { // TODO: Alte doku meinte auch tabs und newlines werden normalisiert. Implementieren?
+function normalizeWhitespaces(text) {
     return stringOf(text).replace(/\s+/g, " ");
 }
 
@@ -1853,8 +1853,8 @@ tools.add({
             "label_en": "Text",
             "label_de": "Text",
             "type": "text",
-            "desc_en": "Text with multiple whitespaces",
-            "desc_de": "Text, mit mehrfachen Leerzeichen"
+            "desc_en": "Text with multiple whitespaces to reduce",
+            "desc_de": "Text, mit zu reduzierenden mehrfachen Leerzeichen"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -2036,13 +2036,13 @@ tools.add({
             "desc_de": "Text, in dem gesucht wird."
         },
         {
-            "key": "textToSearch", // TODO: Akzeptiert aktuell nur einen Wert oder eine Liste. Varargs sollte auch gehen
+            "key": "textToSearch", // TODO: Akzeptiert aktuell nur einen Wert oder eine Liste. Varargs sollte auch gehen. Ja außerdem die andere private schalten. Pattren in doku erwähnen
             "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
             "desc_en": "Text which should be searched.",
             "desc_de": "Text, der gesucht werden soll."
-        } // TODO: Add ignoreCase option
+        } // TODO: ignoreCase für sinnvolle methoden hinzufügen. Sollte default sein
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
     hideInToolbox: null,
@@ -2091,7 +2091,7 @@ tools.add({
         },
         {
             "key": "listItemToSearch+",
-            "label_en": "List item",
+            "label_en": "List entry",
             "label_de": "Listeneintrag",
             "type": "text",
             "desc_en": "List entry in which is searched.",
@@ -2234,8 +2234,8 @@ tools.add({
         },
         {
             "key": "withGroups",
-            "label_en": "One/all results",
-            "label_de": "Erstes/alle Ergebnisse",
+            "label_en": "All results",
+            "label_de": "Alle Ergebnisse",
             "type": "text",
             "desc_en": "Return all results (active if not empty)",
             "desc_de": "Alle Treffer zurückgeben (aktiv wenn nicht leer)"
@@ -2453,7 +2453,7 @@ tools.add({
             "label_en": "Text or object",
             "label_de": "Text oder Objekt",
             "type": "text",
-            "desc_en": "Text or object which should be checked for emptiness",
+            "desc_en": "Text or object to check for being empty",
             "desc_de": "Text oder Objekt, das auf Leerheit überprüft werden soll"
         }
     ],
@@ -2537,7 +2537,7 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "Text to check if it starts with a number",
+            "desc_en": "Text to check for starting with a number",
             "desc_de": "Text bei dem überprüft werden soll, ob er mit einer Zahl beginnt"
         }
     ],
@@ -2576,7 +2576,7 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "Text to check if it is a number",
+            "desc_en": "Text to check for being a number",
             "desc_de": "Text bei dem überprüft werden soll, ob es eine Zahl ist"
         }
     ],
@@ -2982,7 +2982,7 @@ tools.add({
             "label_en": "Search column",
             "label_de": "Suchspalte",
             "type": "data_table_column",
-            "desc_en": "Column name of the data table to search in",
+            "desc_en": "Column name to search in",
             "desc_de": "Spaltenname der Datentabelle, in der gesucht wird"
         },
         {
@@ -2990,7 +2990,7 @@ tools.add({
             "label_en": "Return column",
             "label_de": "Rückgabespalte",
             "type": "data_table_column",
-            "desc_en": "Column name of the data table to return the value from",
+            "desc_en": "Column name to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
     ],
@@ -3062,7 +3062,7 @@ tools.add({
         },
         {
             "key": "columnContainingRegex",
-            "label_en": "Search pattern column",
+            "label_en": "Pattern column",
             "label_de": "Suchmuster-Spalte",
             "type": "data_table_column",
             "desc_en": "Column name containing RegExp patterns to search with",
@@ -3073,7 +3073,7 @@ tools.add({
             "label_en": "Return column",
             "label_de": "Rückgabespalte",
             "type": "data_table_column",
-            "desc_en": "Column name of the data table to return the value from",
+            "desc_en": "Column name to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
     ],
@@ -3250,7 +3250,7 @@ tools.add({
             "label_en": "Replace column",
             "label_de": "Ersatzspalte",
             "type": "data_table_column",
-            "desc_en": "Column name of the data table to return the replacement value from",
+            "desc_en": "Column name to return the replacement value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
     ],
@@ -3319,7 +3319,7 @@ tools.add({
         },
         {
             "key": "matchingRegExpColumn",
-            "label_en": "Search pattern column",
+            "label_en": "Pattern column",
             "label_de": "Suchmuster-Spalte",
             "type": "data_table_column",
             "desc_en": "Column name containing RegExp patterns to search with",
@@ -3330,7 +3330,7 @@ tools.add({
             "label_en": "Return column",
             "label_de": "Rückgabespalte",
             "type": "data_table_column",
-            "desc_en": "Column name of the data table to return the value from",
+            "desc_en": "Column name to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
         }
     ],
@@ -4195,8 +4195,8 @@ tools.add({
             "label_en": "Value",
             "label_de": "Wert",
             "type": "text",
-            "desc_en": "Value to normalize",
-            "desc_de": "Wert, der normalisiert werden soll"
+            "desc_en": "Text containing numeric values to normalize",
+            "desc_de": "Text, der zu normalisierende numerische Werte enthält"
         },
         {
             "key": "decimalSeparator",
@@ -5061,7 +5061,7 @@ tools.add({
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
-            "desc_en": "Text or object to check if it is blank",
+            "desc_en": "Text or object to check for emptiness",
             "desc_de": "Text oder Objekt, das auf Leerheit geprüft wird"
         },
         {
