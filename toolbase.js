@@ -1583,10 +1583,10 @@ tools.add({
         {
             "key": "separator",
             "label_en": "Input text",
-            "label_de": "Eingabetext",
+            "label_de": "Trennzeichen",
             "type": "text",
-            "desc_en": "Separator which divides the text",
-            "desc_de": "Trennzeichen welches den Text teilt"
+            "desc_en": "Separator to use",
+            "desc_de": "Zu verwendendes Trennzeichen"
         },
         {
             "key": "text+",
@@ -4403,10 +4403,10 @@ tools.add({
         {
             "key": "separator",
             "label_en": "Separator",
-            "label_de": "Separator",
+            "label_de": "Trennzeichen",
             "type": "text",
-            "desc_en": "Text to use as separator",
-            "desc_de": "Text, der als Trennzeichen verwendet werden soll"
+            "desc_en": "Text to split the text by",
+            "desc_de": "Text, anhand dessen der Text getrennt werden soll"
         }
     ],
     tags: ["TAGS.TEXT"],
@@ -4827,8 +4827,8 @@ tools.add({
             "label_en": "Date format",
             "label_de": "Datumsformat",
             "type": "text",
-            "desc_en": "Format that the date should be formatted to (empty for default)",
-            "desc_de": "Formatierung des Datums (leer für Standard)"
+            "desc_en": "Target format (empty for default e.g. yyyy-MM-dd hh:mm:ss)",
+            "desc_de": "Datumsformat (leer für Standard z.B. yyyy-MM-dd hh:mm:ss)"
         },
         {
             "key": "dateToProcess",
