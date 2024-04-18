@@ -3000,11 +3000,6 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: false,
     tests: () => {
-        tools.it("will return an empty string if _lookups is not defined", () => {
-            tools.expect(lookupGet("test", "test", "test", "test")).toBe("");
-        });
-
-        // TODO: This needs more tests
     }
 })
 
@@ -3022,12 +3017,12 @@ function lookupGetRegExp(valueToMatch, lookupTableName, columnContainingRegex, c
         columnToRetrieveValueFrom = 'value';
     }
 
-    const lookupItems = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
-    while (lookupItems.hasNext()) {
-        const lookupItem = lookupItems.getNext();
-        const regex = lookupItem.get(columnContainingRegex);
+    const rows = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
+    while (rows.hasNext()) {
+        const row = rows.getNext();
+        const regex = row.get(columnContainingRegex);
         if (regex && valueToMatch.match && valueToMatch.match(new RegExp(regex, 'ig'))) {
-            return lookupItem.get(columnToRetrieveValueFrom);
+            return row.get(columnToRetrieveValueFrom);
         }
     }
 
@@ -3088,7 +3083,7 @@ tools.add({
         });
 
         tools.it('will return an empty string if no match is found', () => {
-            const lookupItem = {
+            const row = {
                 get: (columnName) => {
                     if (columnName === 'key') {
                         return ".*notMatchingRegex.*"
@@ -3096,16 +3091,16 @@ tools.add({
                 }
             }
             let firstRun = true;
-            const lookupList = {
+            const rows = {
                 hasNext: () => {
                     const hasNext = firstRun;
                     firstRun = false;
                     return hasNext;
                 },
-                getNext: () => lookupItem
+                getNext: () => row
             }
             const lookupTable = {
-                getAllEntries: () => lookupList
+                getAllEntries: () => rows
             }
 
             try {
@@ -3120,7 +3115,7 @@ tools.add({
         });
 
         tools.it('will use key and value columns if not specified', () => {
-            const lookupItem = {
+            const row = {
                 get: (columnName) => {
                     if (columnName === 'key') {
                         return ".*for$"
@@ -3130,14 +3125,13 @@ tools.add({
                     return `${columnName} not found`;
                 }
             }
-            const lookupList = {
+            const rows = {
                 hasNext: () => true,
-                getNext: () => lookupItem
+                getNext: () => row
             }
             const lookupTable = {
-                getAllEntries: () => lookupList
+                getAllEntries: () => rows
             }
-
 
             try {
                 _lookups = {
@@ -3151,7 +3145,7 @@ tools.add({
         });
 
         tools.it('will use a specified key and value if specified', () => {
-            const lookupItem = {
+            const row = {
                 get: (columnName) => {
                     if (columnName === 'regexColumn') {
                         return ".*for$"
@@ -3161,12 +3155,12 @@ tools.add({
                     return `${columnName} not found`;
                 }
             }
-            const lookupList = {
+            const rows = {
                 hasNext: () => true,
-                getNext: () => lookupItem
+                getNext: () => row
             }
             const lookupTable = {
-                getAllEntries: () => lookupList
+                getAllEntries: () => rows
             }
 
 
@@ -3198,12 +3192,12 @@ function lookupReplaceRegExp(valueToMatch, lookupTableName, columnContainingRege
         columnToRetrieveValueFrom = 'value';
     }
 
-    const lookupItems = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
-    while (lookupItems.hasNext()) {
-        const lookupItem = lookupItems.getNext();
-        const regex = new RegExp(lookupItem.get(columnContainingRegex), 'ig');
+    const rows = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
+    while (rows.hasNext()) {
+        const row = rows.getNext();
+        const regex = new RegExp(row.get(columnContainingRegex), 'ig');
         if (valueToMatch.match && valueToMatch.match(regex)) {
-            return valueToMatch.replace(regex, lookupItem.get(columnToRetrieveValueFrom));
+            return valueToMatch.replace(regex, row.get(columnToRetrieveValueFrom));
         }
 
     }
@@ -3260,7 +3254,107 @@ tools.add({
     hideInToolbox: false,
     hideOnSimpleMode: false,
     tests: () => {
-        // TODO: Needs Tests
+        {
+            tools.it('will return a default value if _lookups is not defined', () => {
+                tools.expect(lookupReplaceRegExp("test", "test", "test", "test")).toBe("");
+            });
+
+            tools.it('will return an empty string if no match is found', () => {
+                const row = {
+                    get: (columnName) => {
+                        if (columnName === 'key') {
+                            return ".*notMatchingRegex.*"
+                        }
+                    }
+                }
+                let firstRun = true;
+                const rows = {
+                    hasNext: () => {
+                        const hasNext = firstRun;
+                        firstRun = false;
+                        return hasNext;
+                    },
+                    getNext: () => row
+                }
+                const lookupTable = {
+                    getAllEntries: () => rows
+                }
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupReplaceRegExp("some text to search for", "test_table")).toBe("");
+                } finally {
+                    delete _lookups;
+                }
+            });
+
+            tools.it('will use key and value columns if not specified', () => {
+                const row = {
+                    get: (columnName) => {
+                        if (columnName === 'key') {
+                            return ".*for$"
+                        } else if (columnName === 'value') {
+                            return "matchedByRegex";
+                        }
+                        return `${columnName} not found`;
+                    }
+                }
+
+                const rows = {
+                    hasNext: () => true,
+                    getNext: () => row
+                }
+
+                const lookupTable = {
+                    getAllEntries: () => rows
+                }
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupReplaceRegExp("some text to search for", "test_table")).toBe("matchedByRegex");
+                } finally {
+                    delete _lookups;
+                }
+            });
+
+            tools.it('will use a specified key and value if specified', () => {
+                const row = {
+                    get: (columnName) => {
+                        if (columnName === 'regexColumn') {
+                            return ".*for$"
+                        } else if (columnName === 'valueColumn') {
+                            return "matchedByRegex";
+                        }
+                        return `${columnName} not found`;
+                    }
+                }
+
+                const rows = {
+                    hasNext: () => true,
+                    getNext: () => row
+                }
+
+                const lookupTable = {
+                    getAllEntries: () => rows
+                }
+
+                try {
+                    _lookups = {
+                        getLookup: (lookupName, matchingRegExpColumn, columnToRetrieveValueFrom) => lookupTable
+                    };
+
+                    tools.expect(lookupReplaceRegExp("some text to search for", "test_table", "regexColumn", "valueColumn")).toBe("matchedByRegex");
+                } finally {
+                    delete _lookups;
+                }
+            });
+        }
     }
 })
 
@@ -3278,13 +3372,13 @@ function lookupGetAllRegExp(valueToMatch, lookupTableName, columnContainingRegex
     }
 
     const results = [];
-    const lookupItems = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
-    while (lookupItems.hasNext()) {
-        const lookupItem = lookupItems.getNext();
-        const regex = lookupItem.get(columnContainingRegex);
+    const rows = _lookups.getLookup(lookupTableName, columnContainingRegex, columnToRetrieveValueFrom).getAllEntries();
+    while (rows.hasNext()) {
+        const row = rows.getNext();
+        const regex = row.get(columnContainingRegex);
 
         if (regex && valueToMatch.match && valueToMatch.match(new RegExp(regex, 'ig'))) {
-            results.push(lookupItem.get(columnToRetrieveValueFrom));
+            results.push(row.get(columnToRetrieveValueFrom));
         }
     }
 
@@ -3346,7 +3440,7 @@ tools.add({
             });
 
             tools.it('will return null if no match is found', () => {
-                const lookupItem = {
+                const row = {
                     get: (columnName) => {
                         if (columnName === 'key') {
                             return ".*notMatchingRegex.*"
@@ -3354,16 +3448,16 @@ tools.add({
                     }
                 }
                 let firstRun = true;
-                const lookupList = {
+                const rows = {
                     hasNext: () => {
                         const hasNext = firstRun;
                         firstRun = false;
                         return hasNext;
                     },
-                    getNext: () => lookupItem
+                    getNext: () => row
                 }
                 const lookupTable = {
-                    getAllEntries: () => lookupList
+                    getAllEntries: () => rows
                 }
 
                 try {
@@ -3378,7 +3472,7 @@ tools.add({
             });
 
             tools.it('will use key and value columns if not specified', () => {
-                const lookupItem = {
+                const row = {
                     get: (columnName) => {
                         if (columnName === 'key') {
                             return ".*for$"
@@ -3390,15 +3484,15 @@ tools.add({
                 }
 
                 let firstRun = true;
-                const lookupList = {
+                const rows = {
                     hasNext: () => firstRun,
                     getNext: () => {
                         firstRun = !firstRun;
-                        return lookupItem
+                        return row
                     }
                 }
                 const lookupTable = {
-                    getAllEntries: () => lookupList
+                    getAllEntries: () => rows
                 }
 
 
@@ -3415,7 +3509,7 @@ tools.add({
 
             tools.it('will use a specified key and value if specified', () => {
 
-                const lookupItem = {
+                const row = {
                     get: (columnName) => {
                         if (columnName === 'regexColumn') {
                             return ".*for$"
@@ -3427,17 +3521,16 @@ tools.add({
                 }
 
                 let firstRun = true;
-                const lookupList = {
+                const rows = {
                     hasNext: () => firstRun,
                     getNext: () => {
                         firstRun = !firstRun;
-                        return lookupItem
+                        return row
                     }
                 }
                 const lookupTable = {
-                    getAllEntries: () => lookupList
+                    getAllEntries: () => rows
                 }
-
 
                 try {
                     _lookups = {
@@ -3469,7 +3562,7 @@ tools.add({
                 }
 
                 let runCount = 0;
-                const lookupList = {
+                const rows = {
                     hasNext: () => runCount < 2,
                     getNext: () => {
                         runCount++;
@@ -3477,7 +3570,7 @@ tools.add({
                     }
                 }
                 const lookupTable = {
-                    getAllEntries: () => lookupList
+                    getAllEntries: () => rows
                 }
 
                 try {
