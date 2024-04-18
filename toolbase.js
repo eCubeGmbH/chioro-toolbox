@@ -26,11 +26,15 @@ function getJson(url, headers = null) {
         return {};
     }
 
-    if (headers !== null) {
-        return JSON.parse(_apiFetcher.getUrl(url, headers));
+    if (headers === null) {
+        return JSON.parse(_apiFetcher.getUrl(url));
     }
 
-    return JSON.parse(_apiFetcher.getUrl(url));
+    if (!headers['content-type']) {
+        headers['content-type'] = 'application/json';
+    }
+
+    return JSON.parse(_apiFetcher.getUrl(url, headers));
 }
 
 tools.add({
@@ -85,21 +89,20 @@ tools.add({
             }
         });
 
-        // TODO: Others are doing it like this:
-        // tools.it('will use application/json as default content-type', () => {
-        //     try {
-        //         _apiFetcher = {
-        //             getUrl: (url, header) => {
-        //                 tools.expect(header).toBe({'content-type': 'application/json'});
-        //                 return JSON.stringify({});
-        //             }
-        //         }
-        //
-        //         getJson("https://some.interesting.url");
-        //     } finally {
-        //         delete _apiFetcher;
-        //     }
-        // });
+        tools.it('will use application/json as default content-type', () => {
+            try {
+                _apiFetcher = {
+                    getUrl: (url, header) => {
+                        tools.expect(header).jsonToBe({'content-type': 'application/json'});
+                        return JSON.stringify({});
+                    }
+                }
+
+                getJson("https://some.interesting.url", {});
+            } finally {
+                delete _apiFetcher;
+            }
+        });
     }
 })
 
@@ -214,7 +217,7 @@ tools.add({
 
 function putJson(url, params, headers = null) {
     if (typeof _apiFetcher === 'undefined') {
-        return;
+        return {};
     }
 
     if (headers === null) {
@@ -270,7 +273,7 @@ tools.add({
     hideOnSimpleMode: true,
     tests: () => {
         tools.it('will return undefined if no apiFetcher is defined', () => {
-            tools.expect(putJson("https://some.interesting.url")).toBe(undefined); // TODO: Anders als bei postJson da hier sonst ein {} zurückgegeben wird
+            tools.expect(putJson("https://some.interesting.url")).jsonToBe({});
         });
 
         tools.it('will call the endpoint with the given parameters', () => {
@@ -647,8 +650,8 @@ tools.add({
 });
 
 
-function source(propertyName) {
-    return get('source.' + propertyName);
+function source(attributeName) {
+    return get('source.' + attributeName);
 }
 
 tools.add({
@@ -679,8 +682,8 @@ tools.add({
 })
 
 
-function target(propertyName) {
-    return get('target.' + propertyName);
+function target(attributeName) {
+    return get('target.' + attributeName);
 }
 
 tools.add({
@@ -894,11 +897,11 @@ tools.add({
     },
     args: [{
         "key": "param",
-        "label_en": "param",
-        "label_de": "param",
+        "label_en": "input",
+        "label_de": "input",
         "type": "text",
-        "desc_en": "the input to be converted to a string",
-        "desc_de": "der input welcher in eine Zeichenkette umgewandelt werden soll"
+        "desc_en": "Input to be converted to a string",
+        "desc_de": "Engabewert, der zu Text konvertiert werden soll"
     }],
     tags: ["TAGS.UTIL"],
     hideInToolbox: true,
@@ -1159,20 +1162,20 @@ tools.add({
 })
 
 
-function size(something) {
-    if (isNumber(something)) {
-        something = something.toString();
+function size(input) {
+    if (isNumber(input)) {
+        input = input.toString();
     }
 
-    if (!something) {
+    if (!input) {
         return 0;
     }
 
-    if (something.length) {
-        return something.length;
+    if (input.length) {
+        return input.length;
     }
 
-    return mapSize(something);
+    return mapSize(input);
 }
 
 tools.add({
@@ -1198,7 +1201,7 @@ tools.add({
     ],
     tags: ["TAGS.UTIL", "TAGS.LIST", "TAGS.TEXT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(size("")).toBe(0);
         tools.expect(size("abc")).toBe(3);
@@ -1226,7 +1229,7 @@ tools.add({
     impl: asList,
     aliases: {
         en: "asList",
-        de: "speichereAlsTabelle" // TODO: Ist das nicht eig. speichereAlsListe?
+        de: "speichereAlsListe"
     },
     argsOld: {
         en: "something1, something2, ...",
@@ -1235,15 +1238,15 @@ tools.add({
     args: [
         {
             "key": "input+",
-            "label_en": "Input",
-            "label_de": "Eingabe",
+            "label_en": "Value",
+            "label_de": "Wert",
             "type": "text",
             "desc_en": "Input which will merged into a list",
-            "desc_de": "Eingabe, die zu einer Liste zusammengefügt wird"
+            "desc_de": "Eingabewert, der zu einer Liste zusammengefügt wird"
         }
     ],
     tags: ["TAGS.UTIL", "TAGS.LIST"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(asList()).listToBe([]);
@@ -1291,7 +1294,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.UTIL", "TAGS.LIST"],
-    hideInToolbox: null,
+    hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(anyOf()).toBe('');
@@ -1348,8 +1351,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.UTIL"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(filterList(["apfel", "birne", "clementine"], [/a.*/])).listToBe(["apfel"]);
         tools.expect(filterList(["apfel", "birne", "clementine"], [/notexisting/])).listToBe([]);
@@ -1377,7 +1380,7 @@ tools.add({
     impl: asMap,
     aliases: {
         en: "asMap",
-        de: "speichereAlsListe" // TODO: Ist das nicht eig. speichereAlsMap? Can be changed
+        de: "speichereAlsMap"
     },
     argsOld: {
         en: "name1, value1, name2, value2, ...",
@@ -1402,7 +1405,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.UTIL"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(asMap("a", 1, "b", 2)).jsonToBe({"a": 1, "b": 2});
@@ -1448,8 +1451,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.UTIL", "TAGS.LIST"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(removeEmptyListEntries()).listToBe([]);
         tools.expect(removeEmptyListEntries(null)).listToBe([]);
@@ -1488,8 +1491,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(lowerCaseText("")).toBe("");
         tools.expect(lowerCaseText("A")).toBe("a");
@@ -1534,8 +1537,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(upperCaseText("")).toBe("");
         tools.expect(upperCaseText("a")).toBe("A");
@@ -1598,7 +1601,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(joinText("-")).toBe("");
@@ -1643,7 +1646,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(concatenateText()).toBe("");
@@ -1711,8 +1714,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(insertTextAtPosition("01234", "#", 1)).toBe("0#1234");
         tools.expect(insertTextAtPosition("01234", "#", 0)).toBe("#01234");
@@ -1781,8 +1784,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(textAtPosition("01234", 1, 1)).toBe("1");
         tools.expect(textAtPosition("01234", 0, 1)).toBe("0");
@@ -1819,8 +1822,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(trimText(" a ")).toBe("a");
         tools.expect(trimText("  a")).toBe("a");
@@ -1858,8 +1861,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(normalizeWhitespaces(" ")).toBe(" ");
         tools.expect(normalizeWhitespaces(" ")).toBe(" ");
@@ -1939,8 +1942,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(replaceInText("ene mene muh", /m(.)/g, "A$1A")).toBe("ene AeAne AuAh");
         tools.expect(replaceInText("ene mene\n muh", "\n", "")).toBe("ene mene muh");
@@ -1990,8 +1993,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(locateInText("ene mene muh", "mene")).toBe(4);
         tools.expect(locateInText("ene mene muh", "xxx")).toBe(-1);
@@ -2036,7 +2039,7 @@ tools.add({
             "desc_de": "Text, in dem gesucht wird."
         },
         {
-            "key": "textToSearch", // TODO: Akzeptiert aktuell nur einen Wert oder eine Liste. Varargs sollte auch gehen. Ja außerdem die andere private schalten. Pattren in doku erwähnen
+            "key": "textToSearch",
             "label_en": "Search",
             "label_de": "Suchtext",
             "type": "text",
@@ -2045,8 +2048,8 @@ tools.add({
         } // TODO: ignoreCase für sinnvolle methoden hinzufügen. Sollte default sein
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(containsText("ene mene muh", "mene")).toBe(true);
         tools.expect(containsText("ene mene muh", "xxx")).toBe(false);
@@ -2099,7 +2102,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.LIST"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(inList("a", "a", "b")).toBe(true);
@@ -2168,8 +2171,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractFromText("ene mene muh", /m(.*)e/g, "dann halt nicht")).toBe("mene");
         tools.expect(extractFromText("ene mxnx muh", /m(.*)e/g, "dann halt nicht")).toBe("dann halt nicht");
@@ -2242,8 +2245,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.describe("Global (i.e. multi) matches", () => {
             tools.expect(extractAllMatchesFromText("ene mene muhe", /m..e/g)).jsonToBe(['mene', 'muhe']);
@@ -2295,8 +2298,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractNumberFromText("Temperaturen heute: 23 bis 25 Grad")).toBe("25");
         tools.expect(extractNumberFromText("Temperaturen heute: -23,6 bis 25.1 Grad")).toBe("25.1");
@@ -2359,8 +2362,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractAllNumbersFromText("Temperaturen heute: 23 bis 25 Grad")).jsonToBe(["23", "25"]);
         tools.expect(extractAllNumbersFromText("Temperaturen heute: -23,6 bis 25.1 Grad")).jsonToBe(["-23,6", "25.1"]);
@@ -2376,7 +2379,7 @@ tools.add({
 
 
 function deleteSpecialCharacters(text) {
-    return stringOf(text).replace(/[^a-zA-Z0-9]/g, ""); // TODO: Space mit Absicht auch entfernt?
+    return stringOf(text).replace(/[^a-zA-Z0-9]/g, ""); // TODO: Space wohl unabsichtlich ebenfalls entfernt?
 }
 
 tools.add({
@@ -2401,8 +2404,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(deleteSpecialCharacters("a-b-c")).toBe("abc");
         tools.expect(deleteSpecialCharacters("a b c")).toBe("abc");
@@ -2458,8 +2461,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(isBlank("2")).toBe(false);
         tools.expect(isBlank(2)).toBe(false);
@@ -2500,8 +2503,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(isNotBlank("2")).toBe(true);
         tools.expect(isNotBlank(2)).toBe(true);
@@ -2542,8 +2545,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(startsNumeric("1")).toBe(true);
         tools.expect(startsNumeric("23")).toBe(true);
@@ -2581,8 +2584,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(isNumeric("2")).toBe(true);
         tools.expect(isNumeric("23")).toBe(true);
@@ -2663,7 +2666,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(decode("some words", "some", "another", "")).toBe("another");
@@ -2750,7 +2753,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(decodeAll("some words", "some", "a", "words", "b")).jsonToBe(["a", "b"]);
@@ -2806,7 +2809,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(extractFirstTerm("some words", "some")).toBe("some");
@@ -2861,8 +2864,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "Größe")).toBe("XL");
         tools.expect(extractProperty("Produkteigenschaften: Farbe: rot, Größe: XL, Hinweise: nicht schleudern", "hinweise")).toBe(("nicht schleudern"));
@@ -2920,8 +2923,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.EXTRACT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractFromHtmlEnum("<li>someStuff: other</li>", "someStuff")).toBe("other");
         tools.expect(extractFromHtmlEnum("<li><span style=\"font-size:14px;\"><span style=\"font-family: arial,helvetica,sans-serif;\">Wandstärke: 5- 6cm</span></span></li>", "Wandstärke")).toBe("5- 6cm");
@@ -2932,9 +2935,8 @@ tools.add({
 
 
 function lookupGet(valueToMatch, lookupTableName, columnToCompare, columnToRetrieveValueFrom) {
-    /* 'lookups' is injected in environment, an instance of LookupCache class in java */
     if (typeof _lookups === 'undefined') {
-        return "valueFound";
+        return "";
     }
 
     if (!columnToCompare) {
@@ -2995,11 +2997,11 @@ tools.add({
         }
     ],
     tags: ["TAGS.LOOKUP"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
-        tools.it("will return valueFound if _lookups is not defined", () => {
-            tools.expect(lookupGet("test", "test", "test", "test")).toBe("valueFound");
+        tools.it("will return an empty string if _lookups is not defined", () => {
+            tools.expect(lookupGet("test", "test", "test", "test")).toBe("");
         });
 
         // TODO: This needs more tests
@@ -3009,7 +3011,7 @@ tools.add({
 
 function lookupGetRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
     if (typeof _lookups === 'undefined') {
-        return "valueFound"; // TODO: Strange default value
+        return "";
     }
 
     if (!columnContainingRegex) {
@@ -3078,11 +3080,11 @@ tools.add({
         }
     ],
     tags: ["TAGS.LOOKUP"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.it('will return a default value if _lookups is not defined', () => {
-            tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("valueFound");
+            tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("");
         });
 
         tools.it('will return null if no match is found', () => {
@@ -3185,7 +3187,7 @@ tools.add({
 
 function lookupReplaceRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
     if (typeof _lookups === 'undefined') {
-        return "valueFound";
+        return "";
     }
 
     if (!columnContainingRegex) {
@@ -3255,8 +3257,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.LOOKUP"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         // TODO: Needs Tests
     }
@@ -3264,7 +3266,7 @@ tools.add({
 
 function lookupGetAllRegExp(valueToMatch, lookupTableName, columnContainingRegex, columnToRetrieveValueFrom) {
     if (typeof _lookups === 'undefined') {
-        return "valueFound";
+        return "";
     }
 
     if (!columnContainingRegex) {
@@ -3335,12 +3337,12 @@ tools.add({
         }
     ],
     tags: ["TAGS.LOOKUP"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         {
             tools.it('will return a default value if _lookups is not defined', () => {
-                tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("valueFound");
+                tools.expect(lookupGetRegExp("test", "test", "test", "test")).toBe("");
             });
 
             tools.it('will return null if no match is found', () => {
@@ -3524,7 +3526,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.FORMAT"],
-    hideInToolbox: null,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(formatAsHtmlBulletpoints("a", "b", "c")).toBe("<ul><li>a</li><li>b</li><li>c</li></ul>");
@@ -3583,8 +3585,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.FORMAT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(formatAsNumber("8.8")).toBe("8,8");
         tools.expect(formatAsNumber(8.8)).toBe("8,8");
@@ -3643,8 +3645,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.FORMAT"],
-    hideInToolbox: null,
-    hideOnSimpleMode: null,
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(textToNumber("1,223.3", 'en-US')).toBe(1223.3);
         tools.expect(textToNumber("1.223,3")).toBe(1223.3);
@@ -3912,7 +3914,7 @@ tools.add({
         ],
     tags: ["TAGS.CLOUDINARY"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(addCloudinaryTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "cx32x44"))
             .toBe("https://res.cloudinary.com/ecubede/cx32x44/bekleidung/4029051623453.jpeg");
@@ -3963,7 +3965,7 @@ tools.add({
     ],
     tags: ["TAGS.CLOUDINARY"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(addCloudinaryNamedTransformation("https://res.cloudinary.com/ecubede/bekleidung/4029051623453.jpeg", "bekleidung/4029051623453", "josef"))
             .toBe("https://res.cloudinary.com/ecubede/t_josef/bekleidung/4029051623453.jpeg");
@@ -4098,7 +4100,7 @@ tools.add({
     ],
     tags: ["TAGS.UNIT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(convertUnit("23 cm and 23 cm", 10, "cm", "mm")).toBe("230 mm and 230 mm");
         tools.expect(convertUnit("amazing 2,3 cm thing", 10, "cm", "mm")).toBe("amazing 23 mm thing");
@@ -4217,7 +4219,7 @@ tools.add({
     ],
     tags: ["TAGS.UNIT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(normalizeValues("23.1 and 23.22", '.', 1)).toBe("23.1 and 23.2");
         tools.expect(normalizeValues("23 and 23.225 and some", '.', 1)).toBe("23.0 and 23.2 and some");
@@ -4270,7 +4272,7 @@ tools.add({
     ],
     tags: ["TAGS.EXTRACT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractValueBeforeText("some 23.1 mangos and 4 apples ", 'mangos')).toBe("23.1");
         tools.expect(extractValueBeforeText("Dimensions of 25cm and ", 'cm')).toBe("25");
@@ -4323,7 +4325,7 @@ tools.add({
     ],
     tags: ["TAGS.EXTRACT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(extractValueAfterText("some 23.1 mangos and 4 apples ", 'some')).toBe("23.1");
         tools.expect(extractValueAfterText("Price of $200", '$')).toBe("200");
@@ -4359,7 +4361,7 @@ tools.add({
     ],
     tags: ["TAGS.EXTRACT"],
     hideInToolbox: true,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(escapeRegExp("a.b")).toBe("a\\.b");
         tools.expect(escapeRegExp("a.b*")).toBe("a\\.b\\*");
@@ -4411,7 +4413,7 @@ tools.add({
     ],
     tags: ["TAGS.TEXT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(splitText("a,b,c")).jsonToBe(['a', 'b', 'c']);
         tools.expect(splitText("a, b,  c")).jsonToBe(['a', 'b', 'c']);
@@ -4429,7 +4431,7 @@ tools.add({
 
 function attributes() {
     if (typeof _source === 'undefined') {
-        return ['attr1', 'attr2', 'attr3']; // TODO: Ist das ein sinnvoller default?
+        return [];
     }
 
     return Object.keys(JSON.parse(_source)).filter(k => !k.startsWith("_"));
@@ -4466,9 +4468,9 @@ tools.add({
     ],
     tags: ["TAGS.TEXT"],
     hideInToolbox: true,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
-        tools.expect(attributes()).jsonToBe(['attr1', 'attr2', 'attr3']);
+        tools.expect(attributes()).jsonToBe([]);
 
         tools.it('will extract all attributes without _ prefix from the _source object', () => {
             try {
@@ -4531,7 +4533,7 @@ tools.add({
     ],
     tags: ["TAGS.TEXT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(startsWith("super", /u../)).toBe(false);
         tools.expect(startsWith("super", /^s../)).toBe(true);
@@ -4596,7 +4598,7 @@ tools.add({
     ],
     tags: ["TAGS.TEXT"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(endsWith("super", /r/)).toBe(true);
         tools.expect(endsWith("super", /u../)).toBe(false);
@@ -4612,7 +4614,7 @@ tools.add({
 })
 
 
-function someOf() { // TODO: misleading name its more like anyOf
+function someOf() {
     for (let i = 0; i < arguments.length; i++) {
         if (arguments[i] === true) {
             return true;
@@ -4644,7 +4646,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
-    hideInToolbox: false,
+    hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(someOf(true)).toBe(true);
@@ -4787,7 +4789,7 @@ tools.add({
     ],
     tags: ["TAGS.CONDITIONAL"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(not(true)).toBe(false);
         tools.expect(not(false)).toBe(true);
@@ -4841,7 +4843,7 @@ tools.add({
     ],
     tags: ["TAGS.UTIL"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(date('dd.MM.yyyy', Date.parse("1980/01/01"))).toBe("01.01.1980");
         tools.expect(date('dd.MM.yyyy', Date.parse("01.01.1980"))).toBe("01.01.1980");
@@ -4895,7 +4897,7 @@ tools.add({
     ],
     tags: ["TAGS.UTIL"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(timestamp('yyyyMMddhhmm', Date.parse("1980/01/01"))).toBe("198001011200");
         tools.expect(timestamp('yyyyMMddhhmm', Date.parse("01.01.1980"))).toBe("198001011200");
@@ -4964,7 +4966,7 @@ tools.add({
     ],
     tags: ["TAGS.CONDITIONAL"],
     hideInToolbox: false,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(roundAllNumbers([88.6, 55.8])).jsonToBe([89, 56]);
         tools.expect(roundAllNumbers(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
@@ -5023,7 +5025,7 @@ tools.add({
     ],
     tags: ["TAGS.UTIL"],
     hideInToolbox: true,
-    hideOnSimpleMode: null,
+    hideOnSimpleMode: false,
     tests: () => {
         try {
             tools.expect($global('test_key', 'test_value')).toBe('test_value');
