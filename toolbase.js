@@ -1732,11 +1732,11 @@ tools.add({
 
 function textAtPosition(text, position, length) {
     if (!isInteger(position)) {
-        throw "In textAtPosition(): position has to be a number";
+        return null;
     }
 
     if ((length || length === 0) && !isInteger(length)) {
-        throw "In textAtPosition(): length has to be a number";
+        throw null;
     }
 
     if (!length || length === 0) {
