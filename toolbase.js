@@ -1736,7 +1736,7 @@ function textAtPosition(text, position, length) {
     }
 
     if ((length || length === 0) && !isInteger(length)) {
-        throw "";
+        return "";
     }
 
     if (!length || length === 0) {
