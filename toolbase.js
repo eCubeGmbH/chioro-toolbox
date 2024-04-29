@@ -1732,11 +1732,11 @@ tools.add({
 
 function textAtPosition(text, position, length) {
     if (!isInteger(position)) {
-        return null;
+        return "";
     }
 
     if ((length || length === 0) && !isInteger(length)) {
-        throw null;
+        throw "";
     }
 
     if (!length || length === 0) {
