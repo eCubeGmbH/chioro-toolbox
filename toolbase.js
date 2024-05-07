@@ -1364,11 +1364,10 @@ tools.add({
 function asMap() {
     const result = {};
     for (let i = 0; i < arguments.length - 1; i += 2) {
-        const name = stringOf(arguments[i]);
+        let name = stringOf(arguments[i]);
         if (name === "") {
-            throw "In asMap(): Key should not be empty.";
+            name = 'empty';
         }
-
         result[name] = arguments[i + 1];
     }
 
@@ -1668,7 +1667,7 @@ function insertTextAtPosition(text, textToInsert, position) {
     textToInsert = stringOf(textToInsert);
 
     if (!isInteger(position)) {
-        throw "In insertTextAtPosition(): position has to be a number";
+        position = 0;
     }
 
     return text.slice(0, position)
