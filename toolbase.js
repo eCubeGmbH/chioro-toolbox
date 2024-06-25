@@ -4775,6 +4775,10 @@ tools.add({
         en: "allOf",
         de: "sindAlleElementeWahr"
     },
+    simpleDescription: {
+        en: "Check if all elements are true",
+        de: "Prüfe ob alle Elemente wahr sind"
+    },
     argsOld: {
         en: "something1, something2, ...",
         de: "argument1, argument2, ..."
