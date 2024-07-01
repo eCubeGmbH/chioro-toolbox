@@ -4207,7 +4207,7 @@ tools.add({
     },
     simpleDescription: {
         de: "Füge eine cloudinary-Transformation über dessen Namen hinzu",
-        en: "Add a Cloudinary transformation via its name"
+        en: "Add a Cloudinary transformation via it's name"
     },
     argsOld: {
         en: "cloudinaryUrl, publicId, named_transformation",
