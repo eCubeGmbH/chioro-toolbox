@@ -3188,7 +3188,7 @@ tools.add({
         de: "sucheUndNimmRegExp"
     },
     simpleDescription: {
-        de: "Nutze ersten Wert aus Datentabelle mit Suchmusterspalte",
+        de: "Nutze ersten Wert aus Datentabelle mit Musterspalte",
         en: "Use first value from lookup table with pattern column"
     },
     argsOld: {
