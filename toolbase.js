@@ -44,6 +44,10 @@ tools.add({
         en: "getJson",
         de: "getJson"
     },
+    simpleDescription: {
+        de: "JSON-Daten von API abrufen",
+        en: "Fetch JSON data from an API"
+    },
     argsOld: {
         en: "URL, header",
         de: "URL, header"
@@ -130,6 +134,11 @@ tools.add({
         en: "postJson",
         de: "postJson"
     },
+    simpleDescription: {
+        de: "JSON-Daten zu API senden",
+        en: "Send JSON data to an API"
+    },
+
     argsOld: {
         en: "url params headers",
         de: "url parameter header"
@@ -451,6 +460,10 @@ tools.add({
         en: "current",
         de: "current"
     },
+    simpleDescription: {
+        de: "Nutze Name des aktuellen Zielattributs",
+        en: "Use name of the current target attribute"
+    },
     argsOld: {
         en: "",
         de: ""
@@ -660,6 +673,10 @@ tools.add({
     aliases: {
         en: "sourceAttribute",
         de: "quellAttribut"
+    },
+    simpleDescription: {
+        de: "Wert aus einem Quellattribut nutzen",
+        en: "Use value of a source attribute"
     },
     argsOld: {
         en: "propertyName",
@@ -1052,6 +1069,11 @@ tools.add({
         en: "decodeConditions",
         de: "dekodiereBedingungen"
     },
+    simpleDescription: {
+        de: "Bedingungen dekodieren",
+        en: "Decode conditions"
+    },
+
     argsOld: {
         en: "condition_1, toReplace_1, ...",
         de: "bedingung_1, zuErsetzen_1, ..."
@@ -1185,6 +1207,10 @@ tools.add({
         en: "size",
         de: "größe"
     },
+    simpleDescription: {
+        de: "Berechne die Größe/Länge des Eingabewerts",
+        en: "Calculate size/length of the input value"
+    },
     argsOld: {
         en: "something",
         de: "argument"
@@ -1230,6 +1256,10 @@ tools.add({
     aliases: {
         en: "asList",
         de: "speichereAlsListe"
+    },
+    simpleDescription: {
+        de: "Werte in Liste umwandeln",
+        en: "Convert values to a list"
     },
     argsOld: {
         en: "something1, something2, ...",
@@ -1328,6 +1358,10 @@ tools.add({
         en: "filterList",
         de: "filtereListe"
     },
+    simpleDescription: {
+        de: "Liste nach Suchmuster einschränken",
+        en: "Filter a list by search patterns"
+    },
     argsOld: {
         en: "list property, RegExp list",
         de: "listeneintrag, RegExp liste"
@@ -1380,6 +1414,10 @@ tools.add({
     aliases: {
         en: "asMap",
         de: "speichereAlsTabelle"
+    },
+    simpleDescription: {
+        de: "Wertpaare in Tabelle umwandeln",
+        en: "Convert key value pairs to a map"
     },
     argsOld: {
         en: "name1, value1, name2, value2, ...",
@@ -1435,6 +1473,10 @@ tools.add({
         en: "removeEmptyListEntries",
         de: "entferneLeereListeneinträge"
     },
+    simpleDescription: {
+        de: "Leere Listeneinträge entfernen",
+        en: "Remove empty list entries"
+    },
     argsOld: {
         en: "list",
         de: "liste"
@@ -1474,6 +1516,10 @@ tools.add({
     aliases: {
         en: "lowerCaseText",
         de: "ändereZuKleinbuchstaben"
+    },
+    simpleDescription: {
+        de: "Ganzen Text kleinschreiben",
+        en: "Convert whole text to lowercase"
     },
     argsOld: {
         en: "text",
@@ -1520,6 +1566,10 @@ tools.add({
     aliases: {
         en: "upperCaseText",
         de: "ändereZuGroßbuchstaben"
+    },
+    simpleDescription: {
+        de: "Ganzen Text großschreiben",
+        en: "Convert whole text to uppercase"
     },
     argsOld: {
         en: "text",
@@ -1577,6 +1627,10 @@ tools.add({
         en: "joinText",
         de: "verbindeTextMitTrennzeichen"
     },
+    simpleDescription: {
+        de: "Mehrere Texte mit Trennzeichen verbinden",
+        en: "Join multiple texts with a separator"
+    },
     argsOld: {
         en: "separator, text1, text2, ...",
         de: "trennzeichen, text1, text2, ..."
@@ -1630,6 +1684,10 @@ tools.add({
         en: "concatenateText",
         de: "verketteText"
     },
+    simpleDescription: {
+        de: "Mehrere Texte mit Trennzeichen verketten",
+        en: "Concatenate multiple texts with a separator"
+    },
     argsOld: {
         en: "text1, text2, ...",
         de: "text1, text2, ..."
@@ -1681,6 +1739,10 @@ tools.add({
     aliases: {
         en: "insertTextAtPosition",
         de: "fügeTextAnPositionEin"
+    },
+    simpleDescription: {
+        de: "Text an Position einfügen",
+        en: "Insert text at position"
     },
     argsOld: {
         en: "text, textToInsert, position",
@@ -1752,6 +1814,10 @@ tools.add({
         en: "textAtPosition",
         de: "gibTextAnPosition"
     },
+    simpleDescription: {
+        de: "Text ab Position auslesen",
+        en: "Read text from position"
+    },
     argsOld: {
         en: "text, position, length",
         de: "text, position, länge"
@@ -1806,6 +1872,10 @@ tools.add({
         en: "trimText",
         de: "schneideTextZu"
     },
+    simpleDescription: {
+        de: "Entferne Leerzeichen am Beginn/Ende des Texts",
+        en: "Remove leading and trailing spaces from text"
+    },
     argsOld: {
         en: "text",
         de: "text"
@@ -1844,6 +1914,10 @@ tools.add({
     aliases: {
         en: "normalizeWhitespaces",
         de: "normalisiereLücken"
+    },
+    simpleDescription: {
+        de: "Entferne unnötige Leerzeichen aus dem Text",
+        en: "Remove unnecessary whitespace"
     },
     argsOld: {
         en: "inputString",
@@ -1910,6 +1984,10 @@ tools.add({
         en: "replaceInText",
         de: "ersetzeInText"
     },
+    simpleDescription: {
+        de: "Suchbegriff im Text finden und ersetzen",
+        en: "Search and Replace in text"
+    },
     argsOld: {
         en: "text, textToSearch, replaceWith",
         de: "text, suchtext, ersetzeDurch"
@@ -1969,6 +2047,10 @@ tools.add({
         en: "locateInText",
         de: "findePositionInText"
     },
+    simpleDescription: {
+        de: "Suchbegriff im Text finden und Position ausgeben",
+        en: "Search for term in text and return position"
+    },
     argsOld: {
         en: "text, textToSearch",
         de: "text, suchtext"
@@ -2024,6 +2106,10 @@ tools.add({
         en: "containsText",
         de: "beinhaltetText"
     },
+    simpleDescription: {
+        de: "Ist der Suchbegriff im Text zu finden?",
+        en: "Does the text contain the search term?"
+    },
     argsOld: {
         en: "text, textToSearch",
         de: "text, suchtext"
@@ -2077,6 +2163,10 @@ tools.add({
     aliases: {
         en: "inList",
         de: "istInListe"
+    },
+    simpleDescription: {
+        de: "Ist der Wert in Liste zu finden?",
+        en: "Does a List contain a specific value?"
     },
     argsOld: {
         en: "searchItem, listItemToSearch1, listItemToSearch2, ...",
@@ -2138,6 +2228,10 @@ tools.add({
     aliases: {
         en: "extractFromText",
         de: "extrahiereAusText"
+    },
+    simpleDescription: {
+        de: "Mit Suchmuster ersten Treffer aus Text auslesen (RegExp)",
+        en: "Extract first match for search pattern in text (RegExp)"
     },
     argsOld: {
         en: "text, muster, fallback",
@@ -2213,6 +2307,10 @@ tools.add({
         en: "extractAllMatchesFromText",
         de: "extrahiereAlleTrefferAusText"
     },
+    simpleDescription: {
+        de: "Mit Suchmuster alle Treffer aus Text auslesen (RegExp)",
+        en: "Extract all matches for search pattern in text (RegExp)"
+    },
     argsOld: {
         en: "text, pattern, withGroups",
         de: "text, muster, mitGruppen"
@@ -2273,6 +2371,10 @@ tools.add({
     aliases: {
         en: "extractNumberFromText",
         de: "extrahiereZahlAusText"
+    },
+    simpleDescription: {
+        de: "Erste Zahl aus Text auslesen",
+        en: "Extract first number from text"
     },
     argsOld: {
         en: "text, fallback",
@@ -2346,6 +2448,10 @@ tools.add({
         en: "extractAllNumbersFromText",
         de: "extrahiereAlleZahlenAusText"
     },
+    simpleDescription: {
+        de: "Alle Zahlen aus Text auslesen",
+        en: "Extract all numbers from text"
+    },
     argsOld: {
         en: "text",
         de: "text"
@@ -2387,6 +2493,10 @@ tools.add({
     aliases: {
         en: "deleteSpecialCharacters",
         de: "löscheSonderzeichen"
+    },
+    simpleDescription: {
+        de: "Entferne alle Sonderzeichen aus Text",
+        en: "Remove all special characters from text"
     },
     argsOld: {
         en: "text",
@@ -2445,6 +2555,10 @@ tools.add({
         en: "isBlank",
         de: "istLeer"
     },
+    simpleDescription: {
+        de: "Ist der Wert leer?",
+        en: "Is the value empty?"
+    },
     argsOld: {
         en: "text_or_object",
         de: "text_oder_objekt"
@@ -2486,6 +2600,10 @@ tools.add({
     aliases: {
         en: "isNotBlank",
         de: "istNichtLeer"
+    },
+    simpleDescription: {
+        de: "Ist der Wert gefüllt?",
+        en: "Is the value filled?"
     },
     argsOld: {
         en: "text_or_object",
@@ -2529,6 +2647,10 @@ tools.add({
         en: "startsNumeric",
         de: "beginntMitZahl"
     },
+    simpleDescription: {
+        de: "Beginnt der Text mit einer Zahl?",
+        en: "Does the text start with a number?"
+    },
     argsOld: {
         en: "text",
         de: "text"
@@ -2567,6 +2689,10 @@ tools.add({
     aliases: {
         en: "isNumeric",
         de: "istZahl"
+    },
+    simpleDescription: {
+        de: "Ist der Wert eine Zahl?",
+        en: "Is the value a number?"
     },
     argsOld: {
         en: "text",
@@ -2625,6 +2751,10 @@ tools.add({
     aliases: {
         en: "decode",
         de: "findeUndMappe"
+    },
+    simpleDescription: {
+        de: "Ersten Treffer aus Mehrfachsuche ausgeben (RegExp)",
+        en: "Return first hit of multi pattern search (RegExp)"
     },
     argsOld: {
         en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
@@ -2714,6 +2844,10 @@ tools.add({
         en: "decodeAll",
         de: "findeUndMappeAlles"
     },
+    simpleDescription: {
+        de: "Alle Treffer aus Mehrfachsuche ausgeben (RegExp)",
+        en: "Return all hits of multi pattern search (RegExp)"
+    },
     argsOld: {
         en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
         de: "text, suchtext_1, zuErsetzenderText_1, suchtext_2, zuErsetzenderText_2, ..., fallback"
@@ -2787,6 +2921,10 @@ tools.add({
         en: "extractFirstTerm",
         de: "extrahiereErstenBegriff"
     },
+    simpleDescription: {
+        de: "Ersten Begriff aus Text auslesen",
+        en: "Extract first term from text"
+    },
     argsOld: {
         en: "text, textToSearchAndShow_1, textToSearchAndShow_2, ...",
         de: "text, zuExtrahierendesWort_1, zuExtrahierendesWort_2, ..."
@@ -2833,6 +2971,10 @@ tools.add({
     aliases: {
         en: "extractProperty",
         de: "extrahiereEigenschaft"
+    },
+    simpleDescription: {
+        de: "Wert aus Text oder JSON-Daten auslesen",
+        en: "Read value from text or JSON data"
     },
     argsOld: {
         en: "text, propertyName, fallback",
@@ -2892,6 +3034,10 @@ tools.add({
     aliases: {
         en: "extractFromHtmlEnum",
         de: "extrahiereAusHtmlEnum"
+    },
+    simpleDescription: {
+        de: "Text aus HTML-Liste auslesen",
+        en: "Read text from HTML bullet points"
     },
     argsOld: {
         en: "text, propertyName, fallback",
@@ -2958,6 +3104,10 @@ tools.add({
     aliases: {
         en: "lookupGet",
         de: "sucheUndNimm"
+    },
+    simpleDescription: {
+        de: "Nutze Wert aus Datentabelle",
+        en: "Use value from lookup table"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingColumn, columnToRetrieveValueFrom",
@@ -3036,6 +3186,10 @@ tools.add({
     aliases: {
         en: "lookupGetRegExp",
         de: "sucheUndNimmRegExp"
+    },
+    simpleDescription: {
+        de: "Nutze ersten Wert aus Datentabelle mit Muster-Spalte (RegExp)",
+        en: "Use first value from lookup table with pattern column (RegExp)"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
@@ -3212,6 +3366,10 @@ tools.add({
     aliases: {
         en: "lookupReplaceRegExp",
         de: "sucheUndErsetzeRegExp"
+    },
+    simpleDescription: {
+        de: "Ersetze mit Wert aus Datentabelle (RegExp)",
+        en: "Replace with value from lookup table (RegExp)"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
@@ -3392,6 +3550,10 @@ tools.add({
     aliases: {
         en: "lookupGetAllRegExp",
         de: "sucheUndNimmAlleRegExp"
+    },
+    simpleDescription: {
+        de: "Nutze alle Werte aus Datentabelle mit Muster-Spalte (RegExp)",
+        en: "Use all values from lookup table with pattern column (RegExp)"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
@@ -3605,6 +3767,10 @@ tools.add({
         en: "formatAsHtmlBulletpoints",
         de: "formatiereAlsHtmlAufzählung"
     },
+    simpleDescription: {
+        de: "Formatiere Text als HTML-Aufzählung",
+        en: "Format text as HTML bullet points"
+    },
     argsOld: {
         en: "something1, something2, ...",
         de: "argument1, argument2, ..."
@@ -3655,6 +3821,10 @@ tools.add({
     aliases: {
         en: "formatAsNumber",
         de: "formatiereAlsZahl"
+    },
+    simpleDescription: {
+        de: "Formatiere Text als Zahl",
+        en: "Format text as number"
     },
     argsOld: {
         en: "value, locale",
@@ -3715,6 +3885,10 @@ tools.add({
     aliases: {
         en: "textToNumber",
         de: "textAlsZahl"
+    },
+    simpleDescription: {
+        de: "Text zu Zahl umwandeln",
+        en: "Convert text to number"
     },
     argsOld: {
         en: "value, locale",
@@ -4005,7 +4179,7 @@ tools.add({
             "desc_en": "Transformations to perform with cloudinary",
             "desc_de": "Transformationen durch Cloudinary"
         }
-        ],
+    ],
     tags: ["TAGS.CLOUDINARY"],
     hideInToolbox: false,
     hideOnSimpleMode: false,
@@ -4146,6 +4320,10 @@ tools.add({
         en: "convertUnit",
         de: "rechneEinheitUm"
     },
+    simpleDescription: {
+        de: "Einheiten im Text umrechnen und ersetzen",
+        en: "Convert and replace units in the text"
+    },
     argsOld: {
         en: "value, factor, oldUnit, newUnit, decimalPlaces",
         de: "wert, faktor, alteEinheit, neueEinheit, dezimalStellen"
@@ -4281,6 +4459,10 @@ tools.add({
         en: "normalizeValues",
         de: "normalisiereWerte"
     },
+    simpleDescription: {
+        de: "Vereinheitliche Zahlen im Text",
+        en: "Normalize numbers in the text"
+    },
     argsOld: {
         en: "value, decimalSeparator, decimalPlaces",
         de: "wert, dezimalTrennzeichen, dezimalStellen"
@@ -4342,6 +4524,10 @@ tools.add({
         en: "extractValueBeforeText",
         de: "extrahiereWertVorText"
     },
+    simpleDescription: {
+        de: "Zahl vor Suchtreffer aus Text auslesen",
+        en: "Extract number before search hit from the text"
+    },
     argsOld: {
         en: "value, text",
         de: "wert, text"
@@ -4394,6 +4580,10 @@ tools.add({
     aliases: {
         en: "extractValueAfterText",
         de: "extrahiereWertNachText"
+    },
+    simpleDescription: {
+        de: "Zahl nach Suchtreffer aus Text auslesen",
+        en: "Extract number after search hit from the text"
     },
     argsOld: {
         en: "value, text",
@@ -4482,6 +4672,10 @@ tools.add({
     aliases: {
         en: "splitText",
         de: "trenneText"
+    },
+    simpleDescription: {
+        de: "Text in mehrere Teile trennen",
+        en: "Split the text into multiple parts"
     },
     argsOld: {
         en: "text, separator",
@@ -4603,6 +4797,10 @@ tools.add({
         en: "startsWith",
         de: "beginntMit"
     },
+    simpleDescription: {
+        de: "Beginnt der Text mit Suchwort?",
+        en: "Does the text start with the search term?"
+    },
     argsOld: {
         en: "text, search",
         de: "text, suchwert"
@@ -4668,6 +4866,10 @@ tools.add({
         en: "endsWith",
         de: "endetMit"
     },
+    simpleDescription: {
+        de: "Endet der Text mit Suchwort?",
+        en: "Does the text end with the search term?"
+    },
     argsOld: {
         en: "text, search",
         de: "text, suchwert"
@@ -4725,6 +4927,10 @@ tools.add({
         en: "someOf",
         de: "istEinElementWahr"
     },
+    simpleDescription: {
+        de: "Ist ein Element in der Liste wahr? ",
+        en: "Is any element in the list true?"
+    },
     argsOld: {
         en: "something1, something2, ...",
         de: "argument1, argument2, ..."
@@ -4776,8 +4982,8 @@ tools.add({
         de: "sindAlleElementeWahr"
     },
     simpleDescription: {
-        en: "Check if all elements are true",
-        de: "Prüfe ob alle Elemente wahr sind"
+        de: "Sind alle Elemente in der Liste wahr?",
+        en: "Are all elements in the list true?"
     },
     argsOld: {
         en: "something1, something2, ...",
@@ -4828,6 +5034,10 @@ tools.add({
         en: "noneOf",
         de: "istKeinElementWahr"
     },
+    simpleDescription: {
+        de: "Ist kein Element in der Liste wahr?",
+        en: "Is no element in the list true?"
+    },
     argsOld: {
         en: "something1, something2, ...",
         de: "argument1, argument2, ..."
@@ -4870,6 +5080,10 @@ tools.add({
     aliases: {
         en: "not",
         de: "nicht"
+    },
+    simpleDescription: {
+        de: "Drehe den Wahrheitswert um",
+        en: "Negate a boolean value"
     },
     argsOld: {
         en: "value",
@@ -4916,6 +5130,10 @@ tools.add({
     aliases: {
         en: "date",
         de: "datum"
+    },
+    simpleDescription: {
+        de: "Das aktuelle Datum ausgeben",
+        en: "Return the current date"
     },
     argsOld: {
         en: "formatting, dateToProcess",
@@ -4970,6 +5188,10 @@ tools.add({
     aliases: {
         en: "timestamp",
         de: "zeitstempel"
+    },
+    simpleDescription: {
+        de: "Den aktuellen Zeitstempel ausgeben",
+        en: "Return the current timestamp"
     },
     argsOld: {
         en: "formatting, dateToProcess",
@@ -5047,6 +5269,10 @@ tools.add({
     aliases: {
         en: "roundAllNumbers",
         de: "rundeAlleZahlen"
+    },
+    simpleDescription: {
+        de: "Runde alle Zahlen im Text",
+        en: "Round all numbers in the text"
     },
     argsOld: {
         en: "value",
@@ -5150,6 +5376,10 @@ tools.add({
     aliases: {
         en: "defaultValue",
         de: "standardWert"
+    },
+    simpleDescription: {
+        de: "Nutze einen Ersatzwert wenn die Eingabe leer ist",
+        en: "Use a fallback value for an empty input value"
     },
     argsOld: {
         en: "argument, default",
