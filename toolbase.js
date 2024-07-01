@@ -2230,8 +2230,8 @@ tools.add({
         de: "extrahiereAusText"
     },
     simpleDescription: {
-        de: "Mit Suchmuster ersten Treffer aus Text auslesen (RegExp)",
-        en: "Extract first match for search pattern in text (RegExp)"
+        de: "Ersten Suchtreffer aus Text auslesen",
+        en: "Extract first search hit from text"
     },
     argsOld: {
         en: "text, muster, fallback",
@@ -2308,8 +2308,8 @@ tools.add({
         de: "extrahiereAlleTrefferAusText"
     },
     simpleDescription: {
-        de: "Mit Suchmuster alle Treffer aus Text auslesen (RegExp)",
-        en: "Extract all matches for search pattern in text (RegExp)"
+        de: "Alle Suchtreffer aus Text auslesen",
+        en: "Extract all search hits from text"
     },
     argsOld: {
         en: "text, pattern, withGroups",
@@ -2753,8 +2753,8 @@ tools.add({
         de: "findeUndMappe"
     },
     simpleDescription: {
-        de: "Ersten Treffer aus Mehrfachsuche ausgeben (RegExp)",
-        en: "Return first hit of multi pattern search (RegExp)"
+        de: "Ersten Suchtreffer einer Mehrfachsuche ausgeben",
+        en: "Return first search hit of multi search"
     },
     argsOld: {
         en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
@@ -2845,8 +2845,8 @@ tools.add({
         de: "findeUndMappeAlles"
     },
     simpleDescription: {
-        de: "Alle Treffer aus Mehrfachsuche ausgeben (RegExp)",
-        en: "Return all hits of multi pattern search (RegExp)"
+        de: "Alle Suchtreffer für Mehrfachsuche ausgeben",
+        en: "Return all search hits for multi search"
     },
     argsOld: {
         en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
@@ -3188,8 +3188,8 @@ tools.add({
         de: "sucheUndNimmRegExp"
     },
     simpleDescription: {
-        de: "Nutze ersten Wert aus Datentabelle mit Muster-Spalte (RegExp)",
-        en: "Use first value from lookup table with pattern column (RegExp)"
+        de: "Nutze ersten Wert aus Datentabelle mit Suchmusterspalte",
+        en: "Use first value from lookup table with pattern column"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
@@ -3368,8 +3368,8 @@ tools.add({
         de: "sucheUndErsetzeRegExp"
     },
     simpleDescription: {
-        de: "Ersetze mit Wert aus Datentabelle (RegExp)",
-        en: "Replace with value from lookup table (RegExp)"
+        de: "Ersetze mit Wert aus Datentabelle",
+        en: "Replace with value from lookup table"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
@@ -3552,8 +3552,8 @@ tools.add({
         de: "sucheUndNimmAlleRegExp"
     },
     simpleDescription: {
-        de: "Nutze alle Werte aus Datentabelle mit Muster-Spalte (RegExp)",
-        en: "Use all values from lookup table with pattern column (RegExp)"
+        de: "Nutze alle Werte aus Datentabelle mit Musterspalte",
+        en: "Use all values from lookup table with pattern column"
     },
     argsOld: {
         en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
@@ -4206,7 +4206,7 @@ tools.add({
         de: "hinzufügenCloudinaryNamedTransformation"
     },
     simpleDescription: {
-        de: "Füge eine cloudinary-Transformation über dessen Namen hinzu",
+        de: "Füge eine benannte cloudinary-Transformation hinzu",
         en: "Add a Cloudinary transformation via it's name"
     },
     argsOld: {
