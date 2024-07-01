@@ -4150,6 +4150,10 @@ tools.add({
         en: "addCloudinaryTransformation",
         de: "hinzufügenCloudinaryTransformation"
     },
+    simpleDescription: {
+        de: "Füge eine Cloudinary-Transformation hinzu",
+        en: "Add a Cloudinary transformation"
+    },
     argsOld: {
         en: "cloudinaryUrl, publicId, transformation",
         de: "cloudinaryUrl, publicId, transformation"
@@ -4200,6 +4204,10 @@ tools.add({
     aliases: {
         en: "addCloudinaryNamedTransformation",
         de: "hinzufügenCloudinaryNamedTransformation"
+    },
+    simpleDescription: {
+        de: "Füge eine cloudinary-Transformation über dessen Namen hinzu",
+        en: "Add a Cloudinary transformation via its name"
     },
     argsOld: {
         en: "cloudinaryUrl, publicId, named_transformation",
