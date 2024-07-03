@@ -3770,9 +3770,9 @@ function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, c
         const suche = row.get(columnContainingSearch);
 
         if (valueToMatch.includes(suche)) {
-            return row.get(columnToRetrieveValueFrom);
+            return "Match" //row.get(columnToRetrieveValueFrom);
         } else {
-            return valueToMatch;
+            return "no Match"//valueToMatch;
         }
     }
 
