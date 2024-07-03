@@ -3751,6 +3751,86 @@ tools.add({
     }
 })
 
+function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, columnToRetrieveValueFrom) {
+    if (typeof _lookups === 'undefined') {
+        return "";
+    }
+
+    if (!columnContainingSearch) {
+        columnContainingSearch = 'key';
+    }
+
+    if (!columnToRetrieveValueFrom) {
+        columnToRetrieveValueFrom = 'value';
+    }
+
+    const rows = _lookups.getLookup(lookupTableName, columnContainingSearch, columnToRetrieveValueFrom).getAllEntries();
+    while (rows.hasNext()) {
+        const row = rows.getNext();
+        const regex = row.get(columnContainingSearch);
+
+        if (regex && valueToMatch.match(new RegExp(regex, 'ig')).length > 0) {
+            return row.get(columnToRetrieveValueFrom);
+        }
+    }
+
+}
+
+tools.add({
+    id: "lookupGetMatch",
+    impl: lookupGetMatch,
+    aliases: {
+        en: "lookupGetMatch",
+        de: "sucheUndMatche"
+    },
+    simpleDescription: {
+        de: "Nutze alle Werte aus Datentabelle mit Musterspalte",
+        en: "Use all values from lookup table with pattern column"
+    },
+    argsOld: {
+        en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
+        de: "suchWert, datentabelle, suchRegExpSpalte, zuHolenderWertSpalte"
+    },
+    args: [
+        {
+            "key": "matchingValue",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
+        },
+        {
+            "key": "lookupName",
+            "label_en": "Datatable name",
+            "label_de": "Datentabellenname",
+            "type": "data_table",
+            "desc_en": "Name of the data table to search in",
+            "desc_de": "Name der Datentabelle, in der gesucht wird"
+        },
+        {
+            "key": "matchingRegExpColumn",
+            "label_en": "Pattern column",
+            "label_de": "Suchmuster-Spalte",
+            "type": "data_table_column",
+            "desc_en": "Column name containing RegExp patterns to search with",
+            "desc_de": "Spaltenname mit RegExp-Mustern, zur Suche"
+        },
+        {
+            "key": "columnToRetrieveValueFrom",
+            "label_en": "Return column",
+            "label_de": "Rückgabespalte",
+            "type": "data_table_column",
+            "desc_en": "Column name to return the value from",
+            "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
+        }
+    ],
+    tags: ["TAGS.LOOKUP"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
+})
+
 
 function formatAsHtmlBulletpoints() {
     if (arguments.length < 1) {
