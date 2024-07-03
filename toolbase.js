@@ -3767,10 +3767,12 @@ function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, c
     const rows = _lookups.getLookup(lookupTableName, columnContainingSearch, columnToRetrieveValueFrom).getAllEntries();
     while (rows.hasNext()) {
         const row = rows.getNext();
-        const regex = row.get(columnContainingSearch);
+        const suche = row.get(columnContainingSearch);
 
-        if (regex && valueToMatch.match(new RegExp(regex, 'ig')).length > 0) {
+        if (valueToMatch.includes(suche)) {
             return row.get(columnToRetrieveValueFrom);
+        } else {
+            return valueToMatch;
         }
     }
 
