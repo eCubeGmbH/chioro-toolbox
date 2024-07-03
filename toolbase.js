@@ -3751,7 +3751,7 @@ tools.add({
     }
 })
 
-function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, columnToRetrieveValueFrom) {
+function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, columnToRetrieveValueFrom, defaultValue) {
     if (typeof _lookups === 'undefined') {
         return "";
     }
@@ -3770,14 +3770,14 @@ function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, c
         const row = rows.getNext();
         const suche = row.get(columnContainingSearch);
 
-        if (!result_found && valueToMatch.includes(suche)) {
+        if (valueToMatch.includes(suche)) {
             result_found = row.get(columnToRetrieveValueFrom);
         }
     }
     if (result_found) {
         return result_found;
     } else {
-        return valueToMatch;
+        return defaultValue;
     }
 
 }
