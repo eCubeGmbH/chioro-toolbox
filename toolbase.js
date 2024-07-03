@@ -3765,15 +3765,19 @@ function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, c
     }
 
     const rows = _lookups.getLookup(lookupTableName, columnContainingSearch, columnToRetrieveValueFrom).getAllEntries();
+    result_found = "";
     while (rows.hasNext()) {
         const row = rows.getNext();
         const suche = row.get(columnContainingSearch);
 
-        if (valueToMatch.includes(suche)) {
-            return "Match" //row.get(columnToRetrieveValueFrom);
-        } else {
-            return "no Match"//valueToMatch;
+        if (!result_found && valueToMatch.includes(suche)) {
+            result_found = row.get(columnToRetrieveValueFrom);
         }
+    }
+    if (result_found) {
+        return result_found;
+    } else {
+        return valueToMatch;
     }
 
 }
