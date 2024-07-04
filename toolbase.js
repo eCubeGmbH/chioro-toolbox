@@ -3763,19 +3763,21 @@ function lookupGetMatch(valueToMatch, lookupTableName, columnContainingSearch, c
     if (!columnToRetrieveValueFrom) {
         columnToRetrieveValueFrom = 'value';
     }
-
+    if (!defaultValue) {
+        defaultValue = '';
+    }
     const rows = _lookups.getLookup(lookupTableName, columnContainingSearch, columnToRetrieveValueFrom).getAllEntries();
-    result_found = "";
+    let resultFound = "";
     while (rows.hasNext()) {
         const row = rows.getNext();
         const suche = row.get(columnContainingSearch);
 
         if (valueToMatch.includes(suche)) {
-            result_found = row.get(columnToRetrieveValueFrom);
+            resultFound = row.get(columnToRetrieveValueFrom);
         }
     }
-    if (result_found) {
-        return result_found;
+    if (resultFound) {
+        return resultFound;
     } else {
         return defaultValue;
     }
@@ -3787,15 +3789,15 @@ tools.add({
     impl: lookupGetMatch,
     aliases: {
         en: "lookupGetMatch",
-        de: "sucheUndMatche"
+        de: "sucheMatch"
     },
     simpleDescription: {
-        de: "Nutze alle Werte aus Datentabelle mit Musterspalte",
-        en: "Use all values from lookup table with pattern column"
+        de: "Überprüfe ob Wert aus Tabelle vorkommt",
+        en: "Check if value from Datatable is there"
     },
     argsOld: {
-        en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom",
-        de: "suchWert, datentabelle, suchRegExpSpalte, zuHolenderWertSpalte"
+        en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom,default",
+        de: "suchWert, datentabelle, suchRegExpSpalte, zuHolenderWertSpalte,default"
     },
     args: [
         {
@@ -3829,6 +3831,14 @@ tools.add({
             "type": "data_table_column",
             "desc_en": "Column name to return the value from",
             "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
+        },
+        {
+            "key": "default",
+            "label_en": "default",
+            "label_de": "Default",
+            "type": "text",
+            "desc_en": "If nothing is found the default is used",
+            "desc_de": "Wenn nichts gefunden wird -> Default-Wert "
         }
     ],
     tags: ["TAGS.LOOKUP"],
