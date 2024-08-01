@@ -5521,5 +5521,54 @@ tools.add({
     }
 })
 
+function getCategoryPath(treeKey, nodeKey) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return "";
+    }
+    return _categoryTreeFetcher.getPath(treeKey, nodeKey);
+}
+if (typeof _categoryTreeFetcher !== 'undefined') {
+    tools.add({
+        id: "getCategoryPath",
+        impl: getCategoryPath,
+        aliases: {
+            en: "getCategoryPath",
+            de: "kategoriePfad"
+        },
+        simpleDescription: {
+            en: "Get path from a category",
+            de: "Pfad von einer Kategorie"
+        },
+        argsOld: {
+            en: "treeKey, nodeKey",
+            de: "kategorieBaumName, kategorieName"
+        },
+        args: [
+            {
+                "key": "treeKey",
+                "label_en": "Category Tree",
+                "label_de": "Kategoriebaum",
+                "type": "category_tree",
+                "desc_en": "Name of the tree the category is in",
+                "desc_de": "Name des Kategoriebaums"
+            },
+            {
+                "key": "nodeKey",
+                "label_en": "Category",
+                "label_de": "Kategorie",
+                "type": "text",
+                "desc_en": "Name of category",
+                "desc_de": "Name der Kategorie"
+            }
+        ],
+        tags: ["TAGS.UTIL"],
+        hideInToolbox: false,
+        hideOnSimpleMode: false,
+        tests: () => {
+        }
+    })
+}
+
+
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
