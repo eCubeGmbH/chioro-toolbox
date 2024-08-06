@@ -5547,7 +5547,7 @@ tools.add({
             "key": "treeKey",
             "label_en": "Category Tree",
             "label_de": "Kategoriebaum",
-            "type": "text",
+            "type": "taxonomy_tree",
             "desc_en": "Name of the tree the category is in",
             "desc_de": "Name des Kategoriebaums"
         },
