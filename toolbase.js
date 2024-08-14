@@ -5740,8 +5740,8 @@ tools.add({
         de: "Suche Kategorieschlüssel mit Pfad aus Kategorienamen"
     },
     argsOld: {
-        en: "treeKey, pathElements, locale",
-        de: "kategorieBaumName, pfadElemente, Sprache"
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
     },
     args: [
         {
@@ -5764,7 +5764,7 @@ tools.add({
             "key": "pathElements+",
             "label_en": "Path Elements",
             "label_de": "Pfadelemente",
-            "type": "array",
+            "type": "text",
             "desc_en": "Name of category",
             "desc_de": "Name der Kategorie"
         }
