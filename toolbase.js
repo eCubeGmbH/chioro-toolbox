@@ -5762,8 +5762,8 @@ tools.add({
         },
         {
             "key": "pathElements+",
-            "label_en": "Path Elements",
-            "label_de": "Pfadelemente",
+            "label_en": "Path Element",
+            "label_de": "Pfadelement",
             "type": "text",
             "desc_en": "Name of category",
             "desc_de": "Name der Kategorie"
