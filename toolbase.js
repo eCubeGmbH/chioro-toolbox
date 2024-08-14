@@ -1,6 +1,7 @@
 const Toolpackage = require('./toolpackage');
 const format = require('date-fns/format');
 const Decimal = require('decimal');
+const {ar} = require('date-fns/locale');
 
 const tools = new Toolpackage("Base Chioro Tools");
 tools.description = 'These are the toolbox tools included in Chioro by default. All the tools defined here are available in the global namespace. ';
@@ -2029,6 +2030,49 @@ tools.add({
             "value": "ene mene muh"
         }]);
     }
+})
+
+function deleteInText(text, textToSearch) {
+    return replaceInText(text, textToSearch, '');
+}
+
+tools.add({
+    id: "deleteInText",
+    impl: deleteInText,
+    aliases: {
+        en: "deleteInText",
+        de: "löscheInText"
+    },
+    simpleDescription: {
+        de: "Suchbegriff im Text finden und löschen",
+        en: "Search and Delete in text"
+    },
+    argsOld: {
+        en: "text, textToSearch",
+        de: "text, suchtext"
+    },
+    args: [
+        {
+            "key": "text",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": "Text in which something should be replaced.",
+            "desc_de": "Text, in dem etwas ersetzt werden soll."
+        },
+        {
+            "key": "textToSearch",
+            "label_en": "Search",
+            "label_de": "Suchtext",
+            "type": "text",
+            "desc_en": "Text which should be replaced.",
+            "desc_de": "Text, der ersetzt werden soll."
+        }
+    ],
+    tags: ["TAGS.TEXT"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
 })
 
 
@@ -5523,7 +5567,7 @@ tools.add({
 
 function getCategoryPath(treeKey, nodeKey) {
     if (typeof _categoryTreeFetcher === 'undefined') {
-        return "";
+        return null;
     }
     return _categoryTreeFetcher.getPath(treeKey, nodeKey);
 }
@@ -5560,13 +5604,177 @@ tools.add({
             "desc_de": "Name der Kategorie"
         }
     ],
-    tags: ["TAGS.UTIL"],
+    tags: ["TAGS.CATEGORIES"],
     hideInToolbox: false,
     hideOnSimpleMode: false,
     tests: () => {
     }
 })
-
+function getCategory(treeKey, nodeKey) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+    return _categoryTreeFetcher.getCategory(treeKey, nodeKey);
+}
+tools.add({
+    id: "getCategory",
+    impl: getCategory,
+    aliases: {
+        en: "getCategory",
+        de: "holeKategorie"
+    },
+    simpleDescription: {
+        en: "Get a category object",
+        de: "Hole eine Kategorie"
+    },
+    argsOld: {
+        en: "treeKey, nodeKey",
+        de: "kategorieBaumName, kategorieName"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Name of the tree the category is in",
+            "desc_de": "Name des Kategoriebaums"
+        },
+        {
+            "key": "nodeKey",
+            "label_en": "Category",
+            "label_de": "Kategorie",
+            "type": "text",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+// TODO change to x-default
+function getCategoryName(treeKey, nodeKey, locale='de') {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+    return _categoryTreeFetcher.getCategoryName(treeKey, nodeKey, locale);
+}
+tools.add({
+    id: "getCategoryName",
+    impl: getCategoryName,
+    aliases: {
+        en: "getCategoryName",
+        de: "kategorieName"
+    },
+    simpleDescription: {
+        en: "Get name from a category",
+        de: "Name von einer Kategorie"
+    },
+    argsOld: {
+        en: "treeKey, nodeKey, locale",
+        de: "kategorieBaumName, kategorieName, Sprache"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Name of the tree the category is in",
+            "desc_de": "Name des Kategoriebaums"
+        },
+        {
+            "key": "nodeKey",
+            "label_en": "Category",
+            "label_de": "Kategorie",
+            "type": "text",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        },
+        {
+            "key": "locale",
+            "label_en": "Locale",
+            "label_de": "Sprache",
+            "type": "text",
+            "desc_en": "Locale to use (leave empty for default)",
+            "desc_de": "Die zu verwendende Sprache (leer lassen für Standard)"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+// TODO change to x-default
+function queryCategoryKeyByNamePath() {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+    if (arguments.length < 3) {
+        return null;
+    }
+    let treeKey = arguments[0];
+    let locale = arguments[1];
+    let pathElements = [];
+    for (let i = 2; i < arguments.length; i++) {
+        pathElements.push(arguments[i]);
+    }
+    if (pathElements.length === 1 && pathElements[0] instanceof Array) {
+        pathElements = pathElements[0];
+    }
+    return _categoryTreeFetcher.queryCategoryKeyByNamePath(treeKey, pathElements, locale);
+}
+tools.add({
+    id: "queryCategoryKeyByNamePath",
+    impl: queryCategoryKeyByNamePath,
+    aliases: {
+        en: "queryCategoryKeyByNamePath",
+        de: "sucheKategorieNameMitPfadAusNamen"
+    },
+    simpleDescription: {
+        en: "Search category key by path of category names",
+        de: "Suche Kategorieschlüssel mit Pfad aus Kategorienamen"
+    },
+    argsOld: {
+        en: "treeKey, pathElements, locale",
+        de: "kategorieBaumName, pfadElemente, Sprache"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Name of the tree the category is in",
+            "desc_de": "Name des Kategoriebaums"
+        },
+        {
+            "key": "locale",
+            "label_en": "Locale",
+            "label_de": "Sprache",
+            "type": "text",
+            "desc_en": "Locale to use (leave empty for default)",
+            "desc_de": "Die zu verwendende Sprache (leer lassen für Standard)"
+        },
+        {
+            "key": "pathElements+",
+            "label_en": "Path Elements",
+            "label_de": "Pfadelemente",
+            "type": "array",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
 
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
