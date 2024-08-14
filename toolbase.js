@@ -5757,8 +5757,8 @@ tools.add({
             "label_en": "Locale",
             "label_de": "Sprache",
             "type": "text",
-            "desc_en": "Locale to use (leave empty for default)",
-            "desc_de": "Die zu verwendende Sprache (leer lassen für Standard)"
+            "desc_en": "Locale to use (use de for default)",
+            "desc_de": "Die zu verwendende Sprache (de für Standard)"
         },
         {
             "key": "pathElements+",
