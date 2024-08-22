@@ -3907,15 +3907,16 @@ function lookupGetBestAccordance(valueToMatch, lookupTableName, columnContaining
     const rows = _lookups.getLookup(lookupTableName, columnContainingSearch, columnToRetrieveValueFrom).getAllEntries();
     let resultFound = "";
     let accordance = 0.0;
+    let suche = "";
     while (rows.hasNext()) {
         const row = rows.getNext();
-        const suche = row.get(columnContainingSearch);
-        if(getSimilarityPercentage(suche, valueToMatch) > accordance) {
+        suche = row.get(columnContainingSearch);
+        if(Number(getSimilarityPercentage(suche, valueToMatch)) > accordance) {
             accordance = getSimilarityPercentage(suche, valueToMatch);
             resultFound = row.get(columnToRetrieveValueFrom);
         }
     }
-    return accordance.toString()+ "("+resultFound+")";
+    return accordance.toString()+ "% ("+resultFound+")";
 }
 
 tools.add({
@@ -4014,7 +4015,7 @@ function getSimilarityPercentage(str1, str2) {
     const maxLength = Math.max(str1.length, str2.length);
     const similarity = ((maxLength - distance) / maxLength) * 100;
 
-    return similarity.toFixed(2) + '%';
+    return similarity.toFixed(2);
 }
 
 tools.add({
@@ -4051,8 +4052,8 @@ tools.add({
         }
     ],
     tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
-    hideInToolbox: false,
-    hideOnSimpleMode: false,
+    hideInToolbox: true,
+    hideOnSimpleMode: true,
     tests: () => {}
 })
 
