@@ -3847,6 +3847,170 @@ tools.add({
     tests: () => {}
 })
 
+function lookupGetBestAccordance(valueToMatch, lookupTableName, columnContainingSearch, columnToRetrieveValueFrom) {
+    if (typeof _lookups === 'undefined') {
+        return "";
+    }
+
+    if (!columnContainingSearch) {
+        columnContainingSearch = 'key';
+    }
+
+    if (!columnToRetrieveValueFrom) {
+        columnToRetrieveValueFrom = 'value';
+    }
+
+    const rows = _lookups.getLookup(lookupTableName, columnContainingSearch, columnToRetrieveValueFrom).getAllEntries();
+    let resultFound = "";
+    let accordance = 0.0;
+    while (rows.hasNext()) {
+        const row = rows.getNext();
+        const suche = row.get(columnContainingSearch);
+        if(getSimilarityPercentage(str1, str2) > accordance) {
+            accordance = getSimilarityPercentage(str1, str2);
+            resultFound = row.get(columnToRetrieveValueFrom);
+        }
+    }
+    return accordance.toString()+ "("+resultFound+")";
+}
+
+tools.add({
+    id: "lookupGetBestAccordance",
+    impl: lookupGetBestAccordance,
+    aliases: {
+        en: "lookupGetBestAccordance",
+        de: "sucheBesteÜbereinstimmung"
+    },
+    simpleDescription: {
+        de: "Gib die beste Übereinstimmung in % aus Tabelle zurück",
+        en: "Return the best match in % from the table"
+    },
+    argsOld: {
+        en: "matchingValue, lookupName, matchingRegExpColumn, columnToRetrieveValueFrom,default",
+        de: "suchWert, datentabelle, suchRegExpSpalte, zuHolenderWertSpalte,default"
+    },
+    args: [
+        {
+            "key": "matchingValue",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": "Text to be searched",
+            "desc_de": "Text, in dem gesucht wird"
+        },
+        {
+            "key": "lookupName",
+            "label_en": "Datatable name",
+            "label_de": "Datentabellenname",
+            "type": "data_table",
+            "desc_en": "Name of the data table to search in",
+            "desc_de": "Name der Datentabelle, in der gesucht wird"
+        },
+        {
+            "key": "matchingRegExpColumn",
+            "label_en": "Pattern column",
+            "label_de": "Suchmuster-Spalte",
+            "type": "data_table_column",
+            "desc_en": "Column name containing RegExp patterns to search with",
+            "desc_de": "Spaltenname mit RegExp-Mustern, zur Suche"
+        },
+        {
+            "key": "columnToRetrieveValueFrom",
+            "label_en": "Return column",
+            "label_de": "Rückgabespalte",
+            "type": "data_table_column",
+            "desc_en": "Column name to return the value from",
+            "desc_de": "Spaltenname der Datentabelle, mit Rückgabewert"
+        },
+        {
+            "key": "default",
+            "label_en": "default",
+            "label_de": "Default",
+            "type": "text",
+            "desc_en": "If nothing is found the default is used",
+            "desc_de": "Wenn nichts gefunden wird -> Default-Wert "
+        }
+    ],
+    tags: ["TAGS.LOOKUP"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
+})
+
+function getSimilarityPercentage(str1, str2) {
+    function levenshtein(a, b) {
+        const matrix = [];
+
+        for (let i = 0; i <= b.length; i++) {
+            matrix[i] = [i];
+        }
+
+        for (let j = 0; j <= a.length; j++) {
+            matrix[0][j] = j;
+        }
+
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                    matrix[i][j] = matrix[i - 1][j - 1];
+                } else {
+                    matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1, // substitution
+                        matrix[i][j - 1] + 1,     // insertion
+                        matrix[i - 1][j] + 1      // deletion
+                    );
+                }
+            }
+        }
+
+        return matrix[b.length][a.length];
+    }
+
+    const distance = levenshtein(str1, str2);
+    const maxLength = Math.max(str1.length, str2.length);
+    const similarity = ((maxLength - distance) / maxLength) * 100;
+
+    return similarity.toFixed(2) + '%';
+}
+
+tools.add({
+    id: "getSimilarityPercentage",
+    impl: getSimilarityPercentage,
+    aliases: {
+        en: "getSimilarityPercentage",
+        de: "übereinstimmungInProzent"
+    },
+    simpleDescription: {
+        de: "Wie hoch ist die Übereinstimmung in Prozent?",
+        en: "How high is the match in percent?"
+    },
+    argsOld: {
+        en: "text1, text2",
+        de: "text1, text2"
+    },
+    args: [
+        {
+            "key": "text1",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": " First Text",
+            "desc_de": "Erster Text"
+        },
+        {
+            "key": "text2",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": "Second text",
+            "desc_de": "Zweiter Text"
+        }
+    ],
+    tags: ["TAGS.CONDITIONAL", "TAGS.TEXT"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
+})
 
 function formatAsHtmlBulletpoints() {
     if (arguments.length < 1) {
