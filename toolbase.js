@@ -3910,8 +3910,8 @@ function lookupGetBestAccordance(valueToMatch, lookupTableName, columnContaining
     while (rows.hasNext()) {
         const row = rows.getNext();
         const suche = row.get(columnContainingSearch);
-        if(getSimilarityPercentage(str1, str2) > accordance) {
-            accordance = getSimilarityPercentage(str1, str2);
+        if(getSimilarityPercentage(suche, valueToMatch) > accordance) {
+            accordance = getSimilarityPercentage(suche, valueToMatch);
             resultFound = row.get(columnToRetrieveValueFrom);
         }
     }
