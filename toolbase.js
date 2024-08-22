@@ -3916,7 +3916,7 @@ function lookupGetBestAccordance(valueToMatch, lookupTableName, columnContaining
             resultFound = row.get(columnToRetrieveValueFrom);
         }
     }
-    return accordance.toString()+ "% ("+resultFound+")";
+    return accordance.toString()+ " ("+resultFound+")";
 }
 
 tools.add({
