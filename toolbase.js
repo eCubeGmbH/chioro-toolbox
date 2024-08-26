@@ -5779,7 +5779,11 @@ function getCategory(treeKey, nodeKey) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    return _categoryTreeFetcher.getCategory(treeKey, nodeKey);
+    let jsonStr = _categoryTreeFetcher.getCategory(treeKey, nodeKey);
+    if (jsonStr != null) {
+        return JSON.parse(jsonStr);
+    }
+    return null;
 }
 tools.add({
     id: "getCategory",
