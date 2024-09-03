@@ -5824,8 +5824,8 @@ tools.add({
     tests: () => {
     }
 })
-// TODO change to x-default
-function getCategoryName(treeKey, nodeKey, locale='de') {
+
+function getCategoryName(treeKey, nodeKey, locale='x-default') {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
@@ -5878,7 +5878,7 @@ tools.add({
     tests: () => {
     }
 })
-// TODO change to x-default
+
 function queryCategoryKeyByNamePath() {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
@@ -5926,8 +5926,8 @@ tools.add({
             "label_en": "Locale",
             "label_de": "Sprache",
             "type": "text",
-            "desc_en": "Locale to use (use de for default)",
-            "desc_de": "Die zu verwendende Sprache (de für Standard)"
+            "desc_en": "Locale to use (use x-default for default)",
+            "desc_de": "Die zu verwendende Sprache (x-default für Standard)"
         },
         {
             "key": "pathElements+",
