@@ -5730,7 +5730,7 @@ function defaultValue(param, def) {
 }
 
 tools.add({
-    id: "default",
+    id: "defaultValue",
     impl: defaultValue,
     aliases: {
         en: "defaultValue",
