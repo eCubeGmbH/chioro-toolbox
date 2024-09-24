@@ -21,7 +21,53 @@ function isBoolean(value) {
 function isNumber(value) {
     return typeof value === 'number';
 }
+function categorize(attributes, categoryTreeKey) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+    return _categoryTreeFetcher.categorize(attributes, categoryTreeKey);
+}
 
+tools.add({
+    id: "categorize",
+    impl: categorize,
+    aliases: {
+        en: "categorize",
+        de: "kategorisieren"
+    },
+    simpleDescription: {
+        de: "kategorisieren",
+        en: "categorize"
+    },
+    argsOld: {
+        en: "URL, header",
+        de: "URL, header"
+    },
+    args: [
+        {
+        "key": "attributes",
+        "label_en": "Product attributes",
+        "label_de": "Produkt-Attribute",
+        "type": "text",
+        "desc_en": "The description of the product or some other attribute that can be used to detect the category",
+        "desc_de": "Die Beschreibung des Produkts oder ein anderes Attribut, das zur Ermittlung der Kategorie verwendet werden kann"
+        },
+        {
+            "key": "categoryTreeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "key of the category tree",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+
+    ],
+    tags: ["pattern"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
 function getJson(url, headers = null) {
     if (typeof _apiFetcher === 'undefined') {
         return {};
@@ -5757,8 +5803,8 @@ tools.add({
             "label_en": "Category Tree",
             "label_de": "Kategoriebaum",
             "type": "taxonomy_tree",
-            "desc_en": "Name of the tree the category is in",
-            "desc_de": "Name des Kategoriebaums"
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
         },
         {
             "key": "nodeKey",
@@ -5806,8 +5852,8 @@ tools.add({
             "label_en": "Category Tree",
             "label_de": "Kategoriebaum",
             "type": "taxonomy_tree",
-            "desc_en": "Name of the tree the category is in",
-            "desc_de": "Name des Kategoriebaums"
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
         },
         {
             "key": "nodeKey",
@@ -5852,8 +5898,8 @@ tools.add({
             "label_en": "Category Tree",
             "label_de": "Kategoriebaum",
             "type": "taxonomy_tree",
-            "desc_en": "Name of the tree the category is in",
-            "desc_de": "Name des Kategoriebaums"
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
         },
         {
             "key": "nodeKey",
@@ -5918,8 +5964,8 @@ tools.add({
             "label_en": "Category Tree",
             "label_de": "Kategoriebaum",
             "type": "taxonomy_tree",
-            "desc_en": "Name of the tree the category is in",
-            "desc_de": "Name des Kategoriebaums"
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
         },
         {
             "key": "locale",
