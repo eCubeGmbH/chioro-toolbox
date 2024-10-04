@@ -1141,6 +1141,14 @@ tools.add({
             "type": "text",
             "desc_en": "Text to return, if condition evaluated as true",
             "desc_de": "Rückgabetext, wenn Bedingung wahr ist"
+        },
+        {
+            "key": "fallback",
+            "label_en": "Fallback",
+            "label_de": "Ersatzwert",
+            "type": "text",
+            "desc_en": "Text to return if nothing was found.",
+            "desc_de": "Rückgabetext, wenn nichts gefunden wurde."
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
