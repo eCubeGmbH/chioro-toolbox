@@ -1117,8 +1117,8 @@ tools.add({
         de: "dekodiereBedingungen"
     },
     simpleDescription: {
-        de: "Bedingungen dekodieren",
-        en: "Decode conditions"
+        de: "Werte über Bedingungen auswählen",
+        en: "Choose values via conditions"
     },
 
     argsOld: {
@@ -2851,8 +2851,8 @@ tools.add({
         de: "findeUndMappe"
     },
     simpleDescription: {
-        de: "Ersten Suchtreffer einer Mehrfachsuche ausgeben",
-        en: "Return first search hit of multi search"
+        de: "Werte über Textsuche auswählen",
+        en: "Choose values via text search"
     },
     argsOld: {
         en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
@@ -2943,8 +2943,8 @@ tools.add({
         de: "findeUndMappeAlles"
     },
     simpleDescription: {
-        de: "Alle Suchtreffer für Mehrfachsuche ausgeben",
-        en: "Return all search hits for multi search"
+        de: "Mehrfache Werte über Textsuche auswählen",
+        en: "Choose multiple values via text search"
     },
     argsOld: {
         en: "text, textToSearch_1, textToReplace_1, textToSearch_2, textToReplace_2, ..., fallback",
@@ -4881,7 +4881,7 @@ function extractValueBeforeText(value, text) {
             return werte.groups.value;
         }
     }
-    return value;
+    return "";
 }
 
 tools.add({
@@ -4926,6 +4926,7 @@ tools.add({
         tools.expect(extractValueBeforeText("range of 3..5 ", '..')).toBe("3");
         tools.expect(extractValueBeforeText("21,3     text blabla", 'text')).toBe("21,3");
         tools.expect(extractValueBeforeText('74-77', '-')).toBe("74");
+        tools.expect(extractValueBeforeText('range of some', '-')).toBe("");
     }
 })
 
@@ -4938,7 +4939,7 @@ function extractValueAfterText(value, text) {
         }
     }
 
-    return value;
+    return "";
 }
 
 tools.add({
@@ -4981,9 +4982,118 @@ tools.add({
         tools.expect(extractValueAfterText("some 23.1 mangos and 4 apples ", 'some')).toBe("23.1");
         tools.expect(extractValueAfterText("Price of $200", '$')).toBe("200");
         tools.expect(extractValueAfterText("range of 3..5 ", '..')).toBe("5");
+        tools.expect(extractValueAfterText("range of some", 'blue')).toBe("");
     }
 })
 
+function extractTermBeforeText(value, text) {
+    if (value.includes(text)) {
+        const regex = new RegExp(`\\b(\\S+)\\s+${text}\\b`);
+        const match = value.match(regex);
+        return match ? match[1] : "";
+    }
+    return "";
+}
+
+tools.add({
+    id: "extractTermBeforeText",
+    impl: extractTermBeforeText,
+    aliases: {
+        en: "extractTermBeforeText",
+        de: "extrahiereAusdruckVorText"
+    },
+    simpleDescription: {
+        de: "Ausdruck vor Suchtreffer aus Text auslesen",
+        en: "Extract term before search hit from the text"
+    },
+    argsOld: {
+        en: "value, text",
+        de: "wert, text"
+    },
+    args: [
+        {
+            "key": "value",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": "Text to search in",
+            "desc_de": "Text, in dem gesucht wird"
+        },
+        {
+            "key": "text",
+            "label_en": "Text after value",
+            "label_de": "Text nach Wert",
+            "type": "text",
+            "desc_en": "Text to search for to extract the value before",
+            "desc_de": "Text, der nach dem zu extrahierenden Wert steht"
+        }
+    ],
+    tags: ["TAGS.EXTRACT"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+        tools.expect(extractTermBeforeText("2 mm Spalttiefe ", 'Spalttiefe')).toBe("mm");
+        tools.expect(extractTermBeforeText("2mm Spalttiefe", 'Spalttiefe')).toBe("2mm");
+        tools.expect(extractTermBeforeText("helloguys", "guys")).toBe("");
+        tools.expect(extractTermBeforeText("hello guys", "guys")).toBe("hello");
+        tools.expect(extractTermBeforeText("hello guys", "veggies")).toBe("");
+    }
+})
+
+
+function extractTermAfterText(value, text) {
+    if (value.includes(text)) {
+        const regex = new RegExp(`\\b${text}\\s+(\\S+)\\b`);
+        const match = value.match(regex);
+        return match ? match[1] : null;
+    }
+
+    return "";
+}
+
+tools.add({
+    id: "extractTermAfterText",
+    impl: extractTermAfterText,
+    aliases: {
+        en: "extractTermAfterText",
+        de: "extrahiereAusdruckNachText"
+    },
+    simpleDescription: {
+        de: "Ausdruck nach Suchtreffer aus Text auslesen",
+        en: "Extract term after search hit from the text"
+    },
+    argsOld: {
+        en: "value, text",
+        de: "wert, text"
+    },
+    args: [
+        {
+            "key": "value",
+            "label_en": "Input text",
+            "label_de": "Eingabetext",
+            "type": "text",
+            "desc_en": "Text to search in",
+            "desc_de": "Text, in dem gesucht wird"
+        },
+        {
+            "key": "text",
+            "label_en": "Text before value",
+            "label_de": "Text vor Wert",
+            "type": "text",
+            "desc_en": "Text to search for to extract the value after",
+            "desc_de": "Text, der vor dem zu extrahierenden Wert steht"
+        }
+    ],
+    tags: ["TAGS.EXTRACT"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+        tools.expect(extractTermAfterText("some mangos and some apples ", 'some')).toBe("mangos");
+        tools.expect(extractTermAfterText("red 2mm thing", 'red')).toBe("2mm");
+        tools.expect(extractTermAfterText("red 2 mm thing ", 'red')).toBe("2");
+        tools.expect(extractTermAfterText("red things", 'blue')).toBe("");
+    }
+})
 
 function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -5190,7 +5300,7 @@ tools.add({
             "desc_de": "Text, mit dem der Eingabetext beginnen soll"
         }
     ],
-    tags: ["TAGS.TEXT"],
+    tags: ["TAGS.TEXT", "TAGS.CONDITIONAL"],
     hideInToolbox: false,
     hideOnSimpleMode: false,
     tests: () => {
@@ -5313,7 +5423,7 @@ tools.add({
         }
     ],
     tags: ["TAGS.CONDITIONAL"],
-    hideInToolbox: true,
+    hideInToolbox: false,
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(someOf(true)).toBe(true);
@@ -5499,8 +5609,8 @@ tools.add({
         de: "datum"
     },
     simpleDescription: {
-        de: "Das aktuelle Datum ausgeben",
-        en: "Return the current date"
+        de: "Ein gegebenes oder das aktuelle Datum ausgeben",
+        en: "Return a given date or the current date"
     },
     argsOld: {
         en: "formatting, dateToProcess",
