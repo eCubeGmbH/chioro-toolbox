@@ -4279,22 +4279,54 @@ tools.add({
         tools.expect(textToNumber("1.223,3")).toBe(1223.3);
         tools.expect(textToNumber("1234")).toBe(1234);
         tools.expect(textToNumber("1.234,567")).toBe(1234.567);
+        tools.expect(textToNumber("0.6", "en-US")).toBe(0.6);
     }
 })
 
+function _isValidDecimal(numberString, locale) {
+    const format = new Intl.NumberFormat(locale);
 
-function _numberParser(value, locale) {
-    const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
-    const numerals = [...new Intl.NumberFormat(locale, {useGrouping: false}).format(9876543210)].reverse();
-    const index = new Map(numerals.map((d, i) => [d, i]));
-    let _group = new RegExp(`[${parts.find(d => d.type === "group").value}]`, "g");
-    let _decimal = new RegExp(`[${parts.find(d => d.type === "decimal").value}]`);
-    let _numeral = new RegExp(`[${numerals.join("")}]`, "g");
-    let _index = d => index.get(d);
-    return (v = value.trim()
-        .replace(_group, "")
-        .replace(_decimal, ".")
-        .replace(_numeral, _index)) ? +v : null;
+    const parts = format.formatToParts(1234567.89);
+
+    const decimalSeparator = parts.find(p => p.type === 'decimal').value;
+    const groupSeparator = parts.find(p => p.type === 'group').value;
+    const regexPattern = new RegExp(`^\\d{1,3}(${groupSeparator}\\d{3})*(\\${decimalSeparator}\\d+)?$|^\\d+(\\${decimalSeparator}\\d+)?$`);
+
+    return regexPattern.test(numberString);
+}
+
+function _numberParser(input, locale) {
+    const parseNumber = (input, locale) => {
+        if(_isValidDecimal(input, locale)) {
+            const formatter = new Intl.NumberFormat(locale);
+            const parts = formatter.formatToParts(12345.6);
+            const groupSeparator = parts.find(part => part.type === 'group').value;
+            const decimalSeparator = parts.find(part => part.type === 'decimal').value;
+            // Replace locale-specific group and decimal separators
+            let normalized = input
+                .replace(new RegExp(`\\${groupSeparator}`, 'g'), '')  // Remove group separators
+                .replace(new RegExp(`\\${decimalSeparator}`), '.');   // Replace decimal separator with '.'
+
+            if (normalized.match(/^0\d/)) {
+                return null;
+            }
+
+            const parsed = parseFloat(normalized);
+            return isNaN(parsed) ? null : parsed;
+        }
+        return null;
+    };
+
+    // Try the specified locale first
+    let result = parseNumber(input, locale);
+
+    // If NaN, try the other locale
+    if (result === null) {
+        const otherLocale = locale === 'en-US' ? 'de-DE' : 'en-US';
+        result = parseNumber(input, otherLocale);
+    }
+
+    return result;
 }
 
 tools.add({
@@ -4339,9 +4371,24 @@ tools.add({
     hideOnSimpleMode: true,
     tests: () => {
         tools.expect(_numberParser("1,223.3", 'en-US')).toBe(1223.3);
-        tools.expect(_numberParser("1,223.3")).toBe(1223.3);
-        tools.expect(_numberParser("1234")).toBe(1234);
-        tools.expect(_numberParser("1.234,567")).toBe(1.234567);
+        tools.expect(_numberParser("1,223.3", "de-DE")).toBe(1223.3);
+        tools.expect(_numberParser("1234", "de-DE")).toBe(1234);
+        tools.expect(_numberParser("1234", "en-US")).toBe(1234);
+        tools.expect(_numberParser("0", "en-US")).toBe(0);
+        tools.expect(_numberParser("0.0", "en-US")).toBe(0);
+        tools.expect(_numberParser("1.234,567", "de-DE")).toBe(1234.567);
+        tools.expect(_numberParser("0.6", "de-DE")).toBe(0.6);
+        tools.expect(_numberParser("0.6", "en-US")).toBe(0.6);
+        tools.expect(_numberParser("0,6", "en-US")).toBe(0.6);
+        tools.expect(_numberParser("0,6", "de-DE")).toBe(0.6);
+        tools.expect(_numberParser("1.234", "de-DE")).toBe(1234);
+        tools.expect(_numberParser("1.234", "en-US")).toBe(1.234);
+        tools.expect(_numberParser("1.234,33", "en-US")).toBe(1234.33);
+        tools.expect(_numberParser("1.234.33", "en-US")).toBe(null);
+        tools.expect(_numberParser("1.234.33", "de-DE")).toBe(null);
+        tools.expect(_numberParser("1.234.333", "en-US")).toBe(1234333);
+        tools.expect(_numberParser("1,2,3", "en-US")).toBe(null);
+        tools.expect(_numberParser("1,2,3", "de-DE")).toBe(null);
     }
 })
 
