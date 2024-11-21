@@ -733,7 +733,7 @@ tools.add({
         "key": "attributeName",
         "label_en": "Attribute Name",
         "label_de": "Attributname",
-        "attributeType": "attribute",
+        "type": "attribute",
         "desc_en": "Attribute Name from the source",
         "desc_de": "Attributname, in der Quelle"
     }],
@@ -766,7 +766,7 @@ tools.add({
             "key": "attributeName",
             "label_en": "Attribute Name",
             "label_de": "Attributname",
-            "attributeType": "attribute",
+            "type": "attribute",
             "desc_en": "Attribute Name from the target",
             "desc_de": "Attributname im Ziel"
         }
@@ -5945,7 +5945,10 @@ function getCategoryPath(treeKey, nodeKey) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    return _categoryTreeFetcher.getPath(treeKey, nodeKey);
+    let category = getCategory(treeKey, nodeKey);
+    if(category) {
+        return category.path;
+    }
 }
 tools.add({
     id: "getCategoryPath",
@@ -6040,7 +6043,10 @@ function getCategoryName(treeKey, nodeKey, locale='x-default') {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    return _categoryTreeFetcher.getCategoryName(treeKey, nodeKey, locale);
+    let category = getCategory(treeKey, nodeKey);
+    if(category) {
+        return getTextFromLocalizedText(category.name, locale);
+    }
 }
 tools.add({
     id: "getCategoryName",
@@ -6147,6 +6153,55 @@ tools.add({
             "type": "text",
             "desc_en": "Name of category",
             "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function getTextFromLocalizedText(localizedText, locale='x-default') {
+    if(Object.prototype.toString.call(localizedText) === "[object String]") return localizedText;
+
+    if(Array.isArray(localizedText)) {
+        let found = localizedText.find(t => t.lang === locale);
+        if(found) return found.value;
+    }
+    return null;
+}
+tools.add({
+    id: "getTextFromLocalizedText",
+    impl: getTextFromLocalizedText,
+    aliases: {
+        en: "getTextFromLocalizedText",
+        de: "holeTextAusDemLokalisiertenText"
+    },
+    simpleDescription: {
+        en: "Get simple text from localized text object",
+        de: "Einfachen Text aus lokalisiertem Textobjekt holen"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "localizedText",
+            "label_en": "Localized Text",
+            "label_de": "localisierter Text",
+            "type": "attribute",
+            "desc_en": "Localized text attribute",
+            "desc_de": "localisiertes Attribut"
+        },
+        {
+            "key": "locale",
+            "label_en": "Locale",
+            "label_de": "Sprache",
+            "type": "text",
+            "desc_en": "Locale to use (use x-default for default)",
+            "desc_de": "Die zu verwendende Sprache (x-default für Standard)"
         }
     ],
     tags: ["TAGS.CATEGORIES"],
