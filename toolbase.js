@@ -6096,30 +6096,52 @@ tools.add({
     }
 })
 
-function queryCategoryKeyByNamePath() {
+function matchCategoryByNamePath(tree, locale, pathToSearch) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    if (arguments.length < 3) {
+
+    let pathElements = [];
+    if(arguments.length < 3) {
         return null;
     }
-    let treeKey = arguments[0];
-    let locale = arguments[1];
-    let pathElements = [];
-    for (let i = 2; i < arguments.length; i++) {
-        pathElements.push(arguments[i]);
+    if(Array.isArray(pathToSearch)) {
+        pathElements = pathToSearch;
+    } else {
+        for (let i = 2; i < arguments.length; i++) {
+            pathElements.push(arguments[i]);
+        }
     }
-    if (pathElements.length === 1 && pathElements[0] instanceof Array) {
-        pathElements = pathElements[0];
+    let root = getCategory(tree)
+
+    let current = null
+    let pathMatched = []
+    if (getTextFromLocalizedText(root?.name, locale) === pathElements[0]) {
+        current = root
+        for (i = 0; i < pathElements.length; i++) {
+            pathMatched.push(pathElements[i])
+            matchedChildKey = current.children.find(it => getCategoryName(tree, it, locale) === pathElements[i + 1])
+            if (!matchedChildKey) break
+            current = getCategory(tree, matchedChildKey)
+        }
     }
-    return _categoryTreeFetcher.queryCategoryKeyByNamePath(treeKey, pathElements, locale);
+
+    return ({
+        ok: pathMatched.length === pathElements.length,
+        key: current?.key,
+        wanted: pathElements,
+        matched: pathMatched,
+        tail: pathToSearch.slice(pathMatched.length),
+        missing: pathToSearch[pathMatched.length],
+        alternatives: current.children.map(it => getCategoryName(tree, it, locale))
+    })
 }
 tools.add({
-    id: "queryCategoryKeyByNamePath",
-    impl: queryCategoryKeyByNamePath,
+    id: "matchCategoryByNamePath",
+    impl: matchCategoryByNamePath,
     aliases: {
-        en: "queryCategoryKeyByNamePath",
-        de: "sucheKategorieNameMitPfadAusNamen"
+        en: "matchCategoryByNamePath",
+        de: "findeKategoriePerNamensPfad"
     },
     simpleDescription: {
         en: "Search category key by path of category names",
@@ -6163,7 +6185,7 @@ tools.add({
 })
 
 function getTextFromLocalizedText(localizedText, locale='x-default') {
-    if(Object.prototype.toString.call(localizedText) === "[object String]") return localizedText;
+    if(isString(localizedText)) return localizedText;
 
     if(Array.isArray(localizedText)) {
         let found = localizedText.find(t => t.lang === locale);
