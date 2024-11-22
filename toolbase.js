@@ -5993,7 +5993,7 @@ function getCategoryNamesPath(treeKey, categoryPath, locale = 'x-default') {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    if(categoryPath.contains("|")) {
+    if(categoryPath.indexOf("|") > 0) {
         return categoryPath.split('|').map(nodeKey => getCategoryName(treeKey, nodeKey, locale)).join("|");
     }
     return null;
