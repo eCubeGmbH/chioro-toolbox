@@ -5989,6 +5989,54 @@ tools.add({
     tests: () => {
     }
 })
+function getCategoryNamesPath(treeKey, categoryPath, locale = 'x-default') {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+    if(categoryPath.contains("|")) {
+        return categoryPath.split('|').map(nodeKey => getCategoryName(treeKey, nodeKey, locale)).join("|");
+    }
+    return null;
+}
+tools.add({
+    id: "getCategoryNamesPath",
+    impl: getCategoryNamesPath,
+    aliases: {
+        en: "getCategoryNamesPath",
+        de: "holeKategorieNamenPfad"
+    },
+    simpleDescription: {
+        en: "Get path from a category",
+        de: "Pfad von einer Kategorie"
+    },
+    argsOld: {
+        en: "treeKey, nodeKey",
+        de: "kategorieBaumName, kategorieName"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+        {
+            "key": "categoryPath",
+            "label_en": "Category Path",
+            "label_de": "Kategoriepfad",
+            "type": "text",
+            "desc_en": "Pipe separated path of the category",
+            "desc_de": "Durch Pipes getrennter Pfad der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
 function getCategory(treeKey, nodeKey) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
