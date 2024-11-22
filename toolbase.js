@@ -6188,8 +6188,18 @@ function getTextFromLocalizedText(localizedText, locale='x-default') {
     if(isString(localizedText)) return localizedText;
 
     if(Array.isArray(localizedText)) {
+        //try to find what the user is asking for
         let found = localizedText.find(t => t.lang === locale);
         if(found) return found.value;
+
+        //try to find x default
+        found = localizedText.find(v => v.lang === 'x-default');
+        if(found) return found.value;
+
+        //try to find anything before giving up
+        if (localizedText.length > 0) {
+            return localizedText[0].value
+        }
     }
     return null;
 }
