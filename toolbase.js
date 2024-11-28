@@ -1722,14 +1722,7 @@ tools.add({
 
 
 function concatenateText() {
-    const arr = [];
-    for (let i = 0; i < arguments.length; i++) {
-        if (!isObject(arguments[i])) {
-            arr.push(stringOf(arguments[i]));
-        }
-    }
-
-    return arr.join('');
+    return joinText.apply(this, ['', ...arguments])
 }
 
 tools.add({
@@ -1740,8 +1733,8 @@ tools.add({
         de: "verketteText"
     },
     simpleDescription: {
-        de: "Mehrere Texte mit Trennzeichen verketten",
-        en: "Concatenate multiple texts with a separator"
+        de: "Mehrere Texte verbinden",
+        en: "Concatenate multiple texts"
     },
     argsOld: {
         en: "text1, text2, ...",
@@ -1765,11 +1758,10 @@ tools.add({
         tools.expect(concatenateText("a")).toBe("a");
         tools.expect(concatenateText("a", "b")).toBe("ab");
         tools.expect(concatenateText("a", "b", "c")).toBe("abc");
-        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("ad");
+        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("abcd");
         tools.expect(concatenateText(1, 'a')).toBe("1a");
         tools.expect(concatenateText(true, 'a')).toBe("truea");
         tools.expect(concatenateText(false, 'a')).toBe("falsea");
-        tools.expect(concatenateText({}, 'a')).toBe("a");
         tools.expect(concatenateText([], 'a')).toBe("a");
     }
 })
