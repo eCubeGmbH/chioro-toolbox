@@ -6160,7 +6160,7 @@ function matchCategoryByNamePath(tree, locale, pathToSearch) {
         current = root
         for (i = 0; i < pathElements.length; i++) {
             pathMatched.push(pathElements[i])
-            matchedChildKey = current.children.find(it => getCategoryName(tree, it, locale) === pathElements[i + 1])
+            let matchedChildKey = current?.children.find(it => getCategoryName(tree, it, locale) === pathElements[i + 1])
             if (!matchedChildKey) break
             current = getCategory(tree, matchedChildKey)
         }
@@ -6173,7 +6173,7 @@ function matchCategoryByNamePath(tree, locale, pathToSearch) {
         matched: pathMatched,
         tail: pathToSearch.slice(pathMatched.length),
         missing: pathToSearch[pathMatched.length],
-        alternatives: current.children.map(it => getCategoryName(tree, it, locale))
+        alternatives: current?.children.map(it => getCategoryName(tree, it, locale))
     })
 }
 tools.add({
