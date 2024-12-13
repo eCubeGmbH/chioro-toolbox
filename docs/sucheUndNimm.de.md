@@ -7,5 +7,6 @@ Abrufen eines bestimmten Eintrags aus einer Datentabelle anhand eines Suchwerts.
 * `Rückgabespalte` - Wird in der Suchspalte der Eingabetext gefunden, gibt das Werkzeug den Eintrag aus dieser Spalte zurück
 
 ##### Beispiel
-In der Datentabelle "produkttabelle" wird, in der Spalte "produktname" nach dem Wort "Apfelkuchen" gesucht. Dieser Begriff wird gefunden, als Folge wird der Eintrag "12345" aus der Spalte "produktID" zurückgegeben.
-* `sucheUndNimm('Apfelkuchen', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
+In der Datentabelle "produkttabelle" wird, in der Spalte "produktname", nach dem Wort "Kleid" gesucht. 
+Dieser Begriff wird gefunden, als Folge wird der Eintrag "12345" aus der Spalte "produktID" der Datentabelle zurückgegeben.
+* `sucheUndNimm('Kleid', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
