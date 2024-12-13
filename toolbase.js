@@ -733,7 +733,7 @@ tools.add({
         "key": "attributeName",
         "label_en": "Attribute Name",
         "label_de": "Attributname",
-        "attributeType": "attribute",
+        "type": "attribute",
         "desc_en": "Attribute Name from the source",
         "desc_de": "Attributname, in der Quelle"
     }],
@@ -766,7 +766,7 @@ tools.add({
             "key": "attributeName",
             "label_en": "Attribute Name",
             "label_de": "Attributname",
-            "attributeType": "attribute",
+            "type": "attribute",
             "desc_en": "Attribute Name from the target",
             "desc_de": "Attributname im Ziel"
         }
@@ -1722,14 +1722,7 @@ tools.add({
 
 
 function concatenateText() {
-    const arr = [];
-    for (let i = 0; i < arguments.length; i++) {
-        if (!isObject(arguments[i])) {
-            arr.push(stringOf(arguments[i]));
-        }
-    }
-
-    return arr.join('');
+    return joinText.apply(this, ['', ...arguments])
 }
 
 tools.add({
@@ -1740,8 +1733,8 @@ tools.add({
         de: "verketteText"
     },
     simpleDescription: {
-        de: "Mehrere Texte mit Trennzeichen verketten",
-        en: "Concatenate multiple texts with a separator"
+        de: "Mehrere Texte verbinden",
+        en: "Concatenate multiple texts"
     },
     argsOld: {
         en: "text1, text2, ...",
@@ -1765,11 +1758,10 @@ tools.add({
         tools.expect(concatenateText("a")).toBe("a");
         tools.expect(concatenateText("a", "b")).toBe("ab");
         tools.expect(concatenateText("a", "b", "c")).toBe("abc");
-        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("ad");
+        tools.expect(concatenateText("a", ["b", "c"], "d")).toBe("abcd");
         tools.expect(concatenateText(1, 'a')).toBe("1a");
         tools.expect(concatenateText(true, 'a')).toBe("truea");
         tools.expect(concatenateText(false, 'a')).toBe("falsea");
-        tools.expect(concatenateText({}, 'a')).toBe("a");
         tools.expect(concatenateText([], 'a')).toBe("a");
     }
 })
@@ -5945,7 +5937,10 @@ function getCategoryPath(treeKey, nodeKey) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    return _categoryTreeFetcher.getPath(treeKey, nodeKey);
+    let category = getCategory(treeKey, nodeKey);
+    if(category) {
+        return category.path;
+    }
 }
 tools.add({
     id: "getCategoryPath",
@@ -5978,6 +5973,54 @@ tools.add({
             "type": "text",
             "desc_en": "Name of category",
             "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+function getCategoryNamesPath(treeKey, categoryPath, locale = 'x-default') {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+    if(categoryPath.indexOf("|") > 0) {
+        return categoryPath.split('|').map(nodeKey => getCategoryName(treeKey, nodeKey, locale)).join("|");
+    }
+    return null;
+}
+tools.add({
+    id: "getCategoryNamesPath",
+    impl: getCategoryNamesPath,
+    aliases: {
+        en: "getCategoryNamesPath",
+        de: "holeKategorieNamenPfad"
+    },
+    simpleDescription: {
+        en: "Get path from a category",
+        de: "Pfad von einer Kategorie"
+    },
+    argsOld: {
+        en: "treeKey, nodeKey",
+        de: "kategorieBaumName, kategorieName"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+        {
+            "key": "categoryPath",
+            "label_en": "Category Path",
+            "label_de": "Kategoriepfad",
+            "type": "text",
+            "desc_en": "Pipe separated path of the category",
+            "desc_de": "Durch Pipes getrennter Pfad der Kategorie"
         }
     ],
     tags: ["TAGS.CATEGORIES"],
@@ -6040,7 +6083,10 @@ function getCategoryName(treeKey, nodeKey, locale='x-default') {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    return _categoryTreeFetcher.getCategoryName(treeKey, nodeKey, locale);
+    let category = getCategory(treeKey, nodeKey);
+    if(category) {
+        return getTextFromLocalizedText(category.name, locale);
+    }
 }
 tools.add({
     id: "getCategoryName",
@@ -6090,30 +6136,52 @@ tools.add({
     }
 })
 
-function queryCategoryKeyByNamePath() {
+function matchCategoryByNamePath(tree, locale, pathToSearch) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
     }
-    if (arguments.length < 3) {
+
+    let pathElements = [];
+    if(arguments.length < 3) {
         return null;
     }
-    let treeKey = arguments[0];
-    let locale = arguments[1];
-    let pathElements = [];
-    for (let i = 2; i < arguments.length; i++) {
-        pathElements.push(arguments[i]);
+    if(Array.isArray(pathToSearch)) {
+        pathElements = pathToSearch;
+    } else {
+        for (let i = 2; i < arguments.length; i++) {
+            pathElements.push(arguments[i]);
+        }
     }
-    if (pathElements.length === 1 && pathElements[0] instanceof Array) {
-        pathElements = pathElements[0];
+    let root = getCategory(tree)
+
+    let current = null
+    let pathMatched = []
+    if (getTextFromLocalizedText(root?.name, locale) === pathElements[0]) {
+        current = root
+        for (i = 0; i < pathElements.length; i++) {
+            pathMatched.push(pathElements[i])
+            let matchedChildKey = current?.children.find(it => getCategoryName(tree, it, locale) === pathElements[i + 1])
+            if (!matchedChildKey) break
+            current = getCategory(tree, matchedChildKey)
+        }
     }
-    return _categoryTreeFetcher.queryCategoryKeyByNamePath(treeKey, pathElements, locale);
+
+    return ({
+        ok: pathMatched.length === pathElements.length,
+        key: current?.key,
+        wanted: pathElements,
+        matched: pathMatched,
+        tail: pathToSearch.slice(pathMatched.length),
+        missing: pathToSearch[pathMatched.length],
+        alternatives: current?.children.map(it => getCategoryName(tree, it, locale))
+    })
 }
 tools.add({
-    id: "queryCategoryKeyByNamePath",
-    impl: queryCategoryKeyByNamePath,
+    id: "matchCategoryByNamePath",
+    impl: matchCategoryByNamePath,
     aliases: {
-        en: "queryCategoryKeyByNamePath",
-        de: "sucheKategorieNameMitPfadAusNamen"
+        en: "matchCategoryByNamePath",
+        de: "findeKategoriePerNamensPfad"
     },
     simpleDescription: {
         en: "Search category key by path of category names",
@@ -6147,6 +6215,65 @@ tools.add({
             "type": "text",
             "desc_en": "Name of category",
             "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function getTextFromLocalizedText(localizedText, locale='x-default') {
+    if(isString(localizedText)) return localizedText;
+
+    if(Array.isArray(localizedText)) {
+        //try to find what the user is asking for
+        let found = localizedText.find(t => t.lang === locale);
+        if(found) return found.value;
+
+        //try to find x default
+        found = localizedText.find(v => v.lang === 'x-default');
+        if(found) return found.value;
+
+        //try to find anything before giving up
+        if (localizedText.length > 0) {
+            return localizedText[0].value
+        }
+    }
+    return null;
+}
+tools.add({
+    id: "getTextFromLocalizedText",
+    impl: getTextFromLocalizedText,
+    aliases: {
+        en: "getTextFromLocalizedText",
+        de: "holeTextAusDemLokalisiertenText"
+    },
+    simpleDescription: {
+        en: "Get simple text from localized text object",
+        de: "Einfachen Text aus lokalisiertem Textobjekt holen"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "localizedText",
+            "label_en": "Localized Text",
+            "label_de": "localisierter Text",
+            "type": "attribute",
+            "desc_en": "Localized text attribute",
+            "desc_de": "localisiertes Attribut"
+        },
+        {
+            "key": "locale",
+            "label_en": "Locale",
+            "label_de": "Sprache",
+            "type": "text",
+            "desc_en": "Locale to use (use x-default for default)",
+            "desc_de": "Die zu verwendende Sprache (x-default für Standard)"
         }
     ],
     tags: ["TAGS.CATEGORIES"],
