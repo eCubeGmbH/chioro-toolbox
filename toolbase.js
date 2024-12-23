@@ -790,7 +790,7 @@ function writeUserProperty(userPropertyAccessor, defaultValue, reduceFunction) {
 
 tools.add({
     id: "writeUserProperty",
-    impl: context,
+    impl: writeUserProperty,
     aliases: {
         en: "writeUserProperty",
         de: "schreibeBenutzerEigenschaft"
