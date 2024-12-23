@@ -1,11 +1,12 @@
-Ermöglicht das Abrufen eines bestimmten Wertes aus einer vorgegebenen Datentabelle anhand eines Suchwertes.
+Abrufen eines bestimmten Eintrags aus einer Datentabelle anhand eines Suchwerts.
 
 ##### Parameter
-* `valueToMatch` - Der Wert, der in der angegebenen Spalte der Datentabelle gesucht werden soll.
-* `lookupTableName` - Der Name der Datentabelle, aus der der Wert abgerufen werden soll.
-* `columnToCompare` - Der Name der Spalte in der Datentabelle, in der nach dem Suchwert gesucht werden soll.
-* `columnToRetrieveValueFrom` - Der Name der Spalte in der Datentabelle, aus der der Wert abgerufen werden soll.
+* `Eingabetext` - Nach diesem Wert wird in der Datentabelle gesucht
+* `Datentabellenname` - Der Name der Datentabelle die verwendet wird
+* `Suchspalte` - In dieser Spalte der Datentabelle wird nach dem Eingabetext gesucht
+* `Rückgabespalte` - Wird in der Suchspalte der Eingabetext gefunden, gibt das Werkzeug den Eintrag aus dieser Spalte zurück
 
-##### Beispiele
-* `sucheUndNimm('Apfelkuchen', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
-* `sucheUndNimm('#FF0000', 'Farbtabelle', 'hexcode', 'farbname')` Ausgabe: `Rot` 
+##### Beispiel
+In der Datentabelle "produkttabelle" wird, in der Spalte "produktname", nach dem Wort "Kleid" gesucht. 
+Dieser Begriff wird gefunden, als Folge wird der Eintrag "12345" aus der Spalte "produktID" der Datentabelle zurückgegeben.
+* `sucheUndNimm('Kleid', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`

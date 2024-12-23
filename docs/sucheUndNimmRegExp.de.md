@@ -1,11 +1,14 @@
-Diese Funktion durchsucht eine Datentabelle nach einem Wert, der einem bestimmten Muster entspricht. Die Datentabelle enthält eine Spalte mit regulären Ausdrücken und eine weitere Spalte mit den Werten, die zurückgegeben werden sollen, wenn der reguläre Ausdruck mit dem Suchwert übereinstimmt. Der erste Treffer wird verwendet.
+Diese Funktion durchsucht eine Datentabelle nach einem Wert, der einem bestimmten Muster entspricht. 
+Die Datentabelle enthält eine Spalte mit regulären Ausdrücken und eine weitere Spalte mit den Werten, die zurückgegeben werden sollen, wenn der reguläre Ausdruck mit dem Suchwert übereinstimmt. 
+Nur der erste Treffer wird zurückgegeben.
 
 ##### Parameter
-* `valueToMatch` - Der Wert, der mit den regulären Ausdrücken in der Datentabelle verglichen werden soll.
-* `lookupTableName` - Der Name der Datentabelle, in der gesucht werden soll.
-* `columnContainingRegex` - (Optional) Der Name der Spalte, die die regulären Ausdrücke enthält. Standardmäßig wird "key" verwendet.
-* `columnToRetrieveValueFrom` - (Optional) Der Name der Spalte, aus der der Wert zurückgegeben werden soll, wenn eine Übereinstimmung gefunden wird. Standardmäßig wird "value" verwendet.
+* `Eingabetext` - Nach diesem Wert wird in der Datentabelle gesucht
+* `Datentabellenname` - Der Name der Datentabelle die verwendet wird
+* `Suchmuster-Spalte` - In dieser Spalte der Datentabelle wird nach dem Eingabetext gesucht
+* `Rückgabespalte` - Wird in der Suchspalte der Eingabetext gefunden, gibt das Werkzeug den Eintrag aus dieser Spalte zurück
 
-##### Beispiele
-* `sucheUndNimmRegExp("abc", "meineTabelle", "regex", "ergebnis")` Ausgabe: `Wert aus 'ergebnis' Splate`
-* `sucheUndNimmRegExp("123", "suchTabelle")` Ausgabe: `Wert aus 'value' Spalte` 
+##### Beispiel
+Die Einträge in der Datentabellenspalte "regex" werden mit dem Eingabetext "abc" verglichen. Bei einem 
+Treffer wird der Eintrag aus der Spalte "ergebnis" zurückgegeben.
+* `sucheUndNimmRegExp("abc", "meineTabelle", "regex", "ergebnis")` Ausgabe: `Wert aus 'ergebnis' Spalte`
