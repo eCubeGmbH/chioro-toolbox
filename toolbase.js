@@ -779,6 +779,37 @@ tools.add({
     }
 })
 
+function writeUserProperty(userPropertyAccessor, defaultValue, reduceFunction) {
+    if(typeof _chioroScriptUtils === 'undefined') return null;
+    if(reduceFunction == null) {
+        return _chioroScriptUtils.getUserPropertyWriter().writeUserProperty(_flowId, _flowItemId, userPropertyAccessor, defaultValue , (pre) => defaultValue);
+    }
+    return _chioroScriptUtils.getUserPropertyWriter().writeUserProperty(_flowId, _flowItemId, userPropertyAccessor, defaultValue , reduceFunction);
+
+}
+
+tools.add({
+    id: "writeUserProperty",
+    impl: context,
+    aliases: {
+        en: "writeUserProperty",
+        de: "schreibeBenutzerEigenschaft"
+    },
+    simpleDescription: {
+        de: "Werte im Eigenschaften schreiben",
+        en: "Write values in user properties"
+    },
+    argsOld: {
+        en: "propertyName",
+        de: "attributname"
+    },
+    args: [],
+    tags: ["TAGS.UTIL"],
+    hideInToolbox: false,
+    hideOnSimpleMode: true,
+    tests: () => {}
+})
+
 function context(propertyName) {
     const contextMap = typeof _context !== 'undefined' ? JSON.parse(_context) : {};
     if (propertyName.length === 0) {
@@ -825,7 +856,7 @@ tools.add({
         "desc_en": "Property Name, that should be fetched from the context",
         "desc_de": "Name des Attributs, das aus dem Kontext geholt werden soll"
     }],
-    tags: ["pattern"],
+    tags: ["TAGS.UTIL"],
     hideInToolbox: true,
     hideOnSimpleMode: true,
     tests: () => {
