@@ -6314,54 +6314,6 @@ tools.add({
     }
 })
 
-function getProductTypeFromTreeStructure(treeKey, nodeKey) {
-    if (typeof _categoryTreeFetcher === 'undefined') {
-        return null;
-    }
-
-    return JSON.parse(_categoryTreeFetcher.getTaxonomyProductType(treeKey, nodeKey));
-
-}
-tools.add({
-    id: "getProductTypeFromTreeStructure",
-    impl: getProductTypeFromTreeStructure,
-    aliases: {
-        en: "getProductTypeFromTreeStructure",
-        de: "holeProduktTypeAusBaumstruktur"
-    },
-    simpleDescription: {
-        en: "Get product types by tree/node key",
-        de: "hole ProduktTyp aus Baumstruktur"
-    },
-    argsOld: {
-        en: "treeKey, locale, pathElements",
-        de: "kategorieBaumName, Sprache, pfadElemente"
-    },
-    args: [
-        {
-            "key": "treeKey",
-            "label_en": "Category Tree",
-            "label_de": "Kategoriebaum",
-            "type": "taxonomy_tree",
-            "desc_en": "Key of the tree the category is in",
-            "desc_de": "Schlüssel des Kategoriebaums"
-        },
-        {
-            "key": "nodeKey",
-            "label_en": "Category",
-            "label_de": "Kategorie",
-            "type": "text",
-            "desc_en": "Name of category",
-            "desc_de": "Name der Kategorie"
-        }
-    ],
-    tags: ["TAGS.CATEGORIES"],
-    hideInToolbox: false,
-    hideOnSimpleMode: false,
-    tests: () => {
-    }
-})
-
 function getProductType(productTypeName) {
     if (typeof _categoryTreeFetcher === 'undefined') {
         return null;
@@ -6520,12 +6472,60 @@ function _findAttribute(treeKey, nodeKeyOrProductTypeName, searchFunction) {
             if(found) return found;
         }
         i++;
-        currentNodeKey = category ? category.parent : null;
+        currentNodeKey = category ? category.parentKey : null;
     }
 
     return null;
 
 }
+
+function getProductTypeFromTreeStructure(treeKey, nodeKey) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+
+    return JSON.parse(_categoryTreeFetcher.getTaxonomyProductType(treeKey, nodeKey));
+
+}
+tools.add({
+    id: "getProductTypeFromTreeStructure",
+    impl: getProductTypeFromTreeStructure,
+    aliases: {
+        en: "getProductTypeFromTreeStructure",
+        de: "holeProduktTypeAusBaumstruktur"
+    },
+    simpleDescription: {
+        en: "Get product types by tree/node key",
+        de: "hole ProduktTyp aus Baumstruktur"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+        {
+            "key": "nodeKey",
+            "label_en": "Category",
+            "label_de": "Kategorie",
+            "type": "text",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
 
 function getAttributeByKeyFromTreeStructure(treeKey, nodeKey, attributeKey) {
     return _findAttribute(treeKey, nodeKey, a => a.key === attributeKey);
