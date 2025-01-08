@@ -6314,5 +6314,328 @@ tools.add({
     }
 })
 
+function getProductTypeFromTreeStructure(treeKey, nodeKey) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+
+    return JSON.parse(_categoryTreeFetcher.getTaxonomyProductType(treeKey, nodeKey));
+
+}
+tools.add({
+    id: "getProductTypeFromTreeStructure",
+    impl: getProductTypeFromTreeStructure,
+    aliases: {
+        en: "getProductTypeFromTreeStructure",
+        de: "holeProduktTypeAusBaumstruktur"
+    },
+    simpleDescription: {
+        en: "Get product types by tree/node key",
+        de: "hole ProduktTyp aus Baumstruktur"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+        {
+            "key": "nodeKey",
+            "label_en": "Category",
+            "label_de": "Kategorie",
+            "type": "text",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function getProductType(productTypeName) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+
+    return JSON.parse(_categoryTreeFetcher.getProductType(productTypeName));
+
+}
+tools.add({
+    id: "getProductType",
+    impl: getProductType,
+    aliases: {
+        en: "getProductType",
+        de: "holeProduktTyp"
+    },
+    simpleDescription: {
+        en: "Get product type by name",
+        de: "hole ProduktTyp per Name"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "productTypeName",
+            "label_en": "Produkt Type",
+            "label_de": "Producttyp",
+            "type": "schema",
+            "desc_en": "Name of the product type",
+            "desc_de": "Name des Producttypes"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function getAttributeByKeyFromProductType(productTypeName, attributeKey) {
+    return _findAttribute(null, productTypeName, a => a.key === attributeKey);
+}
+tools.add({
+    id: "getAttributeByKeyFromProductType",
+    impl: getAttributeByKeyFromProductType,
+    aliases: {
+        en: "getAttributeByKeyFromProductType",
+        de: "holeAttributPerSchlüsselAusProduktTyp"
+    },
+    simpleDescription: {
+        en: "Get product type attribute by attribute key",
+        de: "Attribut aus Produkttyp per Schlüssel holen"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "productTypeName",
+            "label_en": "Produkt Type",
+            "label_de": "Producttyp",
+            "type": "schema",
+            "desc_en": "Name of the product type",
+            "desc_de": "Name des Producttypes"
+        },
+        {
+            "key": "attributeKey",
+            "label_en": "Attribute Key",
+            "label_de": "Attributschlüssel",
+            "type": "text",
+            "desc_en": "Attribute Key",
+            "desc_de": "Attributschlüssel"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function getAttributeByNameFromProductType(productTypeName, attributeName, locale) {
+    return _findAttribute(null, productTypeName, a => getTextFromLocalizedText(a.name, locale) === attributeName);
+}
+tools.add({
+    id: "getAttributeByNameFromProductType",
+    impl: getAttributeByNameFromProductType,
+    aliases: {
+        en: "getAttributeByNameFromProductType",
+        de: "holeAttributPerNameAusProduktTyp"
+    },
+    simpleDescription: {
+        en: "Get product type attribute by attribute name",
+        de: "Attribut aus Produkttyp per Name holen"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "productTypeName",
+            "label_en": "Produkt Type",
+            "label_de": "Producttyp",
+            "type": "schema",
+            "desc_en": "Name of the product type",
+            "desc_de": "Name des Producttypes"
+        },
+        {
+            "key": "attributeName",
+            "label_en": "Attribute Name",
+            "label_de": "Attributname",
+            "type": "attribute",
+            "desc_en": "Attribute Name",
+            "desc_de": "Names des Attributs"
+        },
+        {
+            "key": "locale",
+            "label_en": "Locale",
+            "label_de": "Sprache",
+            "type": "text",
+            "desc_en": "Locale to use (use x-default for default)",
+            "desc_de": "Die zu verwendende Sprache (x-default für Standard)"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function _findAttribute(treeKey, nodeKeyOrProductTypeName, searchFunction) {
+    if (typeof _categoryTreeFetcher === 'undefined') {
+        return null;
+    }
+
+    if(!treeKey) {
+        const schema = getProductType(nodeKeyOrProductTypeName);
+        if (schema && Array.isArray(schema.attributes)) {
+            const found = schema.attributes.find(a => searchFunction(a));
+            if (found) return found;
+        }
+        return null;
+    }
+
+    let currentNodeKey = nodeKeyOrProductTypeName;
+    let i = 0; //prevent infinite loop due to damaged data
+    while (currentNodeKey !== null && i < 1000) {
+        const category = getCategory(treeKey, currentNodeKey);
+        const schema = getProductTypeFromTreeStructure(treeKey, currentNodeKey);
+        if (schema && Array.isArray(schema.attributes)) {
+            const found = schema.attributes.find(a => searchFunction(a));
+            if(found) return found;
+        }
+        i++;
+        currentNodeKey = category ? category.parent : null;
+    }
+
+    return null;
+
+}
+
+function getAttributeByKeyFromTreeStructure(treeKey, nodeKey, attributeKey) {
+    return _findAttribute(treeKey, nodeKey, a => a.key === attributeKey);
+}
+tools.add({
+    id: "getAttributeByKeyFromTreeStructure",
+    impl: getAttributeByKeyFromTreeStructure,
+    aliases: {
+        en: "getAttributeByKeyFromTreeStructure",
+        de: "holeAttributPerSchlüsselAusBaumstruktur"
+    },
+    simpleDescription: {
+        en: "Get tree structure attribute by attribute key",
+        de: "Attribut aus Baustruktur per Schlüssel holen"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+        {
+            "key": "nodeKey",
+            "label_en": "Category",
+            "label_de": "Kategorie",
+            "type": "text",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        },
+        {
+            "key": "attributeKey",
+            "label_en": "Attribute Key",
+            "label_de": "Attributschlüssel",
+            "type": "text",
+            "desc_en": "Attribute Key",
+            "desc_de": "Attributschlüssel"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
+function getAttributeByNameFromTreeStructure(treeKey, nodeKey, attributeName, locale) {
+    return _findAttribute(treeKey, nodeKey, a => getTextFromLocalizedText(a.name, locale) === attributeName);
+}
+tools.add({
+    id: "getAttributeByNameFromTreeStructure",
+    impl: getAttributeByNameFromTreeStructure,
+    aliases: {
+        en: "getAttributeByNameFromTreeStructure",
+        de: "holeAttributPerNameAusBaumstruktur"
+    },
+    simpleDescription: {
+        en: "Get tree structure attribute by attribute key",
+        de: "Attribut aus Baustruktur per Name holen"
+    },
+    argsOld: {
+        en: "treeKey, locale, pathElements",
+        de: "kategorieBaumName, Sprache, pfadElemente"
+    },
+    args: [
+        {
+            "key": "treeKey",
+            "label_en": "Category Tree",
+            "label_de": "Kategoriebaum",
+            "type": "taxonomy_tree",
+            "desc_en": "Key of the tree the category is in",
+            "desc_de": "Schlüssel des Kategoriebaums"
+        },
+        {
+            "key": "nodeKey",
+            "label_en": "Category",
+            "label_de": "Kategorie",
+            "type": "text",
+            "desc_en": "Name of category",
+            "desc_de": "Name der Kategorie"
+        },
+        {
+            "key": "attributeName",
+            "label_en": "Attribute Name",
+            "label_de": "Attributname",
+            "type": "attribute",
+            "desc_en": "Attribute Name",
+            "desc_de": "Names des Attributs"
+        },
+        {
+            "key": "locale",
+            "label_en": "Locale",
+            "label_de": "Sprache",
+            "type": "text",
+            "desc_en": "Locale to use (use x-default for default)",
+            "desc_de": "Die zu verwendende Sprache (x-default für Standard)"
+        }
+    ],
+    tags: ["TAGS.CATEGORIES"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+    }
+})
+
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
