@@ -6669,7 +6669,7 @@ tools.add({
             "desc_de": "Write Value in target attribute"
         }
     ],
-    tags: ["TAGS.CONDITIONAL"],
+    tags: ["TAGS.TEXT"],
     hideInToolbox: false,
     hideOnSimpleMode: false,
     tests: () => {}
