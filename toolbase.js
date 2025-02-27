@@ -6637,5 +6637,43 @@ tools.add({
     }
 })
 
+function writeValue(value) {
+    if (!value) {
+        return null;
+    }
+    return value;
+}
+
+tools.add({
+    id: "writeValue",
+    impl: writeValue,
+    aliases: {
+        en: "writeValue",
+        de: "schreibeWert"
+    },
+    simpleDescription: {
+        de: "Schreibe Wert in Zielattribut",
+        en: "Write Value in target attribute"
+    },
+    argsOld: {
+        en: "value",
+        de: "wert"
+    },
+    args: [
+        {
+            "key": "value",
+            "label_en": "Value",
+            "label_de": "Wert",
+            "type": "text",
+            "desc_en": "Text with numbers that should be rounded",
+            "desc_de": "Write Value in target attribute"
+        }
+    ],
+    tags: ["TAGS.CONDITIONAL"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
+})
+
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
