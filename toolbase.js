@@ -380,6 +380,54 @@ tools.add({
 
 })
 
+function deleteJson(url, headers = null) {
+    if (typeof _apiFetcher === 'undefined' || headers === null) {
+        return {};
+    }
+
+    if (!headers['content-type']) {
+        headers['content-type'] = 'application/json';
+    }
+
+    return _apiFetcher.deleteUrl(url, headers);
+}
+
+tools.add({
+    id: "deleteJson",
+    impl: deleteJson,
+    aliases: {
+        en: "deleteJson",
+        de: "deleteJson"
+    },
+    argsOld: {
+        en: "url, params, headers",
+        de: "adresse parameter headers"
+    },
+    args: [
+        {
+            "key": "URL",
+            "label_en": "URL",
+            "label_de": "Adresse",
+            "type": "text",
+            "desc_en": "URL to send to",
+            "desc_de": "Aufzurufende Adresse"
+        },
+        {
+            "key": "header",
+            "label_en": "HTTP headers",
+            "label_de": "HTTP headers",
+            "type": "text",
+            "desc_en": "The headers to use (e.g. {'content-type': 'text/csv'})",
+            "desc_de": "Zu verwendende header (z.B. {'content-type': 'text/csv'})"
+        }
+    ],
+    tags: ["pattern"],
+    hideInToolbox: true,
+    hideOnSimpleMode: true,
+    tests: () => {}
+
+})
+
 function getSub() {
     let tmp = get(arguments[0]);
     if (!tmp) {
