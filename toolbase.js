@@ -384,11 +384,6 @@ function deleteJson(url, headers = null) {
     if (typeof _apiFetcher === 'undefined' || headers === null) {
         return {};
     }
-
-    if (!headers['content-type']) {
-        headers['content-type'] = 'application/json';
-    }
-
     return _apiFetcher.deleteUrl(url, headers);
 }
 
