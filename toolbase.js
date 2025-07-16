@@ -5311,8 +5311,7 @@ function attributes() {
     if (typeof _source === 'undefined') {
         return [];
     }
-    const forbiddenFields = new Set(["_chioro"]);
-    return Object.keys(JSON.parse(_source)).filter(k => !forbiddenFields.has(k));
+    return Object.keys(JSON.parse(_source)).filter(k => !k.includes("_chioro"));
 }
 
 tools.add({
