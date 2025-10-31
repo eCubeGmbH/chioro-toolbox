@@ -380,6 +380,49 @@ tools.add({
 
 })
 
+function deleteJson(url, headers = null) {
+    if (typeof _apiFetcher === 'undefined' || headers === null) {
+        return {};
+    }
+    return _apiFetcher.deleteUrl(url, headers);
+}
+
+tools.add({
+    id: "deleteJson",
+    impl: deleteJson,
+    aliases: {
+        en: "deleteJson",
+        de: "deleteJson"
+    },
+    argsOld: {
+        en: "url, params, headers",
+        de: "adresse parameter headers"
+    },
+    args: [
+        {
+            "key": "URL",
+            "label_en": "URL",
+            "label_de": "Adresse",
+            "type": "text",
+            "desc_en": "URL to send to",
+            "desc_de": "Aufzurufende Adresse"
+        },
+        {
+            "key": "header",
+            "label_en": "HTTP headers",
+            "label_de": "HTTP headers",
+            "type": "text",
+            "desc_en": "The headers to use (e.g. {'content-type': 'text/csv'})",
+            "desc_de": "Zu verwendende header (z.B. {'content-type': 'text/csv'})"
+        }
+    ],
+    tags: ["pattern"],
+    hideInToolbox: true,
+    hideOnSimpleMode: true,
+    tests: () => {}
+
+})
+
 function getSub() {
     let tmp = get(arguments[0]);
     if (!tmp) {
@@ -5268,8 +5311,7 @@ function attributes() {
     if (typeof _source === 'undefined') {
         return [];
     }
-
-    return Object.keys(JSON.parse(_source)).filter(k => !k.startsWith("_"));
+    return Object.keys(JSON.parse(_source)).filter(k => !k.includes("_chioro"));
 }
 
 tools.add({
@@ -6672,6 +6714,44 @@ tools.add({
     hideOnSimpleMode: false,
     tests: () => {
     }
+})
+
+function writeValue(value) {
+    if (!value) {
+        return null;
+    }
+    return value;
+}
+
+tools.add({
+    id: "writeValue",
+    impl: writeValue,
+    aliases: {
+        en: "writeValue",
+        de: "schreibeWert"
+    },
+    simpleDescription: {
+        de: "Schreibe Wert in Zielattribut",
+        en: "Write Value in target attribute"
+    },
+    argsOld: {
+        en: "value",
+        de: "wert"
+    },
+    args: [
+        {
+            "key": "value",
+            "label_en": "Value",
+            "label_de": "Wert",
+            "type": "text",
+            "desc_en": "Text with numbers that should be rounded",
+            "desc_de": "Write Value in target attribute"
+        }
+    ],
+    tags: ["TAGS.TEXT"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
 })
 
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
