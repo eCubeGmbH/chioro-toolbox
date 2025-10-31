@@ -5906,12 +5906,20 @@ tools.add({
     },
     args: [
         {
-            "key": "value",
+            "key": "value+",
             "label_en": "Input text",
             "label_de": "Eingabetext",
             "type": "text",
             "desc_en": "Text with numbers that should be rounded",
             "desc_de": "Text mit Zahlen, die gerundet werden sollen"
+        },
+        {
+            "key": "precision",
+            "label_en": "Rounding precision",
+            "label_de": "Rundungsgenauigkeit",
+            "type": "text",
+            "desc_en": "Number of decimal places to round to",
+            "desc_de": "Anzahl der Dezimalstellen, auf die gerundet werden soll"
         }
     ],
     tests: () => {
