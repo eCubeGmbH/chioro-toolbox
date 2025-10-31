@@ -5775,39 +5775,76 @@ tools.add({
 })
 
 function roundAllNumbers(value) {
-    if (!value) {
+    // No arguments provided
+    if (arguments.length === 0) {
         return null;
     }
+
+    // Determine precision and values to process
+    let precision = 0;
+    let valuesToProcess;
+
+    if (arguments.length > 1) {
+        const possiblePrecision = arguments[arguments.length - 1];
+        const parsedPrecision = parseInt(possiblePrecision, 10);
+        precision = isNaN(parsedPrecision) ? 0 : Math.max(0, parsedPrecision);
+        valuesToProcess = Array.prototype.slice.call(arguments, 0, -1);
+    } else {
+        valuesToProcess = [value];
+    }
+
+    const roundNumberWithPrecision = (num, p) => {
+        const factor = Math.pow(10, p);
+        return Math.round(num * factor) / factor;
+    };
 
     const round = v => {
         if (isString(v)) {
             const listOfNumbersFromString = extractAllNumbersFromText(v);
             listOfNumbersFromString.forEach(number => {
-                v = v.replace(number, Math.round(parseFloat(number.replace(',', '.'))));
+                const parsed = parseFloat(number.replace(',', '.'));
+                if (!isNaN(parsed)) {
+                    const rounded = roundNumberWithPrecision(parsed, precision);
+                    v = v.replace(number, String(rounded));
+                }
             })
         } else {
-            v = Math.round(v);
+            v = roundNumberWithPrecision(v, precision);
         }
         return v;
-    }
+    };
 
-    if (Array.isArray(value)) {
-        for (let i = 0; i < value.length; i++) {
-            value[i] = round(value[i]);
+    const processValue = (value) => {
+        if (Array.isArray(value)) {
+            for (let i = 0; i < value.length; i++) {
+                value[i] = round(value[i]);
+            }
+
+            return value;
         }
 
-        return value;
+        if (isObject(value)) {
+            Object.keys(value).forEach(key => {
+                value[key] = round(value[key]);
+            });
+
+            return value;
+        }
+
+        return round(value);
+    };
+
+    // Single value input: preserve previous falsy handling
+    if (valuesToProcess.length === 1) {
+        const single = valuesToProcess[0];
+        if (!single) {
+            return null;
+        }
+        return processValue(single);
     }
 
-    if (isObject(value)) {
-        Object.keys(value).forEach(key => {
-            value[key] = round(value[key]);
-        });
-
-        return value;
-    }
-
-    return round(value);
+    // Multiple inputs: process each and return as an array
+    return valuesToProcess.map(v => processValue(v));
 }
 
 tools.add({
@@ -5835,21 +5872,21 @@ tools.add({
             "desc_de": "Text mit Zahlen, die gerundet werden sollen"
         }
     ],
-    tags: ["TAGS.CONDITIONAL"],
-    hideInToolbox: false,
-    hideOnSimpleMode: false,
     tests: () => {
         tools.expect(roundAllNumbers([88.6, 55.8])).jsonToBe([89, 56]);
-        tools.expect(roundAllNumbers(["aaa", "bbb"])).jsonToBe(["aaa", "bbb"]);
-        tools.expect(roundAllNumbers(["88,6", "66"])).jsonToBe(["89", "66"]);
-        tools.expect(roundAllNumbers('Größe:98 x 50,5 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
+        tools.expect(roundAllNumbers(["aaa", "bbb"])) .jsonToBe(["aaa", "bbb"]);
+        tools.expect(roundAllNumbers(["88,6", "66"])) .jsonToBe(["89", "66"]);
+        tools.expect(roundAllNumbers('Größe:98 x 50,555 x 5 cm:de')).toBe('Größe:98 x 51 x 5 cm:de');
         tools.expect(roundAllNumbers('asfdhgfj 55,4 ashfgklfa')).toBe('asfdhgfj 55 ashfgklfa');
-        tools.expect(roundAllNumbers({'a': 88.5, 'b': 55})).jsonToBe({a: 89, b: 55});
+        tools.expect(roundAllNumbers({'a': 88.56, 'b': 55}, 1)).jsonToBe({a: 88.6, b: 55});
         tools.expect(roundAllNumbers({'a': 'blabla', 'b': 'blabla'})).jsonToBe({a: 'blabla', b: 'blabla'});
         tools.expect(roundAllNumbers(null)).toBe(null);
-        tools.expect(roundAllNumbers("")).toBe(null);
+        tools.expect(roundAllNumbers("")) .toBe(null);
         tools.expect(roundAllNumbers('hello world')).toBe('hello world');
         tools.expect(roundAllNumbers(['Größe:98 x 50,5 x 5 cm:de', 99.7])).jsonToBe(['Größe:98 x 51 x 5 cm:de', 100]);
+        tools.expect(roundAllNumbers(1.2333, 1.3333, 2)).jsonToBe([1.23, 1.33]);
+        tools.expect(roundAllNumbers(1.2345, 2)).toBe(1.23);
+        tools.expect(roundAllNumbers('val 1.239', 2)).toBe('val 1.24');
     }
 })
 
