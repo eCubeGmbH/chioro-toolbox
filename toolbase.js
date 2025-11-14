@@ -1592,7 +1592,7 @@ function removeEmptyListEntries() {
 
     return Array.from(arguments)
         .flat(1)
-        .filter(s => s !== null);
+        .filter(s => isNotBlank(s));
 }
 
 tools.add({
@@ -1628,6 +1628,7 @@ tools.add({
         tools.expect(removeEmptyListEntries(null)).listToBe([]);
         tools.expect(removeEmptyListEntries([null, 'a', null, 'b'])).listToBe(['a', 'b']);
         tools.expect(removeEmptyListEntries([null, 'a', [null, 'b'], 'c'])).listToBe(['a', [null, 'b'], 'c']);
+        tools.expect(removeEmptyListEntries([null, '', [], 'c'])).listToBe([ 'c']);
     }
 })
 
@@ -5351,7 +5352,7 @@ tools.add({
 
         tools.it('will extract all attributes without _ prefix from the _source object', () => {
             try {
-                _source = JSON.stringify({attr1: 1, _attr2: 2, attr3: 3});
+                _source = JSON.stringify({attr1: 1, _chioro_attr2: 2, attr3: 3});
                 tools.expect(attributes()).jsonToBe(['attr1', 'attr3']);
             } finally {
                 delete _source;
