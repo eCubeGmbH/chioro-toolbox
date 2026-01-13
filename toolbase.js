@@ -97,7 +97,7 @@ function getJsonWithEmptyBody(url, headers = null) {
         headers['content-type'] = 'application/json';
     }
 
-    return JSON.parse(_apiFetcher.postUrl(url, JSON.stringify({}), headers));
+    return JSON.parse(_apiFetcher.getUrl(url, JSON.stringify({}), headers));
 }
 
 tools.add({
