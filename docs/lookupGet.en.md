@@ -9,4 +9,5 @@ Retrieve a specific entry from a data table using a search value.
 ##### Example
 In the “producttable” data table, the word “dress” is searched for in the “productname” column.
 When this term is found, as a result the entry “12345” is returned from the “productID” column of the data table.
-* `searchAndTake('dress', 'producttable', 'productname', 'productID')` Output: `12345`
+* `lookupGet('dress', 'producttable', 'productname', 'productID')` Output: `12345`
+* `lookupGet($("color"), "color-mapping", "source", "target")` — looks up source color in a DataTable

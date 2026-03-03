@@ -12,4 +12,5 @@ Die Funktion unterstützt auch das Angeben der Anzahl der Dezimalstellen und das
 ##### Beispiele
 * `rechneEinheitUm("23 apples and 25 bananas", 1, "apples", "carrots")` Ausgabe: "23 carrots and 25 bananas"
 * `rechneEinheitUm("2,3 m", 100, 'm', 'cm')` Ausgabe: "230 cm"
-* `rechneEinheitUm("2.3 and 2.4", 100, '', 'cm')` Ausgabe: "230 cm and 240 cm" 
+* `rechneEinheitUm("2.3 and 2.4", 100, '', 'cm')` Ausgabe: "230 cm and 240 cm"
+* `rechneEinheitUm($("gewicht"), 2.205, "kg", "lbs", 2)` — Quellgewicht von kg in lbs umrechnen

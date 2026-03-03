@@ -6,4 +6,5 @@ This function extracts the first number found in a text. If no number is found, 
 
 ##### Examples
 * `extractNumberFromText("Your bill is 123.45 €")` Output: `123.45`
-* `extractNumberFromText("No results found", 0)` Output: `0` 
+* `extractNumberFromText("No results found", 0)` Output: `0`
+* `extractNumberFromText($("price_text"), "0")` — extracts the numeric price from source text like "Price: €19.99"

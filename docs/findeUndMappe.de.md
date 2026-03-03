@@ -9,4 +9,6 @@ Diese Funktion dekodiert einen Eingabetext anhand einer Reihe von Regeln. Die Re
 * `findeUndMappe("Damenoberteil in rot", /Herren/i, "H", /Damen/i, "F", /Kinder/i, "K")` Ausgabe: `F`
 * `findeUndMappe("Kindershirt in blau", /Herren/i, "H", /Damen/i, "F", /Kinder/i, "K")` Ausgabe: `K`
 * `findeUndMappe("Unisexmantel in grün", /Herren/i, "H", /Damen/i, "F", /Kinder/i, "K", "U")` Ausgabe: `U`
-* `findeUndMappe("Kein Treffer")` Ausgabe: `""` 
+* `findeUndMappe("Kein Treffer")` Ausgabe: `""`
+* `findeUndMappe($("farbe"), "rot", "ROT", "blau", "BLAU", $("farbe"))` — Quellfarbe auf Großbuchstaben mappen, Fallback auf Originalwert
+* `findeUndMappe($("geschlecht"), /damen|frauen/i, "W", /herren|männer/i, "M", "U")` — Regex-Matching auf Quellfeld

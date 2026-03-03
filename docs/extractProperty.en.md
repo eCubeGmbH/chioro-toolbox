@@ -7,4 +7,5 @@ Extracts the value of a property from a text. The property is identified by its 
 
 ##### Examples
 * `extractProperty('name: Max', 'name')` Output: `Max`
-* `extractProperty('Age = 30 years', 'Age')` Output: `30 years` 
+* `extractProperty('Age = 30 years', 'Age')` Output: `30 years`
+* `extractProperty($("description"), "breed", "")` — extracts breed from "breed:Maine Coon age:5"

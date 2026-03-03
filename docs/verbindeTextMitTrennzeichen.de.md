@@ -7,3 +7,4 @@ Ist ähnlich zu `verketteText()`
 ##### Beispiele
 * `verbindeTextMitTrennzeichen(", ", "Hallo", "Welt")` Ausgabe: Hallo, Welt
 * `verbindeTextMitTrennzeichen(" | ", "Apfel", ["Banane", "Kirsche"])` Ausgabe: Apfel | Banane, Kirsche
+* `verbindeTextMitTrennzeichen(" - ", $("marke"), $("modell"))` — Quellfelder mit Trennzeichen verbinden

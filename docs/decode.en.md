@@ -10,3 +10,5 @@ This function decodes an input text based on a series of rules. The rules are pr
 * `decode("Kids shirt in blue", /men/i, "M", /woman/i, "W", /kid/i, "K")` Output: `K`
 * `decode("Unisex coat in green", /men/i, "M", /woman/i, "W", /kid/i, "K", "U")` Output: `U`
 * `decode("No match")` Output: `""`
+* `decode($("color"), "red", "RED", "blue", "BLUE", $("color"))` — maps source color to uppercase, falls back to original value
+* `decode($("gender"), /ladies|women/i, "F", /gentlemen|men/i, "M", "U")` — regex matching on source field

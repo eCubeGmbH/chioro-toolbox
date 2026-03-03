@@ -11,3 +11,4 @@ The function converts a given value with a unit to a different unit. It detects 
 - `convertUnit("23 apples and 25 bananas", 1, "apples", "carrots")` Output: "23 carrots and 25 bananas"
 - `convertUnit("2.3 m", 100, 'm', 'cm')` Output: "230 cm"
 - `convertUnit("2.3 and 2.4", 100, '', 'cm')` Output: "230 cm and 240 cm"
+- `convertUnit($("weight"), 2.205, "kg", "lbs", 2)` — converts source weight from kg to lbs

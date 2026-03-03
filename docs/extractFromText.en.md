@@ -10,4 +10,5 @@ Extracts the first match of a regular expression from a text. If no match is fou
 * `extractFromText('Hello World!', 'World')` Output: `World`
 * `extractFromText('Hello World!', /World/)` Output: `World`
 * `extractFromText('Hello Mars!', /World/, 'somewhere')` Output: `somewhere`
-* `extractFromText('Username: Max', /Username: (.*)/, 'unknown', true)` Output: `Max` 
+* `extractFromText('Username: Max', /Username: (.*)/, 'unknown', true)` Output: `Max`
+* `extractFromText($("description"), /breed:(.+?) age:/, "", true)` — extracts breed from structured source field

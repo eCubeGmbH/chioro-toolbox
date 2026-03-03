@@ -11,4 +11,5 @@ Only the first match is returned.
 ##### Example
 The entries in the data table column “regex” are compared with the input text “abc”. If a
 If a match is found, the entry from the “result” column is returned.
-* `sucheUndNimmRegExp(“abc”, “meineTabelle”, “regex”, “result”)` Output: `Value from 'result' column`
+* `lookupGetRegExp(“abc”, “myTable”, “regex”, “result”)` Output: `Value from 'result' column`
+* `lookupGetRegExp($(“description”), “category-patterns”, “pattern”, “category”)` — matches source text against regex patterns in a DataTable

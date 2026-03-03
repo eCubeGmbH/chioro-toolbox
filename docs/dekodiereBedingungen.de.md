@@ -8,4 +8,5 @@ Diese Funktion ermöglicht es, basierend auf verschiedenen Bedingungen unterschi
 ##### Beispiele
 * `dekodiereBedingungen($('a') > 10, "größer als 10", $('a') < 5, 'kleiner als 5', "ein Wert dazwischen")`
 * `dekodiereBedingungen($('a') > 0, "positiv", $('a') < 0, 'negativ', "gleich Null")`
-* `dekodiereBedingungen($('a').length > 10, "langer Text", $('a').length == 0, 'leerer Text')` 
+* `dekodiereBedingungen($('a').length > 10, "langer Text", $('a').length == 0, 'leerer Text')`
+* `dekodiereBedingungen($("preis") > 100, "premium", $("preis") > 50, "standard", "günstig")` — Kategorisierung nach Quellpreis

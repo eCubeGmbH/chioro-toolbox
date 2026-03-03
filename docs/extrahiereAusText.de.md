@@ -10,4 +10,5 @@ Extrahiert den ersten Treffer eines Texts oder regulären Ausdrucks aus einem Te
 * `extrahiereAusText('Hallo Welt!', 'Welt')` Ausgabe: `Welt`
 * `extrahiereAusText('Hallo Welt!', /Welt/)` Ausgabe: `Welt`
 * `extrahiereAusText('Hallo Mars!', /Welt/, 'irgendwo')` Ausgabe: `irgendwo`
-* `extrahiereAusText('Benutzername: Max', /Benutzername: (.*)/, 'unbekannt', true)` Ausgabe: `Max` 
+* `extrahiereAusText('Benutzername: Max', /Benutzername: (.*)/, 'unbekannt', true)` Ausgabe: `Max`
+* `extrahiereAusText($("beschreibung"), /breed:(.+?) age:/, "", true)` — Rasse aus strukturiertem Quellfeld extrahieren

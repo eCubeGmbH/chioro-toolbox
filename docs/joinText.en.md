@@ -7,3 +7,4 @@ Is similar to `concatenateText()`
 ##### Examples
 * `joinText(", ", "Hello", "World")` Output: Hello, World
 * `joinText(" | ", "Apple", ["Banana", "Cherry"])` Output: Apple | Banana, Cherry
+* `joinText(" - ", $("brand"), $("model"))` — combines source fields with separator

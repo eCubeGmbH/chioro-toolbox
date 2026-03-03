@@ -12,3 +12,4 @@ Nur der erste Treffer wird zurückgegeben.
 Die Einträge in der Datentabellenspalte "regex" werden mit dem Eingabetext "abc" verglichen. Bei einem 
 Treffer wird der Eintrag aus der Spalte "ergebnis" zurückgegeben.
 * `sucheUndNimmRegExp("abc", "meineTabelle", "regex", "ergebnis")` Ausgabe: `Wert aus 'ergebnis' Spalte`
+* `sucheUndNimmRegExp($("beschreibung"), "kategorie-muster", "muster", "kategorie")` — Quelltext gegen Regex-Muster in einer Datentabelle abgleichen

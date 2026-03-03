@@ -7,3 +7,4 @@ Diese Funktion extrahiert die erste Zahl aus einem Text. Falls keine Zahl gefund
 ##### Beispiele
 * `extrahiereZahlAusText("Ihre Rechnung beträgt 123,45 €")` Ausgabe: `123.45`
 * `extrahiereZahlAusText("Es wurden keine Ergebnisse gefunden", 0)` Ausgabe: `0`
+* `extrahiereZahlAusText($("preis_text"), "0")` — numerischen Preis aus Quelltext wie "Preis: 19,99 €" extrahieren

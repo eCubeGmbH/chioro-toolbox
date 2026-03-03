@@ -10,3 +10,4 @@ Abrufen eines bestimmten Eintrags aus einer Datentabelle anhand eines Suchwerts.
 In der Datentabelle "produkttabelle" wird, in der Spalte "produktname", nach dem Wort "Kleid" gesucht. 
 Dieser Begriff wird gefunden, als Folge wird der Eintrag "12345" aus der Spalte "produktID" der Datentabelle zurückgegeben.
 * `sucheUndNimm('Kleid', 'produkttabelle', 'produktname', 'produktID')` Ausgabe: `12345`
+* `sucheUndNimm($("farbe"), "farb-zuordnung", "quelle", "ziel")` — Quellfarbe in einer Datentabelle nachschlagen

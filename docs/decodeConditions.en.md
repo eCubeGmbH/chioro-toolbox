@@ -8,4 +8,5 @@ This function allows you to return different results based on various conditions
 ##### Examples
 * `decodeConditions($('a') > 10, "greater than 10", $('a') < 5, 'less than 5', "something in between")`
 * `decodeConditions($('a') > 0, "positive", $('a') < 0, 'negative', "equal to zero")`
-* `decodeConditions($('a').length > 10, "long text", $('a').length == 0, 'empty text')` 
+* `decodeConditions($('a').length > 10, "long text", $('a').length == 0, 'empty text')`
+* `decodeConditions($("price") > 100, "premium", $("price") > 50, "standard", "budget")` — categorize by source price
