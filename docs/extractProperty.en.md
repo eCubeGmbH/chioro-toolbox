@@ -8,4 +8,8 @@ Extracts the value of a property from a text. The property is identified by its 
 ##### Examples
 * `extractProperty('name: Max', 'name')` Output: `Max`
 * `extractProperty('Age = 30 years', 'Age')` Output: `30 years`
-* `extractProperty($("description"), "breed", "")` — extracts breed from "breed:Maine Coon age:5"
+* `extractProperty('color: red, size: XL', 'color')` Output: `red`
+
+**Note:** Values must be separated by `,` `;` `|` or newline.
+Space-only separation (e.g. `"breed:Maine Coon age:5"`)
+does NOT work — use `extractFromText` with `withGroups=true`.

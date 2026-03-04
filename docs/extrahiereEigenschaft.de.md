@@ -8,4 +8,9 @@ Extrahiert den Wert einer Eigenschaft aus einem Text. Die Eigenschaft wird anhan
 ##### Beispiele
 * `extrahiereEigenschaft('name: Max', 'name')` Ausgabe: `Max`
 * `extrahiereEigenschaft('Alter = 30 Jahre', 'Alter')` Ausgabe: `30 Jahre`
-* `extrahiereEigenschaft($("beschreibung"), "breed", "")` — Rasse aus "breed:Maine Coon age:5" extrahieren
+* `extrahiereEigenschaft('Farbe: rot, Größe: XL', 'Farbe')` Ausgabe: `rot`
+
+**Hinweis:** Werte müssen durch `,` `;` `|` oder Zeilenumbruch
+getrennt sein. Nur durch Leerzeichen getrennte Werte
+(z.B. `"breed:Maine Coon age:5"`) funktionieren NICHT —
+verwende stattdessen `extrahiereAusText` mit `withGroups=true`.
