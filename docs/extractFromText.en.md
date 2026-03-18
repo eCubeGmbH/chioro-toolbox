@@ -1,5 +1,8 @@
 Searches for a text or pattern in the input and returns the first match. If no match is found, an optional fallback value is returned.
 
+##### When to use?
+When a source field contains structured text and only a specific part is needed — e.g. a number from "Weight: 500g", a unit from "1.5 kg flour", or a property from a combined description field.
+
 ##### Parameters
 * `text` - The text to extract from.
 * `pattern` - A plain string or regular expression (RegExp) defining what to search for.
@@ -8,10 +11,7 @@ Searches for a text or pattern in the input and returns the first match. If no m
 
 ##### Examples
 * `extractFromText('Hello World!', 'World')` Output: `World`
-* `extractFromText('Hello World!', /World/)` Output: `World`
 * `extractFromText('Hello Mars!', /World/, 'somewhere')` Output: `somewhere`
-* `extractFromText('Username: Max', /Username: (.*)/, 'unknown', true)` Output: `Max`
-* `extractFromText($("description"), /breed:(.+?) age:/, "", true)` — extracts breed from structured source field
 
 ##### Example with withGroups
 Suppose a supplier provides weight information as `"Weight: 500g"` and you want to extract just the number `500` — without the unit and without the label.
@@ -22,3 +22,4 @@ With `withGroups`: The pattern `/Weight: (\d+)g/` describes the full context, bu
 
 * `extractFromText('Weight: 500g', /Weight: (\d+)g/, '', true)` Output: `500`
 * `extractFromText('Calories: 250 kcal', /Calories: (\d+) kcal/, '', true)` Output: `250`
+* `extractFromText('Username: Max', /Username: (.*)/, 'unknown', true)` Output: `Max`
