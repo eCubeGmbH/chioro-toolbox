@@ -28,6 +28,36 @@ function categorize(attributes, categoryTreeKey) {
     return _categoryTreeFetcher.categorize(attributes, categoryTreeKey);
 }
 
+function askGPT(prompt) {
+    if (typeof _gptFetcher === 'undefined') {
+        return null;
+    }
+    return _gptFetcher.ask(prompt);
+}
+
+tools.add({
+    id: "askGPT",
+    impl: askGPT,
+    aliases: {
+        en: "askGPT",
+        de: "askGPT"
+    },
+    args: [
+        {
+            "key": "prompt",
+            "label_en": "Prompt",
+            "label_de": "Prompt",
+            "type": "text",
+            "desc_en": "The question or instruction to send to GPT",
+            "desc_de": "Die Frage oder Anweisung, die an GPT gesendet wird"
+        }
+    ],
+    tags: ["ai"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
+})
+
 tools.add({
     id: "categorize",
     impl: categorize,
