@@ -32,7 +32,14 @@ function askGPT(prompt) {
     if (typeof _gptFetcher === 'undefined') {
         return null;
     }
-    return _gptFetcher.ask(prompt);
+    try {
+        return _gptFetcher.ask(prompt);
+    } catch (e) {
+        if (typeof _journal !== 'undefined') {
+            _journal.onError('askGPT: ' + e.message);
+        }
+        return null;
+    }
 }
 
 tools.add({
