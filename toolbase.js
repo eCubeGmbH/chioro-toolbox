@@ -71,7 +71,7 @@ tools.add({
             "desc_de": "Optional: Name der OPENAI_PROVIDER Admin-Konfiguration. Wird nichts angegeben, wird die Konfiguration mit Use Case SCRIPT verwendet."
         }
     ],
-    tags: ["ai"],
+    tags: ["AI"],
     hideInToolbox: false,
     hideOnSimpleMode: false,
     tests: () => {}
