@@ -30,19 +30,12 @@ function categorize(attributes, categoryTreeKey) {
 
 function askGPT(prompt, configName) {
     if (typeof _gptFetcher === 'undefined') {
-        return null;
+        throw new Error('askGPT ist in diesem Kontext nicht verfügbar');
     }
-    try {
-        if (typeof configName !== 'undefined' && configName !== null && configName !== '') {
-            return _gptFetcher.ask(prompt, configName);
-        }
-        return _gptFetcher.ask(prompt);
-    } catch (e) {
-        if (typeof _journal !== 'undefined') {
-            _journal.onError('askGPT: ' + e.message);
-        }
-        return null;
+    if (typeof configName !== 'undefined' && configName !== null && configName !== '') {
+        return _gptFetcher.ask(prompt, configName);
     }
+    return _gptFetcher.ask(prompt);
 }
 
 tools.add({
