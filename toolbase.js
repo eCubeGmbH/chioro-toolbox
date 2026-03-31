@@ -32,10 +32,21 @@ function askGPT(prompt, configName) {
     if (typeof _gptFetcher === 'undefined') {
         throw new Error('askGPT ist in diesem Kontext nicht verfügbar');
     }
-    if (typeof configName !== 'undefined' && configName !== null && configName !== '') {
-        return _gptFetcher.ask(prompt, configName);
+    try {
+        if (typeof configName !== 'undefined' && configName !== null && configName !== '') {
+            return _gptFetcher.ask(prompt, configName);
+        }
+        return _gptFetcher.ask(prompt);
+    } catch (e) {
+        var msg = e.message || String(e);
+        if (msg.indexOf('No OPENAI_PROVIDER config found') >= 0) {
+            throw e;
+        }
+        if (typeof _journal !== 'undefined') {
+            _journal.onError('askGPT: ' + msg);
+        }
+        return null;
     }
-    return _gptFetcher.ask(prompt);
 }
 
 tools.add({
