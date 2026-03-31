@@ -38,12 +38,8 @@ function askGPT(prompt, configName) {
         }
         return _gptFetcher.ask(prompt);
     } catch (e) {
-        var msg = e.message || String(e);
-        if (msg.indexOf('No OPENAI_PROVIDER config found') >= 0) {
-            throw e;
-        }
         if (typeof _journal !== 'undefined') {
-            _journal.onError('askGPT: ' + msg);
+            _journal.onError('askGPT: ' + (e.message || String(e)));
         }
         return null;
     }
