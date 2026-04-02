@@ -28,6 +28,55 @@ function categorize(attributes, categoryTreeKey) {
     return _categoryTreeFetcher.categorize(attributes, categoryTreeKey);
 }
 
+function askGPT(prompt, configName) {
+    if (typeof _gptFetcher === 'undefined') {
+        throw new Error('askGPT ist in diesem Kontext nicht verfügbar');
+    }
+    try {
+        if (typeof configName !== 'undefined' && configName !== null && configName !== '') {
+            return _gptFetcher.ask(prompt, configName);
+        }
+        return _gptFetcher.ask(prompt);
+    } catch (e) {
+        if (typeof _journal !== 'undefined') {
+            _journal.onError('askGPT: ' + (e.message || String(e)));
+        }
+        return null;
+    }
+}
+
+tools.add({
+    id: "askGPT",
+    impl: askGPT,
+    aliases: {
+        en: "askGPT",
+        de: "askGPT"
+    },
+    args: [
+        {
+            "key": "prompt",
+            "label_en": "Prompt",
+            "label_de": "Prompt",
+            "type": "text",
+            "desc_en": "The question or instruction to send to GPT",
+            "desc_de": "Die Frage oder Anweisung, die an GPT gesendet wird"
+        },
+        {
+            "key": "configName",
+            "label_en": "Provider Config Name",
+            "label_de": "Provider-Konfig Name",
+            "type": "text",
+            "required": false,
+            "desc_en": "Optional: name of the OPENAI_PROVIDER admin config to use. If omitted, the config with use case SCRIPT is used.",
+            "desc_de": "Optional: Name der OPENAI_PROVIDER Admin-Konfiguration. Wird nichts angegeben, wird die Konfiguration mit Use Case SCRIPT verwendet."
+        }
+    ],
+    tags: ["AI"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {}
+})
+
 tools.add({
     id: "categorize",
     impl: categorize,
