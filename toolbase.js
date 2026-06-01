@@ -6915,7 +6915,7 @@ tools.add({
         {
             "key": "inputString",
             "label_en": "Text",
-            "label_de": "Text",
+            "label_de": "Text",   
             "type": "text",
             "desc_en": "The fixed text value to return",
             "desc_de": "Der feste Text, der zurückgegeben werden soll"
