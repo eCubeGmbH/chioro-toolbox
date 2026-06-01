@@ -6892,5 +6892,41 @@ tools.add({
     }
 })
 
+function fixedValue(inputString) {
+    return inputString;
+}
+
+tools.add({
+    id: "fixedValue",
+    impl: fixedValue,
+    aliases: {
+        en: "fixedValue",
+        de: "festerWert"
+    },
+    simpleDescription: {
+        de: "Gibt einen festen Text unverändert zurück",
+        en: "Returns a fixed text value unchanged"
+    },
+    argsOld: {
+        en: "inputString",
+        de: "eingabeText"
+    },
+    args: [
+        {
+            "key": "inputString",
+            "label_en": "Text",
+            "label_de": "Text",
+            "type": "text",
+            "desc_en": "The fixed text value to return",
+            "desc_de": "Der feste Text, der zurückgegeben werden soll"
+        }
+    ],
+    tags: ["TAGS.TEXT"],
+    hideInToolbox: false,
+    hideOnSimpleMode: false,
+    tests: () => {
+        tools.expect(fixedValue("a")).toBe("a");
+    }
+})
 //-------------- PLEASE ADD FUNCTIONS ABOVE THIS LINE-----------------
 tools.exportAll(exports)
